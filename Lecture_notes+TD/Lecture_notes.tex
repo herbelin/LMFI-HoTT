@@ -1,0 +1,2892 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+%\usepackage{tikz-cd}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+%\newtheorem{example}{Example}
+
+
+\title{Lecture Notes on Synthetic Homotopy Theory}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+%These are lecture notes for an introductory class.
+\end{abstract}
+
+\tableofcontents
+
+
+\se{Introduction}
+
+\sse{A quick introduction to fundamental mathematics}
+
+In fundamental mathematics one is interested in some class of objects.
+
+\begin{itemize}
+\item A group theorist is interested in groups.
+\item A topologist is interested in topological spaces.
+\item A geometer is interested in smooth manifolds (often with additional structure).
+\item A number theorists is interested in number fields.
+\item An algebraic geometer is interested in schemes.
+\item $\cdots$
+\end{itemize}
+
+A fundamental insight (generally attributed to Grothendieck) is that one should be interested in morphisms between objects as well.
+
+\begin{itemize}
+\item A group theorist is interested in morphism of groups.
+\item A topologist is interested in continuous maps.
+\item A geometer is interested in smooth maps (possibly preserving the additional structure).
+%\item An algebraic geometer is interested in morphisms of schemes.
+\item $\cdots$
+\end{itemize}
+
+Moreover some morphisms are called \emph{isomorphisms}, and isomorphic objects should be considered the same.
+
+\begin{itemize}
+\item A morphism of group is an isomorphism if it is a bijection.
+\item A morphism of space is an isomorphism if it is continuous bijection with a continuous inverse. This is called an homeomorphism.
+\item A morphism of manifold is an isomorphism if it a smooth bijection with a smooth inverse. This is called a diffeomorphism.
+\item $\cdots$
+\end{itemize}
+
+This heuristic "isomorphic objects are the same" is often used nowadays. For example if you want to define a meaningful new property of groups, the first thing you should do is check that it is invariant by isomorphisms. This point of view is emphasized by \emph{category theory}. Some category theorists even say that a notion not invariant under isomorphisms is "evil". "Evil" notions are sometimes useful, but we are rarely interested in them per se.
+
+\begin{remark}
+We will see that in homotopy type theory this heuristic is actually an axiom, called the \emph{univalence axiom}. 
+\end{remark}
+
+
+
+%\begin{remark}
+In this situation it is natural to try to understand objects up to isomorphisms. The "holy grail" is to give a classification, generally by giving:
+\begin{itemize}
+\item A list $L$ of non-isomorphic objects, such that any object is isomorphic to one of them.
+\item Some kind of procedure to tell which object of $L$ is isomorphic to a given object. 
+\end{itemize}
+%\end{remark}
+
+This is called a \emph{classification}. This is usually done by defining \emph{invariants}, i.e. things (e.g. natural numbers) which are not changed under isomorphisms. Having a full classification is usually extremely hard, and often impossible. But invariants are nevertheless very useful, as they allow to tell objects apart.
+
+\begin{remark}
+We list some example of classification results linked to groups. Note that a classification of finitely generated groups is impossible (essentially because the word problem is undecidable).
+\begin{itemize}
+\item Finitely generated abelian groups have been classified. This means they are not generally considered a research subject, and extremely useful in mathematics. 
+\item Countably generated abelian groups have not been classified. So they are a research subject, and not as useful as finitely generated ones.%countably
+\item Finite simple groups have been classified. This is generally considered as one of the great mathematical achievements.
+\item Classifying finite groups is an extremely difficult problem.
+\end{itemize}
+\end{remark}
+
+Of course there is a lot more to fundamental mathematics than this, but in my opinion it is a useful picture to have in mind when discovering a new subject.
+
+
+\sse{Algebraic topology and homotopy theory}
+
+I introduce the fundamental notion of homotopy, in the usual mathematical framework.
+
+\begin{definition}
+Assume given $f,g:X\r Y$ two continuous maps between topological spaces. A homotopy from $f$ to $g$ is a continuous map:
+\[H : X\times [0,1]\r Y\]
+where $[0,1]$ is the real interval with its euclidian topology, such that:
+\[H(x,0) = f(x)\]
+\[H(x,1) = g(x)\]
+\end{definition}
+
+Intuitively this is a path from $f$ to $g$ in the space of maps from $X$ to $Y$. One might consider maps between spaces up to homotopy, and this motivates the following definition:
+
+\begin{definition}
+A continuous map $f:X\r Y$ is called a homotopy equivalence if there exists a continuous $g:Y\r X$ such that $f\circ g$ and $g\circ f$ are homotopic to the identity maps.
+\end{definition}
+
+In the 20s some people were investigating the classification of topological spaces. It turns out most of the useful invariants they come up with were invariant not only under homeomorphisms, but also under homotopy equivalences. This leads to algebraic topology, which study invariants under homotopy equivalences. The most well-known invariant of algebraic topology are groups (usually finitely generated, and often abelian), they are called homotopy, homology and cohomology groups.
+
+After some time, people started to be interested in \emph{homotopy types}, which are defined as spaces up to homotopy equivalence. In fact they occur more often and more naturally than topological spaces in mathematics. %In this class we will give an explanation to this fact. %In this class we will give an explanation to this fact.
+ I call the study of homotopy types \emph{homotopy theory}, although this is not a universal terminology.
+
+\begin{remark}
+I list some examples of situations where a homotopy type occurs. This is indicative, and you are not supposed to understand any of them.
+\begin{itemize}
+\item From a presentation of a group it is possible to build a space. Two presentations of the same group will give homotopy equivalent spaces, which are not homeomorphic in general.
+\item A groupoid is a category where all morphisms are invertible. From a groupoid it is possible to build a space, and equivalent groupoids give non-homeomorphic but homotopy equivalent spaces.
+\item It is possible to build a space from chain complexes, and quasi-isomorphic chain complexes give non-homeomorphic but homotopy equivalent spaces.
+%\item $\cdots$
+\end{itemize}
+\end{remark}
+
+
+\sse{$\infty$-groupoids}
+
+The notion of topological space is not very convenient to work with so that nowadays mathematicians use other presentations of homotopy types. We now sketch one such presentation using $\infty$-groupoids. The key idea is that when we consider a space up to homotopy equivalence we can forget its topology and remember only about its points, its paths between points, its homotopies between paths, etc...
+
+First we introduce groupoids as a pedagogical example. A groupoid is defined as a category where all morphisms are invertible. This means that a groupoid consists of:
+\begin{itemize}
+\item A set which element are called points of the groupoid.
+\item For any two points $x,y$ a set called the set of paths from $x$ to $y$.
+\item For any point $x$ a path $e_x$ from $x$ to $x$ called the unit (or identity) of $x$.
+\item For any paths $p$ from $x$ to $y$ and $q$ from $y$ to $z$, a path $p\cdot q$ from $x$ to $z$ called the multiplication (or composition) of $p$ and $q$.
+\item For any $p$ from $x$ to $y$ a path $p^{-1}$ from $y$ to $x$ called the inverse of $p$. 
+\end{itemize}
+
+Such that $e$, $\_\cdot\_$ and $\_^{-1}$ obey the laws of a group. There is a geometrical intuition, which should be transparent from our choice of naming elements points or paths. From a topological space $X$ it is possible to build a groupoid $\Pi_1(X)$ called its fundamental groupoid. The points of $\Pi_1(X)$ are the points of $X$, and the paths of $\Pi_1(X)$ are the equivalence classes of paths in the $X$ up to homotopy.
+
+\begin{exercise}
+Complete the definition of the fundamental groupoid of a topological space. Convince yourself that it is necessary to consider paths up to homotopy, rather than just paths.
+\end{exercise}
+%Such that we have a constant  path can be composed and have inverses in the intuitive topological sense.
+
+There is a notion of equivalence of groupoids (actually defined as an equivalence of category), such that a homotopy equivalence between spaces induces an equivalence between their fundamental groupoids. But we loose some information by going from a space to its fundamental groupoid, even when considering groupoids up to equivalences. In fact some non-homotopy equivalent spaces have equivalent fundamental groupoids. This is due to the fact that we brutally quotiented by homotopy between paths, loosing the structure of dimension higher than one in the space.% (for example $\Pi(S^2)$ is equivalent to $\Pi(\mathrm{pt})$).
+
+The notion of $\infty$-groupoid corrects this defect. An $\infty$-groupoid consists of:
+\begin{itemize}
+\item A set of points.
+\item For any two points a set of paths between them.
+\item For any two paths between two points, a set of homotopies between them.
+\item $\cdots$
+\end{itemize}
+Moreover it should have a lot of compositions, inverses and units, for example multiplications of paths and homotopies, which should obey a lot of rules \emph{up to homotopy}. This means for example that for composable paths $p,q,r$, we should have multiplications $(p\cdot q)\cdot r$ and $p\cdot(q\cdot r)$, as well as a homotopy between them. Listing all such rules is quite technical, and is usually done using the so-called Kan simplicial sets. 
+
+From a space $X$ there is a way to build its \emph{fundamental $\infty$-groupoid} $\Pi_\infty(X)$. There is a notion of equivalence of $\infty$-groupoids such that homotopy equivalences between spaces induce equivalences between their fundamental $\infty$-groupoids. Now we have the following result:
+
+\begin{center}
+Homotopy types correspond precisely to $\infty$-groupoids up to equivalences.
+\end{center} 
+
+This is called the \emph{homotopy hypothesis}. It means that we can use $\infty$-groupoids rather than topological spaces to represent homotopy types.
+
+%Most homotopical notions about spaces can be adapted to groupoids. 
+
+%In fact there is a technical sense in which the fundamental groupoid of a space retains precisely the one
+
+%Nevertheless we loose information about the homotopy 
+
+
+
+
+\sse{Homotopy type theory}
+
+Now we talk about a seemingly unrelated story. In the 70s Martin-L{\"o}f introduced a formal system called type theory. His goal was to provide a foundation for constructive mathematics. The main objects of type theory are types and their inhabitants, with types playing the role of sets and proposition, and inhabitants playing the role of elements of sets and proofs of propositions. This collapse of elements and proofs means that type theory is \emph{proof-relevant}, i.e. it is meaningful to ask whether two proofs of a propositions are the same.
+
+The word "type" in type theory is related to the notion of type in computer science. Indeed we can see a type as the specification of the behavior of its inhabitants, which are seen as programs. As an example consider the proposition: 
+\begin{center}
+"for all natural numbers $m$ and $n\neq 0$, there exists natural numbers $q$ and $r<n$ such that $m = qn+r$"
+\end{center}
+
+In type theory it corresponds to a type whose inhabitants are programs computing the euclidian division. So type theory is both a foundational system for mathematics and a programming language.%, and it has been successfully in a proof assistants.
+
+There has been some debate concerning equality in type theory, especially about proof-relevance. We explain the problem. Assume we have two proofs $p$ and $q$ that $a=b$, i.e. we have $p,q:a=b$. Can we assert that $p=q$ ? At first sight it seems more natural to assume this. Indeed if we have two such proofs, and we have $s:P(a)$ an inhabitant of some type depending on $a$. Then we can build two inhabitants in $P(b)$, one using $p$ and the other using $q$. If we do not assume that $p=q$, we can not assert that these two inhabitants are equal, contradicting the usual mathematical practice. So for some time this equality $p=q$ was assumed one way or the other when using type theory, so that it stays closer to usual mathematics.
+
+In 1998 Martin Hofmann and Thomas Streicher gave a model of type theory where this rule $p=q$ does not hold \cite{}. In this model types were interpreted as groupoids, and proofs of equalities were interpreted as morphisms in the groupoid. In 2006, Steve Awodey and his student Michael Warren presented the first higher dimensional model of type theory. In 2009 Voevodsky worked out the details of an interpretation of types from type theory as $\infty$-groupoids \cite{}, and therefore as homotopy types. This result forms the basis of \emph{Homotopy Type Theory}. 
+
+\begin{remark}
+This is a lucky coincidence that types from type theory are related to types from homotopy theory, as both terms have distinct origins. The name "Homotopy Type Theory" is a play on word between "homotopy type" and "type theory", coined by Steve Awodey.
+\end{remark}
+
+In this class we will mainly investigate one consequence of this: 
+
+\begin{center}
+If we prove something about types in type theory, then this fact holds true for homotopy types.
+\end{center}
+
+This method of proving facts about homotopy types is called \emph{synthetic homotopy theory}. It is useful because types (even with a proof-relevant equality) are often easier to manipulate than homotopy types. 
+
+This interpretation validates a new axiom called univalence, which has a lot of interesting consequences. So we will do some maths in type theory with univalence, keeping in mind that it gives interesting result in homotopy theory through the interpretation. 
+
+\begin{remark}
+We will not give any formal account of the interpretation, although we will give some intuition about it through examples.
+\end{remark}
+% which play the role of both sets and  (e.g. $\mathbb{N}$). 
+
+
+\se{Functions, products and identities}
+
+Here we give a quick introduction to the constructors of type theory, mainly to agree on notations. We sketch their interpretation as homotopy types or $\infty$-groupoids.
+
+%\sse{Identity types}
+
+
+\sse{Universe}
+
+\begin{assumption}
+There is a type $\U$ whose inhabitants are types.
+\end{assumption}
+
+This is definitely vague, for us it means that "let $A$ be a type" would be formalized as "let $A$ be of type $\U$", and that for $A:\U$, it makes sense to consider $x:A$.
+
+\begin{remark}
+The rule $\U:\U$ leads to inconsistency (intuitively this is similar to Russell paradox: we can not assume that the collection of all sets is a member of itself). One can introduce a second universe $\U_1$, which has the same rule has $\U$ plus the rule $\U:\U_1$. In most proof assistants based on type theory (Coq, Agda...), one assumes a whole hierarchy of universes $\U_0:\U_1:\U_2:\cdots$, so that any universe is in some other "larger" universe.
+\end{remark}
+
+%The interpretation of $\U$ as a homotopy type is not so clear, but we know that it has some topogical spaces as points, and homotopy equivalences as paths between them.
+
+The interpretation of $\U$ as an $\infty$-groupoid has $\infty$-groupoids as points, and equivalences as paths between them. Note that the interpretation of $\U$ as a topological spaces is rather unclear, justifying the need to introduce the more flexible notion of $\infty$-groupoid.
+
+%\begin{remark}
+%Making this precise require some technical machinery, mainly simplicial sets and model categories.
+%\end{remark}
+
+
+\sse{Function types}
+
+\begin{assumption}
+Assume given two types $A,B:\U$.
+\begin{itemize}
+\item (Formation) We have a type $A\r B$ in $\U$.
+\item (Elimination) From $f:A\r B$ and $a:A$, we can build $f(a):B$.
+\item (Introduction) We can define a function $f:A\r B$ by defining $f(x):\equiv t$ with $t$ of type $B$ assuming $x:A$.
+\end{itemize}
+\end{assumption}
+
+The function defined by $f(x):\equiv t$ is denoted by $\Gl (x:A).\, t$ (in traditional mathematical notation this would be $x\mapsto t$). Then we have the definitional equality:
+\[(\Gl (x:A).\, t)(a) \equiv t[x:=a]\]
+
+The type $A\r B$ is interpreted as the homotopy types of continuous maps from $A$ to $B$, or equivalently the $\infty$-groupoid of morphisms of $\infty$-groupoids from $A$ to $B$.
+
+\begin{remark}
+An important example is the type $A\r \U$ for $A:\U$, which is seen as the type of families of types indexed by $A$. An element of this type is interpreted as the data of an $\infty$-groupoid for each point in $A$, an equivalence between them for each path in $A$, and so on...
+\end{remark}
+
+
+\sse{Dependent functions}
+
+\begin{assumption}
+Assume given a type $A:\U$ and a family of type $B:A\r\U$.
+\begin{itemize}
+\item (Formation) We have a type $(x:A)\r B(x)$.
+\item (Elimination) From $f:(x:A)\r B(x)$ and $a:A$, we can build $f(a):B(a)$.
+\item (Introduction) We can define a function $f:(x:A)\r B(x)$ by defining $f(x):\equiv t$ with $t$ of type $B(x)$ assuming $x:A$.
+\end{itemize}
+\end{assumption}
+
+%Intuitively an element of $(x:A)\r B(x)$ 
+
+As for function types, the dependent function defined by $f(x):\equiv t$ is denoted by $\Gl (x:A).\, t$. Notations seems to conflict with function types, but this is not a problem because $A\r B$ can be defined as $(x:A)\r \tilde{B}(x)$ where $\tilde{B}$ is the constant family in $A\r \U$ defined by $\tilde{B}(x) :\equiv B$. %as $ when $B$ does not depend on $x$.
+
+We introduce some notations for identity morphisms and compositions, i.e. %we define $\id_A :A\r A$ by $\id_A(x) \, :\equiv\, x$, and 
+we define $\id_A \, :\equiv\, \Gl(x:A).x$ and $g\circ f\, :\equiv\, \Gl(x:A).\, g(f(x))$.
+
+We do not make explicit the interpretation of $(x:A)\r B(x)$ as an $\infty$-groupoid.
+
+
+
+\sse{The identity types}
+
+\begin{ind_def}
+Assume given a type $A$ in $\U$.% and $x,y : A$, then we have a type $x=_A y$. 
+\begin{itemize}
+\item (Formation) For all $x,y:A$, then we have a type $x=_A y$ in $\U$.
+\item (Introduction) For all $x:A$, we have:
+\[\refl_x : x=_Ax\]
+\item (Elimination) In order to define a dependent function: 
+\[f : (x,y:A)\r (p:x=_Ay)\r P(x,y,p)\] 
+it is enough to define for all $x:A$:
+\[f(x,x,\refl_x)\,:\equiv\, t\]
+with $t:P(x,x,\refl)$.
+
+%Given a type $C(x,y,p)$ depending on $x,y:A$ and $p:x=_Ay$ and $d : (x:A)\r C(x,x,\refl_x)$, then we have:
+%\[J_C(d) : (x,y:A)\r (p:x=_Ay)\r C(x,y,p)\]
+%\item (Computation) We have that $J_C(d,\refl_x)$ is defined as $d(x)$.
+%Then we  Assume we want to prove something for all $x,y:A$ and $p:x=_Ay$, then it is sufficient to prove it for $\refl(x)$ for any $x:A$.
+\end{itemize}
+\end{ind_def}
+
+The elimination principle of identity types is called path induction. So, for example we will often say "by path induction, we may assume that $p:x=_A y$ is $\refl_x$". We will often omit the subscript $A$ in $x=_Ay$ and simply write $x=y$. 
+
+\begin{warning}
+Path induction is only valid when $x$ and $y$ are distinct variables, for example we can not assume that $p:f(x)=_Bf(y)$ or $p:x=_Ax$ are equal to $\refl$.
+\end{warning}
+
+For $A$ a type and $x,y:A$, the type $x=y$ is interpreted as the homotopy type of paths from $x$ to $y$ in $A$.
+
+\begin{remark}
+We give a geometric interpretation of path induction. Assume we want to prove something for all $x,y:A$ and $p:x=_Ay$. This is interpreted as a path in $A$ with free endpoints, but we see intuitively that such a path can be deformed to a constant one, i.e. a reflexivity. So it is enough to prove what we want for reflexivities. Note that a path with only one free endpoint can also be deformed to a reflexivity, suggesting the next assumption.% TODO It suggests principle based path induction.
+\end{remark}
+
+Next principle is very useful. It follows from the usual path induction principle, but we will not prove this. For us (and for example Agda) it can be understood as an alternative definition of identity types. %know.
+
+\begin{assumption}
+Assume given $a:A$. In order to define a dependent function:
+\[f(x:A)\r (p:x=_Aa)\r C(x,p)\]
+it is enough to define:
+\[f(\refl_a) \, :\equiv\, t\]
+with $t:C(a,\refl_a)$.
+\end{assumption}
+
+This assumption is called based path induction.
+
+
+
+%More formally, it means that we have a term $h$
+
+%\begin{remark}
+%\end{remar}
+
+
+
+
+%\sse{Functions types}
+
+%\sse{Dependent function types}
+
+\sse{Product types}
+
+\begin{ind_def}
+Assume given two types $A,B:\U$.
+\begin{itemize}
+\item (Formation) We have a type $A\times B$ in $\U$
+\item (Introduction) For all $x:A$ and $y:B$ we have:
+\[(x,y) : A\times B\]
+\item (Elimination) In order to define a dependent function: 
+\[f : (z:A\times B)\r P(z)\] 
+it is enough to define for all $x:A$ and $y:B$:
+\[f(x,y)\, :\equiv\, t\]
+with $t:P(x,y)$.
+\end{itemize}
+\end{ind_def}
+
+Note that $f(x,y)$ is a shorthand for $f((x,y))$. We can define $p_A : A\times B\r A$ by $p_A(x,y) :\equiv x$, and $p_B : A\times B \r B$ by $p_B(x,y) :\equiv y$. %We denote $p_A(z)$ by $z.1$, and $p_B(z)$ by $z.2$.
+
+The interpretation of $A\times B$ as an $\infty$-groupoid has pair of points in $A$ and $B$ as points, pair of paths as paths, etc...
+
+
+\sse{Dependent product types}
+
+\begin{ind_def}
+Assume given a type $A:\U$ and a family of types $B:A\r \U$.
+\begin{itemize}
+\item (Formation) We have a type $(x:A)\times B(x)$ in $\U$
+\item (Introduction) For all $x:A$ and $y:B(x)$ we have:
+\[(x,y) : (x:A)\times B(x)\]
+\item (Elimination) In order to define a dependent function: 
+\[f : (z:(x:A)\times B(x))\r P(z)\] 
+it is enough to define for all $x:A$ and $y:B$:
+\[f(x,y)\, :\equiv\, t\]
+with $t:P(x,y)$.
+\end{itemize}
+\end{ind_def}
+
+Once again notations conflict with the (non-dependent) product, but this is okay because $A\times B$ behaves as $(x:A)\times \tilde{B}(x)$  where $\tilde{B}$ is the constant family in $A\r \U$ defined by $\tilde{B}(x) :\equiv B$. %For $z:(x:A)\times B(x)$ we can define $z.1 : A$ and $z.2 : B(z.1)$ as in the non-dependent case.
+
+
+%\sse{The interpretation in $\infty$-groupoids}
+
+
+
+\se{First results about identity types}
+
+In this section we present some easy consequences of path induction, in order to familiarize the reader with this rather exotic way of reasoning. This will also make clear that the $\infty$-groupoid structure from the interpretation is (to some extent) already present in type theory.
+
+
+\sse{Deriving some $\infty$-groupoid rules from path induction}
+
+
+
+%$\infty$-groupoids rules. 
+%Now we derive a few rules from path induction. %This result can be used in both directions: on one hand it suggests that types can be interpreted as $\infty$-groupoids, on the other it allows to give a %This is a very important because it suggested that types can be interpreted as $\infty$-groupoids. The next few lemma illustrate this.
+
+In this section we show that path induction allows to prove some rules of $\infty$-groupoids for types. First, we define composition of paths.
+
+\begin{lemma}
+Let $A:\U$ be a type, and assume given $x,y,z:A$, with $p:x=_A y$ and $q:y=_A z$. Then, there is a path $p\cdot q: x=_Az$.
+\end{lemma}
+\begin{proof}
+By path induction we may assume that $p$ and $q$ are $\refl_x$. But in this case we define:
+\[\refl_x\cdot\refl_x \, :\equiv\,  \refl_x\]
+\end{proof}
+
+The path $p\cdot q$ is called the composition of $p$ and $q$. Now we show that reflexivity is neutral for composition. 
+
+\begin{lemma}
+Let $A:\U$ be a type, assume given $x,y:A$ and $p:x=_Ay$. Then we have:
+\[\refl_x\cdot p \, =_{x=_Ay}\, p\]
+and
+\[p\cdot \refl_y \, =_{x=_Ay}\, p\]
+\end{lemma}
+\begin{proof}
+We only prove the first equality. By path induction we assume that $p$ is $\refl_x$, then we need to prove:
+\[\refl_x\cdot\refl_x =_{x=_Ax} \refl_x\]
+But this is true by $\refl_{\refl_x}$.
+\end{proof}
+
+We show that composition of paths is associative.
+
+\begin{lemma}
+Assume given $A:\U$ with $a,b,c,d:A$ and $p : a =_A b$, $q:b=_Ac$, $r:c=_Ad$. We can construct a path:
+\[(p\cdot q)\cdot r =_{a=_Ad} p\cdot (q\cdot r)\] 
+\end{lemma}
+\begin{proof}
+By path induction we can assume that $p$, $q$ and $r$ are $\refl_a$. In this case we need to build an inhabitant of:
+\[(\refl_a\cdot \refl_a)\cdot \refl_a =_{a=_A a} \refl_a\cdot (\refl_a\cdot \refl_a)\]
+But both sides are defined as $\refl_a$, so $\refl_{\refl_a}$ is such an inhabitant.
+\end{proof}
+
+We construct the inverse of paths.
+
+\begin{lemma}
+Let $A:\U$ be a type, and assume given $x,y:A$ with $p:x=_A y$. Then there is a path $p^{-1}:y=_Ax$.
+\end{lemma}
+\begin{proof}
+By path induction we may assume that $p$ is $\refl_x$. But then we define:
+\[(\refl_x)^{-1}\, :\equiv \, \refl_x\]
+\end{proof}
+
+We show that inverses behave as expected.
+
+\begin{lemma}
+Let $A:\U$ be a type, and assume given $x,y:A$ with $p:x=_A y$. Then there is a path in 
+\[p\cdot p^{-1} =_{x=_A x}\refl_x \]
+and 
+\[p^{-1}\cdot p =_{y=_A y}\refl_y \]
+\end{lemma}
+\begin{proof}
+We just prove the first equality. By path induction we may assume that $p$ is $\refl_x$. Then we need to build an inhabitant of:
+\[\refl_x\cdot (\refl_x)^{-1} =_{x=_Ax}  \refl_x\]
+but the left-hand side is defined as $\refl_x$, so $\refl_{\refl_x}$ is such an inhabitant.
+\end{proof}
+
+The general strategy for deriving rules of $\infty$-groupoids from path induction is quite clear from these examples: first we assume that all paths in sight are reflexivities, and then we just output a suitable reflexivity.
+
+
+\begin{remark}
+In fact it has been proven that path induction implies that a type together with its iterated identity types has a structure of $\infty$-groupoid \cite{}. % $\infty$-groupoid \cite{}, which in turn can be interpreted as homotopy type.
+It is surprising that something as simple as path induction is equivalent to the rather complicated structure of $\infty$-groupoid. 
+\end{remark}
+
+
+
+\sse{Functions as morphisms of $\infty$-groupoids}
+
+In this section we show that a map between types obeys some rules of morphisms between $\infty$-groupoids. %continuous maps between homotopy types. 
+We prove this as in the previous section: we do path induction on all paths in sight, and then output a suitable reflexivity. First we show that a map acts on paths.
+
+\begin{lemma}
+Let $A,B:\U$ be types with $f:A\r B$. Assume given $x,y:A$ with $p:x=_Ay$, then we have a term:
+\[\ap_f(p) : f(x)=_B f(y)\]
+\end{lemma}
+\begin{proof}
+By path induction we assume that $p$ is $\refl_x$, but then we just define:
+\[\ap_f(\refl_x) \, :\equiv\, \refl_{f(x)}\]
+\end{proof}
+
+We show that this action commutes with composition of paths.
+
+\begin{lemma}
+Assume given $A,B:\U$ and $f:A\r B$. If we have $x,y,z:A$ with $p:x=_Ay$ and $q:y=_Az$, then:
+\[\ap_f(p\cdot q) \, =_{f(x)=_Bf(z)}\, \ap_f(p)\cdot\ap_f(q)\]
+\end{lemma}
+\begin{proof}
+By path induction we assume that both $p$ and $q$ are $\refl_x$. Then we need to prove:
+\[\ap_f(\refl_x\cdot \refl_x) \,=_{f(x)=_Bf(x)}\, \ap_f(\refl_x)\cdot\ap_f(\refl_x)\]
+But both sides are defined as $\refl_{f(x)}$, so we can conclude using $\refl_{\refl_{f(x)}}$
+\end{proof}
+
+We show that the action of a morphism on paths commutes with inverses.
+
+\begin{lemma}
+Assume given $A,B:\U$ and $f:A\r B$. If we have $x,y:A$ with $p:x=_Ay$, then:
+\[\ap_f(p^{-1})\, =_{f(y)=_Bf(x)}\, (\ap_f(p))^{-1}\]
+\end{lemma}
+\begin{proof}
+By path induction we assume that $p$ is $\refl_x$. Then we need to prove:
+\[\ap_f(\refl_x^{-1})\, =_{f(x)=_Bf(x)}\, (\ap_f(\refl_x))^{-1}\]
+But both sides are defined as $\refl_{f(x)}$, so $\refl_{\refl_{f(x)}}$ inhabits the desired type.
+\end{proof}
+
+
+
+\sse{Type families as families of $\infty$-groupoids}
+
+In this section we show that type families behave as families of homotopy types. First we define transport.
+
+\begin{lemma}
+Let $A:\U$ be a type with $B:A\r \U$. Assume given $x,y:A$ and $p:x=_Ay$, then we have a function:
+\[\tr_p^B : B(x) \r B(y)\]
+\end{lemma}
+\begin{proof}
+By path induction it is enough to define:
+\[\tr_{\refl_x}^B(b) \, :\equiv \, b\]
+for $b:B(x)$.
+\end{proof}
+
+Next we show that transport interacts well with composition of paths. %This result is a bit different from the other one, because we prove an equivalence rather than an equality.
+
+\begin{lemma}
+Let $A:\U$ be a type with $B:A\r \U$. Assume given $x,y,z:A$ and $p:x=_Ay$ with $q:y=_Az$. Then for all $b:B(x)$ we have:
+\[\tr_{q}^B\tr_p^B(b) =_{B(z)} \tr_{p\cdot q}^B(b)\]
+%the map $\tr_p^B$ is an equivalence.
+\end{lemma}
+\begin{proof}
+By path induction we assume that $p$ and $q$ are $\refl_x$. Then we need to prove:
+\[\tr_{\refl_x}^B\tr^B_{\refl_x}(b) \, =_{B(x)}\, \tr_{\refl_x\cdot \refl_x}^B(b)\]
+But both sides are defined as $b$, so $\refl_b$ has the desired type.
+%$\tr_{\refl_x}^B$ is the identity $\id_{B(x)}$. But this is easy to show that this is an equivalence.
+\end{proof}
+
+Now we show that dependent functions interact well with family of paths.
+
+\begin{lemma}
+Assume given $A:\U$ with $B:A\r \U$ and $f:(x:A)\r B(x)$. Then for $x,y:A$ and $p:x=_Ay$ we have a term:
+\[\apd_f(p) : \tr^B_p(f(x)) =_{B(y)} f(y)\]
+\end{lemma}
+%Note that $f(x)$
+\begin{proof}
+By path induction we assume that $p$ is $\refl_x$. Then we need to give an inhabitant of:
+\[\tr^B_{\refl_x}(f(x))=_{B(x)} f(x)\]
+but since the left hand side is defined as $f(x)$, so we see that it is enough to define:
+\[\apd_f(\refl_x) \, :\equiv\, \refl_{f(x)}\]%\refl_{f(x)}$ is such an inhabitant.
+\end{proof}
+
+This long string of results shows path induction in action. From now on we will often use these results, and other ones obtained the same way, without any reference.
+
+%\sse{Based path induction}
+
+
+\sse{Identities in (dependent) function types}
+
+\begin{definition}
+Assume given $A,B:\U$ and $f,g:A\r B$. Then we define:
+\[f\sim g \ :\equiv\ (x:A)\r f(x) =_B g(x)\]
+\end{definition}
+
+An inhabitant of $f\sim g$ is called a homotopy from $f$ to $g$. 
+
+\begin{remark}
+As a map of $\infty$-groupoids, an inhabitant of $(x:A)\r f(x)=_B g(x)$ gives a lot more than a path from $f(x)$ to $g(x)$ for each point $x$ in $A$, indeed it gives a continuous family of such paths.% between the image of points, because it is continuous: it acts on all higher paths as well. %It should be noted that as a map of $\infty$
+\end{remark}
+
+This can be extended straightforwardly to dependent functions:
+
+\begin{definition}
+Assume given $A:\U$ with $B:A\r \U$ and $f,g:(x:A)\r B(x)$. Then we define:
+\[f\sim g \, :\equiv\, (x:A)\r f(x) =_{B(x)} g(x)\]
+\end{definition}
+
+We see that the non-dependent case is a special case of the dependent one.
+
+\begin{lemma}
+Assume given $A:\U$ with $B:A\r \U$ and $f,g:(x:A)\r B(x)$. Then the canonical function in:
+\[f= g \r f\sim g\]
+is an equivalence.
+\end{lemma}
+
+%\begin{proof}
+%The proof
+%\end{proof}
+
+The proof of this lemma uses the soon to be introduced \emph{univalence axiom}, and is a bit tricky, so we admit it. It can be found in \cite{}.
+
+%\begin{lemma}
+%\end{lemma}
+
+
+\sse{The univalence axiom: identity types in the universe}
+
+Now we define equivalences between types, which are interpreted as homotopy equivalences (or equivalences of $\infty$-groupoids).
+
+\begin{definition}
+Let $A$, $B$ be types in $\U$. A proof that $f:A\r B$ is an equivalence consists of:
+\begin{itemize}
+\item A map $g_1:B\r A$ with a homotopy in $g_1\circ f \sim \id_A$.
+\item A map $g_2:B\r A$ with a homotopy in $f\circ g_2 \sim \id_B$.
+\end{itemize}
+\end{definition}
+
+Formally, we define $\mathrm{isEquiv} : (A \r B)\r \U$ by:
+\[\mathrm{isEquiv}(f) \, :\equiv\, (g_1:B\r A)\times (g_2:B\r A)\times (g_1\circ f \sim \id_A) \times (f\circ g_2 \sim \id_B)\]
+
+
+%\begin{remark}
+%It is remarkable that the definition can be stated so simply, whereas for $\infinity$-groupoid one would need a lot more than a path betwee
+%\end{remark}
+
+The use of $g_1$ and $g_2$ might surprise you, but it is necessary to guarantee the next lemma.
+
+
+% Nevertheless both definition are not equivalent, as we can prove:
+
+\begin{lemma}
+For all $\epsilon_1,\epsilon_2:\mathrm{isEquiv}(f)$, we have:
+\[\epsilon_1 =_{\mathrm{isEquiv}(f)} \epsilon_2\]
+\end{lemma}
+
+This is desirable, because we want to identify an equivalence with its underlying map. In order to do that we need all proofs of equivalence to be equal. %does not carry any information: they are all equal. 
+When proving that a map $f$ is an equivalence, we will always choose $g_1 \equiv g_2$.
+
+\begin{remark}
+We develop on this matter. In fact if we define:
+
+\[\mathrm{isQuasiEquiv}(f) \, :\equiv\, (g:B\r A)\times \big((x:A)\r g(f(x))=_A x \big)\times\big((y:B)\r f(g(y)) =_B y\big)\]
+
+One can prove that for all equivalence, we have $(y:B)\r g_1(y) =_A g_2(y)$, so that for all $f:A\r B$, we have 
+\[\mathrm{isEquiv}(f) \leftrightarrow \mathrm{isQuasiequiv}(f)\]
+
+Nevertheless there is no equivalence:
+\[\mathrm{isEquiv}(f)\ \not\simeq \ \mathrm{isQuasiEquiv}(f)\]
+because previous lemma does not hold for $\mathrm{isQuasiEquiv}$.
+\end{remark}
+
+%whereas the analogous result for $\mathrm{isQuasiEquiv}(f)$ does not holds. This is illustrate a major difference of type theory with set theory: it is \emph{proof relevant}.
+
+%\end{remark}
+
+%\end{remark}
+
+We introduce some notations.
+
+\begin{definition}
+For $A,B$ types in $\U$, we define the type of equivalences between $A$ and $B$ as:
+\[A\simeq B \ :\equiv \ (f:A\r B)\times \mathrm{isEquiv}(f)\]
+\end{definition}
+
+Now the very important \emph{univalence axiom}.
+
+\begin{assumption}
+For all $A,B:\U$, we define $\ua : A=_\U B\r A\simeq B$ by path induction:
+\[\ua(\refl_A) \, :\equiv\, \id_A\]
+The univalence axiom says that this map is an equivalence.
+%the canonical map from $A=_\U B$ to $A\simeq B$ sending $\refl_A$ to $\Gl(x:A).\, x$ is an equivalence.
+\end{assumption}
+
+The univalence axiom can be summarized (somewhat imprecisely) as:
+\[(A=_\U B) \, \simeq \, (A\simeq B)\]
+
+
+
+\begin{remark}
+From a foundational point of view this is very interesting, especially a category theorist. Indeed this can be seen as a formalisation of the principle that isomorphic objects are the same: in HoTT we cannot distinguish such objects.
+\end{remark} 
+
+\begin{remark}
+For a homotopy theorist the univalence axiom is both a blessing and a curse:
+\begin{itemize}
+\item It is a blessing because whatever we define is automatically a homotopy invariant. %, and we are interrested in these.
+\item It is a curse because we cannot use intermediary constructions not invariant under homotopy equivalences.
+\end{itemize}
+\end{remark}
+
+
+\sse{Identities in (dependent) product types}
+
+The product of types is an example of inductive type. We want to perform an analysis of its identity types, i.e. find a type equivalent to $(x,y)=_{A\times B} (x',y')$ for $x,x':A$ and $y,y':B$. In order to do that we introduce the \emph{encode-decode method}, an essential tool of homotopy type theory. %Note that a similar analysis
+
+\begin{proposition}
+Assume given $x,x':A$ and $y,y':B$. Then we have:
+\[(x,y)=_{A\times B}(x',y')\ \simeq\ (x=_A x')\times (y=_By')\]
+\end{proposition}
+
+If we try to build directly a map out of $(x,y)=_{A\times B}(x',y')$, we cannot proceed by path induction because $(x,y)$ and $(x',y')$ are not variables. In fact this problem will be encountered whenever we try to analyse the identity types of an inductive type. We present a solution called the \emph{encode-decode method}. The key idea is to generalize our property to $z=_{A\times B} z'$.
+
+\begin{proof}
+We define $\mathrm{Eq}_{A\times B} : A\times B \r A\times B \r \U$ inductively by:
+\[\mathrm{Eq}_{A\times B}((x,y),(x',y')) \, :\equiv \, (x=_Ax')\times (y=_By')\]
+It is clear that proving:
+\[(z,z':A\times B) \r z=_{A\times B} z' \simeq \mathrm{Eq}_{A\times B}(z,z')\]
+will imply the desired property.
+
+%$H:$
+
+First we define $\encode : z=_{A\times B} z' \r \mathrm{Eq}_{A\times B}(z,z')$. By path induction it is enough to define $\encode(\refl_z) :\mathrm{Eq}_{A\times B}(z,z)$ for all $z:A\times B$, but assuming by induction that $z$ is $(x,y)$, it is enough to define: %we can give $(\refl_x,\refl_y)$.
+
+\[\encode(\refl_{(x,y)})\,  :\equiv\, (\refl_x,\refl_y)\] 
+%by definition.
+
+Now we define $\decode : \mathrm{Eq}_{A\times B}(z,z') \r z=_{A\times B} z'$. By induction we assume $z$ is $(x,y)$ and $z'$ is $(x',y')$. Then we need to give:
+\[\decode : (x=_Ax')\times (y=_By') \r (x,y)=_{A\times B}(x',y')\]
+By induction on the product and two path inductions, it is enough to define:
+\[\decode(\refl_x,\refl_y) \, :\equiv \, \refl_{(x,y)}\]
+
+We can prove that for all $z,z':A\times B$ we have:
+\begin{itemize}
+\item For all $q:\mathrm{Eq}_{A\times B}(z,z')$
+\[\encode (\decode(q)) = q\] 
+indeed by induction on $z,z'$ followed by induction on $q$, it is enough to prove:
+\[\encode(\decode(\refl_x,\refl_y)) = (\refl_x,\refl_y)\]
+but this is true by reflexivity.
+\item For all $p:z=_{A\times B} z'$ we have:
+\[\decode(\encode(p))=p\]
+indeed by induction on $p$ followed by induction on $z$, it is enough to prove:
+\[\decode(\encode(\refl_{(x,y)})) = \refl_{(x,y)}\]
+but the constant path solves this as well.
+\end{itemize}
+Now we can conclude.
+\end{proof}
+
+I was very chatty in this proof. I hope it will help you replicate this encode-decode method for other inductive types (see TD1). Later on we will see how it can be made shorter using the appropriate lemma. 
+
+%\begin{definition}
+%Heterogeneous identity
+%\end{definition}
+
+Now we want to perform a similar analysis of the identity types in dependent products.
+
+\begin{lemma}
+Assume given $A:\U$ with $B:A\r \U$. For $x,x':A$ and $y:B(x)$ and $y':B(x')$, we have:
+\[(x,y)=_{(a:A)\times B(a)} (x',y') \ \simeq \ (p:x=_Ax')\times (\tr^B_p(y) =_{B(x')} y')\]
+\end{lemma}
+\begin{proof}
+The proof is the same as for the non-dependent case.
+\end{proof}
+
+Note that we need to use the transport $\tr^B_p$ because $y:B(x)$ whereas $y':B(x')$, so they are not in the same type.
+
+\begin{exercise}
+Convince yourself that the proof for non-dependent products works in the dependent case. %ones. %is the same for non-dependent and dependent products.
+\end{exercise}
+
+
+\sse{Using univalence}
+
+We give an example of use of univalence, and comment a bit on it. First we define the type of maps to $B$ for $B:\U$.
+
+\begin{definition}
+For $B:\U$, we define:
+\[\U_{/B}\ :\equiv\ (X:\U)\times (X \r B) \]
+\end{definition}
+
+For $f:A\r B$, we write $f:\U_{/B}$ as a shorthand for $(A,f)$. %In usual mathematics, we would define isomorphism between $f,g:\U_{/B}$. 
+As usual, we want to characterize identity types in $\U_{/B}$. %Intuitively two maps 
+
+\begin{lemma}
+Assume given $A,A',B:\U$ with $f:A\r B$ and $g:A'\r B$ then:
+\[f=_{\U_{/B}} g\]
+is equivalent to the type: 
+\[(\epsilon:A\simeq A')\times (f \sim g\circ \epsilon)\]
+%of equivalence $\epsilon:A\r A'$ such that for all $x:A$ we have $ f(x) =_B g(\epsilon(x))$
+\end{lemma} 
+
+\begin{proof}
+We need to characterize:
+\[(A,f)=_{(X:\U)\times (X\r B)} (A',g)\]
+But by the characterization of identity types in a dependent product, it is equivalent to:
+\[(\epsilon : A=_\U A')\times (\tr^{\Gl Z.Z\r B}_\epsilon(f) =_{A'\r B} g)\]
+
+\begin{itemize}
+
+\item Now we prove that for any $\epsilon:A=_\U A'$ and $f:A\r B$, $g:A'\r B$ we have:
+\[\big(\tr^{\Gl Z.Z\r B}_\epsilon(f) =_{A'\r B} g\big) \ \simeq\ \big(f =_{A\r B}g\circ \ua(\epsilon) \big)\]
+Where $\ua$ is the map from $A=_\U B$ to $A\simeq B$ is assumed to be an equivalence by the univalence axiom.
+By path induction on $\epsilon$ one just needs to show that:
+\[\big(\tr^{\Gl Z.Z\r B}_{\refl_A}(f) =_{A\r B} g\big) \ \simeq\ \big(f =_{A\r B}g\circ \ua(\refl_A)\big) \]
+but by definition this just means:
+\[\big(f=_{A\r B}g\big) \simeq \big(f =_{A\r B} g\big)\]
+which is obvious.
+%\item 
+\end{itemize}
+
+From that we know that $f=_{\U_{/B}} g$ is equivalent to:
+\[(\epsilon : A=_\U A')\times (f=_{A\r B} g\circ \ua(\epsilon))\]
+But using univalence (i.e. the fact that $\ua$ is an equivalence) we can show (omitted) that this is equivalent to:
+\[(\epsilon:A\simeq A')\times (f=_{A\r B} g \circ \epsilon)\]
+which is equivalent to what we want by function extensionality.
+
+%\[\[\tr^{\Gl Z.Z\r B}_\epsilon(f) =_{A'\r B} g \ \simeq\ g\circ \ua(\epsilon)=_{A\r B}f \]\]
+%Note that $f$ is actually 
+%\[\tr^{\Gl Z.Z\r X}_\epsilon(p_Y) =_{X\r Y} f \]
+\end{proof}
+
+You should convince yourself that this result was to be expected: what else could reasonably be called an equivalence between maps to $B$ ?
+
+\begin{remark}
+This illustrates a general situation: assume we define a notion of "types with extra-structure" (e.g. maps to $B$). 
+\begin{itemize}
+\item In traditional mathematics one would need to define by hand a notion of "equivalences" or "isomorphisms" of such types with extra-structure, and then prove that "equivalent" objects share the same properties. 
+\item In homotopy type theory we just use plain equality as the correct notion of "equivalence", so that equivalent objects automatically share the same properties. Then univalence (and a bit of work) shows that this is the same as the traditional notion mathematicians came up with.%This is a remarkable fact that univalence implies all the usual definitions
+\end{itemize}
+\end{remark}
+
+
+
+\sse{A first theorem: Grothendieck correspondence for types}
+
+We give a very important auxiliary definition.
+
+\begin{definition}
+Assume given a map $f:X\r Y$. We define $\fib_f : Y\r \U$ by:
+\[\fib_f(y) \, :\equiv \, (x:X)\times f(x) =_X y\]
+\end{definition}
+
+Note that there is a canonical map $p_f:\fib_f(y) \r X$.
+
+\begin{remark}
+Here the set-theoretic perspective is that $\fib_f(y)$ is what is usually denoted $f^{-1}(y)$. We will see that this analogy fails to explain some phenomena. A far better analogy is with the \emph{homotopy fibers} in traditional algebraic topology. %, for example the fibers of $p_X$ can complicated.
+\end{remark}
+
+
+We need an auxiliary lemma.
+
+\begin{lemma}
+Assume given $Y:\U$ with $P:Y\r \U$ and $b:Y$. Then we have
+\[(z:(y:Y)\times P(y))\times (p_Y(z) =_Y b) \ \simeq \ P(b)\]
+\end{lemma}
+\begin{proof}
+We just construct the equivalence:
+\begin{itemize}
+\item We define $\phi : P(b) \r (z:(y:Y)\times P(y))\times (p_Y(z) =_Y b)$ by:
+\[\phi(p) \, :\equiv\, ((b,p),\refl_b)\]
+\item We need to define: 
+\[\psi : (z:(y:Y)\times P(y))\times (p_Y(z) =_Y b) \r P(b)\] 
+Inductively on $z$ it is enough to define for $y:Y$ and $p:P(y)$ with $q:y=_Y b$ a term:
+\[\psi((y,p),q) : P(b)\]
+But by based path induction on $q$ (allowed because $y$ is a variable), it is enough to define:
+\[\psi((b,p),\refl_b) :\equiv p\]
+\item We have that $\psi(\phi(p)) =_{P(b)} p$ by definition for $p:P(b)$.
+\item To show that $\phi(\psi(z)) = z$ we proceed by induction on $z$, so we just need to prove:
+\[\phi(\psi((y,p),q) = ((y,p),q)\]
+for $y:Y$ with $p:P(y)$ and $q:y=_Y b$. But by based path induction on $q$, we just need to prove:
+\[\phi(\psi((b,p),\refl_b)) = ((b,p),\refl_b)\]
+which is true by definition.
+\end{itemize}
+\end{proof}
+
+Now we prove our first theorem.
+
+\begin{theorem}
+For $Y:\U$, we have:
+\[(Y\r \U) \, \simeq\, \U_{/Y}\]
+\end{theorem}
+
+
+\begin{proof}
+We define $\psi : (Y\r \U)\r \U_{/Y}$ by:
+\[\psi(P) \, :\equiv \, ((y:Y)\times P(y) , p_Y)\]
+for $P:Y\r \U$. The other way we define $\phi : \U_{/Y}\r (Y\r \U)$ by induction as:
+\[\psi((Y,f)) \, :\equiv \, \fib_f\]
+Now we need to check that both constructions are inverse to each other.
+\begin{itemize}
+\item  For $P:Y\r \U$ we need to prove $\phi(\psi(P)) =_{Y\r \U} P$, i.e. with: 
+\[p_Y : (y:Y)\times P(y)\r Y\]
+we need:
+\[\fib_{p_Y} =_{Y\r \U} P\]
+But this is equivalent by function extensionality to proving for all $b:Y$ that:
+\[\fib_{p_Y}(b) =_\U P(b) \]
+%so by univalence we just need:
+%\[(z:(y:Y)\times P(y))\times p_Y(z) =_Y b \, \simeq \, P(b)\]
+
+But this is the previous lemma.
+
+\item In the other direction assume given $f:X\r Y$, we want to show that for: 
+\[p_Y : (y:Y)\times \fib_f(y) \r Y\]
+we have:
+\[p_Y=_{\U_{/Y}} f\]
+By the characterisation of identity types in $\U_{/Y}$, it is enough to give an equivalence:
+\[\epsilon : X\r (y:Y)\times \fib_f(y)  \]
+such that for all $x:X$, we have $p_Y(\epsilon(x)) =_Y f(x)$.
+
+We define $\epsilon$ by:
+\[\epsilon(x) \, :\equiv\, (f(x),x,\refl_{f(x)})\]
+It is obvious that $\epsilon$ obeys the desired equality. Now we check that $\epsilon$ is an equivalence. To do that we define: 
+\[\alpha : (y:Y)\times \fib_f(y) \r X\] 
+inductively by: 
+\[\alpha(y,x,p) :\equiv x\]
+where $y:Y$, $x:X$ and $p:f(x)=_Y y$.
+
+Then $\alpha(\epsilon(x))$ is by definition equal to $x$. We want to prove $\epsilon(\alpha(z)) = z$, so by induction we just need to prove that for $y:Y$, $x:X$ and $p:f(x)=_Y y$, we have that:
+\[\epsilon(\alpha(y,x,p)) = (y,x,p)\]
+i.e. 
+\[(f(x),x,\refl_{f(x)}) = (y,x,p)\]
+But we can assume that $p$ is $\refl_{f(x)}$ (so that $y$ is $f(x)$) by based path induction (since $p$ has one variable $y$ as its endpoint). Then it is easy to conclude.%the property is obvious.
+
+%\subitem First we construct $\epsilon$
+\end{itemize}
+\end{proof}
+
+\begin{remark}
+A similar result is true in set theory. Roughly it says that for $Y$ a set, giving a family of sets $(X_y)_{y\in Y}$ is "equivalent" (in some not-so-clear sense at this point) to giving a function to $Y$. In this case we construct $\psi((X_y)_{y\in Y})$ as $\coprod_y X_y \r Y$ (where $\coprod$ is the so-called "disjoint union", because it is in bijection with the union $\cup_yX_y$ when the $X_y$ are disjoints) and $\phi(f)$ is $(f^{-1}(y))_{y\in Y}$.
+
+We see that type theory has two advantages over set theory in this case:
+\begin{itemize}
+\item Knowing in which sense families of sets are "equivalent" to functions require to know a bit of category theory (technically we use equivalences of category). In homotopy type theory families correspond to maps in a very canonical way: by univalence we have $(Y\r \U) = \U_{/Y}$. This means that (at least in this case) homotopy type theory has some foundational value: it gives a more natural meaning to this "families equivalent to maps" idea. %This advantage is a bit subtle, and I do not expect you to understand it at this point. Just know that it gives homotopy type theory some value as a foundation of mathematics.
+\item On the other hand, using the homotopical interpretation of type theory we deduce from our theorem that for $Y$ an $\infty$-groupoid, the $\infty$-groupoid of morphisms (of $\infty$-groupoid) to $Y$ is equivalent to the $\infty$-groupoid of morphisms (of $\infty$-groupoid) from $Y$ to the $\infty$-groupoid of all $\infty$-groupoids. Proving (and even stating...) this theorem in traditional mathematics requires a lot of serious work. But our proof does not require a lot more work than for sets.
+\end{itemize}
+\end{remark}
+
+%\begin{remark}
+
+%\end{remark}
+
+
+%\begin{}
+
+
+
+
+\se{Inductive types and the encode-decode method}
+
+In this section we give examples of inductive types. This types are defined by a list of constructors allowing to build inhabitants of them, and an elimination stating that they are the simpler type with these constructors. We do not attempt to give a general definition of inductive types. It can be found in \cite{}. %We treat $\bot$, $\top$, $\mathrm{Bool}$, $\mathbb{N}$, $A+B$, maybe $W(x:A).\, B(x)$.
+
+\sse{The unit type}
+
+The unit type $\one$ corresponds to a singleton $\{*\}$ in set theory, and the true proposition $\top$ in logic.
+
+\begin{ind_def}
+We define the unit type.
+\begin{itemize}
+\item (Formation) There is a type $\one:\U$.
+\item (Introduction) There is a term $*:\one$.
+\item (Elimination) Assume given $P : \one \r \U$. In order to define:
+\[f:(x:\one) \r P(x)\]
+it is enough to define:
+\[f(*) \ :\equiv\ t\]
+with $t:P(*)$.
+\end{itemize}
+\end{ind_def}
+
+
+\begin{lemma}
+For any $x:\one$, we have $x=*$
+\end{lemma}
+\begin{proof}
+By induction we can assume that $x$ is $*$. Then the property is obvious.
+\end{proof}
+
+\begin{lemma}
+Assume given $x,y:\one$, then we have:
+\[(x=y)\ \simeq \ \one\]
+\end{lemma}
+\begin{proof}
+See TD1.
+\end{proof}
+
+
+\sse{The empty type}
+
+We look at a somewhat degenerate case. The empty type $\zero$ is defined by having no constructor, meaning there is no way to build an element in it. This makes it akin to the empty set $\emptyset$ from set theory, and the false proposition $\bot$ from logic. %Indeed the type "$A$ is false" is fomalized as $A\r \zero$.
+
+\begin{ind_def}
+We define the empty set.
+\begin{itemize}
+\item (Formation) There is a type $\zero : \U$.
+\item (Introduction) There is no introduction rule.
+\item (Elimination) Assume given $P : \zero\r \U$, in order to define a map:
+\[f: (x:\zero) \r P(x)\]
+we do not need to give anything!
+\end{itemize}
+\end{ind_def}
+
+In practice the elimination principle means that if we assume $x:\zero$, we can immediately conclude. We do not need any subtlety to study identity types in $\zero$, in fact we can prove anything about them! 
+
+The type $\zero$ is used to define the negation of a type $\lnot A \,:\equiv\, A\r \zero$. If $A$ is seen as a set then $\lnot A$ means it is empty, if $A$ is seen as a proposition $\lnot A$ means it is refutable.
+
+
+\sse{The type of booleans}
+
+The type of booleans $\two$ correspond to a set with two elements. Traditionally these elements are called {\bf true} and {\bf false} by computer scientist, explaining the name of booleans. We will call them $0$ and $1$, hoping that no confusion with the natural numbers occurs.
+
+\begin{ind_def}
+We define the type of booleans.
+\begin{itemize}
+\item (Formation) There is a type $\two:\U$.
+\item (Introduction) We have elements $0,1:\two$.
+\item (Elimination) Assume given $P:A\r \U$, in order to define:
+\[f:(x:\two)\r P(x)\]
+it is enough to define:
+\[f(0) \ :\equiv\ s\]
+\[f(1) \ :\equiv\ t\]
+with $s:P(0)$ and $t:P(1)$.
+\end{itemize}
+\end{ind_def}
+
+Its identity types are as expected.
+
+\begin{lemma}
+We have that:
+\[(0=_\two0) \ \simeq \ \one\]
+\[(0=_\two1) \ \simeq \ \zero\]
+\[(1=_\two0) \ \simeq \ \zero\]
+\[(1=_\two1) \ \simeq \ \one\]
+\end{lemma}
+\begin{proof}
+See TD1.
+\end{proof}
+
+
+\sse{Sum types}
+
+We can also define types depending on other types. For example we define the sum type $A+B$ for $A,B:\U$, which correspond to the disjoint union of $A$ and $B$ from a set theoretic perspective.
+
+\begin{ind_def}
+We define sum types.
+\begin{itemize}
+\item (Formation) Assume given $A,B:\U$, then there is a type $A+B:\U$.
+\item (Introduction) For any $x:A$ we have an element:
+\[\inc_l(x)\]
+Moreover for all $y:B$ we have an element:
+\[\inc_r(y)\]
+\item (Elimination) Assume given $P:A+B\r \U$, in order to define:
+\[f:(x:A+N)\r P(x)\]
+it is enough to define:
+\[f(\inc_l(x)) \ :\equiv\ s\]
+with $s:P(\inc_l(x))$ for $x:A$ and:
+\[f(\inc_l(y)) \ :\equiv\ t\]
+with $t:P(\inc_r(y))$ for $y:B$.
+\end{itemize}
+\end{ind_def}
+
+%\begin{lemma}
+%Assume given $A,B,C:\U$. Then:
+%\[(A+B)\r C \ \simeq\ (A\r C) \times (A\r C)\]
+%\end{lemma}
+
+\begin{lemma}
+Assume given $A,B:\U$ with $a,a':A$ and $b,b':B$. Then:
+\[\inc_l(a) = \inc_l(a') \ \simeq \ a=_Aa'\]
+\[\inc_l(a) = \inc_r(b')\ \simeq \ \zero\]
+\[\inc_r(b) = \inc_l(a') \ \simeq \ \zero\]
+\[\inc_r(b),\inc_l(b') \ \simeq \ b=_Bb'\]
+\end{lemma}
+
+
+\sse{The natural numbers}
+
+We introduce our first truly recursive inductive type.
+
+\begin{ind_def}
+We define the type of natural numbers.
+\begin{itemize}
+\item (Formation) There is a type $\mathbb{N}:\U$.
+\item (Introduction) We have elements $0:\mathbb{N}$, and we have a function:
+%or any $n:\mathbb{N}$ we have an element:
+\[\s : \mathbb{N} \r \mathbb{N}\]
+\item (Elimination) Assume given $P:\mathbb{N}\r \U$, in order to define:
+\[(x:\mathbb{N})\r P(x)\]
+it is enough to define:
+\[f(0) \ :\equiv\ s\]
+\[f(\s(n)) \ :\equiv\ t\]
+with $s:P(0)$ and $t:P(\s(n))$, which can be build using $f(n)$.
+\end{itemize}
+\end{ind_def}
+
+The idea is that $\s$ is the successor function (which sends $n$ to $n+1$). This type is called recursive because the constructor $\s$ use an element in $\mathbb{N}$ in order to build a new one. You should convince yourself that the elimination principle for $\mathbb{N}$ is just the usual induction on natural numbers.
+
+\begin{lemma}
+Assume given $m,n:\mathbb{N}$, then:
+\[0=_\mathbb{N}0\ \simeq\ \one\]
+\[\s(m)=_\mathbb{N}0\ \simeq\ \zero\]
+\[0=_\mathbb{N}\s(n)\ \simeq\ \zero\]
+\[\s(m)=_\mathbb{N}\s(n)\ \simeq\ m=_\mathbb{N}n\]
+\end{lemma}
+
+%There exists many more example of inductive types, for example lists, finitely branching trees, $\cdots$
+
+
+
+\se{Higher inductive types}
+
+In this section we give an introduction to higher inductive types. They are inductive types with constructors in their iterated identity types.
+
+%A higher inductive type is an inductive type with identity constructors. So intuitively it is a type inductively generated by  
+
+
+\sse{Reformulating encode-decode}
+
+We give a useful lemma to study identity types. From now on when we say "by the reformulation of the encode-decode method" we mean "using this lemma". 
+
+%Next lemma is useful reformulation of the encode-decode method. From now on when we say "by the reformulation of the encode-decode method" we mean "using this lemma". %This is not standard by any mean. 
+
+\begin{lemma}
+Assume given $A:\U$ with $a:A$. Assume given $\Eq_A : A\r \U$ with $q : \Eq_A(a)$. Then if:
+\[(x:A)\times \Eq_A(x)\]
+is contractible, we have for all $x:A$:
+\[\Eq_A(x) \simeq a=_A x\]
+%Moreover for $p:a=_Ax$ and 
+\end{lemma}
+\begin{proof}
+We consider the map: 
+\[p_A:(x:A)\times \Eq_A(x)\r A\]
+We denote by $*_a : \one \r A$ the map defined by $*_A(x) :\equiv a$. We want to show that:
+$*_a=_{\U_{/A}} p_A$
+\begin{itemize}
+\item By the characterization of identity types in it is enough to find an equivalence:
+\[\phi : \one \r (x:A)\times \Eq_A(x)\] 
+such that $p_A\circ \phi \sim *_a$.
+\item We define $\phi$ by induction:
+\[\phi(*) \, :\equiv \, (a,q)\]
+\item It is immediate to check by induction that $p_A\circ \phi \sim *_a$.
+\item The map $\phi$ is an equivalence because any map between contractible type is an equivalence.
+\end{itemize}
+So we know that for all $b:A$ we have
+\[\fib_{*_a}(b)\, \simeq\, \fib_{p_A}(b)\]
+From the Grothendieck we know that:
+\[\fib_{p_A}(b) \, \simeq \, \Eq_A(b)\]
+Now we see:
+\[\fib_{*_a}(b) \ \equiv\  (x:\one)\times (*_a(x)=_Ab) \]
+\[\ \equiv\  \one\times (a=_Ab) \]
+\[\ \simeq\ a=_Ab\]
+So we can conclude.
+\end{proof}
+
+
+\sse{The circle}
+
+Now we give our first example of higher inductive type.
+
+\begin{definition}
+We have:
+\begin{itemize}
+\item (Formation) There is a type $S^1$.
+\item (Introduction) There is a point: \[\base : S^1\] 
+Moreover there is a path: \[\loop : \base=_{S^1}\base\]
+\item (Elimination) In order to define $f:(x:S^1) \r P(x)$ it is enough to define:
+\[f(\base) \, :\equiv\, t \]
+\[\apd_f(\loop) \, :\equiv\, \epsilon\]
+For $t:P(\base)$ and 
+%\[\apd\]
+\[\epsilon : \tr^P_\loop(t) =_{P(\base)} t\]% In this case:
+%\[\apd_f(\loop) = \epsilon\] 
+\end{itemize}
+\end{definition}
+
+This is a type freely generated by a point $\base$ and an identity proof $\loop$. As a space this correspond to a point $b$ with a path from this point to itself added, i.e. a circle. So we call $S^1$ the circle. 
+
+As usual we want to characterize the identity types in $S^1$. One can guess that $\base=_{S^1}\base$ will have one point correponding to $\refl_\base$, plus one point corresponding to $\loop$. But as $S^1$ is a type there should also be a point for $\loop\cdot\loop$, which should be different from the two previous one (as $S^1$ is freely generated). There should be a point for $\loop^{-1}$ as well.
+
+From these hints we guess that $\base=_{S^1}\base$ is equivalent to $\mathbb{Z}$, via the map sending $n:\mathbb{Z}$ to $\loop^n$. When proving this we need to generalize this to $\base=_{S^1}x$, so that we can use path induction.
+
+\begin{definition}
+We define $\Eq_{S^1} : S^1 \r \U$ inductively by:
+\[\Eq_{S^1}(\base) \, :\equiv\, \mathbb{Z}\]
+with 
+\[\ap_{\Eq_{S^1}}(\loop) : \mathbb{Z}=_\U\mathbb{Z}\] 
+corresponding to the equivalence $\Gl(x:\mathbb{Z}).\, x+1$ via univalence.
+%\[\ap_{\Eq_{S^1}}(\loop) \, :\equiv\, \]
+\end{definition} 
+
+Now we want to show that $\Eq_{S^1}(x)$ is equivalent to $\base=_{S^1}x$. We need an auxiliary lemma.
+
+\begin{lemma}
+Assume given $A:\U$ with $B : A \r \U$ and $C:(x:A)\r B(x)\r \U$. Moreover assume given $a,a':A$ with $p:a=_Aa'$ and $\psi : (q:B(a))\r C(a,q)$. Then:
+\[\tr^{(q:B(x))\r C(x,q)}_p(\psi) \ = \ \Gl(q:B(a')).\, \tr^{C(x,y)}_{H}\psi(\tr^{B(x)}_{p^{-1}}(q))\]
+where $H:(a,\tr^{B(x)}_{p^{-1}}(q)) = (a',q)$ is defined by path induction on $p$.
+\end{lemma}
+\begin{proof}
+By path induction.
+\end{proof}
+
+Now we give our main result:
+
+\begin{proposition}
+The type:
+\[(x:S^1)\times \Eq_{S^1}(x)\]
+is contractible.
+\end{proposition}
+\begin{proof}
+We skecth the proof, without displaying all the details.
+
+First we give an inhabitant $(\base,0)$ as center of contraction. Now we need to prove that for all $x:S^1$ and $q:\Eq_{S^1}$ we have 
+\[(x,q) =_{(x:S^1)\times \Eq_{S^1}(x)} (\base,0)\]
+We proceed by induction on $x$.
+\begin{itemize}
+\item If $x$ is $\base$, we need to prove that $(\base,n)=(\base,0)$ for all $n:\mathbb{Z}$. In order to do this we notice that $\loop$ induces an equality 
+\[(\base,n) = (\base,\tr^{\Eq^{S^1}}_\loop(n))\]
+But this means that:
+\[(\base,n)=(\base,n+1)\]
+by the definition of $\Eq_{\S^1}$. From this it is easy to obtained a proof of the desired result. We denote by $\psi$ this proof.
+\item Now we need to check that: 
+\[\tr^{(q:\Eq_{S^1}(x)) \r (x,q)=(\base,0)}_\loop(\psi) =_{(n:\mathbb{Z}) \r (\base,n) = (\base,0)} \psi \]
+By function extensionality plus the previous lemma we need to prove for all $n:\mathbb{Z}$ that:
+\[\tr^{(x,y)=(\base,0)}_H(\psi(\tr^{\Eq_{S^1}}_{\loop^{-1}}(n))) =_{(\base,n)=(\base,0)} \psi(n)\]
+with $H : (\base,\tr^{\Eq_{S^1}}_{\loop^{-1}}(n)) = (\base,n)$ induced by $\loop$. One can check that this is equivalent to:
+\[H'\cdot \psi(n-1) = \psi(n)\]
+where $H' : (\base,n) = (\base,n-1)$ is induced from $\loop^{-1}$.
+
+But this is more or less the definition of $\psi$.
+\end{itemize}
+\end{proof}
+
+\begin{proposition}
+We have: 
+\[(\base=_{S^1}\base) \ \simeq \ \mathbb{Z}\]
+\end{proposition}
+\begin{proof}
+This is an immediate consequence of our last result together with the reformulation of the encode-decode method.
+\end{proof}
+
+
+\sse{More higher inductive types}
+
+We did not attempt to define inductive types in general in these notes, a complete definition can be found in \cite{}. Higher inductive types are a variant with constructors not only for inhabitants of the type, but also of its iterated identity types. There is currently no generally accepted definition of higher inductive types, although some work in this direction has been done. Just note that a definition of HITs would consists of:
+\begin{itemize}
+\item A rule determining which constructors are valid.
+\item An algorithm giving the elimination principle corresponding to a given list of constructors.
+\end{itemize}
+Here we give some examples of higher inductive types, but we do not state their dependent elimination principles.
+
+%Higher inductive types are a variant, intuitively types generated by constructors not only for inhabitants, but also 
+
+\ssse{The torus}
+
+\begin{ind_def}
+We define the torus $T^2$ by:
+\begin{itemize}
+\item (Formation) There is a type $T^2:\U$.
+\item (Introduction) There is a point $b:T^2$, with:
+\[p,q:b=_{T^2}b\] 
+and moreover: 
+\[s:p\cdot q =_{b=_{T^2}b} q\cdot p\]
+\item (Non-dependent Elimination) In order to define $f:T^2\r A$, it is enough to define:
+\[f(b) \, :\equiv\, s\]
+\[\ap_f(p) \, :\equiv\, \epsilon_1 \]
+\[\ap_f(q) \, :\equiv\, \epsilon_2\]
+\[\ap^2_f(s) \, :\equiv\, h\]
+for $s:A$, with $\epsilon_1,\epsilon_2 : s=_As$ and $h:\epsilon_1\cdot\epsilon_2 =_{s=_As}\epsilon_2\cdot\epsilon_1$.
+\end{itemize}
+\end{ind_def}
+
+We do not state the dependent elimination principle, although it is necessary in order for the torus to be well-behaved. It implies that:
+\[(T^2\r A) \ \simeq \ (x:A)\times(z_1,z_2:x=_Ax)\times (z_1\cdot z_2 =_{x=_Ax} z_2\cdot z_1)\]
+
+The geometric idea is simple: if we glue the opposite edges of a square together we obtain a torus. We can present a lot of spaces as HITs using this kind of decompositions.
+
+\begin{remark}
+In algebraic topology such a decomposition of a space as some points, paths, surfaces between paths, etc is called a cellular decomposition. When we know a (say finite) cellular decomposition of a topological space, we can represent it as a HIT.
+\end{remark}
+
+\ssse{The sphere}
+
+Now we present the sphere $S^2$.
+
+\begin{ind_def}
+We define the sphere $S^2$ by:
+\begin{itemize}
+\item (Formation) There is a type $S^2:\U$.
+\item (Introduction) There is a point $\base:S^2$, and there is a path:
+\[h:\refl_\base =_{\base=_{S^2}\base}\refl_\base\]
+\item (Non-dependent Elimination) In order to define $f:S^2\r A$, it is enough to define:
+\[f(\base)\, :\equiv\, t\]
+\[\ap^2_f(h) \, :\equiv\, t\]
+for $s:A$ and $t:\refl_s=_{s=_As}\refl_s$.
+\end{itemize}
+\end{ind_def}
+
+The $n$-dimensional spheres can be defined in a similar way, for example $S^3$ has a point $\base:S^3$ and 
+\[h:\refl_{\refl_\base} =_{\refl_\base =_{S^3}\refl_\base} \refl_{\refl_\base}\]
+
+
+
+\ssse{The suspension}
+
+Now we will give an example of higher inductive type which we will actually use, so we give the full (i.e. dependent) elimination principle.
+
+\begin{ind_def}
+We define the suspension $\Sigma X$ of a type $X:\U$ by:
+\begin{itemize}
+\item (Formation) For any $X:\U$, there is a type $\Sigma X : \U$.
+\item (Introduction) We have two points $\N,\S : \Sigma X$. For any $x:X$, we have a path:
+\[\merid_x : \N=_{\Sigma X}\S\]
+\item (Elimination) In order to define $f:(x:\Sigma X)\r P(x)$, it is enough to define:
+\[f(\N) \, :\equiv\, s\]
+\[f(\S)\, :\equiv\, t\]
+\[\apd_f(\merid_x) \, :\equiv\, \epsilon_x\]
+For $s:P(\N)$ and $t:P(\S)$, with:
+\[\epsilon_x : \tr^P_{\merid_x}(s) =_{P(\S)} t\] 
+\end{itemize}
+\end{ind_def}
+
+The geometric picture is a bit more complicated. For example we will see that $\Sigma \two$ is the circle and $\Sigma S^1$ is the sphere.
+
+
+%\ssse{Truncations}
+
+%It should be noted that the truncation $|X|$ is an example of higher inductive type with two constructors:
+%\[[\_] : X\r |X|\]
+%and 
+%\[t: (x,y:|X|) \r x=_{|X|} y\]
+%This differs from the previous HITs because $|X|$ appears in the type of the constructors for $|X|$. We say that $|X|$ is a recursive HIT.
+
+%\begin{remark}
+%Recursive HITs tend to encode very complicated geometric constructions. In algebraic topology the (higher) truncations are defined by inductively adding a lot of cells of higher dimensions. HITs encode this process in a very compact way.
+%\end{remark} 
+
+
+\ssse{Quotients}
+
+We define quotients as HITs. 
+
+\begin{ind_def}
+Assume given $A:\U$ and $\_\sim\_:A\r A\r \U$. We define the the quotient $A/\sim$ of $A$ by $\sim$:
+\begin{itemize}
+\item (Formation) We have a type $A/\sim$.
+\item (Introduction) For any $x:A$, we have:
+\[[x] : A/_\sim\] 
+For any $x,y:A$ and $p:a\sim b$, we have a path:
+\[\mathrm{quo}(p) : [x] =_{A/_\sim} [y]\]
+\item (Non-dependent Elimination) Assume given $B : \U$. In order to define 
+\[f:A/_\sim\r B\]
+ it is enough to define:
+\[f([x]) \, :\equiv \, s \]
+\[\ap_f(\mathrm{quo}(p)) \, :\equiv\, e\]
+for $s:B$ and $e:f([x])=_{B}f([y])$ for $p:x\sim y$.
+\end{itemize}
+\end{ind_def}
+
+This is quite different from the usual quotients, as an example $\one$ quotiented by the relation 
+\[x\sim y \, :\equiv\, \one\]
+is equivalent to $S^1$. They are called homotopy quotients in traditional homotopy theory. The usual quotients of sets can be defined in HoTT by taking the set-truncation of the homotopy quotients. 
+
+\begin{remark}
+%Homotopy quotients are sometimes harder to manipulate than the set-theoretic quotients, because we need to pay attention the different proof of equalities between elements. 
+It should be noted that quotients in set-theory are ill-behaved with respect to families. Indeed assume you have a family of sets $(X_a)_{a\in A}$ indexed by a set $A$, and equivalence relation $\sim$ on $A$. Moreover assume that if $a\sim b$ then we have a bijection between $X_a$ and $X_b$. Then it is not possible to get a family of sets indexed over $A/_\sim$. In homotopy type theory this is possible, using quotient as HITs and univalence.
+
+This remark that quotients are (sometimes...) better behaved in homotopy type theory than in set-theory supports \emph{univalent foundations}. They claim that univalence and HITs are more natural and desirable than the usual features of set-theory, even if you are not interested in homotopy types. %We will come back to this issue in the conclusion of this class.
+%A category theorist would say that quotients are not effective.
+ \end{remark}
+
+
+\ssse{And a lot more...}
+
+There are a lot of other HITs, not always with a geometric flavor. We give examples of things definable as HITs:
+\begin{itemize} 
+\item Real numbers.
+\item Free groups (or more generally free algebraic structure).
+\item The cumulative hierarchy $V$.
+\item Type theory.
+\item $\cdots$
+\end{itemize}
+
+
+
+
+\se{Truncation properties}
+
+In this section we define some properties of types, allowing to internalize the concepts of sets, propositions and groupoids to type theory.
+
+
+\sse{Contractible types}
+
+First we define the notion of contractibility. Intuitively a space is contractible if it can be deformed continuously to one of its point (e.g. a disk, $\mathbb{R}$, and so on). %A contractible $\infty$-groupoid is an 
+
+\begin{definition}
+A proof that $X:\U$ is contractible consists of:
+\begin{itemize}
+\item A point $y:X$ called the \emph{center of contraction}.
+\item For all $x:X$ a path in $x=_X y$ called the \emph{contraction}.
+\end{itemize}
+\end{definition}
+
+\begin{warning}
+A naive and wrong reading of this property would be that $X$ (as a space) is inhabited and connected (i.e. for all $x:X$ and $y:X$, we have a path from $x$ to $y$). But in fact the choice of path in $x=_X y$ must depend continuously on $x$, making this a far stronger property. In fact this will imply that $X$ is equivalent to $\one$.
+\end{warning}
+
+\begin{proposition}
+The type $\one$ is contractible.
+\end{proposition}
+\begin{proof}
+See TD1.
+\end{proof}
+
+In fact this example is the only one:
+
+\begin{proposition}
+Let $X:\U$ be a contractible type, then the map $X\r \one$ with constant value $*$ is an equivalence.
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+
+Next property is often useful.
+
+\begin{proposition}
+Assume given $X:\U$ and $x:X$. Then the type: 
+\[(y:X)\times x=_X y\]
+is contractible.%Singleton contractible
+\end{proposition}
+\begin{proof}
+We choose $(x,\refl_x)$ as a center of contraction. Then we need to show that for all $z:(y:X)\times x=_X y$ we have: 
+\[z=(x,\refl_x)\]
+But by based path induction we can assume that $z$ is $(x,\refl_x)$, in which case this is obvious.
+\end{proof}
+
+This result is sometimes called \emph{contractibility of singleton}, although we will call it \emph{local contractibility of types}. This name is reasonable if we consider intuitively $(y:X)\times x=_X y$  as the neighborhood of $x$ in $X$. %Grothendieck was the first to observe that homotopy types should be locally contractible.
+
+%\begin{remark}
+%local contractibility
+%\end{remark}
+
+
+\sse{Propositions}
+
+Now we want to internalize the classical idea of proposition. Recall that the propositions-as-types paradigm allows us to see any type as a \emph{proof-relevant} proposition. This means that we need to be careful: two proofs of this proposition (i.e. inhabitant of this type) are not necessarily equal. 
+
+What we want to internalize is the more traditional notion of \emph{proof-irrelevant} proposition. Our approach is straightforward: we \emph{define} a proposition as a type with at most one element.
+
+\begin{definition}
+A type $X:\U$ is called a proposition if for all $x,y:X$ we have: 
+\[x=_X y\]
+
+%We denote by $\Prop$ the type of proposition.%, i.e. we define:
+%\[\Prop \, :\equiv\, (X:\U)\times \mathrm{isProp}(X)\]
+\end{definition}
+
+Formally we define $\mathrm{isProp} : \U \r \U$ by: 
+\[\mathrm{isProp}(X) \, :\equiv\,  (x,y:X)\r x=_X y\]
+
+The main point is that when assuming that a proposition $A$ holds (i.e. $A$ is inhabited), we never need to give a name to an inhabitant in $A$, because all of them are equal anyway. This mimics traditional (i.e. non-proof-relevant) mathematics.
+
+\begin{warning}
+As for contractible type the naive reading "a space $X$ is a proposition if it is path-connected" is very wrong. In fact using the excluded-middle one can show that a proposition is either empty or contractible.
+\end{warning}
+
+
+\begin{proposition}
+A contractible type is a proposition.
+\end{proposition}
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{proposition}
+The type $\zero$ is a proposition.
+\end{proposition}
+\begin{proof}
+We need to prove $x=y$ for all $x,y:\zero$, but we can prove anything assuming something in $\zero$.
+\end{proof}
+
+\begin{proposition}
+Assume given $A:\U$ and $P:A\r \U$ a family of propositions (i.e. for all $x:A$ the type $P(x)$ is a proposition). Then 
+\[(x:A)\r P(x)\]
+is a proposition.
+\end{proposition}
+\begin{proof}
+Assume given $f,g:(x:A)\r P(x)$, we need to prove $f=g$. By function extensionality we just need to prove that:
+\[f(x)=_{P(x)}g(x)\]
+for all $x:X$. But $P(x)$ is a proposition so we can conclude.
+\end{proof}
+
+It should be noted that $A$ is any type, and not necessarily a proposition. If we apply this proposition to the case where $A$ is a propositions, it implies that for $A,B:\U$ two propositions, the type $A\r B$ is a proposition. This is the traditional implication of propositions.
+
+\begin{proposition}
+Assume given $A,B:\U$ two propositions. Then $A\times B$ is a proposition.
+\end{proposition}
+\begin{proof}
+We need to prove that for all $z,z':A\times B$ we have $z=_{A\times B} z'$. By induction on $z$ and $z'$ it is enough to prove:
+\[(x,y)=_{A\times B}(x',y')\]
+for all $x,x':A$ and $y,y':B$. But by the computation of identity types of products we know this is equivalent to:
+\[(x=_Ax')\times (y=_By')\]
+and this type is inhabited because $A$ and $B$ are propositions.
+\end{proof}
+
+In the usual language $A\times B$ would be called the conjunction of $A$ and $B$ (meaning the property "$A$ and $B$"). Note that we have a dependent version.
+
+\begin{warning}
+One should be careful that our notion of propositions is less stable than the one from usual mathematics:
+\begin{itemize}
+\item If $A:\U$ is any type, and $P:A\r \U$ is a family of proposition, the type
+\[(x:A)\times P(x)\] 
+is not a proposition. This is because in constructive mathematics, the existential statements are proof relevant: to prove them we need to construct an element. 
+\item Similarly for $A,B:\U$ two propositions, the type $A+B$ is not a proposition (recall that in TD1 we see that $\one+\one\simeq\two$ but $\two$ is not a proposition because we have $0\neq_{\two}1$), so it does not correspond to the traditional disjunction. Indeed to prove it constructively we need to indicate which side is true.  
+\end{itemize}
+We will see later how to define proof irrelevant existential and disjunctive statements.
+\end{warning}
+
+Now we prove a first results about identity types in proposition.
+
+\begin{proposition}
+Let $A:\U$ be a proposition. Then for all $x,y:A$, the type $x=_Ay$ is contractible.
+\end{proposition}
+\begin{proof}
+Assume $x,y:A$, then it is easy to prove that $A$ is contractible (say with center of contraction $x$). Therefore $A=_\U\one$, but we know from TD1 that identity types in $\one$ are equivalent to $\one$, so that $x=_A y$ is equivalent to $\one$. So $x=_Ay$  is contractible.
+\end{proof}
+
+Recall that for $A:\U$ and $P:A\r \U$ a family of proposition, the type $(x:A)\times P(x)$ is far from a proposition. In fact we can characterize its identity types.
+
+\begin{proposition}
+Assume given $A:\U$ and $P:A\r \U$ a family of propositions. For $a,a':A$ with $p:P(a)$ and $p':P(a')$, we have:
+\[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (a=_Aa')\]
+where $p_A$ is the canonical map from $(x:A)\times P(x)$ to $A$.
+\end{proposition}
+\begin{proof}
+By the characterization of path types in products we have:
+\[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (e:a=_Aa')\times(\tr^P_e(p) =_{P(a')} p') \]
+But since $P(a')$ is a proposition the type $\tr^P_e(p) =_{P(a')} p'$ is contractible hence equivalent to $\one$. So we have:
+\[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (a=_Aa')\times \one\]
+and it is easy to verify that this is equivalent to $a=_Aa'$.
+%\item 
+\end{proof}
+
+%This might be confusing to you, in this case just ignore the issue and come back latter. In practice it means that when I say "let $X:\U$ be a proposition", I do not give a name to the assumed inhabitant of $\mathrm{isProp}(X)$. 
+
+
+%Saying "let $X:\U$ be contractible / be a proposition" is not so much of an abuse, 
+
+%As an exercise you can try to und
+
+
+\sse{Sets}
+
+Now we want to internalize the traditional notion of sets. The idea is to see set as discrete spaces: we define them as types where any two paths are equal.
+
+\begin{definition}
+A proof that $A:\U$ is a set consists of a proof that for all $x,y:A$, the type $x=_A y$ is a proposition.
+\end{definition}
+
+Explicitely this means that $A$ is a set of if for all $x,y:A$ and $p,q:x=_Ay$, we have $p=_{x=_Ay} q$. So sets are types with proof-irrelevant identity types. We give examples of sets.
+
+\begin{proposition}
+Propositions are sets.
+\end{proposition}
+\begin{proof}
+We know that the identity types in a propositions are contractible, so they are propositions.
+\end{proof}
+
+\begin{proposition}
+The types $\two$ and $\N$ are sets.
+\end{proposition}
+\begin{proof}
+See TD1.
+\end{proof}
+
+Now we establish some closure property of sets.
+
+\begin{proposition}
+Assume $A:\U$ is any type and $P:A\r \U$ is a family of sets. Then the type:
+\[(x:A)\r P(x)\]
+is a set.
+\end{proposition}
+\begin{proof}
+Assume given $f,g:(x:A)\r P(x)$, we need to prove that $f=g$ is a proposition. But by function extensionnality:
+\[(f=g)\, \simeq \ (x:A)\r f(x)=_{P(x)}g(x)\]
+Since $f(x)=_{P(x)}g(x)$ is a family of proposition indexed by $x$, we know that:
+\[(x:A)\r f(x)=_{P(x)}g(x)\]
+is a proposition, so we can conclude
+\end{proof}
+
+It is again remarkable that $A$ is any type, and not a set. Intuitively next proposition says that a union of sets indexed by a set is again a set.
+
+\begin{proposition}
+Assume given $A:\U$ a set and $P:A\r \U$ a family of set. Then:
+\[(x:A)\times P(x)\]
+is a set.
+\end{proposition}
+\begin{proof}
+We need to show that for all $x,x':A$ with $p:P(a)$ and $p':P(a')$, the type:
+\[(x,p)=_{(x:A)\times P(x)}(x',p')\]
+is a proposition, and we know it is equivalent to:
+\[(e:x=_Ax')\times \tr^P_e(p) =_{P(x)} p'\]
+But this the the product of a proposition by a family of proposition, so we can conclude.
+\end{proof}
+
+
+\sse{Groupoids}
+
+In traditional mathematics a groupoid is defined as a category where all morphisms are invertible. Now we want to internalize them to HoTT. We see them as spaces with sets of paths between points.
+
+\begin{definition}
+A proof that a type $A:\U$ is groupoid is a proof that for all $x,y:A$ the type:
+\[x=_Ay\]
+is a set.
+\end{definition}
+
+The intuition is that if $A:\U$ is a groupoid, then $x,y:A$ are objects of the groupoid, and the type $x=_Ay$ is the set of morphisms from $x$ to $y$.
+This definition is remarkable: all the groupoid structure (composition, identities, inverse, ...) comes from the path elimination principle.
+
+The definition is formally similar to the definition of sets, so the following propositions are proved as for sets:
+
+\begin{proposition}
+Assume given $A:\U$ any type, and $P:A\r \U$ a family of groupoids. Then:
+\[(x:A)\r P(x)\]
+is a groupoid.
+\end{proposition}
+
+\begin{proposition}
+Assume given $A:\U$ a groupoid and $P:A\r \U$ a family of groupoids. Then:
+\[(x:A)\times P(x)\]
+is a groupoid.
+\end{proposition}
+
+ Note that this idea can be iterated, for example we can define a $2$-groupoid as a type whose identity types are groupoids, and so on.
+
+%\sse{}
+
+
+
+\sse{The types $\Prop$, $\Set$ and $\Gpd$}
+
+\begin{definition}
+We denote by $\Prop$ (resp. $\Set$, $\Gpd$) the type of propositions (resp. sets, groupoids).%, i.e. we define:
+%\[\Prop \, :\equiv\, (X:\U)\times \mathrm{isProp}(X)\]
+\end{definition}
+
+Formally we define:
+\[\Prop \, :\equiv\, (X:\U)\times \mathrm{isProp}(X)\]
+
+And similarly for $\Set$ and $\Gpd$. We will often say e.g. "Assume $X:\Set$ and $x:X$", where it is implicit that $x:X$ is in fact an inhabitant of the underlying type of $X$. I omit the proofs of the next lemma, which is a bit technical:
+
+\begin{proposition}
+Being contractible (resp. a propositon, a set, a groupoid) is a proposition.
+\end{proposition}
+
+Formally this means that we have an inhabitant of:
+\[(X:\U)\r (p,q:\mathrm{isProp}(X)) \r p=_{\mathrm{isProp}(X)} q\] 
+and similarly for sets and groupoids. In practice it means that we never need to give a name to a proof that $X:\U$ is e.g. a proposition.
+
+In the next proposition one should be careful that for $X,Y:\Prop$, the type 
+\[X=_\U Y\] 
+is actually a notation for the equality between the underlying types of $X$ and $Y$.%being equal to the underlying type of $Y$.
+
+\begin{proposition}
+Assume given $X,Y:\Prop$ (resp. $\Set$ or $\Gpd$). Then:
+\[(X=_\Prop Y) \simeq (X=_\U Y)\]
+(resp. 
+\[(X=_\Set Y) \simeq (X=_\U Y)\]
+or the same for groupoids).
+%Identity types in Prop, Set, Gpd
+\end{proposition}
+\begin{proof}
+This is the characterization of identity types in $(x:A)\times P(x)$ with $A$ any type ($\U$ in this case) and $P:A\r \Prop$ (in our case $P\equiv\mathrm{isProp}$, or the same for sets and groupoids). %(or similarly for sets and groupoids).
+% We give a detailed proof for propositions. Assume given $X,Y:\Prop$, by induction we can assume $X$ is $(A,e)$ and $Y$ is $()$
+\end{proof}
+
+%Next lemma is useful in particular because it means
+
+We can prove some conceptually important properties.
+
+\begin{proposition}
+The type $\Prop$ is a set.
+\end{proposition}
+\begin{proof}
+By the previous proposition we know that for $A,B:\Prop$, $A=_\Prop B$ is equivalent to $A=_\U B$, which is equivalent to $A\simeq B$ by univalence.
+
+So we just need to prove that $A\simeq B$ is a proposition. But this is straightforward using our previous results on propositions. %we have $\epsilon_1 = \epsilon_2$. Since being an equivalence is a proposition, it is enough to prove that the underlying function of both equivalences are equal, but this true because $A\r B$ is a proposition.%$f,g:A\r B$ we have $f=g$
+\end{proof}
+
+\begin{proposition}
+The type $\Set$ is a groupoid.
+\end{proposition}
+
+\begin{proof}
+As the previous proposition.
+\end{proof}
+
+We could define similarly prove that $\Gpd$ is a $2$-groupoids. In fact this can be iterated to define $n$-groupoids, and the type of $n$-groupoids is an $n+1$-groupoid. These $n$-groupoids are called $n$-truncated types in \cite{HoTT}.
+
+
+Now we study the equality types in $\Prop$. %from the point of view of .
+%In the case of propositions, we can prove a property often called \emph{proposition extensionnality}.
+
+\begin{proposition}
+Assume given $X,Y:\Prop$. Then:
+\[(X=_\Prop Y)\, \simeq \, (X\leftrightarrow Y)\]
+\end{proposition}
+\begin{proof}
+We know that $X=_\Prop Y$ is equivalent to $X=_\U Y$. 
+
+First we prove that for $X,Y:\Prop$, we have that $X\leftrightarrow Y$ implies $X=_\U Y$. By induction assume given $f:X\r Y$ and $g: Y\r X$. But then $f\circ g \sim \id_Y$ and $g\circ f\sim \id_X$ because $X$ and $Y$ are propositions, so we have $X\simeq Y$, so by univalence $X=_\U Y$.
+%It is clear that for $X,Y:\Prop$, we have that $X\leftrightarrow Y$ implies $X\simeq Y$.
+
+Now we know that that $X=_\Prop Y$ and $X\leftrightarrow Y$ are propositions, so by the previous paragraph we just need to prove:
+
+\[(X=_\U Y)\, \leftrightarrow \, (X\leftrightarrow Y)\]
+
+The left to right direction is by path induction. The converse is (also) the previous remark.
+\end{proof}
+
+This property is often called \emph{proposition extensionnality}.
+
+
+\sse{Propositional truncations}
+
+Sometimes we are given a type $A:\U$, and we want to replace it by a proposition, a set or a groupoid. There is a universal way to do this. For propositions we define a type $|A|$ called the propositional truncation of $A$.
+
+\begin{ind_def}
+Assume given a type $A:\U$.
+\begin{itemize}
+\item (Formation) We have a type $|A|$.
+\item (Introduction) For any $x:A$, we have $[x]:|A|$. Moreover $|A|$ is a proposition.
+\item (Elimination) In order to define a dependent function: 
+\[f:(x:|A|) \r P(x)\]
+with $P$ a family of propositions, it is enough to define for all $x:A$:
+\[f([x])\, :\equiv \, t\]
+for $t:P([x])$.
+\end{itemize}
+\end{ind_def}
+
+In practice the induction principle says that if we want to prove a proposition and we have assumed $|A|$, we can in fact assume $A$. 
+
+\begin{remark}
+It should be noted that the truncation $|X|$ is an example of higher inductive type with two constructors:
+\[[\_] : X\r |X|\]
+and: 
+\[t: (x,y:|X|) \r x=_{|X|} y\]
+This differs from the HITs we have seen previously because $|X|$ appears in the type of the constructors for $|X|$. We say that $|X|$ is a recursive HIT. Recursive HITs can encode very complicated geometric constructions. In algebraic topology the (higher) truncations are defined by inductively adding a lot of cells of higher dimensions. HITs encode this process in a very compact way.
+\end{remark} 
+
+
+This construction allows to remove proof relevance from any situation. As a first example, recall that being a proposition is a lot stronger than being path-connected. Indeed for $A:\U$ when assuming:
+\[(x,y:A)\r (p,q:x=_Ay)\r p=q\]
+we assume a \emph{continuous} choice of paths, implying that if $A$ is inhabited it is contractible. Nevertheless we can define connectedness using propositional truncation.
+
+\begin{definition}
+Assume given $A:\U$. Then $A$ is said connected if we have:
+\[(x,y:A)\r |x=_Ay|\]
+\end{definition}
+
+The use of propositional truncation allows to remove continuity. This examples can be generalized quite a lot. We give some definitions:
+
+\begin{definition}
+Assume given $A:\U$ and $P:A\r \Prop$. Then we can define a proposition $\exists (x:A).p(x)$ by:
+\[\exists (x:A). P(x) \ :\equiv\ |(x:A)\times P(x)|\]
+Similarly for $A,B:\Prop$ we can define a proposition $A\lor B$ (read "$A$ or $B$") by:
+\[A\lor B \ :\equiv\ |A+B|\]
+\end{definition}
+
+This allows us to use proof irrelevant existential and disjunctive statement. Note that $A\lor B$ is still not classical, but it is proof-irrelevant. 
+
+\begin{remark}
+We decomposed existentials and disjunctions as two constructors. This is satisfying, as we can now think of proof-relevance and intuitionism as two different issues. The picture is:
+\[(x:A)\times P(x) \r \exists(x:A).P(x)\r \lnot\lnot\big(\exists(x:A).P(x)\big)\]
+and 
+\[A+B \r A\lor B \r \lnot\lnot(A+B)\]
+with no reverse implications, adding a \emph{proof-irrelevant intuitionist} version of logical connective in the middle. 
+
+It is remarkable that this idea came from homotopy theory, illustrating the connections between constructivism and geometry.
+\end{remark}
+
+%\begin{remark}
+In fact we will refrain from using the notation $A\lor B$ because we use the symbol "$\lor$" for the wedge of types (to be defined later).
+%\end{remark}
+
+\sse{Set truncations, and beyond}
+
+We give the similar definition for sets.
+
+\begin{ind_def}
+Assume given a type $A:\U$.
+\begin{itemize}
+\item (Formation) We have a type $|A|_0$.
+\item (Introduction) For any $x:A$, we have $[x]:|A|_0$. Moreover $|A|_0$ is a set.
+\item (Elimination) In order to define a dependent function: 
+\[f:(x:|A|) \r P(x)\]
+with $P$ a family of sets, it is enough to define for all $x:A$:
+\[f([x])\, :\equiv \, t\]
+for $t:P([x])$.
+\end{itemize}
+\end{ind_def}
+
+If we see $A:\U$ as a space, then $|A|_0$ is its set of path-connected components. This will be extremely useful to define the usual topological invariants. We can give a similar definition for groupoids (corresponding to the fundamental groupoid of a space), and even for $n$-groupoids.
+
+
+
+
+
+
+
+\se{Homotopy groups and fiber sequences}
+
+In this section we define the basicl invariants of algebraic topology: the so-called homotopy groups. Our main goal is to prove the so-called \emph{long exact sequence of homotopy groups} of a fibration, and explain some advantages of the type-theoretic treatment.%gives interesting insight about it.
+
+
+\sse{Pointed types}
+
+Most traditional invariants in algebraic topology are defined on pointed spaces. We introduce pointed types, their counterpart in our setting.
+
+\begin{definition}
+We denote by $\U_*$ the type of pointed types, i.e. we define:
+\[\U_* \, :\equiv\, (X:\U)\times X\]
+\end{definition}
+
+So an element in $\U_*$ consists of a type $X:\U$ with $x:X$. When we have $X:\U_*$, we denote by $X$ its underlying type, and we denote by $*_X:X$ its underlying point (or sometimes just $*:X$).
+
+\begin{definition}
+Assume $X, Y:\U_*$ We define the type of maps from $X$ to $Y$, denoted $X\r_*Y$ by:
+\[X\r_*Y \ :\equiv\ (f:X\r Y)\times (f(*_X) =_Y *_Y)\]
+
+This type is considered pointed by the constant map to $*_Y$.
+%We define $\Map_*(X,Y):\U_*$ the type $X\r_*Y$ pointed by the constant map to $*_Y$.
+\end{definition}
+
+For $f:X\r_*Y$, we denote by $f$ its underlying map, and we denote by $*_f$ the path in $f(x)=_Y*_Y$.
+
+
+Now we analyse the identity types of these new types. An equality between pointed types is just an equivalence between the underlying types preserving basepoint.
+
+\begin{lemma}
+Assume given $X,Y:\U_*$. Then $X=_{\U_*} Y$ is equivalent to the type of equivalence:
+\[f:X\r Y\]
+ with a path $f(*_X)=*_Y$.
+\end{lemma}
+\begin{proof}
+By induction we just need to prove the result for $(X,*_X)$ and $(Y,*_Y)$ in $\U_*$. Then:
+\[(X,*_X) =_{\U_*}(Y,*_Y) \ \simeq \ (\epsilon : X=_\U Y)\times \tr_\epsilon^{\Gl(X:\U).X}(*_X) =_Y *_Y\]
+by the characterization of equality in a dependent product. But recall that: 
+\[\ua : X=_\U Y\r X\simeq Y\] 
+is an equivalence. We can show:
+\[\tr_\epsilon^{\Gl(X:\U).X}(*_X) \, =_Y \, \ua(\epsilon)(*_X)\]
+From this it is easy to conclude.
+\end{proof}
+
+An equality between maps between pointed types is a basepoint preserving homotopy.
+
+\begin{lemma}
+Assume given $X,Y:\U_*$ and $f,g:X\r_* Y$. Then we have that 
+\[(f=_{X\r_*Y}g) \ \simeq \ (h:f\sim g)\times (h(*_X) \cdot *_g =  *_f) \]
+\end{lemma}
+\begin{proof}
+Exercise.
+\end{proof}
+
+%\sse}
+
+
+\sse{Groups}
+
+First we recall a presumably well-known definition:
+
+\begin{definition}
+A group $G$ consists of:
+\begin{itemize}
+\item A set $G$.
+\item A unit $e:G$.
+\item A multiplication $\_\cdot\_ : G\times G\r G$.
+\item An inverse map $\_^{-1} : G\r G$. 
+\end{itemize}
+Such that:
+\begin{itemize}
+\item For all $x,y,z:G$ we have $x\cdot(y\cdot z) =_G (x\cdot y)\cdot z$.
+\item For all $x:G$ we have $x\cdot e = x$ and $e\cdot x =x$.
+\item For all $x:G$ we have $x\cdot x^{-1} = e$ and $x^{-1}\cdot x = e$.
+\end{itemize}
+We denote $\Grp$ the type of groups. 
+\end{definition}
+
+Note that we identify $G$ with its underlying set, as is traditional in mathematics.
+
+\begin{definition}
+For $G,G':\Grp$, a morphism of groups from $G$ to $G'$ consists of a map from $f:G\r G'$ such that:
+\begin{itemize}
+\item For all $g,g':G$, we have: 
+\[f(g\cdot g') =_{G'} f(g)\cdot f(g')\]
+\item We have:
+\[f(e) = e\]
+\end{itemize}
+We denote by $\Hom_{\Grp}(G,G')$ the type of morphism from from $G$ to $G'$. 
+
+A morphism is called an isomorphism if its underlying map is an equivalence. We denote by $\Iso_{\Grp}(G,G')$ the type of isomorphisms from $G$ to $G'$.
+\end{definition}
+
+As usual we are interested in identity types in the type of groups.
+
+\begin{proposition}
+For all $G,G':\Grp$, we have:
+\[(G=_{\Grp} G') \ \simeq \ \Iso_{\Grp}(G,G')\]
+\end{proposition}
+\begin{proof}
+Exercise. One need univalence.
+\end{proof}
+
+
+\begin{definition}
+Assume given a groupoid $A$ with $a:A$. Then we define the group $\Aut_A(a)$ as $a=_Aa$ with multiplication, unit and inverse induced by composition, reflexivity and inverse of paths.
+\end{definition}
+
+%\mathrm{Grp}
+
+
+\sse{Homotopy groups, suspension and spheres}
+
+\begin{definition}
+Assume given $X$ a pointed type. Then we define two pointed types:
+\[\Omega X \ :\equiv\ (*=_X* , \refl_*)\]
+called the loop space of $X$, and
+\[\Sigma X \ :\equiv\ (\Sigma X , \N)\]
+called the suspension of $X$.
+\end{definition}
+
+Note that the choice of $\N$ as a basepoint for $\Sigma X$ is arbitrary.
+
+\begin{proposition}
+Assume given $X,Y$ two pointed types. Then:
+\[(\Sigma X \r_* Y)\ \simeq\ (X\r_*\Omega Y)\]
+\end{proposition}
+\begin{proof}
+See TD3.
+\end{proof}
+
+\begin{definition}
+Assume given $X$ a pointed type, we define the \emph{homotopy groups} $\pi_n(X)$ of $X$ by:
+\[\pi_n(X) \ :\equiv\ |\Omega^n X|_0\]
+Note that $\pi_0(X)$ is actually a pointed set, and $\pi_n(X)$ is a group for $n>0$.
+\end{definition}
+
+We will see in TD4 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy class of pointed maps out of the spheres. We make this formal.
+
+\begin{definition}
+We define $S^n$ the (pointed) $n$-dimensional sphere inductively on $n:\N$. 
+\begin{itemize}
+\item $S^0$ is defined as the two points type $\two$, pointed by $0:\two$.
+\item $S^{n+1}$ is defined as $\Sigma S^n$.
+\end{itemize}
+\end{definition}
+
+Then the following proposition is straightforward.
+
+\begin{proposition}
+Let $X$ be a pointed type, then:
+\[\pi_n(X) \ \simeq \ |S^n\r_* X|_0\]
+\end{proposition}
+\begin{proof}
+By the last theorem we know that:
+\[\pi_n(X) \ \equiv\ |\Omega^nX|_0 \ \simeq \ |S^0\r_*\Omega^nX|_0\ \simeq\ |\Sigma^nS^0\r_*X|_0 \ \equiv\ |S^n\r_*X|_0\]
+\end{proof}
+
+
+\sse{Fiber sequences}
+
+First we clarify some vocabulary and notations.
+
+\begin{definition}
+Assume given $X,Y:\U_*$ with a map $f:X\r_* Y$. The canonical fiber sequence associated to $f$ is:
+\[\fib_f \overset{p_f}{\r_*} X \overset{f}{\r_*} Y\]
+where:
+\begin{itemize}
+\item The type $\fib_f$ is defined as:
+\[(x:X)\times (f(x)=_Y*)\] 
+pointed by $(*_X,*_f)$.
+\item The map $p_X$ is the projection to $X$ (which obviously preserves the basepoints).
+\end{itemize}
+\end{definition}
+
+We define an important tool of homotopy theory. %They play a role analogous to exact se
+
+\begin{definition}
+Assume given $X,Y,Z:\U_*$ with maps $f:X\r_* Y$ and $g:Y\r_* Z$. Then a proof that:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
+is a fiber sequence consists of an inhabitant of $f=p_g$ in the type of pointed maps to $Y$.
+\end{definition}
+
+\begin{warning}
+With this definition, being a fiber sequence is not a proposition. This could be corrected. 
+\end{warning}
+
+In order to understand this definition better, we make it explicit for sets. Note that next proposition is not an equivalence between types.
+
+\begin{proposition}
+A sequence of pointed sets:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+is a fiber sequence if and only if for all $y:Y$, 
+\[\fib_f(y)\simeq (g(y)=*) \]
+\end{proposition}
+\begin{proof}
+If $f,g$ form a fiber sequence, we can assume it is a canonical one. In this situation one need to show for $y:Y$ that:
+\[\fib_{p_g}(y)\simeq(g(y)=*)\]
+This is true by Grothendieck correspondence.
+%Or equivalently that:
+%\[\big((y':Y)\times(g(y')=*)\times(y'=y)\big) \leftrightarrow (g(y)=*)\]
+%(using the fact that $f(y)=*$ is a proposition). TODO
+
+For the converse assume 
+\[\epsilon : (x:X)\times (f(x)=y)\r  (g(y)=*) \]
+an equivalence. We want to show $f = p_g$. We build an equality directly. 
+\begin{itemize}
+\item We build a map $\psi$ from $X$ to $\fib_g$, defined by:
+\[\psi(x) \, :\equiv\, (f(x),\epsilon(x,\refl_{f(x)}))\]
+It is a pointed map, and we have $p_g\circ \psi = f$.
+\item We define $\phi$ the other way by:
+\[\phi(y,p) \, :\equiv\, p_X(\epsilon^{-1}(p))\]
+\item Now we check that $\phi(\psi(x)) =_X x$ indeed $\phi(\psi(x))$ is defined as:
+\[p_X(\epsilon^{-1}\epsilon(x,\refl_{f(x)}))\]
+which is equal to $x$.
+\item In order to show $\psi\circ\phi \sim \id$, by induction it is enough to prove:
+\[\psi(\phi(y,q)) = (y,q)\]
+For $y:Y$ and $q:f(y)=*$. This means:
+\[\phi(p_X(\epsilon^{-1}(q))) = (y,q)\]
+Since $f(y)=*$ is a proposition, it is enough to prove:
+\[f(p_X(\epsilon^{-1}(q))) = y\]
+but this is the second component of $\epsilon^{-1}(q)$.
+\end{itemize}
+\end{proof}
+
+
+\sse{The long fiber sequence of a map}
+
+Now we give a very important theorem of homotopy theory.
+
+\begin{theorem}
+Assume given a fiber sequence:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+Then we have $\delta : \Omega Z\r_* X$ and a long fiber sequence:
+\[\cdots \r_* \Omega^2 X \overset{\Omega^2 f}{\r_*} \Omega^2 Y \overset{\Omega^2 g}{\r_*}\Omega^2 Z \overset{\Omega\delta}{\r_*} \Omega X \overset{\Omega f}{\r_*} \Omega Y \overset{\Omega g}{\r_*} \Omega Z \overset{\delta}{\r_*} X \overset{f}{\r_*} Y\overset{g}{\r_*} Z  \]
+\end{theorem}
+\begin{proof}
+See TD4.
+\end{proof}
+
+We see that fibers in homotopy type theory behave quite differently than the set-theoretic fibers, in the sense that iterating them still gives interesting information.
+
+
+
+
+
+%\sse{Set-truncation and fiber sequence}
+
+\sse{The long homotopy exact sequence}
+
+The long fiber sequence of a map is usually not presented to beginners in algebraic topology. What is often presented one of its consequence. We need to define exact sequence of pointed sets.
+
+\begin{definition}
+A sequence of maps between pointed sets:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+is called exact if for all $y:Y$ we have:
+\[\exists(x:X).f(x)=y \ \leftrightarrow\ g(y)=*\]
+It is called an exact sequence of groups if $X,Y,Z$ have a group structure with $*$ the unit, and $f$ and $g$ are morphisms of groups.
+\end{definition}
+
+Being exact is weaker than being a fiber sequence, since we use $\exists(x:X).f(x)=y$ (recall this is defined as $|(x:X)\times f(x)=y|$).
+
+\begin{theorem}
+Assume given a fiber sequence:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+Then we have a long exact sequence of pointed sets:
+\[\cdots\r_*\pi_2(X)\r_* \pi_2(Y)\r_*\pi_2(Z) \r_* \pi_1(X)\r_*\pi_1(Y)\r_*\pi_1(Z) \r_* \pi_0(X)\r_*\pi_0(Y)\r_*\pi_0(Z)\]
+This is an exact sequence sequence of groups for $n>0$. 
+\end{theorem}
+\begin{proof}
+We see the displayed sequence of pointed sets is just the set-truncation of the long fiber sequence. So it is enough to show that the set-truncation of a fiber sequence is exact. This is next lemma.
+\end{proof}
+
+
+\begin{lemma}
+The set truncation of a fiber sequence is exact.
+\end{lemma}
+\begin{proof}
+More precisely assume given a fiber sequence:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+Then we prove that the sequence of pointed sets:
+\[|X|_0\overset{|f|_0}{\r_*} |Y|_0\overset{|g|_0}{\r_*} |Z|_0\] 
+is exact, where $|f|_0$ is the map induced by $f$, i.e. defined by 
+\[|f|_0([x]) = [f(x)]\] 
+It is enough to prove this for a canonical fiber sequence so we assume $f:X\r_* Y$ and try to prove that:
+\[|\fib_f|_0 \r |X|_0\r |Y|_0\]
+is exact.
+
+We assume given $x':|X|_0$, and try to prove:
+\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} x' \ \leftrightarrow\ |f|_0(x') =_{|Y|_0} *\]
+where $p_0$ is actually the truncation of the map $p_f:\fib_f\r X$, i.e. defined by: 
+\[p_0([x,q]) \, :\equiv\, [x]\] 
+This is a proposition so we can replace $x'$ by $[x]$ for $x:X$. Then we need to prove:
+\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x] \ \leftrightarrow\ [f(x)] =_{|Y|_0} *\]
+
+\begin{itemize}
+\item First assume: 
+\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x]\]
+Then we need to prove that:
+\[[f(x)] =_{|Y|_0} *\]
+But this is a proposition because $|Y|_0$ is a set. 
+
+So we can assume that we have $z:|\fib_f|_0$ such that $p_0(z)=_{|X|_0} [x]$, by eliminating the $\exists$ truncation.
+
+But by induction again we can assume that $z$ is of the form $[x',q]$ with $x':X$ and $q:f(x')=_Y*$, as we are trying to prove a proposition.
+
+To sum up we have $x':X$ such that $f(x') =_Y *$, we have $[x']=_{|X_0|}[x]$ and we need $[f(x)] =_{|Y|_0} *$.
+
+So it is enough to show that $[x]=_{|X|_0}[x']$ imply $[f(x)]=_{|Y|_0} [f(x')]$. But this is a special case of $\ap_{|f|_0}$.
+% and that we have:
+%\[(z:|\fib_f|_0)\times (p_X(z)=_{|X|_0}[x]\]
+
+\item In the other direction we assume $[f(x)] =_{|Y|_0} *$ and we try to prove:
+\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x]\]
+From the characterization of identity types in truncations (see TD3) we know that we have $|f(x)=_Y*|$, so since we are trying to prove a proposition we can assume $q:f(x)=_Y*$.
+
+Then we just use:
+\[([x,q],\refl_{[x]}) : (z:|\fib_f|_0)\times p_0(z)=_{|X|_0} [x]\] 
+%has type.
+%We just need $q$ of type $f(x)=_Y *$ in order to conclude, as in this case $([x,q],\refl_{[x]})$ is good enough. But we know that $[f(x)]=*$ is equivalent to $|f(x)=*|$ by the characterization of paths in truncations (see TD3 (?)).
+\end{itemize}
+\end{proof}
+
+This proof might look a bit complicated, but it is straightforward, one just need to be careful about truncation elimination. An exact sequence of groups allows one to extract some information about groups in the sequence from informations about the others. As an example we have:
+
+\begin{lemma}
+Assume given an exact sequence of groups:
+\[0 \r G \overset{i}{\r} G' \r 0\]
+Then $i$ is an isomorphism of groups.
+\end{lemma}
+\begin{proof}
+Omitted as it has nothing to do with homotopy type theory.
+\end{proof}
+
+\begin{remark}
+This presentation differs from the traditional one in algebraic topology.
+%Here we see some advantage to Homotopy Type Theory over traditional algebraic topology:
+\begin{itemize}
+\item In algebraic topology, one restrain to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
+\item We see that the long exact sequence of homotopy groups is actually the shadow of a more powerful (and infinite dimensional) fiber sequence. This fact is usually not pointed out in algebraic topology, at least not in an introductory class.
+\end{itemize}
+Both these facts comes from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than fibers.
+\end{remark}
+
+\begin{remark}
+This theorem is a useful tool to compute homotopy groups. For example we can build a fiber sequence: 
+\[S^1\r_* S^3\r_*S^2\]
+usually called the Hopf fibration. From this we know that we have exact sequences of groups:
+\[\pi_n(S^1)\r \pi_n(S^3)\r \pi_n(S^2)\r \pi_{n-1}(S^1) \]
+for $n> 0$. But since $\pi_n(S^1) = 0$ for $n>1$, one can conclude that:
+\[\pi_n(S^3)\simeq \pi_n(S^2)\]
+for $n>2$.
+\end{remark}
+
+
+%\begin{definition}A chain sequence is a sequence of pointed maps: \[X\overset{f}{\r_*} Y\overset{g}{\r_*} Z\]With an equality: \[g\circ f =_{X\r_* Z} *\]\end{definition}
+
+
+%\begin{definition}
+%A chain sequence
+%\end{definition}
+
+%\begin{definition}
+%A fiber sequence is TODO
+%\end{definition}
+
+
+
+\se{Groups as pointed connected types and $\infty$-groups}
+
+In this section we come back to groups and show an alternative definition for them in homotopy type theory. We will generalize this definition to $\infty$-groups, i.e. groups whose carriers are arbitrary types rather than sets.
+
+
+\sse{The main equivalence}
+
+We know that given a pointed type $X$ it is possible to define a group $\pi_1(X)$ as: 
+\[|*=_X*|_0\] If the type $X$ happens to be a groupoid (i.e. its identity types are sets), then the truncation is unecessary. So from a pointed groupoid $X$ it is possible to define a group $*=_X*$, denoted $\Omega X$. 
+
+If $X$ is not connected it is obvious that this construction looses some information: we forget everything about the connected components not containing the basepoint. We will prove that this is the only lost information.
+
+\begin{definition}
+A pointed connected groupoid consists of a pointed type $X$ such that:
+\begin{itemize}
+\item For all $x:X$ we have $|x=*|$, i.e. $X$ is connected.
+\item $*=_{X}*$ is a set, implying that $X$ is a groupoid.
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+For a pointed connected groupoid $X$, we define a group $\Omega X$ as:
+\[*=_X*\]
+\end{definition}
+
+\begin{theorem}
+The map $\Omega$ from pointed connected groupoids from groups is an equivalence. We denote its inverse by $\B$.
+\end{theorem}
+\begin{proof}
+See TD5.
+\end{proof}
+
+This theorem is very important, it means that we could be \emph{define} groups as pointed connected groupoids. As a space $\B G$ is a pointed connected space with one loop per element in $G$, such that composition of paths behave as the multiplication in $G$, and with a trivial higher-dimensional structure. Now we give some examples.
+
+\begin{proposition}
+We describe $\B G$ for some already defined groups.
+\begin{itemize}
+\item Assume given a groupoid $A$ (we think mainly of $\Set$ and $\Grp$) and $a:X$. Then we have:
+\[\B \Aut_A(a) \ = \ (x:A)\times |x=a|\]
+pointed by $(a,[\refl_a])$.
+\item Assume given a pointed type $X$. Then we have:
+\[\B\pi_1(X) \ = \ \B\Aut_{|X|_1}([*])\ = \ (x:|X|_1)\times |x=[*]|\]
+pointed by $([*],[\refl_{[*]}])$.
+\end{itemize}
+\end{proposition}
+\begin{proof}
+\begin{itemize}
+\item For the first example, we need to prove that $(x:A)\times |x=a|$ is a connected groupoid and that: 
+\[(a,[\refl_a]) =_{(x:A)\times |x=a|}(a,[\refl_a])\ =_\Grp\ \Aut_A(a)\]
+Since being connected is a proposition, we have that:
+\[(a,p) =_{(x:A)\times |x=a|} (a',p') \ \simeq \ a=_Aa'\]
+So we see that:
+\[(a,[\refl_a]) =_{(x:A)\times |x=a|}(a,[\refl_a])\ \simeq\ a=_Aa\]
+and we can conclude because $\Aut_A(a)$ is defined as $a=_Aa$, and the group multiplication is induced by concatenation of paths in both cases, so it is preserved.
+
+All that is left to show is that $(x:A)\times |x=a|$ is connected. Assume given $z:(x:A)\times |x=a|$, we want to show that:
+\[|z = (a,[\refl_a])|\]
+Since we want to prove a proposition, we can assume $x:A$ and $q:x=a$ and try to prove:
+\[(x,[q]) = (a,[\refl_a])\]
+But this is equivalent to $x=a$, and we conclude using $q$.
+
+\item For the second case we just need to prove that 
+\[\pi_1(X) = \B\Aut_{|X|_1}([*])\]
+i.e. that:
+\[|*=_X*|_0 \ \simeq\ ([*] =_{|X|_1} [*])\] 
+But this is the characterization of identity types in $|X|_1$. 
+%, which is defined.
+\end{itemize} 
+\end{proof}
+
+
+\sse{Reformulating morphisms}
+
+Now we have an alternate definition of groups, we want to reformulate some group theory in this point of view.
+
+\begin{proposition}
+For $G,G':\Grp$, we have:
+\[\Hom_\Grp(G,G') \ \simeq \ \B G\r_* \B G'\]
+\end{proposition}
+\begin{proof}
+See TD5.
+\end{proof}
+
+Intuitively this is because maps preserving the basepoint need to acts on loops, and they preserve composition of loop (and the constant path) because any map does.
+
+\begin{proposition}
+Giving an exact sequence of groups:
+\[0\r K \r H\r  G\r 0 \]
+is the same thing as giving a fiber sequence:
+\[\B K \r_*\B H\r_*\B G\]
+\end{proposition}
+\begin{proof}
+Assume given a fiber sequence:
+\[\B K \r_*\B H\r_*\B G\]
+Then by the long homotopy exact sequence we have an exact sequence:
+\[\pi_2(G)\r \pi_1(\B K) \r \pi_1(\B H) \r \pi_1(\B G) \r \pi_0(H)\]
+But we can conclude because $\pi_2(G) = 0$ as $G$ is a groupoid, $\pi_0(H) = 0$ as $H$ is connected, and $\pi_1(\B L)$ is equal to $L$ for any group $L$.
+ 
+We omit the converse.
+\end{proof}
+
+%This means that morphisms of groups are very easy to underste
+
+
+\sse{Reformulating actions}
+
+We give a very classical definition. You should think a bit about it if you have not seen it already.
+
+\begin{definition}
+An action of a group $G$ is:
+\begin{itemize}
+\item A set $X$.
+\item A morphism of group from $G$ to $\Aut_\Set(X)$.
+\end{itemize}
+In this case we say that $G$ acts on $X$. We denote the type of action of $G$ by $G-\Set$.
+\end{definition}
+
+We imagine that elements of $G$ acts on elements of $X$. This is made explicit in the following definition:
+
+\begin{lemma}
+An action of $G$ on $X$ is equivalent to a map:
+\[\_\cdot\_ : G\times X \r X\]
+such that:
+\begin{itemize}
+\item For all $g,g':G$ and $x:X$ we have:
+\[(g\cdot g')\cdot x = g\cdot (g'\cdot x)\]
+\item For all $x:X$ we have:
+\[e\cdot x = x\]
+\end{itemize} 
+\end{lemma}
+\begin{proof}
+Omitted as it has nothing to do with homotopy type theory.
+\end{proof}
+
+Now we characterize actions of $G$ depending on $\B G$.
+
+\begin{proposition}
+Let $G$ be a group, then:
+\[G-\Set \ \simeq \ \B G\r \Set\]
+\end{proposition}
+\begin{proof}
+By definition $G-\Set$ is:
+\[(X:\Set)\times \Hom_\Grp(G,\Aut_\Set(X))\]
+\[\simeq \ \ (X:\Set)\times \big(\B G \r_*\B\Aut_\Set(X)\big)\]
+%which is equivalent to:
+\[\simeq \ \ (X:\Set)\times \big(f : \B G \r (Y:\Set)\times |Y=X|\big) \times (f(*) = (X,[\refl_X]))\]
+%which is seen equivalent to:
+\[\simeq \ \ (X:\Set)\times (f : \B G \r \Set)\times \big((x:\B G) \r |f(x) = X|\big) \times (f(*) = X)\]
+But then $f(*) = X$ imply that $|f(x) = X|$ for all $x:\B G$ (because $\B G$ is connected) and:
+\[(x:\B G) \r |f(x) = X|\]
+ is a proposition therefore it is contractible. So our type is equivalent to:
+\[(X:\Set)\times (f : \B G \r \Set)\times (f(*) = X)\]
+\[\simeq \ \ \B G\r \Set\]
+\end{proof}
+
+From now on we define new notions directly using $\B G$ rather than $G$.
+
+\begin{definition}
+Assume given an action $P:\B G\r \Set$ of $G$. Then we define the type of invariants of the action as:
+\[X^G \ :\equiv \ (x:\B G)\r P(x)\]
+and we define the quotient of the action as:
+\[X//G \ :\equiv\ (x:\B G)\times P(x)\]
+\end{definition}
+
+The type $X^G$ correspond to the set of points in $x:X(*)$ such that for all $g:G$ we have $g\cdot x = x$.%left invariant by the action of any element in $G$.
+
+The type $X//G$ is not a set but a groupoid. In fact it is the groupoid obtained from $X(*)$ by adding a path from $x$ to $x'$ for every $g:G$ such that $g\cdot x = x'$. It is usually not defined in introductory algebra class. 
+
+The usual set-quotient can be defined in HoTT as the set-truncation of $X//G$.% mathematics
+
+\begin{remark}
+As a follow up to our remark on quotients ill-behaved in set-theory, the set-quotient of an action of group can also be problematic. 
+
+As an example when we have $G$ a finite group acting on $X$ finite there is in general no relation between the cardinals of $G$, of $X$ and of the set-quotient of $X$ by $G$. But there is a notion of cardinal for finite groupoids such that:
+\[\mathrm{card}(X) = \mathrm{card}(G) \times \mathrm{card}(X//G)\]
+where $X//G$ is the groupoid-quotient we have defined. (Puzzle unrelated to the class: Can you guess the notion of cardinal needed for finite groupoids ?)
+
+In traditional algebra classes, you see that this relation is true when the action is free (meaning that if $g\cdot x =x$ for some $x$ then $g=e$). In fact freeness of the action guarantee that $X//G$ is a set.
+
+This is a somewhat general phenomena: if you see a theorem about set-quotients of free group actions, there is probably an analogue for the groupoid-quotient of any action. We will see a much deeper example of this when we discuss principal bundles. 
+\end{remark}
+
+
+\sse{$\infty$-groups}
+
+We have given two definitions of groups. Now we want to sketch the notion of $\infty$-groups. Very roughly it is a group where we do not assume that the underlying type is a set. We examine the simpler example of an associative binary operation. So we ask for a type $A$ with a binary operation $\_\cdot\_ : A\times A \r A$, such that we have a homotopy:
+\[\alpha_{x,y,z} : (x\cdot y) \cdot z = x\cdot (y\cdot z)\] 
+for any $x,y,z:A$. But this is not enough: indeed from $\alpha$ we obtain for $a,b,c,d:A$ two ways to show:
+\[((a\cdot b)\cdot c )\cdot d = a\cdot(b\cdot (c\cdot d))\]
+(can you find them ?). In order to obtain a well-behaved theory of associative operations, we should ask for a homotopy $\beta$ between those two paths. But inductively for five elements we need to ask for a higher homotopy between two homotopies build from $\beta$, and so on. We know how to define this infinite tower in traditional homotopy theory, and the result is often called an operation \emph{associative up to coherent homotopy}.
+
+\begin{open_problem}
+Is it possible to give a type in HoTT interpreted as operations associative up to coherent homotopy ?
+\end{open_problem}
+
+This problem is in my opinion the most important open problem about the applicability of HoTT. It has a lot of implications concerning synthetic homotopy theory. So it seems difficult to define $\infty$-groups in HoTT, because the naive approach requires an operation associative up to coherent homotopy. But we have an alternative definition of groups as pointed connected groupoids, and this one is very straightforward to generalize.
+%There exists a lot of variation on this problem of coherent homotopies.
+
+\begin{definition}
+An $\infty$-group $G$ consists of a connected pointed types $\B G$.
+\end{definition}
+
+We use different notations for an $\infty$-group $G$ and its underlying type $\B G$ just to mirror the situation with groups. This definition is indeed interpreted as something equivalent to the traditional definition of $\infty$-groups, so that if we prove a result about pointed connected types in HoTT, we can deduce a result about $\infty$-groups in traditional homotopy theory. 
+
+\begin{remark}
+From a topological group one can get an $\infty$-group structure on its underlying homotopy type. This group is called strict because its homotopies witnessing coherent associativity are all constant. There are a lot of non-strict $\infty$-group not equivalent to a strict one.%$\infty$-groups not equivalent to a strict one.
+\end{remark}
+
+Now we give some definitions for $\infty$-groups.
+
+\begin{definition}
+Assume given a type $A$ and $a$ in $A$, then we define the $\infty$-group $\Aut_A(a)$ by:
+\[\B \Aut_A(a) \ :\equiv\ (x:A)\times |x=a|\]
+pointed by $(a,[\refl_a])$.
+\end{definition}
+
+We are particularly interested in the $\infty$-group $\Aut_\U(A)$ for $A:\U$, which is called the $\infty$-group of automorphisms of $A$.
+
+\begin{definition}
+A morphism of $\infty$-group is a map map of pointed sets. 
+\end{definition}
+
+Now we define exact sequence of $\infty$-groups.
+
+\begin{definition}
+An exact sequence of $\infty$-group is a a fiber sequence. More precisely an exact sequence:
+\[0\r K\r H\r G\r 0\]
+is by definition a fiber sequence:
+\[\B K\r_*\B H\r_*\B G\]
+\end{definition}
+
+Now we define actions.
+
+\begin{definition}
+An action of an $\infty$-group $G$ is an element in:
+\[X : \B G \r \U\]
+We say that $G$ acts on $X(*)$. Assume given an action $X:\B G \r \U$, then we define:
+\[X^G \ :\equiv\ (x:\B G)\r X(x)\]
+the type of invariants of $X$, and we define:
+\[X//G \ :\equiv\ (x:\B G)\times X(x)\]
+the quotient of the action. 
+\end{definition}
+
+Note that we just copied our definitions for groups.
+
+
+
+
+
+
+%\begin{tikzcd}[column sep = 0.01in, row sep = 0.3in,nodes={scale=0.9}]    
+ %& a\times ((b\times c)\times d) \ar[dash]{rr}\ar[dash]{ddl}& & (a\times (b\times c)) \times d \ar[dash]{ddr} & \\
+  %& & & & \\
+%a\times (b \times (c \times d))\ar[dash]{ddrr} & & & & ((a\times b)\times c) \times d \\
+% & & & & \\
+% & & (a\times b) \times (c\times d) \ar[dash]{uurr}& &
+%\end{tikzcd}
+
+
+\se{Applications}
+
+Now that we have a alternative definition of ($\infty$-)groups, we will exploit it to prove important theorems from algebraic topology. The main goal is to illustrate how homotopy type theory allows direct and easy proofs of these theorems, once we have these definitions of groups and $\infty$-groups.
+
+
+
+\sse{Galois theorem for coverings}
+
+We define coverings.
+
+\begin{definition}
+A covering of $X:\U$ is a map to $X$ whose fibres are sets. For $X:\U$ we denote by:
+\[\mathrm{Cover}(X)\]
+the type of coverings of $X$.
+\end{definition} 
+
+\begin{remark}
+In traditional algebraic topology there is a definition of coverings of a space $X$ as well-behaved continuous maps to $X$ with discrete fibers. Our definition is interpreted as something equivalent to the traditional one, because any map with homotopy fibers equivalent to sets is actually equivalent to a traditional covering.
+\end{remark}
+
+You should see covering over $X$ as continuous family of sets indexed by $X$, as shown by next proposition. It is an easy variant of the Grothendieck correspondance.
+
+\begin{proposition}
+Assume given a type $X:\U$. Then we have:
+\[\mathrm{Cover}(X) \ \simeq\ X \r \Set\]
+\end{proposition}
+
+It is a bit cumbersome to define and prove a counterpart to this result using topological spaces. Now we prove an important theorem of algebraic topology.
+
+\begin{theorem}
+Assume given a pointed connected type $\U$. Then we have:
+\[\mathrm{Cover}(X) \ \simeq\ \pi_1(X)-\Set\]
+Recall that $\pi_1(X)-\Set$ is the type of sets with an action of $\pi_1(X)$.
+\end{theorem}
+\begin{proof}
+We know that:
+\[\mathrm{Cover}(X)\ \simeq\ X\r \Set\]
+But then since $\Set$ is a groupoid, we have that:
+\[X\r\Set \ \simeq\ |X|_1\r \Set\]
+Then it is enough to prove 
+\[|X|_1 \simeq \B\pi_1(X)\] 
+to conclude. But we know that:
+\[\B\pi_1(X) \ \simeq \ (x:|X|_1)\times |x=[*]|\]
+It is enough to prove $|x=[*]]$ inhabited for all $x:|X|_1$ is order to conclud, because in this case $|x=[*]|$ is contractible.
+Since $X$ is connected, we know that $|x=[*]|$ is inhabited for any $x:|X|_1$, indeed by induction we can assume $x$ is the form $[x]$ but then:
+\[|[x]=[*]| \ \simeq \ ||x=*|_0| \ \simeq\ |x=*|\]
+by the characterisation of paths in a truncation. But $|x=*|$ is inhabited because $X$ is connected.
+\end{proof}
+
+So we know a very explicit description of coversings of a type. The intuitive summary is that giving a cover of a pointed connected type is the same as giving a set (which will be the fiber of the cover over the basepoint), and an action of $\pi_1(X)$ on this set (which will be induced on the fiber by transport along paths in $X$). Note that in this section we were only concerned with plain groups.
+
+%The main trick which is hard to replicate in traditional homotopy theory is the use of grothendieck correpondance. %the fact that $\Set$ is a groupoid, i.e. a one-dimensional space.
+
+\begin{remark}
+Usually in an introductory class about algebraic topology one often see that subgroups of $\pi_1(X)$ corresponds to connected coverings of $X$. In fact connected coverings correspond to the so-called \emph{transitive} actions of $\pi_1(X)$, which in turn correspond to subgroups of $\pi_1(X)$
+\end{remark}
+
+
+
+\sse{Classifying fiber bundles}
+
+We define fiber bundles.
+
+\begin{definition}
+A fiber bundle with fibre $F:\U$ over $X:\U$ is a map $f$ to $X$ such that for all $x:X$ we have:
+\[| \fib_f(x)=F| \]
+We denote by $\mathrm{Fib}_F(X)$ the type of fiber bundles with fiber $F$ over $X$.
+\end{definition}
+
+\begin{remark}
+In traditional topology, fiber bundles over $X$ are defined as continuous map to $X$ with (strict) fibers homeomorphic to $F$, and an additional topological condition of \emph{local triviality}. This condition is removed entirely for us.
+\end{remark}
+
+\begin{theorem}
+For any types $X,F:\U$ we have:
+\[\mathrm{Fib}_F(X) \ \simeq \ X\r \B\Aut_\U(F)\]
+\end{theorem}
+\begin{proof}
+By a variant of the Grothendieck correspondence, we have that:
+\[\mathrm{Fib}_F(X) \ \simeq \ (X\r (Y:\U)\times|Y=F|)\]
+But $\B\Aut_\U(F)$ is defined as $(Y:\U)\times |Y=F|$.
+\end{proof}
+
+We say that $\B \Aut_\U(F)$ classify bundles with fiber $F$. This comes from a more general terminology: an object $A$ is said to classify some kind structure on types if giving such a structure on a type $X$ is the same thing as giving a map from $X$ to $A$. It is often useful to know that some kind structure is classified by a type.
+
+Note that the proof is extremely simple, it is essentially Grothendieck correspondance.
+
+
+\sse{Classifying principal bundles}
+
+We define $G$-principal bundles for $G$ an $\infty$-group.
+
+\begin{definition}
+Assume given an $\infty$-group $G$ and $X$ a type. Then a principal $G$-bundle over $X$ is a $G$-action $P$ such that:
+\[P//G \ = \ X\]
+We denote by $\mathrm{Bund}_G(X)$ the type of $G$-principal bundles over $X$.
+\end{definition}
+
+\begin{remark}
+In traditional algebraic topology $G$-principal bundle over $X$ for $G$ a topological group are defined as a free and transitive continuous action with quotient $X$, obeying some additional topological hypothesis. In our definition, we can remove topological conditions. We can also remove the condition of freeness and transitiveness, which are here to guarantee that the strict quotient is the same as the homotopy quotient. Moreover our definition is more general as we can use non-strict $\infty$-groups.
+\end{remark}
+
+\begin{theorem}
+Assume given a type $X:\U$ and an $\infty$-group $G$. Then we have:
+\[\mathrm{Bund}_G(X)\ \simeq\ (X\r \B G)\]
+\end{theorem}
+\begin{proof}
+By definition:
+\[\mathrm{Bund}_G(X)\ \equiv\ (P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big)\]
+But by the Grothendieck correspondance, we have:
+ \[(P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big) \ \simeq\ (Y:\U)\times (f:Y\r \B G) \times \big((x:\B G)\times \fib_f(x) \simeq X\big)\]
+ But we know (also by the Grothendieck correspondance) that  
+ \[(x:\B G)\times \fib_f(x)\ \simeq\ Y\]
+ therefore we have:
+ \[(Y:\U)\times (f:Y\r \B G) \times \big((x:\B G)\times \fib_f(x) \simeq X\big) \ \simeq \ (Y:\B G)\times  (Y\r \B G)\times (Y \simeq X)\]
+\[\simeq \ X\r \B G\]
+ so we can conclude.
+\end{proof}
+
+Note that the principal bundle associated to $f:X\r \B G$ is just $\fib_f : \B G \r \U$. Our last two theorems form the foundation of bundle theory. The proof are very short, a lot shorter than using traditional methods. 
+% for the theory 
+
+
+\sse{Schreier theory}
+
+As a last example we give an application to ($\infty$-)group theory.
+
+\begin{definition}
+Assume given two $\infty$-groups $K$ and $G$, we define an extension of $G$ by $K$ as:
+\begin{itemize}
+\item An $\infty$-group $H$.
+\item An exact sequence of $\infty$-group:
+\[\B K \r_* \B H\r_* \B G\]
+\end{itemize}
+We denote by $\mathrm{Ext}(K,G)$ the type of extension of $G$ by $K$.
+\end{definition}
+
+For any two $\infty$-groups $K$ and $G$ we have a trivial extension:
+\[\B K\r_* \B K\times\B G\r_*\B G\]
+The main intuition about group extensions is that they are "twisted" products of groups. %, i.e. variants of $p : \B K \times \B G \r \B G$ where the fiber of $\B K$ depends on $\B G$
+It should be noted that if $K$ and $G$ happens to be group, then $\mathrm{Ext}(K,G)$ is in fact equivalent to the type of exact sequence of groups:
+\[0\r K\r ?\r G\r 0\]
+Indeed in any fiber sequence of $\infty$-groups:
+\[\B K \r \B H\r \B G\]
+if $G$ and $K$ are groups, so is $H$.
+
+
+\begin{theorem}
+Assume given two $\infty$-groups $K$ and $G$. Then we have:
+\[\mathrm{Ext}(G,K)\ \simeq \ \B G\r_* \B\Aut_\U(\B K)\]
+\end{theorem}
+\begin{proof}
+We have:
+\[\mathrm{Ext}(G,K) \ \simeq\ (X:\U_*) \times (f:X\r_* \B G) \times (\fib_f=_{\U_*} \B K) \]
+The only non trivial point is that this implies $X$ connected, and it is left to the reader. Now we have:
+\[\mathrm{Ext}(G,K) \ \simeq \ (X:\U)\times (x:X)\times (f:X\r \B G)\times (f(x)=*) \times  (\fib_f=_{\U_*} \B K) \]
+But by the Grothendieck correspondance:
+\[\mathrm{Ext}(G,K) \ \simeq\ (P : \B G \r \U) \times (y:P(*))\times (P(*) =_{\U_*} \B K) \]
+\[\simeq \ (P : \B G \r \U)\times (\epsilon : P(*) =_\U \B K) \times (y:P(*)) \times (y= \ua(\epsilon)^{-1}(*))\]
+\[\simeq\ (P:\B G \r \U) \times (P(*) =_\U \B K)\]
+but since $\B G$ is connected, we know that for all $x:\B G$ we have $|P(x) = \B K|$, so:
+\[\mathrm{Ext}(G,K) \ \simeq\ (P:\B G \r \U)\times ((x:\B G)\r |P(x) =_\U \B K|) \times (P(*) =_\U \B K)\]
+\[\simeq\  (P:\B G\r (X:\U)\times | X= \B K|)\times P(*) =_\U \B K\]
+But by definition this means:
+\[\mathrm{Ext}(G,K) \ \simeq (P:\B G\r \B\Aut_\U(\B K))\times (P(*) =_\U \B K)\]
+which is what we want.
+%An extension of $G$ by $K$ is the same thing  $P:$
+\end{proof}
+
+One important point to note is that we use $\Aut_\U(\B K)$ rather than: 
+\[\Aut_{\U_*}(\B K)\ (=\Aut_{\infty\Grp}(K))\] 
+When $K$ is a group, $\B\Aut_\U(\B K)$ is not a groupoid but rather a $2$-groupoid, because $\B K =_\U\B K$ is not a set but a groupoid. This means that $\Aut_\U(\B K)$ is a $2$-group and not a group. So when $K$ and $G$ are groups, this theorem tells us that extensions of $G$ by $K$ correspond to morphisms of $2$-groups from $G$ to $\Aut_\U(\B K)$.
+
+\begin{remark}
+Some extensions often encountered in group theory are called semi-direct products, and they correspond precisely to morphisms of groups from $G$ to $\Aut_\Grp(K)$. For us they come from composition with the morphism:
+\[\Aut_\Grp(K) \ \simeq\ \Aut_{\U_*}(\B K) \ \r \ \Aut_\U(\B K)\]
+\end{remark}
+
+
+
+
+\se{Spectra and cohomology}
+
+It is a well-known fact that homotopy groups are exceedingly hard to compute (for example, not all homotopy groups of the sphere $S^2$ are known). In this section we describe another family of invariants called cohomology groups, which are easier to compute. Note that we will not present the methods to compute them, although they can be implemented in HoTT, at least for finite HITs \cite{}.
+
+
+\sse{Abelian groups and abelian $\infty$-groups}
+
+In this section we want to define abelian $\infty$-groups. We have seen that $\pi_1(\Omega^2 X)$ is abelian for any pointed type $X$. There is a kind of reciprocate to this property. We omit all proofs in this section, see \cite{} for a thorough treatment of this (and much more).%, i.e. some class of pointed types equivalent to abelian groups through $\Omega^2$. 
+
+%\begin{definition}
+%We say that a group $G$ has two deloopings if there exists a pointed connected type $X$ such that:
+%\[\B G = \Omega X\]
+%\end{definition}
+
+\begin{proposition}
+Let $A$ be an abelian group, then there exists a pointed connected type $X$ such that $\Omega X = \B A$.
+\end{proposition}
+
+Such an $X$ is denoted $\B^2A$. The type of such $X$ is actually contractible.
+
+\begin{remark}
+This can be used to build an equivalence $\Omega^2$ from simply connected $2$-types to abelian groups. They are pointed types $X$ such that:
+\begin{itemize}
+\item $X$ is connected.
+\item $\pi_1(X)$ is the trivial group.
+\item $*=_X*$ is a groupoid, implying that $X$ is a $2$-groupoid.
+\end{itemize}
+\end{remark}
+
+This suggests to define $\infty$-abelian groups as $\infty$-groups $G$ that can be delooped (i.e. $\B G = \Omega X$ for some $X$). While this definition makes sense, it does not give a reasonable notion of abelian $\infty$-group.
+
+\begin{remark}
+Deloopable $\infty$-groups are called \emph{braided $\infty$-groups}.
+\end{remark}
+
+ Next theorem is a special case of the stability theorem from \cite{}.
+
+\begin{theorem}
+Let $A$ be an abelian group, there for any natural number $n>0$, there exists a connected type $X$ (denoted $\B^nX$) such that:
+\[\Omega^n X \ = \ A\]
+\end{theorem}
+
+The goal of these result was to motivate the following definition, suggested by the fact that abelian groups can be delooped arbitrarily many times:
+
+\begin{definition}
+An abelian $\infty$-group is a pointed connected type with infinitely many deloopings. 
+
+More precisely it a family of pointed connected types $X_n$ for $n:\mathbb{N}$ such that for all $n$ we have:
+\[\Omega X_{n+1} = X_n\]
+\end{definition}
+
+This definition is satisfying, as we will illustrate in the next sections. We have mentioned that abelian groups can be seen as abelian $\infty$-groups.
+
+\begin{remark}
+The notion of $\infty$-groups deloopable $n$ times makes sense (e.g. it gives braided $\infty$-groups for $n=1$). This notion allows us to see "how much commutativity" an $\infty$-group has: the more it can be delooped, the more it commutes.
+%It is intersting to see that while being associative has only one general 
+%These $\infty$-groups are more statisfying than braided ones.
+\end{remark}
+
+
+
+
+\sse{Spectra and cohomolgy}
+
+In an introductory classes to algebraic topology, cohomology theories with coefficient in an abelian group are defined. We will define them with coefficient in a spectrum, a generalistion of abelian $\infty$-groups.% are usually defined 
+
+\begin{definition}
+A spectrum $A$ is a family of pointed types $A_n$ for $n:\mathbb{Z}$ such that for all $n$ we have:
+\[\Omega A_{n+1} \simeq A_n\]
+\end{definition}
+
+Note that a spectrum is not necessarily an abelian $\infty$-groups because we do not ask for the pointed types to be connected. The fact that we use $\mathbb{Z}$ rather than $\mathbb{N}$ is unimportant, because for $n:\mathbb{N}$ we have: 
+\[X_{-n} = \Omega^n X_0\]
+We use it because it leads to more convenient notations. We are now ready to define the cohomology groups.
+
+\begin{definition}
+Assume given a pointed type $X$ and a spectrum $A$, for $n:\mathbb{Z}$ we define the abelian group $H^n(X,A)$ by: 
+\[H^n(X,A)\ :\equiv\ |X\r_* A_n|_0\]
+with its group structure induced by the fact tat $A_n$ is a loop space.
+
+The abelian group $H^n(X,A)$ is called the $n$-th cohomology group of $X$ with coefficient in $A$.
+\end{definition}
+
+For example if $A$ is an abelian group, then $H^n(X,A)$ is defined as
+\[|X\r_* \B^n A|_0\]
+
+Note that we see a duality between homotopy and cohomology groups: one are defined as maps \emph{from} some fixed types (more precisely from the spheres), the other are defined as maps \emph{to} some fixed types (more precisely to elements of a spectrum). We will see that cohomology groups have some dual properties to homotopy groups. 
+
+\begin{remark}
+Perhaps you know about group cohomology. We define it in our context. If $G$ is an $\infty$-groups, then we define the cohomology of $G$ with coefficient in a spectrum $A$ by:
+\[H^n_\Grp(G,A) \ :\equiv\ |\B G \r_* A_n|_0\]
+\end{remark}
+
+
+\sse{Eilenberg-Steenrod axioms for cohomology}
+
+Now we present the Eilenberg-Steenrod axioms for cohomology theories.
+
+\begin{proposition}
+Assume given a spectrum $A$, for any pointed type $X$ and $n:\mathbb{Z}$ we have:
+\[H^n(X,A) = H^{n+1}(\Sigma X,A)\]
+\end{proposition}
+\begin{proof}
+We have:
+\[H^n(X,A) \ \equiv\ |X\r_* A_n|_0 \ \simeq \ |X\r_*\Omega A_{n+1}|_0 \ \simeq \ |\Sigma X \r_* A_{n+1}| \ \equiv\ H^{n+1}(\Sigma X , A)\]
+We do not check that this respect the group structure.
+\end{proof}
+
+\begin{ind_def}
+Assume given a set $I$ and a family of pointed types $X_i$ for $i:I$. Then we define the type $\bigvee_I X_i$ by:
+\begin{itemize}
+\item (Formation) There is a type $\bigvee_I X_i$.
+\item (Introduction) There is a point $*:\bigvee_I X_i$.
+For any $i:I$ and $x:X_i$ there is a point $\mathrm{\bf inc}_i(x) : \bigvee_I X_i$.
+For any $i:I$ there is a path $* = \mathrm{\bf inc}_i(*)$.
+\item (Non-dependent Elimination) Omitted.
+\end{itemize} 
+\end{ind_def}
+
+\begin{lemma}
+Assume given a family of pointed type $X_i$ indexed by $I$ a set. Then:
+\[\big(\bigvee_I X_i \r_* Y\big) \ \simeq\ (i:I) \r (X_i\r_* Y)\]
+\end{lemma}
+
+\begin{proposition}
+Assume the axiom of choice for set-truncation. Then for all family of pointed types $X_i$ indexed by a set $I$ we have:
+\[H^n(\bigvee_I X_i , A) \ \simeq\ (i:I) \r H^n(X_i,A)\]
+\end{proposition}
+\begin{proof}
+This is an easy consequence of the previous lemma.
+\end{proof}
+
+\begin{proposition}
+Assume given a spectrum $A$ and a cofiber sequence: 
+\[X\r_* Y\r_* Z\]
+Then we have an exact sequence:
+\[H^n(Z,A) \r H^n(Y,A) \r H^n(X,A) \]
+\end{proposition}
+%\begin{proof}
+%\end{}
+
+The previous remarks combined with knowledge about cofiber sequences combine to give next proposition.
+
+\begin{proposition}
+Assume given a spectrum $A$ and a cofiber sequence: 
+\[X\r_* Y\r_* Z\]
+Then we have a long exact sequence:
+\[\cdots \r H^{n+1}(X,A) \r H^n(Z,A) \r H^n(Y,A) \r H^n(X,A) \r H^{n-1}(Z,A) \r \cdots \]
+\end{proposition}
+
+
+\begin{remark}
+Note that in traditional algebraic topology a family of $H^n : \U_* \r \mathrm{Ab}$ for $n:\mathbb{Z}$ obeying the previous axioms is in fact equivalent to $H^n(\_,A)$ for some spectrum $A$. To my knowledge, whether this is provable in HoTT is an open problem. %do not know whether this can be proven in HoTT, and I think it is an open problem.
+\end{remark}
+
+
+
+\se{Conclusion}
+
+We conclude this introductory class by giving a summary and some perspectives. 
+
+\sse{Summary}
+In this class:
+\begin{itemize}
+\item We used homotopical ideas to revisit some logic, mainly with propositional truncation. This allowed us to decompose disjunction and existential quantifier through proof-irrelevant but intuitionist constructors. This also allowed us to define an axiom of choice in type theory, intuitively related to the usual one.
+\item We presented HITs and illustrated how they allowed to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
+\item We gave an alternative definition of groups, which shed some new lights on some basic constructs, for example quotients.
+\item Using Grothendieck and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
+\item We presented cohomology and homotopy groups in a similar fashion, emphasizing the duality between the two.
+\end{itemize}
+
+\noindent The main insights we gain:
+\begin{itemize}
+\item For homotopy theorists: constructive methods and ideas can be useful for homotopy theory. This actually apply to mathematicians in general, although we did not demonstrate this.
+\item For type theorists: Homotopical ideas are useful to understand identity types even in "normal" type theory. For example higher inductive types are useful even without univalence. 
+\item For foundations: The idea of "isomorphic imply the same" can be taken seriously, and imply some homotopical structure on the universe !
+\end{itemize}
+
+\noindent We list some limitations to HoTT. %For understandable reasons we did not emphasized them in the main body of the lecture notes.
+\begin{itemize}
+\item HoTT is not computational. This means that when we define say a natural number using univalence, it does not necessarily compute to an actual numeral. As an example if we show that $\pi_4(S^3) = \mathbb{Z}/n\mathbb{Z}$, there is no automated way in HoTT to compute the value of $n$ (see \cite{bruneriethesis} for more information on this). This problem can be solved using \emph{cubical type theory} \cite{}, which will be introduced latter in this class. Some workaround in non-cubical HoTT are being investigated \cite{homotopycanonicity}.
+\item We mentioned the idea of infinite towers of coherences when we introduced $\infty$-groups. It is not known whether such infinite tower can be defined in HoTT. We were able to use a trick in order to define $\infty$-groups anyway, but no such trick is known for e.g. monoids. \emph{Two-Level type theories} \cite{} are being investigated as a solution to this problem.
+\item HoTT is not directed, in the sense that we only say things about isomorphisms and not about morphisms. As an example we can extract the notion of isomorphisms of groups from the definition of groups in HoTT, but not the notion of morphisms of groups. Solutions to this are being investigated under the name of \emph{directed type theories} (e.g. \cite{}).
+\item Currently no new theorem about homotopy types was proved in HoTT. It should be noted that some theorems were extended from homotopy types to any $\infty$-topoi using HoTT (Intuitively an $\infty$-topos is a mathematical universe similar to the universe of homotopy types, see below for more information).
+\end{itemize}
+
+\noindent The main thing to remember about these limitations is that HoTT is not the definitive answer to any question, but rather a beautiful first step with many ramifications.
+
+
+\sse{Toward higher mathematics}
+
+I give some perspectives from the point of view of someone interested in fundamental mathematics. %Note that this section present my belief rather than a supposed truth, although they are shared by some colleagues.
+
+We have seen that groups are secretly $1$-dimensional objects in a rather natural way, whereas monoids are not. We know that groups are a lot more useful in mathematics than monoids, in fact groups are always introduced in a first algebra class, whereas monoids are not. I believe there is a correlation between these facts: knowing that groups are $1$-dimensional objects we could reasonably predict that they would be useful to mathematicians. Similarly it is shown in the HoTT book that categories are secretly $1$-dimensional objects, and they are used almost everywhere in fundamental mathematics.
+
+This leads to the idea that $\infty$-dimensional objects should be very useful for mathematics. Nowadays we see a tendency to replace mathematical objects by some $\infty$-dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they lead to the proof of Weibel's conjecture in algebraic geometry.
+
+\begin{remark}
+In fundamental physics one can study quantum fields, which describe matter and light in a space-time. Different fields on the same space-time can correspond to each other through what are called gauge equivalences, and gauge equivalent fields describe the same physical reality. But sometimes you have non-trivial gauge equivalences of a field with itself, and this fact can be observed through experiments. They are called ghost field by physicians. Similarly you have gauge equivalences between gauge equivalences, and so on, leading to ghost-of-ghost fields, etc.
+
+It turns out fields on a space-time form a genuinely $\infty$-dimensional object, called a smooth $\infty$-groupoid. \emph{Higher gauge theory} is a useful keyword if you want to learn more about this, and Urs Schreiber wrote a lot of interesting things on this idea.
+%, and more timidly in fundamental physics (higher gauge theory is a useful keyword if you want to know more about that).
+\end{remark}
+
+The situation is as follow:
+\begin{itemize}
+\item Objects in mathematics usually have an $\infty$-dimensional analogue.
+\item An $\infty$-dimensional theory should be somewhat similar to its $0$-dimensional counterpart, as it has been worked out in details for many examples.
+\item But $\infty$-dimensional objects tend to be very difficult to work with, they can get quite messy and technical (see e.g. \cite{Lurie}).
+\end{itemize}
+
+So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful $\infty$-dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondance: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
+
+%\begin{remark}
+HoTT is proof relevant and this can be used to derive some results about homotopy types. But HoTT is also intuitionist. Can we use this to amplify these results ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, except that it does not obey the law of excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{}. As $\infty$-topoi are one of the most useful new higher dimensional tool, this allows to amplify further the applicability of HoTT.
+
+\begin{remark}
+This means that all the results we proved in this class are valid in any $\infty$-topos, as long as they did not use excluded middle or choice. So for example we proved Schreier theory for $\infty$-groups in any $\infty$-topos, a result which would be so cumbersome to prove using classical methods that (to my knowledge) no such direct proof has ever been written.
+\end{remark}
+
+\begin{remark}
+Mathieu Anel, Georg Biedermann, Eric Finster and Andr{\'e} Joyal manage to prove the Blakers-Massey theorem in HoTT \cite{}, therefore reproving this result for homotopy types, but also generalizing it to any $\infty$-topos. They derive some new results about Goodwillie calculus of functors from this \cite{}. 
+\end{remark}
+
+The moral of this story is that homotopy type theory has proven itself a useful (albeit not definitive) tool in the development of these new higher mathematics. I hope that in the future more efficient tools using ideas from constructive mathematics will be developed, and that mathematicians will open themselves to constructivist and intuitionistic methods as a way to prove new classical theorem.
+
+
+
+
+
+
+
+\end{document}
+
+
+
+

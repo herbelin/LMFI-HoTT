@@ -1,0 +1,296 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+
+ \usepackage[landscape,twocolumn]{geometry}
+\geometry{margin=0.4in}
+%\usepackage{tikz-cd}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+%\newtheorem{example}{Example}
+
+\usepackage{exercise}
+
+
+
+\title{Synthetic Homotopy Theory TD1: Inductive types}
+
+\begin{document}
+
+\maketitle
+
+
+%\se{Inductive types}
+
+An inductive type is defined by a list of constructor, allowing you to build inahbitantss of the type, and an elimination principle allowing you to build map out of the type. In this first section we will study identity types of some examples of inductive types. In class we saw how to compute the identity types in product types using the \emph{encode-decode method}. In summary:
+
+\begin{enumerate}
+\item We define a family $\Eq_{A\times B} : A\times B \r A\times B \r \U$.
+\item We define functions in:
+\[\encode : (z,z':\Eq_{A\times B}(z,z')) \r z=z'\r \Eq_{A\times B}(z,z')\]
+and
+\[\decode : (z,z':\Eq_{A\times B}(z,z')) \r \Eq_{A\times B}(z,z') \r z=z'\]
+\item We show that they are inverse to each other.
+\item From this we conclude that:
+\[(x,y)=_{A\times B}(x',y') \ \simeq \ (x=_Ax')\times (y=_By')\]
+\end{enumerate}
+
+Now we try to apply this method to other types.
+
+%\sse{Exercice 1: the empty type $\zero$}
+
+
+
+\begin{Exercise}[title={The unit type}]
+
+We define $\Eq_\one : \one \r \one \r \U$ by:
+\[\Eq_\one(x,y) \ :\equiv\ \one\]
+
+\paragraph{Question 1} Prove that for any $A:\U$ we have $(A\times \one) \simeq A$ and that $(A\r\one)\simeq\one$
+%Explain the name and notations for the unit type.
+
+\paragraph{Question 2} Define a function:
+\[\encode : (x,y:\one) \r x=y \r \Eq_\one(x,y)\]
+(Hint: start by path induction).
+
+\paragraph{Question 3} Define a function:
+\[\decode : (x,y:\one) \r \Eq_\one(x,y)\r x=y\]
+(Hint: start by induction on $x$ and $y$).
+
+\paragraph{Question 4} Prove that $\encode$ and $\decode$ are inverse to each other. Conclude that:
+\[(x=y) \ \simeq \ \one\]
+for any $x,y:\one$.
+\end{Exercise}
+
+
+
+\begin{Exercise}[title={The empty type}]
+
+\paragraph{Question 1} Prove that for all $A:\U$ we have $(A\times \zero) \simeq A$ and $(\zero\r A)\simeq \one$.
+
+\paragraph{Question 2} Prove that for all $x,y:\zero$, we have $x=y$.
+
+%\noindent Recall that $x\neq y$ is defined as $x=y\r \zero$.
+%\[x=y\r \zero\] 
+%as is the negation of any proposition.
+
+\paragraph{Question 3} Recall that $x\neq y$ is defined as $x=y\r \zero$. Prove that for all $x,y:\zero$, we have $x\neq y$.
+
+\paragraph{Question 4} Prove that for all $x,y:\zero$, anything holds for $x=_\zero y$.
+
+\paragraph{Question 5} Let $A$ be a type. Show that any map $A\r \zero$ is an equivalence.
+
+%\paragraph{Question 3} Prove that for any type $A$ and $x,y:\zero$, we have:
+%\[(x=y) \ \simeq \ A\]
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={The type of booleans}]
+
+We define $\Eq_\two : \two \r \two \r \U$ by:
+\[\Eq_\two(0,0) \ :\equiv \ \one\]
+\[\Eq_\two(0,1) \ :\equiv \ \zero\]
+\[\Eq_\two(1,0) \ :\equiv \ \zero\]
+\[\Eq_\two(1,1) \ :\equiv \ \one\]
+You should convince yourself that these are reasonable expectation for equalities in a two-point set.
+
+\paragraph{Question 1} Define a function:
+\[\encode : (x,y:\two) \r x=y \r \Eq_\two(x,y)\]
+(Hint: start by path induction).
+
+\paragraph{Question 2} Define a fucntion:
+\[\decode : (x,y:\two) \r \Eq_\two(x,y)\r x=y\]
+(Hint: start by induction on $x$ and $y$).
+
+\paragraph{Question 3} Prove that $\encode$ and $\decode$ are inverse to each other. Conclude that $0\neq 1$.
+
+%\paragraph{Question 2} Conclude that $0\neq 1$.
+
+\paragraph{Question 4 (Optional)} Can you find a shorter proof that $0\neq 1$ ? 
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Sum types}]
+
+We define: 
+\[\Eq_{A+B} : A+B \r A+B \r \U\] 
+by:
+\[\Eq_{A+B}(\inc_l(x),\inc_l(x')) \ :\equiv \ x=_Ax'\]
+\[\Eq_{A+B}(\inc_l(x),\inc_r(y')) \ :\equiv \ \zero\]
+\[\Eq_{A+B}(\inc_r(y),\inc_l(x')) \ :\equiv \ \zero\]
+\[\Eq_{A+B}(\inc_r(y),\inc_l(y')) \ :\equiv \ y=_By'\]
+You should convince yourself that these are reasonable expectation for equalities in a two point set.
+
+\paragraph{Question 1} Assume given $A,B,C:\U$, prove that $(A+B\r C) \ \simeq \ (A\r C)\times (B\r C)$
+
+\paragraph{Question 2} Prove that for any $A:\U$ we have $(A+\zero)\simeq A$.
+
+\paragraph{Question 3} Prove that $\one+\one  \simeq  \two$.
+
+\paragraph{Question 4} Using the same method as in exercises 1 and 3, prove that for all $z,z':A+B$ we have:
+\[(z=z') \ \simeq\ \Eq_{A+B}(z,z')\]
+
+\end{Exercise}
+
+
+
+\begin{Exercise}[title={The natural numbers}]
+
+We define $\Eq_{\mathbb{N}}: {\mathbb{N}} \r {\mathbb{N}} \r \U$ by:
+\[\Eq_{\mathbb{N}}(0,0) \ :\equiv \ \one\]
+\[\Eq_{\mathbb{N}}(0,\s(n)) \ :\equiv \ \zero\]
+\[\Eq_{\mathbb{N}}(\s(m),0) \ :\equiv \ \zero\]
+\[\Eq_{\mathbb{N}}(\s(m),\s(n)) \ :\equiv \ \Eq_{\mathbb{N}}(m,n)\]
+Note that we used $\Eq_{\mathbb{N}}$ in the definition of $\Eq_{\mathbb{N}}$ which is okay because ${\mathbb{N}}$ is recursive. %You should convince yourself that these are reasonable expectation for equalities in a two point set.
+
+\paragraph{Question 1}
+Using the same method as in exercises 1, 3 and 4 prove that for all $m,n:\mathbb{N}$ we have:
+\[(m=n) \ \simeq\ \Eq_{\mathbb{N}}(m,n)\]
+
+\paragraph{Question 2}
+Conclude that $0\neq 1$, and that for any $m,n:{\mathbb{N}}$ we have:
+\[(m=n)\ \simeq\ (\s(m)=\s(n))\]
+
+%\paragraph{Question 1} Define a function:
+%\[\encode : (x,y:{\mathbb{N}}) \r x=y \r \Eq_{\mathbb{N}}(x,y)\]
+%(Hint: start by path induction).% You can define an auxiliary function in $(x:{\mathbb{N}})\r \Eq_{\mathbb{N}}(x,x)$).
+
+%\paragraph{Question 2} Define a fucntion:
+%\[\decode : (x,y:{\mathbb{N}}) \r \Eq_{\mathbb{N}}(x,y)\r x=y\]
+%(Hint: start by induction on $x$ and $y$).
+
+%\paragraph{Question 3} Prove that $\encode$ and $\decode$ are inverse to each other. Conclude that $0\neq 1$, and that for any $m,n:{\mathbb{N}}$ we have:
+%\[(m=n)\ \simeq\ (\s(m)=\s(n))\]
+
+%s\paragraph{Question 4 (Optional)} Can you find a shorter proof that $0\neq 1$ ? 
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Univalence contradicts unicity of identity proofs}]
+Recall that the unicity of identity proofs (UIP for short) is the principle that for all $p,q:x=_Ay$ we have $p=q$. We will use the type of booleans $\two$ to prove that univalence contradicts UIP.
+
+\paragraph{Question 1} Define an equivalence $\mathrm{\bf swap} : \two\simeq \two$
+swapping $0$ and $1$.
+
+\paragraph{Question 2} Show that $\mathrm{\bf swap}\neq \id_\two$ in $\two\simeq\two$.
+
+\paragraph{Question 3} Conclude that we have two distincts elements in $\two=_\U\two$ using univalence.
+ 
+\end{Exercise}
+
+
+\begin{Exercise}[title={Quasi-equivalences},difficulty=1]
+Recall that for $f:A\r B$ we defined $\mathrm{isQuasiEquiv}(f)$ as:
+\[(g:B\r A)\times (f\circ g\sim \id_B) \times (g\circ f\sim \id_A)\]
+
+\paragraph{Question 1}
+Assume we want to prove something for all types $A,B:\U$ and all equivalences $\epsilon : A\simeq B$. Using univalence and path induction prove that it is enough to prove what we want for the equivalences $\id_A$ for any $A:\U$.
+
+%\begin{remark}
+%This is called path induction for equivalences.
+%\end{remark}
+
+\paragraph{Question 2}
+Using previous question, prove that for all equivalences $\epsilon:A\simeq B$ we have:
+\[\mathrm{isQuasiEquiv}(\epsilon) \ \simeq \ (a:A)\r a=a\]
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Types of lists, and more},difficulty=1]
+We assume that you are familiar with the inductive type $\List_A$ of lists of elements in $A$. We denote by $\emptyset$ the empty list and $a::l$ the list with head $a$ and tail $l$. 
+
+\paragraph{Question 1} Using the encode-decode method, prove that:
+\[(a::l =_{\List_A} a'::l') \ \simeq \ (a=_Aa)\times (l=_{\List_A}l')\]
+
+\paragraph{Question 2} If you happen to know other inductive types (e.g. $W$-types), what can you prove about their identity types using the encode-decode method ?
+\end{Exercise}
+
+%\begin{paragraph}[test] jjj\end{paragraph}
+
+
+%\begin{enumerate}
+%\item 
+%\end{enumerate}
+
+
+
+\end{document}
+
+
+
