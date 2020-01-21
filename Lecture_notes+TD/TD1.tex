@@ -94,7 +94,7 @@
 
 %\se{Inductive types}
 
-An inductive type is defined by a list of constructor, allowing you to build inahbitantss of the type, and an elimination principle allowing you to build map out of the type. In this first section we will study identity types of some examples of inductive types. In class we saw how to compute the identity types in product types using the \emph{encode-decode method}. In summary:
+An inductive type is defined by a list of constructors, allowing you to build inahbitants of the type, and an elimination principle allowing you to build maps out of the type (or equivalently prove things for all inhabitants of the type). In this first section we will study identity types of some examples of inductive types. In class we saw how to compute the identity types in product types using the \emph{encode-decode method}. In summary:
 
 \begin{enumerate}
 \item We define a family $\Eq_{A\times B} : A\times B \r A\times B \r \U$.
@@ -116,7 +116,7 @@ Now we try to apply this method to other types.
 \begin{Exercise}[title={The unit type}]
 
 We define $\Eq_\one : \one \r \one \r \U$ by:
-\[\Eq_\one(x,y) \ :\equiv\ \one\]
+\[\Eq_\one(*,*) \ :\equiv\ \one\]
 
 \paragraph{Question 1} Prove that for any $A:\U$ we have $(A\times \one) \simeq A$ and that $(A\r\one)\simeq\one$
 %Explain the name and notations for the unit type.
@@ -130,7 +130,9 @@ We define $\Eq_\one : \one \r \one \r \U$ by:
 (Hint: start by induction on $x$ and $y$).
 
 \paragraph{Question 4} Prove that $\encode$ and $\decode$ are inverse to each other. Conclude that:
-\[(x=y) \ \simeq \ \one\]
+\[(*=*) \ \simeq \ \one\]
+From this conclude that:
+\[(x=y) \ \simeq\ \one\]
 for any $x,y:\one$.
 \end{Exercise}
 
@@ -150,7 +152,7 @@ for any $x,y:\one$.
 
 \paragraph{Question 4} Prove that for all $x,y:\zero$, anything holds for $x=_\zero y$.
 
-\paragraph{Question 5} Let $A$ be a type. Show that any map $A\r \zero$ is an equivalence.
+\paragraph{Question 5} Let $A$ be a type. Show that any map in $A\r \zero$ is an equivalence.
 
 %\paragraph{Question 3} Prove that for any type $A$ and $x,y:\zero$, we have:
 %\[(x=y) \ \simeq \ A\]
@@ -171,7 +173,7 @@ You should convince yourself that these are reasonable expectation for equalitie
 \[\encode : (x,y:\two) \r x=y \r \Eq_\two(x,y)\]
 (Hint: start by path induction).
 
-\paragraph{Question 2} Define a fucntion:
+\paragraph{Question 2} Define a function:
 \[\decode : (x,y:\two) \r \Eq_\two(x,y)\r x=y\]
 (Hint: start by induction on $x$ and $y$).
 
@@ -193,7 +195,7 @@ by:
 \[\Eq_{A+B}(\inc_l(x),\inc_r(y')) \ :\equiv \ \zero\]
 \[\Eq_{A+B}(\inc_r(y),\inc_l(x')) \ :\equiv \ \zero\]
 \[\Eq_{A+B}(\inc_r(y),\inc_l(y')) \ :\equiv \ y=_By'\]
-You should convince yourself that these are reasonable expectation for equalities in a two point set.
+You should convince yourself that these are reasonable expectation for equalities in a two-point set.
 
 \paragraph{Question 1} Assume given $A,B,C:\U$, prove that $(A+B\r C) \ \simeq \ (A\r C)\times (B\r C)$
 
@@ -247,26 +249,26 @@ Recall that the unicity of identity proofs (UIP for short) is the principle that
 \paragraph{Question 1} Define an equivalence $\mathrm{\bf swap} : \two\simeq \two$
 swapping $0$ and $1$.
 
-\paragraph{Question 2} Show that $\mathrm{\bf swap}\neq \id_\two$ in $\two\simeq\two$.
+\paragraph{Question 2} Show that $\mathrm{\bf swap}\neq \id$ in $\two\simeq\two$.
 
-\paragraph{Question 3} Conclude that we have two distincts elements in $\two=_\U\two$ using univalence.
+\paragraph{Question 3} Conclude that we have two distinct elements in $\two=_\U\two$ using univalence.
  
 \end{Exercise}
 
 
 \begin{Exercise}[title={Quasi-equivalences},difficulty=1]
-Recall that for $f:A\r B$ we defined $\mathrm{isQuasiEquiv}(f)$ as:
-\[(g:B\r A)\times (f\circ g\sim \id_B) \times (g\circ f\sim \id_A)\]
+Recall that for $f:A\r B$ we defined $\mathrm{isQuasiEquiv}(f)$ by:
+\[\mathrm{isQuasiEquiv}(f)\ :\equiv\ (g:B\r A)\times (f\circ g\sim \id_B) \times (g\circ f\sim \id_A)\]
 
 \paragraph{Question 1}
-Assume we want to prove something for all types $A,B:\U$ and all equivalences $\epsilon : A\simeq B$. Using univalence and path induction prove that it is enough to prove what we want for the equivalences $\id_A$ for any $A:\U$.
+Assume we want to prove something for all types $A,B:\U$ and all equivalences $\epsilon : A\simeq B$. Using univalence and path induction show that it is enough to prove what we want for the equivalences $\id_A$ for any $A:\U$.
 
 %\begin{remark}
 %This is called path induction for equivalences.
 %\end{remark}
 
 \paragraph{Question 2}
-Using previous question, prove that for all equivalences $\epsilon:A\simeq B$ we have:
+Using the previous question, prove that for all equivalences $\epsilon:A\simeq B$ we have:
 \[\mathrm{isQuasiEquiv}(\epsilon) \ \simeq \ (a:A)\r a=a\]
 
 \end{Exercise}
