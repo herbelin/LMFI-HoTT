@@ -1145,13 +1145,45 @@ Assume given $m,n:\mathbb{N}$, then:
 \end{lemma}
 
 
-\sse{The relative numbers}
+\sse{The integers}
 
 We introduce $\mathbb{Z}$.
 
 \begin{ind_def}
-TODO
+We define non-zero natural number.
+\begin{itemize}
+\item There is a type $\mathbb{N}^*$.
+\item There is an inhabitant $1:\mathbb{N}^*$, and for any $m:\mathbb{N}^*$ there is an inhabitant:
+\[\s(m):\mathbb{N}^*\]
+\item The induction principle is the same as for natural numbers.
+\end{itemize}
 \end{ind_def}
+
+Note that $\mathbb{N}^*$ is equivalent to $\mathbb{N}$, we just gave different name to its inhabitants.
+
+\begin{ind_def}
+We define integers.
+\begin{itemize}
+\item There is a type $\mathbb{Z}$.
+\item We have an inhabitant $0:\mathbb{Z}$.
+For any $m:\mathbb{N}^*$, we have two inhabitants:
+\[+m : \mathbb{Z}\]
+\[-m:\mathbb{Z}\]
+\item Assume we want to define:
+\[f:(x:\mathbb{Z})\r P(x)\]
+then it is enough to define:
+\[f(0) \ :\equiv\ s_0\]
+\[f(+m) \ :\equiv\ s_+\]
+\[f(-m) \ :\equiv\ s_-\]
+For $s_0$, $s_+$ and $s_-$ of the appropriate type.
+\end{itemize}
+\end{ind_def}
+
+Note that integers behave as the usual set-theoretic integers, so that we will use addition, multiplication, etc without proof.
+
+\begin{exercise}
+Analyse identity types in $\mathbb{Z}$ using the encode-decode method. 
+\end{exercise}
 
 %There exists many more example of inductive types, for example lists, finitely branching trees, $\cdots$
 
