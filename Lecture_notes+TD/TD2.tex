@@ -1,0 +1,258 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+
+ \usepackage[landscape,twocolumn]{geometry}
+\geometry{margin=0.4in}
+%\usepackage{tikz-cd}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+%\newtheorem{example}{Example}
+
+\usepackage{exercise}
+
+
+
+\title{Synthetic Homotopy Theory TD2: Higher inductive types, truncations and logic}
+
+\begin{document}
+
+\maketitle
+
+\begin{Exercise}[title={Higher inductive types}]
+
+\paragraph{Question 1} Let $A$ be a type, show that: 
+\[(S^1\r A)\ \simeq\ (x:A)\times (x=x)\]
+
+\paragraph{Question 2} Prove that $\Sigma \two \ \simeq \ S^1$. 
+
+\paragraph{Question 3 (Optional)} Prove that $S^1\times S^1 \simeq T$. Prove that $\Sigma S^1 \ \simeq \ S^2$.
+%\paragraph{Question 4}
+%Assume $X$ and $Y$ are pointed types. ????% be a pointed type
+\end{Exercise}
+
+
+%\begin{Exercise}[title={Suspensions}]
+%Recall that a pointed type is a type $X$ with an inhabitant $x:X$. The type of pointed type is denoted $$
+%\end{Exercise}
+
+\begin{Exercise}
+In this exercise we use results from TD1 to prove truncation results for types.
+
+\paragraph{Question 1} Show that $\one$ is contractible. %and $\zero$ are propositions.
+
+\paragraph{Question 2} Show that $\zero$ is a proposition.
+
+\paragraph{Question 3} Show that $\two$ and $\mathbb{N}$ are sets. Show that they are not propositions.
+
+\paragraph{Question 4} Let $A$ be a proposition. Show that $A+ \lnot A$ is a proposition. Find $A,B:\Prop$ such that $A+B$ is not a proposition (Hint: recall that $\one+\one = \two$).
+
+\paragraph{Question 5} Show that the type of sets is a groupoid.
+
+\paragraph{Question 6 (Optional)} Show that the type of contractible types is contractible.
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Identity types in set-truncations}]
+\paragraph{Question 1} Let $A$ be a type, using the encode-decode method show that: 
+\[[x]=_{|A|_0}[y]\ \simeq \ |x=_A y|\]
+\end{Exercise}
+
+
+\begin{Exercise}[title={Decidable types and propositions}]
+
+%We give two definitions.
+
+\begin{definition}
+A proposition $A$ is called decidable if we can prove $A+\lnot A$. A type $X$ is said to have decidable equality if for all $x,y:X$ the type $(x=y)+\lnot(x=y)$ is provable.
+\end{definition}
+
+\paragraph{Question 1} Let $A$ be a decidable proposition, prove that:
+\[(A=\zero) + (A=\one)\]
+
+\paragraph{Question 2} Show that types with decidable equality are sets (Hint: use the encode-decode method to compute the identity types of a decidable type).
+
+%\paragraph{Question 3}  Show that not all types are decidable (Hint: $$).
+\begin{remark}
+It is quite natural to ask whether all propositions are decidable. This cannot be proved or disproved in HoTT.
+\end{remark}
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={The law of the excluded middle}]
+In this exercise we consider the law of the excluded middle in type theory. The naive law of the excluded middle is an inhabitant of the type $(A:\U)\r A+\lnot A$.
+%\[(A:\U)\r A+\lnot A\]
+
+\paragraph{Question 1} Show that univalence contradicts the naive law of the excluded middle.
+
+\begin{definition}
+The law of excluded middle is the following type:
+\[(A:\Prop)\r A + \lnot A\]
+Equivalently it says that all propositions are decidable.
+\end{definition}
+
+The law of excluded cannot be proved nor disproved in HoTT. Its interpretation in homotopy types is true. 
+
+\paragraph{Question 2} Assuming the law of the excluded middle, show that $\Prop =_\U \two$.
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Propositional truncation}]
+
+\paragraph{Question 1} Let $A$ be a type. Show that the map $[\_] : A\r |A|$ induces equivalences:
+\[\Gl f,x.\, f([x]) : (|A|\r B) \r (A\r B)\]
+for all proposition $B$.%, définit par $\psi(f) = f \circ [\_]$.
+
+%\paragraph{Question 2} Let $A$ be a type 
+
+\paragraph{Question 2} Let $A$ be a type. Assume given a type $C$ with a map $t:A\r C$ such that we have equivalences:
+\[\Gl f.\, f\circ t:(C\r B) \r (A\r B)\]
+for all proposition $B$. Show that $C\simeq |A|$.
+
+\paragraph{Question 3} Assuming the law of excluded middle, prove that $\lnot\lnot A$ is equivalent to $|A|$.   
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Connected types}]
+Recall that a type $X$ is said connected if $(x,y:X)\r |x=y|$.
+
+\paragraph{Question 1} Let $X$ be a connected type with $x:X$. Show that $|X|_0=\one$.
+
+\paragraph{Question 2} Let $X$ be a type such that $|X|_0=\one$, show that $X$ is connected.
+
+\paragraph{Question 3} Show that the circle is connected.
+
+\paragraph{Question 4} Assume given $X:\U$ with $x:X$. Show that $\Sigma X$ is connected.
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={The axiom of choice}]
+
+\begin{definition}
+The naive axiom of choice says that for any types $A,B:\U$ and $P:A\r B\r \U$ we have an inhabitant of: %is the type: 
+\[\big((x:A)\r (y:B)\times P(x,y) \big) \r (f:A\r B) \times \big((x:A)\r P(x,f(x))\big)\]
+\end{definition}
+
+\paragraph{Question 1} Prove the naive axiom of choice.
+
+\begin{definition}
+The axiom of choice says that for all {\bf set} $A$ with $P:A\r \U$ we have:
+\[ \big((x:A)\r |P(x)|\big) \r |(x:A)\r P(x)|\]
+\end{definition}
+
+\begin{remark}
+There exists a lot of variants of this axiom in HoTT, for example $P$ can be a family of sets, or we can use set-truncation rather than propositional truncation, etc.
+\end{remark}
+
+\paragraph{Question 2 (Optional)} Prove that the same axiom for all $A:\U$ contradicts univalence.
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Diaconescu's theorem}]
+In this exercise we show that the axiom of choice imply the law of the excluded middle. Assume given $A:\Prop$.
+
+\paragraph{Question 1} Using the encode-decode method, prove that $\Sigma A$ is a set and that: 
+\[(\N=_{\Sigma A} \S) \ \simeq\ A\]
+
+\paragraph{Question 2} We define $f:\two \r \Sigma A$ by $f(0):\equiv \N$ and $f(1):\equiv \S$. Show that:
+\[(x:\Sigma A) \r |\fib_f(x)|\]
+
+\paragraph{Question 3} Using the axiom of choice, conclude that:
+\[|(g:\Sigma A \r \two) \times (f\circ g \sim \id)|\]
+
+\paragraph{Question 4} Assume given $g:\Sigma A \r \two$ such that $f\circ g \sim \id$. Show that:
+\[(g(\N)=_\two g(\S))+(g(\N){\not=}_\two g(\S))\]
+ Show that $g(\N)=g(\S)\r \N=\S$ and $g(\N)\not=g(\S) \r \N\not=\S$.
+
+%\paragraph{Question 4} Prove that we have $A+\lnot A$ using $g$ (Hint: recall that $A+\lnot A$ is a proposition, and then notice that $g(\N)=g(\S)\r \N = \S$ and $g(\N)\not=g(\S) \r \N\not=\S$). 
+
+\paragraph{Question 5} From the previous questions, conclude that the axiom of choice implies the law of the excluded-middle.
+
+\end{Exercise}
+
+
+
+
+
+
+\end{document}
+
+
