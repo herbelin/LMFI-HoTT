@@ -2138,9 +2138,22 @@ By the previous theorem we know that:
 
 \sse{Fiber sequences}
 
-First we clarify some vocabulary and notations.
+We define an important tool of homotopy theory.
 
 \begin{definition}
+Assume given a sequence of maps between pointed sets:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
+It is a fiber sequence if for all $y:Y$ we have:
+\[\fib_f(y) \ \simeq\ (g(y)=*)\]
+\end{definition}
+
+\begin{warning}
+With this definition, being a fiber sequence is not a proposition. This could be corrected. 
+\end{warning}
+
+Any map between pointed types is part of a canonical fiber sequence.
+
+\begin{proposition}
 Assume given $X,Y:\U_*$ with a map $f:X\r_* Y$. The canonical fiber sequence associated to $f$ is:
 \[\fib_f(*) \overset{p_f}{\r_*} X \overset{f}{\r_*} Y\]
 where:
@@ -2148,22 +2161,35 @@ where:
 \item The type $\fib_f(*)$ is defined as:
 \[(x:X)\times (f(x)=_Y*)\] 
 pointed by $(*_X,*_f)$.
-\item The map $p_X$ is the projection to $X$ (which obviously preserves the basepoints).
+\item The map $p_f$ is the projection to $X$ (which obviously preserves the basepoints).
 \end{itemize}
-\end{definition}
+\end{proposition}
+\begin{proof}
+We need to prove for $y:Y$ that: 
+\[\fib_{p_f}(y)\ \simeq\ (f(y)=*)\]
+But this is part of the Grothendieck correspondence.
+\end{proof}
 
-We define an important tool of homotopy theory. %They play a role analogous to exact se
+In some sense all fiber sequence is equal to a canonical one, as proved by the next proposition.
 
-\begin{definition}
-Assume given $X,Y,Z:\U_*$ with maps $f:X\r_* Y$ and $g:Y\r_* Z$. Then a proof that:
+\begin{proposition}
+Assume given a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
-is a fiber sequence consists of an inhabitant of $f=_{\U_{*/Y}}p_g$ in the type of pointed maps to $Y$.
-\end{definition}
+then we have that $f=p_g$ as ponted maps to $Y$. 
+\end{proposition}
+\begin{proof}
+We have that: 
+\[X\ \simeq\ (y:Y)\times \fib_f(y)\]
+by the Grothendieck correspondence. But then we have:
+ \[(y:Y)\times \fib_f(y) \ \simeq\ (y:Y)\times (g(y)=*)\]
+ by hypothesis.
+ 
+We do not check that this can be extended to an equality of pointed maps to $Y$.
+\end{proof}
 
-\begin{warning}
-With this definition, being a fiber sequence is not a proposition. This could be corrected. 
-\end{warning}
 
+
+\comment{
 In order to understand this definition better, we make it explicit for sets. Note that next proposition is not an equivalence between types.
 
 \begin{proposition}
@@ -2200,7 +2226,7 @@ Since $f(y)=*$ is a proposition, it is enough to prove:
 \[f(p_X(\epsilon^{-1}(q))) = y\]
 but this is the second component of $\epsilon^{-1}(q)$.
 \end{itemize}
-\end{proof}
+\end{proof}}
 
 
 \sse{The long fiber sequence of a map}
@@ -2237,19 +2263,30 @@ is called exact if for all $y:Y$ we have:
 It is called an exact sequence of groups if $X,Y,Z$ have a group structure with $*$ the unit, and $f$ and $g$ are morphisms of groups.
 \end{definition}
 
-Being exact is weaker than being a fiber sequence, since we use $\exists(x:X).f(x)=y$ (recall this is defined as $|(x:X)\times f(x)=y|$).
+Being exact is weaker than being a fiber sequence, since we use $\exists(x:X).f(x)=y$ (recall this is defined as $|(x:X)\times f(x)=y|$). Now we want to prove that the set-truncation of a fiber sequence is an exact sequence. We need an auxiliary lemma.
 
-\begin{theorem}
-Assume given a fiber sequence:
-\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
-Then we have a long exact sequence of pointed sets:
-\[\cdots\r_*\pi_2(X)\r_* \pi_2(Y)\r_*\pi_2(Z) \r_* \pi_1(X)\r_*\pi_1(Y)\r_*\pi_1(Z) \r_* \pi_0(X)\r_*\pi_0(Y)\r_*\pi_0(Z)\]
-This is an exact sequence sequence of groups for $n>0$. 
-\end{theorem}
+\begin{lemma}
+Assume given $X,Y:\U$ with $f:X\r Y$ and $y:Y$, then we have:
+\[\exists(x:|X|_0).\,(|f|_0(x) = [y]) \ \simeq\ |(x:X)\times f(x)=y|\]
+where $|f|_0:|X|_0\r |Y|_0$ is defined by $|f|_0([x])\ :\equiv\ [f(x)]$.
+\end{lemma}
 \begin{proof}
-We see the displayed sequence of pointed sets is just the set-truncation of the long fiber sequence. So it is enough to show that the set-truncation of a fiber sequence is exact. This is next lemma.
+Since both sides are propositions, it is enough to build maps both way:
+\begin{itemize}
+\item Assume given an inhabitant of $\exists(x:|X|_0).\,(|f|_0(x) = [y])$, we want to prove: 
+\[|(x:X)\times f(x)=y|\] 
+Since we want to prove a proposition, we can assume given $x:|X|_0$ such that $|f|_0(x) = [y]$, but the using induction on the truncation again we can assume given $x:X$ such that $[f(x)]=[y]$. 
+
+By our analysis of identity types in set-truncation in TD2, we this is equivalent to $x:X$ such that $|f(x)=y|$. Using induction on the truncation again, we can assume given $x:X$ such that $f(x)=y$, and we can conclude.
+\item Assume given an inhabitant of $|(x:X)\times f(x)=y|$, we want to prove:
+\[\exists(x:|X|_0).\,(|f|_0(x) = [y])\]
+By induction on the truncation we can assume given $x:X$ with $q:f(x)=y$, and then we have:
+\[([x],\ap_{[\_]}(q)) : (x:|X|_0)\times (|f|_0(x) = [y])\]
+so we can conclude.
+\end{itemize}
 \end{proof}
 
+This proof is a good example of working with truncations: we eliminate them as much as possible.
 
 \begin{lemma}
 The set truncation of a fiber sequence is exact.
@@ -2259,48 +2296,35 @@ More precisely assume given a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
 Then we prove that the sequence of pointed sets:
 \[|X|_0\overset{|f|_0}{\r_*} |Y|_0\overset{|g|_0}{\r_*} |Z|_0\] 
-is exact, where $|f|_0$ is the map induced by $f$, i.e. defined by 
+is exact, where $|f|_0$ is the map induced by $f$, i.e. defined by: 
 \[|f|_0([x]) = [f(x)]\] 
-It is enough to prove this for a canonical fiber sequence so we assume $f:X\r_* Y$ and try to prove that:
-\[|\fib_f(*)|_0 \r |X|_0\r |Y|_0\]
-is exact.
 
-We assume given $x':|X|_0$, and try to prove:
-\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} x' \ \leftrightarrow\ |f|_0(x') =_{|Y|_0} *\]
-where $p_0$ is actually the truncation of the map $p_f:\fib_f(*)\r X$, i.e. defined by: 
-\[p_0([x,q]) \, :\equiv\, [x]\] 
-This is a proposition so we can replace $x'$ by $[x]$ for $x:X$. Then we need to prove:
-\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x] \ \leftrightarrow\ [f(x)] =_{|Y|_0} *\]
-
-\begin{itemize}
-\item First assume: 
-\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x]\]
-Then we need to prove that:
-\[[f(x)] =_{|Y|_0} *\]
-But this is a proposition because $|Y|_0$ is a set. 
-
-So we can assume that we have $z:|\fib_f(*)|_0$ such that $p_0(z)=_{|X|_0} [x]$, by eliminating the $\exists$ truncation.
-
-But by induction again we can assume that $z$ is of the form $[x',q]$ with $x':X$ and $q:f(x')=_Y*$, as we are trying to prove a proposition.
-
-To sum up we have $x':X$ such that $f(x') =_Y *$, we have $[x']=_{|X_0|}[x]$ and we need $[f(x)] =_{|Y|_0} *$.
-
-So it is enough to show that $[x]=_{|X|_0}[x']$ imply $[f(x)]=_{|Y|_0} [f(x')]$. But this is a special case of $\ap_{|f|_0}$.
-% and that we have:
-%\[(z:|\fib_f|_0)\times (p_X(z)=_{|X|_0}[x]\]
-
-\item In the other direction we assume $[f(x)] =_{|Y|_0} *$ and we try to prove:
-\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x]\]
-From the characterization of identity types in truncations (see TD3) we know that we have $|f(x)=_Y*|$, so since we are trying to prove a proposition we can assume $q:f(x)=_Y*$.
-
-Then we just use:
-\[([x,q],\refl_{[x]}) : (z:|\fib_f(*)|_0)\times p_0(z)=_{|X|_0} [x]\] 
-%has type.
-%We just need $q$ of type $f(x)=_Y *$ in order to conclude, as in this case $([x,q],\refl_{[x]})$ is good enough. But we know that $[f(x)]=*$ is equivalent to $|f(x)=*|$ by the characterization of paths in truncations (see TD3 (?)).
-\end{itemize}
+So we need for all $y:|Y|_0$ that: 
+\[\exists(x:|X|_0).\,(|f|_0(x) = y) \ \leftrightarrow\ |g|_0(y)=[*] \]
+Since both sides are propositions, their equivalence is itself a proposition, therefore we can assume that $y$ is of the from $[y']$ for $y':Y$. Then we need to prove that:
+\[\exists(x:|X|_0).\,(|f|_0(x) = [y']) \ \leftrightarrow\ [g(y')]=[*] \]
+%But then by our analysis of path types in set-truncation in TD2, we know that it is enough to prove:
+%\[\exists(x:|X|_0).\,(|f|_0(x) = [y']) \ \leftrightarrow\ |g(y')=*|\]
+But then we have:
+\[ \big([g(y')]=[*]\big) \ \simeq\ |g(y')=*|\ \simeq\ |(x:X)\times f(x)=y'|\]
+And we can conclude using the previous lemma.
 \end{proof}
 
-This proof might look a bit complicated, but it is straightforward, one just need to be careful about truncation elimination. An exact sequence of groups allows one to extract some information about groups in the sequence from informations about the others. As an example we have:
+Then we can prove our first classical theorem from algebraic topology.
+
+\begin{theorem}
+Assume given a fiber sequence:
+\[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+Then we have a long exact sequence of pointed sets:
+%\[\cdots\r_*\pi_n(X)\r_* \pi_n(Y)\r_*\pi_n(Z) \r_* \cdots\]
+\[\cdots \r_* \pi_1(X)\r_*\pi_1(Y)\r_*\pi_1(Z) \r_* \pi_0(X)\r_*\pi_0(Y)\r_*\pi_0(Z)\]
+This is an exact sequence sequence of groups for $n>0$. 
+\end{theorem}
+\begin{proof}
+We see the displayed sequence of pointed sets is just the set-truncation of the long fiber sequence, so we can conclude using the previous proposition.% So it is enough to show that the set-truncation of a fiber sequence is exact. This is next two lemmas.
+\end{proof}
+
+An exact sequence of groups allows one to extract some information about groups in the sequence from informations about the others. As an example:
 
 \begin{lemma}
 Assume given an exact sequence of groups:
@@ -2311,25 +2335,24 @@ Then $i$ is an isomorphism of groups.
 Omitted as it has nothing to do with homotopy type theory.
 \end{proof}
 
-\begin{remark}
-This presentation differs from the traditional one in algebraic topology.
-%Here we see some advantage to Homotopy Type Theory over traditional algebraic topology:
-\begin{itemize}
-\item In algebraic topology, one restrain to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
-\item We see that the long exact sequence of homotopy groups is actually the shadow of a more powerful (and infinite dimensional) fiber sequence. This fact is usually not pointed out in algebraic topology, at least not in an introductory class.
-\end{itemize}
-Both these facts comes from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than fibers.
-\end{remark}
-
-\begin{remark}
-This theorem is a useful tool to compute homotopy groups. For example we can build a fiber sequence: 
+This can be a useful tool to compute homotopy groups. For example we can build a fiber sequence: 
 \[S^1\r_* S^3\r_*S^2\]
 usually called the Hopf fibration. From this we know that we have exact sequences of groups:
 \[\pi_n(S^1)\r \pi_n(S^3)\r \pi_n(S^2)\r \pi_{n-1}(S^1) \]
 for $n> 0$. But since $\pi_n(S^1) = 0$ for $n>1$, one can conclude that:
 \[\pi_n(S^3)\simeq \pi_n(S^2)\]
 for $n>2$.
+
+\begin{remark}
+This presentation of the long homotopy exact sequence differs from the traditional one in algebraic topology.
+%Here we see some advantage to Homotopy Type Theory over traditional algebraic topology:
+\begin{itemize}
+\item In algebraic topology, one restrain to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
+\item We see that the long exact sequence of homotopy groups is actually the shadow of a more powerful (and higher-dimensional) fiber sequence. This fact is usually not pointed out in algebraic topology, at least not in an introductory class.
+\end{itemize}
+Both these facts come from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than fibers.
 \end{remark}
+
 
 
 %\begin{definition}A chain sequence is a sequence of pointed maps: \[X\overset{f}{\r_*} Y\overset{g}{\r_*} Z\]With an equality: \[g\circ f =_{X\r_* Z} *\]\end{definition}
