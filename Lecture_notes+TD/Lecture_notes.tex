@@ -1508,7 +1508,7 @@ is equivalent to $S^1$. They are called homotopy quotients in traditional homoto
 
 \begin{remark}
 %Homotopy quotients are sometimes harder to manipulate than the set-theoretic quotients, because we need to pay attention the different proof of equalities between elements. 
-It should be noted that this kind of quotients in set-theory are ill-behaved with respect to families. Indeed assume you have a family of sets $(X_a)_{a\in A}$ indexed by a set $A$, and and a relation relation $\_\sim\_$ on $A$.% (this means that $x\sim y$ is a set for all $x,y:A$). 
+It should be noted that quotients in set-theory are ill-behaved with respect to families. Indeed assume you have a family of sets $(X_a)_{a\in A}$ indexed by a set $A$, and and a relation $\_\sim\_$ on $A$.% (this means that $x\sim y$ is a set for all $x,y:A$). 
 Moreover assume that if $a\sim b$, we have a bijection between $X_a$ and $X_b$. Then it is not possible to get a family of sets indexed over $A/_\sim$ in a satisfying way. In homotopy type theory this is possible, using quotient as HITs and univalence.
 
 %The usual solution is to consider quotients by relations only, which is somewhat unsatisfying from a foundational point of view. 
@@ -1566,7 +1566,18 @@ In fact this example is the only one:
 Let $X:\U$ be a contractible type, then the map $X\r \one$ with constant value $*$ is an equivalence.
 \end{proposition}
 \begin{proof}
-Exercise.
+Assume $c:X$ is the center of contraction of $X$. Then we define: 
+\[\psi \ :\equiv \ \Gl (y:\one).\,c\]
+\[\phi \ :\equiv\ \Gl(x:X).\,*\] 
+Let us prove they are inverse to each other.
+\begin{itemize}
+\item To prove that for any $x:X$ we have $\psi(\phi(x)) =_X x$, we just need to prove that:
+\[(x:X) \r c =_X x\]
+But this is the definition of $c$ being a center of contraction.
+\item To prove that for any $y:\one$ we have $\phi(\psi(y))=_\one y$, we just need to prove that:
+\[(y:\one)\r *=_\one y\]
+This is done by induction on $y$.
+\end{itemize}
 \end{proof}
 
 Next property is often useful.
@@ -1591,7 +1602,7 @@ This result is sometimes called \emph{contractibility of singleton}, although we
 
 \sse{Propositions}
 
-Now we want to internalize the classical idea of proposition. Recall that the propositions-as-types paradigm allows us to see any type as a \emph{proof-relevant} proposition. This means that we need to be careful: two proofs of this proposition (i.e. inhabitant of this type) are not necessarily equal. 
+Now we want to internalize the classical idea of proposition. Recall that the propositions-as-types paradigm allows us to see any type as a \emph{proof-relevant} proposition. This means that we need to be careful: two proofs of this proposition (i.e. two inhabitants of this type) are not necessarily equal. 
 
 What we want to internalize is the more traditional notion of \emph{proof-irrelevant} proposition. Our approach is straightforward: we \emph{define} a proposition as a type with at most one element.
 
@@ -1609,7 +1620,7 @@ Formally we define $\mathrm{isProp} : \U \r \U$ by:
 The main point is that when assuming that a proposition $A$ holds (i.e. $A$ is inhabited), we never need to give a name to an inhabitant in $A$, because all of them are equal anyway. This mimics traditional (i.e. non-proof-relevant) mathematics.
 
 \begin{warning}
-As for contractible type the naive reading "a space $X$ is a proposition if it is path-connected" is very wrong. In fact using the excluded-middle one can show that a proposition is either empty or contractible.
+As for contractible types the naive reading "a space $X$ is a proposition if it is path-connected" is very wrong. In fact using the excluded-middle one can show that a proposition is either empty or contractible.
 \end{warning}
 
 
@@ -1628,7 +1639,7 @@ We need to prove $x=y$ for all $x,y:\zero$, but we can prove anything assuming s
 \end{proof}
 
 \begin{proposition}
-Assume given $A:\U$ and $P:A\r \U$ a family of propositions (i.e. for all $x:A$ the type $P(x)$ is a proposition). Then 
+Assume given $A:\U$ and $P:A\r \U$ a family of propositions (i.e. for all $x:A$ the type $P(x)$ is a proposition). Then the type: 
 \[(x:A)\r P(x)\]
 is a proposition.
 \end{proposition}
@@ -1638,7 +1649,7 @@ Assume given $f,g:(x:A)\r P(x)$, we need to prove $f=g$. By function extensional
 for all $x:X$. But $P(x)$ is a proposition so we can conclude.
 \end{proof}
 
-It should be noted that $A$ is any type, and not necessarily a proposition. If we apply this proposition to the case where $A$ is a propositions, it implies that for $A,B:\U$ two propositions, the type $A\r B$ is a proposition. This is the traditional implication of propositions.
+It should be noted that $A$ is any type, and not necessarily a proposition. If we apply this result to the case where $A$ is a proposition, it implies that for $A,B:\U$ two propositions, the type $A\r B$ is a proposition. This is the traditional implication of propositions.
 
 \begin{proposition}
 Assume given $A,B:\U$ two propositions. Then $A\times B$ is a proposition.
@@ -1670,7 +1681,7 @@ Now we prove a first results about identity types in proposition.
 Let $A:\U$ be a proposition. Then for all $x,y:A$, the type $x=_Ay$ is contractible.
 \end{proposition}
 \begin{proof}
-Assume $x,y:A$, then it is easy to prove that $A$ is contractible (say with center of contraction $x$). Therefore $A=_\U\one$, but we know from TD1 that identity types in $\one$ are equivalent to $\one$, so that $x=_A y$ is equivalent to $\one$. So $x=_Ay$  is contractible.
+Assume given $x,y:A$, then we can prove that $A$ is contractible (say with center of contraction $x$). Therefore $A=_\U\one$, but we know from TD1 that identity types in $\one$ are equivalent to $\one$, so that $x=_A y$ is equivalent to $\one$. So $x=_Ay$  is contractible.
 \end{proof}
 
 Recall that for $A:\U$ and $P:A\r \U$ a family of proposition, the type $(x:A)\times P(x)$ is far from a proposition. In fact we can characterize its identity types.
@@ -1678,14 +1689,14 @@ Recall that for $A:\U$ and $P:A\r \U$ a family of proposition, the type $(x:A)\t
 \begin{proposition}
 Assume given $A:\U$ and $P:A\r \U$ a family of propositions. For $a,a':A$ with $p:P(a)$ and $p':P(a')$, we have:
 \[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (a=_Aa')\]
-where $p_A$ is the canonical map from $(x:A)\times P(x)$ to $A$.
+%where $p_A$ is the canonical map from $(x:A)\times P(x)$ to $A$.
 \end{proposition}
 \begin{proof}
 By the characterization of path types in products we have:
 \[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (e:a=_Aa')\times(\tr^P_e(p) =_{P(a')} p') \]
 But since $P(a')$ is a proposition the type $\tr^P_e(p) =_{P(a')} p'$ is contractible hence equivalent to $\one$. So we have:
 \[(a,p)=_{(x:A)\times P(x)} (a',p')\ \simeq \ (a=_Aa')\times \one\]
-and it is easy to verify that this is equivalent to $a=_Aa'$.
+and this is equivalent to $a=_Aa'$.
 %\item 
 \end{proof}
 
@@ -1699,7 +1710,7 @@ and it is easy to verify that this is equivalent to $a=_Aa'$.
 
 \sse{Sets}
 
-Now we want to internalize the traditional notion of sets. The idea is to see set as discrete spaces: we define them as types where any two paths are equal.
+Now we want to internalize the traditional notion of sets. The idea is to represent sets as discrete spaces: we define them as types where any two paths are equal.
 
 \begin{definition}
 A proof that $A:\U$ is a set consists of a proof that for all $x,y:A$, the type $x=_A y$ is a proposition.
@@ -1715,7 +1726,7 @@ We know that the identity types in a propositions are contractible, so they are 
 \end{proof}
 
 \begin{proposition}
-The types $\two$ and $\N$ are sets.
+The types $\two$, $\mathbb{N}$ and $\mathbb{Z}$ are sets.
 \end{proposition}
 \begin{proof}
 See TD1.
@@ -1748,7 +1759,7 @@ We need to show that for all $x,x':A$ with $p:P(a)$ and $p':P(a')$, the type:
 \[(x,p)=_{(x:A)\times P(x)}(x',p')\]
 is a proposition, and we know it is equivalent to:
 \[(e:x=_Ax')\times \tr^P_e(p) =_{P(x)} p'\]
-But this the the product of a proposition by a family of proposition, so we can conclude.
+But this the the product of a proposition by a family of propositions, so we can conclude.
 \end{proof}
 
 
@@ -1779,7 +1790,7 @@ Assume given $A:\U$ a groupoid and $P:A\r \U$ a family of groupoids. Then:
 is a groupoid.
 \end{proposition}
 
- Note that this idea can be iterated, for example we can define a $2$-groupoid as a type whose identity types are groupoids, and so on.
+ Note that this idea can be iterated, for example we can define a $2$-groupoid as a type which identity types are groupoids, and so on.
 
 %\sse{}
 
@@ -1843,7 +1854,7 @@ The type $\Set$ is a groupoid.
 As the previous proposition.
 \end{proof}
 
-We could define similarly prove that $\Gpd$ is a $2$-groupoids. In fact this can be iterated to define $n$-groupoids, and the type of $n$-groupoids is an $n+1$-groupoid. These $n$-groupoids are called $n$-truncated types in \cite{hottbook}.
+We could define similarly prove that $\Gpd$ is a $2$-groupoids. In fact this can be iterated to define $n$-groupoids, and the type of $n$-groupoids is an $n+1$-groupoid. These $n$-groupoids are called $n$-truncated types in the HoTT book \cite{hottbook}.
 
 
 Now we study the equality types in $\Prop$. %from the point of view of .
@@ -1892,13 +1903,13 @@ In practice the induction principle says that if we want to prove a proposition 
 It should be noted that the truncation $|X|$ is an example of higher inductive type with two constructors:
 \[[\_] : X\r |X|\]
 and: 
-\[t: (x,y:|X|) \r x=_{|X|} y\]
+\[\mathrm{trunc}: (x,y:|X|) \r x=_{|X|} y\]
 This differs from the HITs we have seen previously because $|X|$ appears in the type of the constructors for $|X|$. We say that $|X|$ is a recursive HIT. Recursive HITs can encode very complicated geometric constructions. In algebraic topology the (higher) truncations are defined by inductively adding a lot of cells of higher dimensions. HITs encode this process in a very compact way.
 \end{remark} 
 
 
 This construction allows to remove proof relevance from any situation. As a first example, recall that being a proposition is a lot stronger than being path-connected. Indeed for $A:\U$ when assuming:
-\[(x,y:A)\r (p,q:x=_Ay)\r p=q\]
+\[(x,y:A)\r x=_Ay\]
 we assume a \emph{continuous} choice of paths, implying that if $A$ is inhabited it is contractible. Nevertheless we can define connectedness using propositional truncation.
 
 \begin{definition}
@@ -1909,22 +1920,22 @@ Assume given $A:\U$. Then $A$ is said connected if we have:
 The use of propositional truncation allows to remove continuity. This examples can be generalized quite a lot. We give some definitions:
 
 \begin{definition}
-Assume given $A:\U$ and $P:A\r \Prop$. Then we can define a proposition $\exists (x:A).p(x)$ by:
+Assume given $A:\U$ and $P:A\r \Prop$. Then we can define a proposition $\exists (x:A).P(x)$ by:
 \[\exists (x:A). P(x) \ :\equiv\ |(x:A)\times P(x)|\]
 Similarly for $A,B:\Prop$ we can define a proposition $A\lor B$ (read "$A$ or $B$") by:
 \[A\lor B \ :\equiv\ |A+B|\]
 \end{definition}
 
-This allows us to use proof irrelevant existential and disjunctive statement. Note that $A\lor B$ is still not classical, but it is proof-irrelevant. 
+This allows us to use proof irrelevant existential and disjunctive statements. Note that $A\lor B$ is still not classical, but it is proof-irrelevant. 
 
 \begin{remark}
 We decomposed existentials and disjunctions as two constructors. This is satisfying, as we can now think of proof-relevance and intuitionism as two different issues. The picture is:
-\[(x:A)\times P(x) \r \exists(x:A).P(x)\r \lnot\lnot\big(\exists(x:A).P(x)\big)\]
-and 
+\[(x:A)\times P(x) \r \exists(x:A).P(x)\r \lnot\lnot\big((x:A)\times P(x)\big)\]
+and: 
 \[A+B \r A\lor B \r \lnot\lnot(A+B)\]
 with no reverse implications, adding a \emph{proof-irrelevant intuitionist} version of logical connective in the middle. 
 
-It is remarkable that this idea came from homotopy theory, illustrating the connections between constructivism and geometry.
+It is remarkable that this idea came from homotopy theory, illustrating the many connections between constructivism and geometry.
 \end{remark}
 
 %\begin{remark}
@@ -1933,7 +1944,7 @@ In fact we will refrain from using the notation $A\lor B$ because we use the sym
 
 \sse{Set truncations, and beyond}
 
-We give the similar definition for sets.
+We give a similar definition for sets.
 
 \begin{ind_def}
 Assume given a type $A:\U$.
@@ -1948,7 +1959,7 @@ for $t:P([x])$.
 \end{itemize}
 \end{ind_def}
 
-If we see $A:\U$ as a space, then $|A|_0$ is its set of path-connected components. This will be extremely useful to define the usual topological invariants. We can give a similar definition for groupoids (corresponding to the fundamental groupoid of a space), and even for $n$-groupoids.
+If we see $A:\U$ as a space, then $|A|_0$ is its set of path-connected components. This will be extremely useful to define the usual topological invariants. We can give a similar definition for groupoids by giving $|A|_1$ for $A:\U$ (corresponding to the fundamental groupoid of a space), and even for $n$-groupoids.
 
 
 
@@ -1958,7 +1969,7 @@ If we see $A:\U$ as a space, then $|A|_0$ is its set of path-connected component
 
 \se{Homotopy groups and fiber sequences}
 
-In this section we define the basicl invariants of algebraic topology: the so-called homotopy groups. Our main goal is to prove the so-called \emph{long exact sequence of homotopy groups} of a fibration, and explain some advantages of the type-theoretic treatment.%gives interesting insight about it.
+In this section we define the basic invariants of algebraic topology: the homotopy groups. Our main goal is to prove the so-called \emph{long exact sequence of homotopy groups} of a fibration, and explain the advantages of the type-theoretic treatment.%gives interesting insight about it.
 
 
 \sse{Pointed types}
@@ -1980,10 +1991,10 @@ This type is considered pointed by the constant map to $*_Y$.
 %We define $\Map_*(X,Y):\U_*$ the type $X\r_*Y$ pointed by the constant map to $*_Y$.
 \end{definition}
 
-For $f:X\r_*Y$, we denote by $f$ its underlying map, and we denote by $*_f$ the path in $f(x)=_Y*_Y$.
+For $f:X\r_*Y$, we denote by $f$ its underlying map, and we denote by $*_f$ the path in $f(*_X)=_Y*_Y$.
 
 
-Now we analyse the identity types of these new types. An equality between pointed types is just an equivalence between the underlying types preserving basepoint.
+Now we analyse the identity types of these new types. An equality between pointed types is just an equivalence between the underlying types preserving basepoints.
 
 \begin{lemma}
 Assume given $X,Y:\U_*$. Then $X=_{\U_*} Y$ is equivalent to the type of equivalence:
@@ -2000,7 +2011,7 @@ is an equivalence. We can show:
 From this it is easy to conclude.
 \end{proof}
 
-An equality between maps between pointed types is a basepoint preserving homotopy.
+An equality between maps between pointed types is a basepoint-preserving homotopy.
 
 \begin{lemma}
 Assume given $X,Y:\U_*$ and $f,g:X\r_* Y$. Then we have that 
@@ -2020,7 +2031,7 @@ First we recall a presumably well-known definition:
 \begin{definition}
 A group $G$ consists of:
 \begin{itemize}
-\item A set $G$.
+\item A {\bf  set} $G$.
 \item A unit $e:G$.
 \item A multiplication $\_\cdot\_ : G\times G\r G$.
 \item An inverse map $\_^{-1} : G\r G$. 
@@ -2044,7 +2055,7 @@ For $G,G':\Grp$, a morphism of groups from $G$ to $G'$ consists of a map from $f
 \item We have:
 \[f(e) = e\]
 \end{itemize}
-We denote by $\Hom_{\Grp}(G,G')$ the type of morphism from from $G$ to $G'$. 
+We denote by $\Hom_{\Grp}(G,G')$ the type of morphisms from from $G$ to $G'$. 
 
 A morphism is called an isomorphism if its underlying map is an equivalence. We denote by $\Iso_{\Grp}(G,G')$ the type of isomorphisms from $G$ to $G'$.
 \end{definition}
@@ -2056,13 +2067,23 @@ For all $G,G':\Grp$, we have:
 \[(G=_{\Grp} G') \ \simeq \ \Iso_{\Grp}(G,G')\]
 \end{proposition}
 \begin{proof}
-Exercise. One need univalence.
+Exercise. One needs univalence.
 \end{proof}
 
+\begin{proposition}
+The type $\Grp$ is a groupoid.
+\end{proposition}
+\begin{proof}
+Assume given $G$ and $G'$ two groups, we need to show that $G=_\Grp G'$ is a set. By the previous proposition it is enough to prove that $ \Iso_{\Grp}(G,G')$ is a set. One can show that: 
+\[\Iso_{\Grp}(G,G') \simeq (f:G\r G')\times P(f)\]
+for $P : (G\r G') \r \Prop$. But then we know that $G\r G'$ is a set, and therefore so is $(f:G\r G')\times P(f)$.
+\end{proof}
 
 \begin{definition}
 Assume given a groupoid $A$ with $a:A$. Then we define the group $\Aut_A(a)$ as $a=_Aa$ with multiplication, unit and inverse induced by composition, reflexivity and inverse of paths.
 \end{definition}
+
+Usually we use this definition when $A$ is $\Set$ or $\Grp$, giving groups of permutations and automorphisms.
 
 %\mathrm{Grp}
 
@@ -2072,7 +2093,7 @@ Assume given a groupoid $A$ with $a:A$. Then we define the group $\Aut_A(a)$ as 
 \begin{definition}
 Assume given $X$ a pointed type. Then we define two pointed types:
 \[\Omega X \ :\equiv\ (*=_X* , \refl_*)\]
-called the loop space of $X$, and
+called the loop space of $X$, and:
 \[\Sigma X \ :\equiv\ (\Sigma X , \N)\]
 called the suspension of $X$.
 \end{definition}
@@ -2093,12 +2114,12 @@ Assume given $X$ a pointed type, we define the \emph{homotopy groups} $\pi_n(X)$
 Note that $\pi_0(X)$ is actually a pointed set, and $\pi_n(X)$ is a group for $n>0$.
 \end{definition}
 
-We will see in TD4 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy class of pointed maps out of the spheres. We make this formal.
+We will see in TD4 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy classes of pointed maps out of the spheres. We make this formal.
 
 \begin{definition}
-We define $S^n$ the (pointed) $n$-dimensional sphere inductively on $n:\N$. 
+We define $S^n$ the (pointed) $n$-dimensional sphere inductively on $n:\mathbb{N}$. 
 \begin{itemize}
-\item $S^0$ is defined as the two points type $\two$, pointed by $0:\two$.
+\item $S^0$ is defined as the two-points type $\two$, pointed by $0:\two$.
 \item $S^{n+1}$ is defined as $\Sigma S^n$.
 \end{itemize}
 \end{definition}
@@ -2110,7 +2131,7 @@ Let $X$ be a pointed type, then:
 \[\pi_n(X) \ \simeq \ |S^n\r_* X|_0\]
 \end{proposition}
 \begin{proof}
-By the last theorem we know that:
+By the previous theorem we know that:
 \[\pi_n(X) \ \equiv\ |\Omega^nX|_0 \ \simeq \ |S^0\r_*\Omega^nX|_0\ \simeq\ |\Sigma^nS^0\r_*X|_0 \ \equiv\ |S^n\r_*X|_0\]
 \end{proof}
 
@@ -2121,10 +2142,10 @@ First we clarify some vocabulary and notations.
 
 \begin{definition}
 Assume given $X,Y:\U_*$ with a map $f:X\r_* Y$. The canonical fiber sequence associated to $f$ is:
-\[\fib_f \overset{p_f}{\r_*} X \overset{f}{\r_*} Y\]
+\[\fib_f(*) \overset{p_f}{\r_*} X \overset{f}{\r_*} Y\]
 where:
 \begin{itemize}
-\item The type $\fib_f$ is defined as:
+\item The type $\fib_f(*)$ is defined as:
 \[(x:X)\times (f(x)=_Y*)\] 
 pointed by $(*_X,*_f)$.
 \item The map $p_X$ is the projection to $X$ (which obviously preserves the basepoints).
@@ -2136,7 +2157,7 @@ We define an important tool of homotopy theory. %They play a role analogous to e
 \begin{definition}
 Assume given $X,Y,Z:\U_*$ with maps $f:X\r_* Y$ and $g:Y\r_* Z$. Then a proof that:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
-is a fiber sequence consists of an inhabitant of $f=p_g$ in the type of pointed maps to $Y$.
+is a fiber sequence consists of an inhabitant of $f=_{\U_{*/Y}}p_g$ in the type of pointed maps to $Y$.
 \end{definition}
 
 \begin{warning}
@@ -2148,24 +2169,24 @@ In order to understand this definition better, we make it explicit for sets. Not
 \begin{proposition}
 A sequence of pointed sets:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
-is a fiber sequence if and only if for all $y:Y$, 
+is a fiber sequence if and only if for all $y:Y$, we have:
 \[\fib_f(y)\simeq (g(y)=*) \]
 \end{proposition}
 \begin{proof}
 If $f,g$ form a fiber sequence, we can assume it is a canonical one. In this situation one need to show for $y:Y$ that:
 \[\fib_{p_g}(y)\simeq(g(y)=*)\]
-This is true by Grothendieck correspondence.
+This is true by the Grothendieck correspondence.
 %Or equivalently that:
 %\[\big((y':Y)\times(g(y')=*)\times(y'=y)\big) \leftrightarrow (g(y)=*)\]
 %(using the fact that $f(y)=*$ is a proposition). TODO
 
-For the converse assume 
-\[\epsilon : (x:X)\times (f(x)=y)\r  (g(y)=*) \]
+For the converse assume: 
+\[\epsilon : \big((x:X)\times (f(x)=y)\big)\r  (g(y)=*) \]
 an equivalence. We want to show $f = p_g$. We build an equality directly. 
 \begin{itemize}
 \item We build a map $\psi$ from $X$ to $\fib_g$, defined by:
 \[\psi(x) \, :\equiv\, (f(x),\epsilon(x,\refl_{f(x)}))\]
-It is a pointed map, and we have $p_g\circ \psi = f$.
+It is a pointed map, and we have $p_g\circ \psi =_{X\r_* Y} f$ (exercise: prove this).
 \item We define $\phi$ the other way by:
 \[\phi(y,p) \, :\equiv\, p_X(\epsilon^{-1}(p))\]
 \item Now we check that $\phi(\psi(x)) =_X x$ indeed $\phi(\psi(x))$ is defined as:
@@ -2193,7 +2214,7 @@ Then we have $\delta : \Omega Z\r_* X$ and a long fiber sequence:
 \[\cdots \r_* \Omega^2 X \overset{\Omega^2 f}{\r_*} \Omega^2 Y \overset{\Omega^2 g}{\r_*}\Omega^2 Z \overset{\Omega\delta}{\r_*} \Omega X \overset{\Omega f}{\r_*} \Omega Y \overset{\Omega g}{\r_*} \Omega Z \overset{\delta}{\r_*} X \overset{f}{\r_*} Y\overset{g}{\r_*} Z  \]
 \end{theorem}
 \begin{proof}
-See TD4.
+See TD3.
 \end{proof}
 
 We see that fibers in homotopy type theory behave quite differently than the set-theoretic fibers, in the sense that iterating them still gives interesting information.
@@ -2241,24 +2262,24 @@ Then we prove that the sequence of pointed sets:
 is exact, where $|f|_0$ is the map induced by $f$, i.e. defined by 
 \[|f|_0([x]) = [f(x)]\] 
 It is enough to prove this for a canonical fiber sequence so we assume $f:X\r_* Y$ and try to prove that:
-\[|\fib_f|_0 \r |X|_0\r |Y|_0\]
+\[|\fib_f(*)|_0 \r |X|_0\r |Y|_0\]
 is exact.
 
 We assume given $x':|X|_0$, and try to prove:
-\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} x' \ \leftrightarrow\ |f|_0(x') =_{|Y|_0} *\]
-where $p_0$ is actually the truncation of the map $p_f:\fib_f\r X$, i.e. defined by: 
+\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} x' \ \leftrightarrow\ |f|_0(x') =_{|Y|_0} *\]
+where $p_0$ is actually the truncation of the map $p_f:\fib_f(*)\r X$, i.e. defined by: 
 \[p_0([x,q]) \, :\equiv\, [x]\] 
 This is a proposition so we can replace $x'$ by $[x]$ for $x:X$. Then we need to prove:
-\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x] \ \leftrightarrow\ [f(x)] =_{|Y|_0} *\]
+\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x] \ \leftrightarrow\ [f(x)] =_{|Y|_0} *\]
 
 \begin{itemize}
 \item First assume: 
-\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x]\]
+\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x]\]
 Then we need to prove that:
 \[[f(x)] =_{|Y|_0} *\]
 But this is a proposition because $|Y|_0$ is a set. 
 
-So we can assume that we have $z:|\fib_f|_0$ such that $p_0(z)=_{|X|_0} [x]$, by eliminating the $\exists$ truncation.
+So we can assume that we have $z:|\fib_f(*)|_0$ such that $p_0(z)=_{|X|_0} [x]$, by eliminating the $\exists$ truncation.
 
 But by induction again we can assume that $z$ is of the form $[x',q]$ with $x':X$ and $q:f(x')=_Y*$, as we are trying to prove a proposition.
 
@@ -2269,11 +2290,11 @@ So it is enough to show that $[x]=_{|X|_0}[x']$ imply $[f(x)]=_{|Y|_0} [f(x')]$.
 %\[(z:|\fib_f|_0)\times (p_X(z)=_{|X|_0}[x]\]
 
 \item In the other direction we assume $[f(x)] =_{|Y|_0} *$ and we try to prove:
-\[\exists (z:|\fib_f|_0).p_0(z) =_{|X|_0} [x]\]
+\[\exists (z:|\fib_f(*)|_0).p_0(z) =_{|X|_0} [x]\]
 From the characterization of identity types in truncations (see TD3) we know that we have $|f(x)=_Y*|$, so since we are trying to prove a proposition we can assume $q:f(x)=_Y*$.
 
 Then we just use:
-\[([x,q],\refl_{[x]}) : (z:|\fib_f|_0)\times p_0(z)=_{|X|_0} [x]\] 
+\[([x,q],\refl_{[x]}) : (z:|\fib_f(*)|_0)\times p_0(z)=_{|X|_0} [x]\] 
 %has type.
 %We just need $q$ of type $f(x)=_Y *$ in order to conclude, as in this case $([x,q],\refl_{[x]})$ is good enough. But we know that $[f(x)]=*$ is equivalent to $|f(x)=*|$ by the characterization of paths in truncations (see TD3 (?)).
 \end{itemize}
