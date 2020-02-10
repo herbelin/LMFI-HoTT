@@ -104,6 +104,25 @@
 \end{Exercise}
 
 
+\begin{Exercise}[title={Quotients},difficulty=1]
+Assume given $A:\U$ and $\_\sim\_:A\r A\r \U$.
+
+\begin{ind_def}
+TODO
+\end{ind_def}
+
+We give the dependent elimination principle for $A/_\sim$:
+
+\parapgraph{Question 1} Using univalence, prove that 
+\[(A/_\sim \r \U)\ \sim\ (f:A\r \U)\times( (x,y:A)\r (p:x\sim y) \r f(x)\simeq f(y))\]
+
+\vspace{0.6cm}
+
+In the second part of the exercise, we want to show that UIP contradict TODO
+
+\paragraph{Question 2} Prove that UIP contradicts the previous property. 
+\end{Exercise}
+
 %\begin{Exercise}[title={Suspensions}]
 %Recall that a pointed type is a type $X$ with an inhabitant $x:X$. The type of pointed type is denoted $$
 %\end{Exercise}
@@ -143,7 +162,7 @@ A proposition $A$ is called decidable if we can prove $A+\lnot A$. A type $X$ is
 \paragraph{Question 1} Let $A$ be a decidable proposition, prove that:
 \[(A=\zero) + (A=\one)\]
 
-\paragraph{Question 2} Show that types with decidable equality are sets (Hint: use the encode-decode method to compute the identity types of a decidable type).
+\paragraph{Question 2} Show that types with decidable equality are sets (Hint: use the encode-decode method to compute the identity types of a type with decidable equality).
 
 %\paragraph{Question 3}  Show that not all types are decidable (Hint: $$).
 \begin{remark}

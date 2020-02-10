@@ -1288,7 +1288,7 @@ Now we want to show that $\Eq_{S^1}(x)$ is equivalent to $\base=_{S^1}x$. We use
 For all $m:\mathbb{Z}$, we have that $\tr_\loop^{\Eq_{S^1}}(m) = m+1$.
 \end{lemma}
 \begin{proof}
-We prove that for any $B:A\r \U$ and $p:x=_Ay$ we have $\tr^B_p = \ua(\ap_B(p))$. But then we know that by definition $\ap_{\Eq^{S^1}}(\loop) = \ua^{-1}(\Gl m.m+1)$, so we can conclude.
+We prove that for any $B:A\r \U$ and $p:x=_Ay$ we have $\tr^B_p = \ua(\ap_B(p))$ by path induction. But then we know that by definition $\ap_{\Eq^{S^1}}(\loop) = \ua^{-1}(\Gl m.m+1)$, so we can conclude.
 \end{proof}
 
 \begin{lemma}
@@ -1329,7 +1329,7 @@ For any $n:\mathbb{Z}$ we have:
 \[\encode(\loop^n) = n\]
 \end{lemma}
 \begin{proof}
-We check by path induction on $p$ that $\encode(p) = \tr^{\Eq_{S^1}}_p(0)$. So we need to check that: 
+We check by path induction on $p$ that $\encode(p) = \tr^{\Eq_{S^1}}_p(0)$. Then we need to check that: 
 \[\tr^{\Eq_{S^1}}_{\loop^n}(0) = n\]
 But we know that:%By the definition of $\Eq_{S^1}$, we know that:
 \[\tr^{\Eq_{S^1}}_\loop(m) = m+1\]
@@ -1345,17 +1345,18 @@ Do the induction on $n:\mathbb{Z}$.
 
 \begin{proposition}
 For all $x:S^1$ we have:
-\[(\base=_{S^1}x) \ \simeq \ \Eq_{S^1}\]
+\[(\base=_{S^1}x) \ \simeq \ \Eq_{S^1}(x)\]
 \end{proposition}
 \begin{proof}
 We use the encode-decode method as usual.
 \begin{itemize}
-\item We define:
-\[\encode : (\base=_{S^1}x) \r \Eq_{S^1}(x)\]
-by based path induction:
-\[\encode(\refl_\base) \ :\equiv\ 0\]
+%\item We define:
+%\[\encode : (\base=_{S^1}x) \r \Eq_{S^1}(x)\]
+%by based path induction:
+%\[\encode(\refl_\base) \ :\equiv\ 0\]
 \item We use:
-\[\decode : (\base=_{S^1}x)\] 
+\[\encode: (x:S^1)\r (\base=x)\r\Eq_{S^1}(x)\]
+\[\decode : (x:S^1)\r \Eq_{S^1}(x)\r(\base=_{S^1}x)\] 
 defined in the previous lemma.
 \item We prove that for all $x:S^1$ and $p:\base=_{S^1}x$, we have:
 \[\decode(\encode(p))\]
@@ -1369,8 +1370,8 @@ but this is the previous lemma.
 \subitem If $x$ is $\loop$ then we need to show that:
 \[\tr_\loop(H) =_{(n:\mathbb{Z}) \r \psi(\loop^n) =_{\mathbb{Z}} n} H\]
 where $H$ is the previous proof of $(n:\mathbb{Z})\r \encode(\loop^n) = n$. By function extensionality it is enough to show that for all $n:\mathbb{Z}$ we have:
-\[G(n) =_{\psi(\loop^n) =_{\mathbb{Z}} n} H(n)\]
-But using our analysis of identity types in $\mathbb{Z}$, we can easily prove that for any $p,q:m=_{\mathbb{Z}} n$ we have $p=q$.
+\[\tr_\loop(H)(n) =_{\psi(\loop^n) =_{\mathbb{Z}} n} H(n)\]
+But using an analysis of identity types in $\mathbb{Z}$ by the encode-decode method, we can prove that for any $p,q:m=_{\mathbb{Z}} n$ we have $p=q$.
 \end{itemize}
 \end{proof}
 
@@ -1485,9 +1486,9 @@ The geometric picture is a bit more complicated. For example we will see that $\
 We define quotients as HITs. 
 
 \begin{ind_def}
-Assume given $A:\U$ and $\_\sim\_:A\r A\r \U$. We define the the quotient $A/\sim$ of $A$ by $\sim$:
+Assume given $A:\U$ and $\_\sim\_:A\r A\r \U$. We define the the quotient $A/_\sim$ of $A$ by $\_\sim\_$:
 \begin{itemize}
-\item (Formation) We have a type $A/\sim$.
+\item (Formation) We have a type $A/_\sim$.
 \item (Introduction) For any $x:A$, we have:
 \[[x] : A/_\sim\] 
 For any $x,y:A$ and $p:a\sim b$, we have a path:
@@ -1507,9 +1508,12 @@ is equivalent to $S^1$. They are called homotopy quotients in traditional homoto
 
 \begin{remark}
 %Homotopy quotients are sometimes harder to manipulate than the set-theoretic quotients, because we need to pay attention the different proof of equalities between elements. 
-It should be noted that quotients in set-theory are ill-behaved with respect to families. Indeed assume you have a family of sets $(X_a)_{a\in A}$ indexed by a set $A$, and equivalence relation $\sim$ on $A$. Moreover assume that if $a\sim b$ then we have a bijection between $X_a$ and $X_b$. Then it is not possible to get a family of sets indexed over $A/_\sim$. In homotopy type theory this is possible, using quotient as HITs and univalence.
+It should be noted that this kind of quotients in set-theory are ill-behaved with respect to families. Indeed assume you have a family of sets $(X_a)_{a\in A}$ indexed by a set $A$, and and a relation relation $\_\sim\_$ on $A$.% (this means that $x\sim y$ is a set for all $x,y:A$). 
+Moreover assume that if $a\sim b$, we have a bijection between $X_a$ and $X_b$. Then it is not possible to get a family of sets indexed over $A/_\sim$ in a satisfying way. In homotopy type theory this is possible, using quotient as HITs and univalence.
 
-This remark that quotients are (sometimes...) better behaved in homotopy type theory than in set-theory supports \emph{univalent foundations}. They claim that univalence and HITs are more natural and desirable than the usual features of set-theory, even if you are not interested in homotopy types. %We will come back to this issue in the conclusion of this class.
+%The usual solution is to consider quotients by relations only, which is somewhat unsatisfying from a foundational point of view. 
+
+This remark that quotients are better behaved in homotopy type theory than in set-theory supports \emph{univalent foundations}. They claim that univalence and HITs are more natural and desirable than the usual features of set-theory, even if you are not interested in homotopy types. %We will come back to this issue in the conclusion of this class.
 %A category theorist would say that quotients are not effective.
  \end{remark}
 
@@ -2434,7 +2438,7 @@ An action of a group $G$ is:
 \item A set $X$.
 \item A morphism of group from $G$ to $\Aut_\Set(X)$.
 \end{itemize}
-In this case we say that $G$ acts on $X$. We denote the type of action of $G$ by $G-\Set$.
+In this case we say that $G$ acts on $X$. We denote the type of action of $G$ by $\Set^G$.
 \end{definition}
 
 We imagine that elements of $G$ acts on elements of $X$. This is made explicit in the following definition:
@@ -2458,10 +2462,10 @@ Now we characterize actions of $G$ depending on $\B G$.
 
 \begin{proposition}
 Let $G$ be a group, then:
-\[G-\Set \ \simeq \ \B G\r \Set\]
+\[\Set^G \ \simeq \ \B G\r \Set\]
 \end{proposition}
 \begin{proof}
-By definition $G-\Set$ is:
+By definition $\Set^G$ is:
 \[(X:\Set)\times \Hom_\Grp(G,\Aut_\Set(X))\]
 \[\simeq \ \ (X:\Set)\times \big(\B G \r_*\B\Aut_\Set(X)\big)\]
 %which is equivalent to:
@@ -2519,7 +2523,7 @@ This problem is in my opinion the most important open problem about the applicab
 %There exists a lot of variation on this problem of coherent homotopies.
 
 \begin{definition}
-An $\infty$-group $G$ consists of a connected pointed types $\B G$.
+An $\infty$-group $G$ consists of a connected pointed type $\B G$.
 \end{definition}
 
 We use different notations for an $\infty$-group $G$ and its underlying type $\B G$ just to mirror the situation with groups. This definition is indeed interpreted as something equivalent to the traditional definition of $\infty$-groups, so that if we prove a result about pointed connected types in HoTT, we can deduce a result about $\infty$-groups in traditional homotopy theory. 
@@ -2531,7 +2535,7 @@ From a topological group one can get an $\infty$-group structure on its underlyi
 Now we give some definitions for $\infty$-groups.
 
 \begin{definition}
-Assume given a type $A$ and $a$ in $A$, then we define the $\infty$-group $\Aut_A(a)$ by:
+Assume given a type $A$ and $a:A$, then we define the $\infty$-group $\Aut_A(a)$ by:
 \[\B \Aut_A(a) \ :\equiv\ (x:A)\times |x=a|\]
 pointed by $(a,[\refl_a])$.
 \end{definition}
@@ -2609,9 +2613,9 @@ Assume given a type $X:\U$. Then we have:
 It is a bit cumbersome to define and prove a counterpart to this result using topological spaces. Now we prove an important theorem of algebraic topology.
 
 \begin{theorem}
-Assume given a pointed connected type $\U$. Then we have:
-\[\mathrm{Cover}(X) \ \simeq\ \pi_1(X)-\Set\]
-Recall that $\pi_1(X)-\Set$ is the type of sets with an action of $\pi_1(X)$.
+Assume given a pointed connected type $X$. Then we have:
+\[\mathrm{Cover}(X) \ \simeq\ \Set^{\pi_1(X)}\]
+Recall that $\Set^{\pi_1(X)}$ is the type of sets with an action of $\pi_1(X)$.
 \end{theorem}
 \begin{proof}
 We know that:
@@ -2622,13 +2626,13 @@ Then it is enough to prove
 \[|X|_1 \simeq \B\pi_1(X)\] 
 to conclude. But we know that:
 \[\B\pi_1(X) \ \simeq \ (x:|X|_1)\times |x=[*]|\]
-It is enough to prove $|x=[*]]$ inhabited for all $x:|X|_1$ is order to conclud, because in this case $|x=[*]|$ is contractible.
-Since $X$ is connected, we know that $|x=[*]|$ is inhabited for any $x:|X|_1$, indeed by induction we can assume $x$ is the form $[x]$ but then:
+It is enough to prove $|x=[*]]$ inhabited for all $x:|X|_1$ is order to conclude, because in this case $|x=[*]|$ is contractible.
+We prove that $|x=[*]|$ is inhabited for any $x:|X|_1$. By induction we can assume $x$ is the form $[x]$ but then:
 \[|[x]=[*]| \ \simeq \ ||x=*|_0| \ \simeq\ |x=*|\]
 by the characterisation of paths in a truncation. But $|x=*|$ is inhabited because $X$ is connected.
 \end{proof}
 
-So we know a very explicit description of coversings of a type. The intuitive summary is that giving a cover of a pointed connected type is the same as giving a set (which will be the fiber of the cover over the basepoint), and an action of $\pi_1(X)$ on this set (which will be induced on the fiber by transport along paths in $X$). Note that in this section we were only concerned with plain groups.
+So we know a very explicit description of coverings of a type. The intuitive summary is that giving a cover of a pointed connected type is the same as giving a set (which will be the fiber of the cover over the basepoint), and an action of $\pi_1(X)$ on this set (which will be induced on the fiber by transport along paths in $X$). Note that in this section we were only concerned with plain groups.
 
 %The main trick which is hard to replicate in traditional homotopy theory is the use of grothendieck correpondance. %the fact that $\Set$ is a groupoid, i.e. a one-dimensional space.
 
@@ -2687,18 +2691,18 @@ Assume given a type $X:\U$ and an $\infty$-group $G$. Then we have:
 \end{theorem}
 \begin{proof}
 By definition:
-\[\mathrm{Bund}_G(X)\ \equiv\ (P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big)\]
+\[\mathrm{Bund}_G(X)\ :\equiv\ (P : \B G \r \U)\times \big( \big((x:\B G)\times P(x)\big) \simeq X \big)\]
 But by the Grothendieck correspondance, we have:
- \[(P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big) \ \simeq\ (Y:\U)\times (f:Y\r \B G) \times \big((x:\B G)\times \fib_f(x) \simeq X\big)\]
- But we know (also by the Grothendieck correspondance) that  
+ \[(P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big) \ \simeq\ (Y:\U)\times (f:Y\r \B G) \times \big(\big((x:\B G)\times \fib_f(x)\big) \simeq X\big)\]
+ But we know (also by the Grothendieck correspondance) that:  
  \[(x:\B G)\times \fib_f(x)\ \simeq\ Y\]
  therefore we have:
- \[(Y:\U)\times (f:Y\r \B G) \times \big((x:\B G)\times \fib_f(x) \simeq X\big) \ \simeq \ (Y:\B G)\times  (Y\r \B G)\times (Y \simeq X)\]
-\[\simeq \ X\r \B G\]
+ \[(Y:\U)\times (f:Y\r \B G) \times \big(\big((x:\B G)\times \fib_f(x)\big) \simeq X\big) \ \simeq \ (Y:\B G)\times  (Y\r \B G)\times (Y \simeq X)\]
+\[\ \simeq\ (Y:\U)\times (Y\r \B G)\times (X=_\U Y)\ \simeq \ X\r \B G\]
  so we can conclude.
 \end{proof}
 
-Note that the principal bundle associated to $f:X\r \B G$ is just $\fib_f : \B G \r \U$. Our last two theorems form the foundation of bundle theory. The proof are very short, a lot shorter than using traditional methods. 
+Note that the principal bundle associated to $f:X\r \B G$ is just $\fib_f : \B G \r \U$. Our last two theorems form the foundation of bundle theory. The proofs are very short, a lot shorter than using traditional methods. 
 % for the theory 
 
 
@@ -2713,7 +2717,7 @@ Assume given two $\infty$-groups $K$ and $G$, we define an extension of $G$ by $
 \item An exact sequence of $\infty$-group:
 \[\B K \r_* \B H\r_* \B G\]
 \end{itemize}
-We denote by $\mathrm{Ext}(K,G)$ the type of extension of $G$ by $K$.
+We denote by $\mathrm{Ext}(G,K)$ the type of extension of $G$ by $K$.
 \end{definition}
 
 For any two $\infty$-groups $K$ and $G$ we have a trivial extension:
@@ -2824,7 +2828,7 @@ The notion of $\infty$-groups deloopable $n$ times makes sense (e.g. it gives br
 
 \sse{Spectra and cohomolgy}
 
-In an introductory classes to algebraic topology, cohomology theories with coefficient in an abelian group are defined. We will define them with coefficient in a spectrum, a generalistion of abelian $\infty$-groups.% are usually defined 
+In an introductory classes to algebraic topology, cohomology theories with coefficient in an abelian group are defined. We will define them with coefficient in a spectrum, a generalisation of abelian $\infty$-groups.% are usually defined 
 
 \begin{definition}
 A spectrum $A$ is a family of pointed types $A_n$ for $n:\mathbb{Z}$ such that for all $n$ we have:
@@ -2953,12 +2957,17 @@ In this class:
 
 I give some perspectives from the point of view of someone interested in fundamental mathematics. %Note that this section present my belief rather than a supposed truth, although they are shared by some colleagues.
 
-We have seen that groups are secretly $1$-dimensional objects in a rather natural way, whereas monoids are not. We know that groups are a lot more useful in mathematics than monoids, in fact groups are always introduced in a first algebra class, whereas monoids are not. I believe there is a correlation between these facts: knowing that groups are $1$-dimensional objects we could reasonably predict that they would be useful to mathematicians. Similarly it is shown in the HoTT book that categories are secretly $1$-dimensional objects, and they are used almost everywhere in fundamental mathematics.
+%We have seen that $\inty$-groups can be defined as pointed, connected and truncated types
 
-This leads to the idea that $\infty$-dimensional objects should be very useful for mathematics. Nowadays we see a tendency to replace mathematical objects by some $\infty$-dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they lead to the proof of Weibel's conjecture in algebraic geometry.
+%TODO Groups important, groupoid important, etc...
+
+%We have seen that groups are secretly $1$-dimensional objects in a rather natural way, whereas monoids are not. We know that groups are a lot more useful in mathematics than monoids, in fact groups are always introduced in a first algebra class, whereas monoids are not. I believe there is a correlation between these facts: knowing that groups are $1$-dimensional objects we could reasonably predict that they would be useful to mathematicians. Similarly it is shown in the HoTT book that categories are secretly $1$-dimensional objects, and they are used almost everywhere in fundamental mathematics.
+
+%This leads to the idea that $\infty$-dimensional objects should be very useful for mathematics. 
+Nowadays we see a tendency to replace mathematical objects by some $\infty$-dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they lead to the proof of Weibel's conjecture in algebraic geometry.
 
 \begin{remark}
-In fundamental physics one can study quantum fields, which describe matter and light in a space-time. Different fields on the same space-time can correspond to each other through what are called gauge equivalences, and gauge equivalent fields describe the same physical reality. But sometimes you have non-trivial gauge equivalences of a field with itself, and this fact can be observed through experiments. They are called ghost field by physicians. Similarly you have gauge equivalences between gauge equivalences, and so on, leading to ghost-of-ghost fields, etc.
+In fundamental physics one can study quantum fields, which describe matter and light in a space-time. Different fields on the same space-time can correspond to each other through what are called gauge equivalences, and gauge equivalent fields describe the same physical reality. But sometimes you have non-trivial gauge equivalences of a field with itself, and this fact can be observed through experiments. These are called ghost fields by physicians. Similarly you have gauge equivalences between gauge equivalences, and so on, leading to ghost-of-ghost fields, etc.
 
 It turns out fields on a space-time form a genuinely $\infty$-dimensional object, called a smooth $\infty$-groupoid. \emph{Higher gauge theory} is a useful keyword if you want to learn more about this, and Urs Schreiber wrote a lot of interesting things on this idea.
 %, and more timidly in fundamental physics (higher gauge theory is a useful keyword if you want to know more about that).
@@ -2974,7 +2983,7 @@ The situation is as follow:
 So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful $\infty$-dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondance: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
 
 %\begin{remark}
-HoTT is proof relevant and this can be used to derive some results about homotopy types. But HoTT is also intuitionist. Can we use this to amplify these results ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, except that it does not obey the law of excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional tools, this allows to amplify further the applicability of HoTT.
+HoTT is proof relevant and this can be used to derive some results about homotopy types. But HoTT is also intuitionist. Can we use this to amplify these results ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that it does not obey the law of excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional tools, this allows to amplify further the applicability of HoTT.
 
 \begin{remark}
 This means that all the results we proved in this class are valid in any $\infty$-topos, as long as they did not use excluded-middle or choice. So for example we proved Schreier theory for $\infty$-groups in any $\infty$-topos, a result which would be so cumbersome to prove using classical methods that (to my knowledge) no such direct proof has ever been written.
