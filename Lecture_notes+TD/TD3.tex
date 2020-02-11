@@ -93,25 +93,38 @@
 \maketitle
 
 
+\begin{Exercise}[title={The homotopy groups of $S^1$}]
+
+%\paragraph{Question 1} Show that $S^1\simeq \Sigma S^0$.
+
+\paragraph{Question 1} Compute the homotopy groups of $S^1$. 
+
+\paragraph{Remark} The same problem for $S^2$ is open.
+\end{Exercise}
 
 \begin{Exercise}[title={Eckmann-Hilton argument}]
 In this exercise we want to show that $|\Omega^2 X|_0$ has a structure of {\bf abelian} group for any pointed type $X$.% A unital binary operation 
 
-\paragraph{Question 1} Assume given a set $X$ with two binary operations $\_\cdot\_$ and $\_\otimes\_$ with the same unit $e$, meaning that for all $x:X$ we have: 
+\paragraph{Question 1} Assume given a type $X:\U$ with two binary operations: 
+\[\_\cdot\_ \, :\, X\r X\r X\]
+\[\_\otimes\_ \, :\,  X\r X\r X\] 
+with the same unit $e:X$, meaning that for all $x:X$ we have: 
 \[x\cdot e = e\cdot x = x\]
-\[x\cdot e = e\cdot x = x\]
-Moreover assume that:
+\[x\otimes e = e\otimes x = x\]
+Moreover assume that for any $a,b,c,d:X$ we have:
 \[(a\otimes b)\cdot(c\otimes d) = (a\cdot c)\otimes(b\cdot d)\]
-Prove that $\_\cdot\_$ and $\_\otimes\_$ coincide and commute.
+Prove that $\_\cdot\_$ and $\_\otimes\_$ are equal and that they both commute.
 
 %\paragrapf{Question 2 (optional)}
 
 \paragraph{Question 2} Assume given $A:\U$ with $p,q : x=_Ay$ and $p',q':y=_Az$. Moreover assume given $h:p=q$ and $h':p'=q'$. Define:
 \[h\otimes h': p\cdot q = p'\cdot q'\]
 
-\paragraph{Question 3} Assume given a type $X$ with $x:X$. Prove that $\_\cdot\_$ and $\_\otimes\_$ induces operations on $\refl_x=_{x=_Xx}\refl_x$ obeying the hypothesis from question 1.
+\paragraph{Question 3} Assume given a type $X$ with $x:X$. Prove that the composition of paths $\_\cdot\_$ and the operation $\_\otimes\_$ from the previous question induce operations on: 
+\[\Omega^2 X \ :\equiv\ \refl_x=_{x=_Xx}\refl_x\]
+obeying the hypothesis from question 1.
 
-\paragraph{Question 4} Conclude that $|\Omega^2 X|_0$ has a structure of abelian group.
+\paragraph{Question 4} Conclude that the canonical group structure on $|\Omega^2 X|_0$ is abelian.
 
 \end{Exercise}
 
@@ -168,7 +181,7 @@ for all $g:X\r_*\Omega Y$.
 
 \paragraph{Question 3} Using previous questions, prove that any fiber sequence is of the form:
  \[P(*_Z) \overset{\inc}\r_* (x:Z)\times P(x)\overset{p_Z}{\r_*} Z\]
- where $P(_Z*$) is pointed by $*_P$ and $(z:Z)\times P(x)$ is pointed by $(*_Z,*_P)$, with $p_Z$ the projection and $\inc(q):\equiv (*_Z,q)$.
+ where $P(*_Z$) is pointed by $*_P$ and $(z:Z)\times P(x)$ is pointed by $(*_Z,*_P)$, with $p_Z$ the projection and $\inc(q):\equiv (*_Z,q)$.
 \end{Exercise}
 
 

@@ -50,6 +50,7 @@
 \newcommand{\Iso}{\mathrm{Iso}}
 \newcommand{\B}{\mathrm{B}}
 \newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\comment}[1]{}
 
 \newcommand{\List}{\mathrm{\bf List}}
 
@@ -104,6 +105,8 @@
 \end{Exercise}
 
 
+\comment{
+
 \begin{Exercise}[title={Quotients},difficulty=1]
 Assume given $A:\U$ and $\_\sim\_:A\r A\r \U$.
 
@@ -113,7 +116,7 @@ TODO
 
 We give the dependent elimination principle for $A/_\sim$:
 
-\parapgraph{Question 1} Using univalence, prove that 
+\paragraph{Question 1} Using univalence, prove that 
 \[(A/_\sim \r \U)\ \sim\ (f:A\r \U)\times( (x,y:A)\r (p:x\sim y) \r f(x)\simeq f(y))\]
 
 \vspace{0.6cm}
@@ -123,12 +126,14 @@ In the second part of the exercise, we want to show that UIP contradict TODO
 \paragraph{Question 2} Prove that UIP contradicts the previous property. 
 \end{Exercise}
 
+}
+
 %\begin{Exercise}[title={Suspensions}]
 %Recall that a pointed type is a type $X$ with an inhabitant $x:X$. The type of pointed type is denoted $$
 %\end{Exercise}
 
 \begin{Exercise}
-In this exercise we use results from TD1 to prove truncation results for types.
+In this exercise we use results from TD1 to prove truncation results for usual types.
 
 \paragraph{Question 1} Show that $\one$ is contractible. %and $\zero$ are propositions.
 
@@ -146,7 +151,7 @@ In this exercise we use results from TD1 to prove truncation results for types.
 
 
 \begin{Exercise}[title={Identity types in set-truncations}]
-\paragraph{Question 1} Let $A$ be a type, using the encode-decode method show that: 
+\paragraph{Question 1} Let $A$ be a type, using the encode-decode method show that for any $x,y:A$ we have: 
 \[[x]=_{|A|_0}[y]\ \simeq \ |x=_A y|\]
 \end{Exercise}
 
@@ -179,14 +184,14 @@ In this exercise we consider the law of the excluded middle in type theory. The 
 \paragraph{Question 1} Show that univalence contradicts the naive law of the excluded middle.
 
 \begin{definition}
-The law of excluded middle is the following type:
+The law of the excluded middle is the following type:
 \[(A:\Prop)\r A + \lnot A\]
 Equivalently it says that all propositions are decidable.
 \end{definition}
 
 The law of excluded cannot be proved nor disproved in HoTT. Its interpretation in homotopy types is true. 
 
-\paragraph{Question 2} Assuming the law of the excluded middle, show that $\Prop =_\U \two$.
+\paragraph{Question 2} Assuming the law of the excluded-middle, show that $\Prop =_\U \two$.
 
 \end{Exercise}
 
@@ -199,11 +204,11 @@ for all proposition $B$.%, définit par $\psi(f) = f \circ [\_]$.
 
 %\paragraph{Question 2} Let $A$ be a type 
 
-\paragraph{Question 2} Let $A$ be a type. Assume given a type $C$ with a map $t:A\r C$ such that we have equivalences:
-\[\Gl f.\, f\circ t:(C\r B) \r (A\r B)\]
-for all proposition $B$. Show that $C\simeq |A|$.
+%\paragraph{Question 2} Let $A$ be a type. Assume given a type $C$ with a map $t:A\r C$ such that we have equivalences:
+%\[\Gl f.\, f\circ t:(C\r B) \r (A\r B)\]
+%for all proposition $B$. Show that $C\simeq |A|$.
 
-\paragraph{Question 3} Assuming the law of excluded middle, prove that $\lnot\lnot A$ is equivalent to $|A|$.   
+\paragraph{Question 2} Assuming the law of excluded middle, prove that $\lnot\lnot A$ is equivalent to $|A|$.   
 
 \end{Exercise}
 

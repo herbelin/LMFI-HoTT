@@ -1385,6 +1385,29 @@ This is an immediate consequence of our last result.
 \end{proof}
 
 
+\sse{The suspension}
+
+Now we will give an example of higher inductive type which will be useful. %, so we give the full (i.e. dependent) elimination principle.
+
+\begin{ind_def}
+We define the suspension $\Sigma X$ of a type $X:\U$ by:
+\begin{itemize}
+\item (Formation) For any $X:\U$, there is a type $\Sigma X : \U$.
+\item (Introduction) We have two points $\N,\S : \Sigma X$. For any $x:X$, we have a path:
+\[\merid_x : \N=_{\Sigma X}\S\]
+\item (Elimination) In order to define $f:(x:\Sigma X)\r P(x)$, it is enough to define:
+\[f(\N) \, :\equiv\, s\]
+\[f(\S)\, :\equiv\, t\]
+\[\apd_f(\merid_x) \, :\equiv\, \epsilon_x\]
+For $s:P(\N)$ and $t:P(\S)$, with:
+\[\epsilon_x : \tr^P_{\merid_x}(s) =_{P(\S)} t\] 
+\end{itemize}
+\end{ind_def}
+
+The geometric picture is a bit complicated. For example we will see that $\Sigma \two$ is the circle and $\Sigma S^1$ is the sphere.
+
+
+
 \sse{More higher inductive types}
 
 We did not attempt to define inductive types in general in these notes, a complete definition can be found in \cite{dybjer1994inductive}. Higher inductive types are a variant with constructors not only for inhabitants of the type, but also of its iterated identity types. There is currently no generally accepted definition of higher inductive types, although some work in this direction has been done (see for example \cite{cavallo2019higher}). Just note that a definition of HITs would consists of:
@@ -1445,27 +1468,6 @@ The $n$-dimensional spheres can be defined in a similar way, for example $S^3$ h
 \[h:\refl_{\refl_\base} =_{\refl_\base =_{S^3}\refl_\base} \refl_{\refl_\base}\]
 
 
-
-\ssse{The suspension}
-
-Now we will give an example of higher inductive type which we will actually use, so we give the full (i.e. dependent) elimination principle.
-
-\begin{ind_def}
-We define the suspension $\Sigma X$ of a type $X:\U$ by:
-\begin{itemize}
-\item (Formation) For any $X:\U$, there is a type $\Sigma X : \U$.
-\item (Introduction) We have two points $\N,\S : \Sigma X$. For any $x:X$, we have a path:
-\[\merid_x : \N=_{\Sigma X}\S\]
-\item (Elimination) In order to define $f:(x:\Sigma X)\r P(x)$, it is enough to define:
-\[f(\N) \, :\equiv\, s\]
-\[f(\S)\, :\equiv\, t\]
-\[\apd_f(\merid_x) \, :\equiv\, \epsilon_x\]
-For $s:P(\N)$ and $t:P(\S)$, with:
-\[\epsilon_x : \tr^P_{\merid_x}(s) =_{P(\S)} t\] 
-\end{itemize}
-\end{ind_def}
-
-The geometric picture is a bit more complicated. For example we will see that $\Sigma \two$ is the circle and $\Sigma S^1$ is the sphere.
 
 
 %\ssse{Truncations}
@@ -1969,7 +1971,7 @@ If we see $A:\U$ as a space, then $|A|_0$ is its set of path-connected component
 
 \se{Homotopy groups and fiber sequences}
 
-In this section we define the basic invariants of algebraic topology: the homotopy groups. Our main goal is to prove the so-called \emph{long exact sequence of homotopy groups} of a fibration, and explain the advantages of the type-theoretic treatment.%gives interesting insight about it.
+In this section we define the basic invariants of algebraic topology: the homotopy groups. Our main goal is to prove the so-called \emph{long exact sequence of homotopy groups}, and explain the advantages of its type-theoretic treatment.%gives interesting insight about it.
 
 
 \sse{Pointed types}
@@ -1998,17 +2000,17 @@ Now we analyse the identity types of these new types. An equality between pointe
 
 \begin{lemma}
 Assume given $X,Y:\U_*$. Then $X=_{\U_*} Y$ is equivalent to the type of equivalence:
-\[f:X\r Y\]
+\[f:X\simeq Y\]
  with a path $f(*_X)=*_Y$.
 \end{lemma}
 \begin{proof}
 By induction we just need to prove the result for $(X,*_X)$ and $(Y,*_Y)$ in $\U_*$. Then:
 \[(X,*_X) =_{\U_*}(Y,*_Y) \ \simeq \ (\epsilon : X=_\U Y)\times \tr_\epsilon^{\Gl(X:\U).X}(*_X) =_Y *_Y\]
-by the characterization of equality in a dependent product. But recall that: 
+by the characterization of identity types in a dependent product. But recall that: 
 \[\ua : X=_\U Y\r X\simeq Y\] 
 is an equivalence. We can show:
 \[\tr_\epsilon^{\Gl(X:\U).X}(*_X) \, =_Y \, \ua(\epsilon)(*_X)\]
-From this it is easy to conclude.
+by path induction on $\epsilon$.
 \end{proof}
 
 An equality between maps between pointed types is a basepoint-preserving homotopy.
@@ -2026,7 +2028,7 @@ Exercise.
 
 \sse{Groups}
 
-First we recall a presumably well-known definition:
+First we recall a presumably well-known definition.
 
 \begin{definition}
 A group $G$ consists of:
@@ -2076,11 +2078,11 @@ The type $\Grp$ is a groupoid.
 \begin{proof}
 Assume given $G$ and $G'$ two groups, we need to show that $G=_\Grp G'$ is a set. By the previous proposition it is enough to prove that $ \Iso_{\Grp}(G,G')$ is a set. One can show that: 
 \[\Iso_{\Grp}(G,G') \simeq (f:G\r G')\times P(f)\]
-for $P : (G\r G') \r \Prop$. But then we know that $G\r G'$ is a set, and therefore so is $(f:G\r G')\times P(f)$.
+for some $P : (G\r G') \r \Prop$. But then we know that $G\r G'$ is a set, and therefore so is $(f:G\r G')\times P(f)$.
 \end{proof}
 
 \begin{definition}
-Assume given a groupoid $A$ with $a:A$. Then we define the group $\Aut_A(a)$ as $a=_Aa$ with multiplication, unit and inverse induced by composition, reflexivity and inverse of paths.
+Assume given a groupoid $A$ with $a:A$. Then we define the group $\Aut_A(a)$ as $a=_Aa$ with multiplication, unit and inverse defined as composition, reflexivity and inverse of paths.
 \end{definition}
 
 Usually we use this definition when $A$ is $\Set$ or $\Grp$, giving groups of permutations and automorphisms.
@@ -2109,12 +2111,12 @@ See TD3.
 \end{proof}
 
 \begin{definition}
-Assume given $X$ a pointed type, we define the \emph{homotopy groups} $\pi_n(X)$ of $X$ by:
+Assume given $X$ a pointed type and $n:\mathbb{N}$, we define the $n$-th \emph{homotopy groups} $\pi_n(X)$ of $X$ by:
 \[\pi_n(X) \ :\equiv\ |\Omega^n X|_0\]
 Note that $\pi_0(X)$ is actually a pointed set, and $\pi_n(X)$ is a group for $n>0$.
 \end{definition}
 
-We will see in TD4 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy classes of pointed maps out of the spheres. We make this formal.
+We will see in TD3 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy classes of pointed maps out of the spheres. We make this formal.
 
 \begin{definition}
 We define $S^n$ the (pointed) $n$-dimensional sphere inductively on $n:\mathbb{N}$. 
@@ -2124,14 +2126,14 @@ We define $S^n$ the (pointed) $n$-dimensional sphere inductively on $n:\mathbb{N
 \end{itemize}
 \end{definition}
 
-Then the following proposition is straightforward.
+Note that this definition is different than our previous one for $S^1$, but equivalent. Then the following proposition is straightforward.
 
 \begin{proposition}
 Let $X$ be a pointed type, then:
 \[\pi_n(X) \ \simeq \ |S^n\r_* X|_0\]
 \end{proposition}
 \begin{proof}
-By the previous theorem we know that:
+By the previous proposition we know that:
 \[\pi_n(X) \ \equiv\ |\Omega^nX|_0 \ \simeq \ |S^0\r_*\Omega^nX|_0\ \simeq\ |\Sigma^nS^0\r_*X|_0 \ \equiv\ |S^n\r_*X|_0\]
 \end{proof}
 
@@ -2167,8 +2169,10 @@ pointed by $(*_X,*_g)$.
 \end{proposition}
 \begin{proof}
 We need to give for $x:X$ a term: 
-\[\epsilon_y : \fib_{p_g}(x)\ \simeq\ (g(x)=*)\]
-But this is part of the Grothendieck correspondence. Then we need $\epsilon_*((*_X,*_g),\refl_{*_X}) = *_g$, but the equivalence from the Grothendieck correspondance is defined by transporting the second component $*_g$ along the third $\refl_{*_X}$. So we can conclude.
+\[\epsilon_x : \fib_{p_g}(x)\ \simeq\ (g(x)=*)\]
+But this is part of the Grothendieck correspondence. Then we need: 
+\[\epsilon_*((*_X,*_g),\refl_{*}) = *_g\]
+but the equivalence from the Grothendieck correspondance is defined by transporting the second component $*_g$ along the third $\refl_{*}$. So we can conclude.
 \end{proof}
 
 In some sense any fiber sequence is equal to a canonical one, as proved by the next proposition.
@@ -2176,7 +2180,7 @@ In some sense any fiber sequence is equal to a canonical one, as proved by the n
 \begin{proposition}
 Assume given a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
-then we have that $f=p_g$ as ponted maps to $Y$. 
+then we have that $f=p_g$ as pointed maps to $Y$. 
 \end{proposition}
 \begin{proof}
 We have that: 
@@ -2254,13 +2258,13 @@ We see that fibers in homotopy type theory behave quite differently than the set
 
 \sse{The long homotopy exact sequence}
 
-The long fiber sequence of a map is usually not presented to beginners in algebraic topology. What is often presented one of its consequence. We need to define exact sequence of pointed sets.
+The long fiber sequence of a map is usually not presented to beginners in algebraic topology. Instead the long exact sequence of homotopy groups is presented. We present this result. We need to define exact sequence of pointed sets.
 
 \begin{definition}
 A sequence of maps between pointed sets:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
 is called exact if for all $y:Y$ we have:
-\[\exists(x:X).f(x)=y \ \leftrightarrow\ g(y)=*\]
+\[\big(\exists(x:X).f(x)=y\big) \ \leftrightarrow\ g(y)=*\]
 It is called an exact sequence of groups if $X,Y,Z$ have a group structure with $*$ the unit, and $f$ and $g$ are morphisms of groups.
 \end{definition}
 
@@ -2276,7 +2280,7 @@ Since both sides are propositions, it is enough to build maps both way:
 \begin{itemize}
 \item Assume given an inhabitant of $\exists(x:|X|_0).\,(|f|_0(x) = [y])$, we want to prove: 
 \[|(x:X)\times f(x)=y|\] 
-Since we want to prove a proposition, we can assume given $x:|X|_0$ such that $|f|_0(x) = [y]$, but the using induction on the truncation again we can assume given $x:X$ such that $[f(x)]=[y]$. 
+Since we want to prove a proposition, we can assume given $x:|X|_0$ such that $|f|_0(x) = [y]$, but using induction on the truncation again we can assume given $x:X$ such that $[f(x)]=[y]$. 
 
 By our analysis of identity types in set-truncation in TD2, we this is equivalent to $x:X$ such that $|f(x)=y|$. Using induction on the truncation again, we can assume given $x:X$ such that $f(x)=y$, and we can conclude.
 \item Assume given an inhabitant of $|(x:X)\times f(x)=y|$, we want to prove:
@@ -2325,7 +2329,7 @@ This is an exact sequence sequence of groups for $n>0$.
 We see the displayed sequence of pointed sets is just the set-truncation of the long fiber sequence, so we can conclude using the previous proposition.% So it is enough to show that the set-truncation of a fiber sequence is exact. This is next two lemmas.
 \end{proof}
 
-An exact sequence of groups allows one to extract some information about groups in the sequence from informations about the others. As an example:
+An exact sequence of groups allows one to extract some information about groups in the sequence from information about the others. As an example:
 
 \begin{lemma}
 Assume given an exact sequence of groups:
@@ -2351,7 +2355,7 @@ This presentation of the long homotopy exact sequence differs from the tradition
 \item In algebraic topology, one restrain to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
 \item We see that the long exact sequence of homotopy groups is actually the shadow of a more powerful (and higher-dimensional) fiber sequence. This fact is usually not pointed out in algebraic topology, at least not in an introductory class.
 \end{itemize}
-Both these facts come from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than fibers.
+Both these facts come from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than usual fibers. %In HoTT we can only use homotopy fibers.
 \end{remark}
 
 
