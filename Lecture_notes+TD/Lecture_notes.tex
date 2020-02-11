@@ -2144,7 +2144,8 @@ We define an important tool of homotopy theory.
 Assume given a sequence of maps between pointed sets:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
 It is a fiber sequence if for all $y:Y$ we have:
-\[\fib_f(y) \ \simeq\ (g(y)=*)\]
+\[\epsilon_y : \fib_f(y) \ \simeq\ (g(y)=*)\]
+with $\epsilon_{*_Y}(*_X,*_f) = *_g$.
 \end{definition}
 
 \begin{warning}
@@ -2154,23 +2155,23 @@ With this definition, being a fiber sequence is not a proposition. This could be
 Any map between pointed types is part of a canonical fiber sequence.
 
 \begin{proposition}
-Assume given $X,Y:\U_*$ with a map $f:X\r_* Y$. The canonical fiber sequence associated to $f$ is:
-\[\fib_f(*) \overset{p_f}{\r_*} X \overset{f}{\r_*} Y\]
+Assume given $X,Y:\U_*$ with a map $g:X\r_* Y$. The canonical fiber sequence associated to $g$ is:
+\[\fib_g(*) \overset{p_g}{\r_*} X \overset{g}{\r_*} Y\]
 where:
 \begin{itemize}
-\item The type $\fib_f(*)$ is defined as:
-\[(x:X)\times (f(x)=_Y*)\] 
-pointed by $(*_X,*_f)$.
-\item The map $p_f$ is the projection to $X$ (which obviously preserves the basepoints).
+\item The type $\fib_g(*)$ is defined as:
+\[(x:X)\times (g(x)=_Y*)\] 
+pointed by $(*_X,*_g)$.
+\item The map $p_g$ is the projection to $X$ (which obviously preserves the basepoints).
 \end{itemize}
 \end{proposition}
 \begin{proof}
-We need to prove for $y:Y$ that: 
-\[\fib_{p_f}(y)\ \simeq\ (f(y)=*)\]
-But this is part of the Grothendieck correspondence.
+We need to give for $x:X$ a term: 
+\[\epsilon_y : \fib_{p_g}(x)\ \simeq\ (g(x)=*)\]
+But this is part of the Grothendieck correspondence. Then we need $\epsilon_*((*_X,*_g),\refl_{*_X}) = *_g$, but the equivalence from the Grothendieck correspondance is defined by transporting the second component $*_g$ along the third $\refl_{*_X}$. So we can conclude.
 \end{proof}
 
-In some sense all fiber sequence is equal to a canonical one, as proved by the next proposition.
+In some sense any fiber sequence is equal to a canonical one, as proved by the next proposition.
 
 \begin{proposition}
 Assume given a fiber sequence:

@@ -1,0 +1,276 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+
+ \usepackage[landscape,twocolumn]{geometry}
+\geometry{margin=0.4in}
+%\usepackage{tikz-cd}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+\newcommand{\comment}[1]{}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+%\newtheorem{example}{Example}
+
+\usepackage{exercise}
+
+
+
+\title{Synthetic Homotopy Theory TD3: Homotopy groups}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{Exercise}[title={Eckmann-Hilton argument}]
+In this exercise we want to show that $|\Omega^2 X|_0$ has a structure of {\bf abelian} group for any pointed type $X$.% A unital binary operation 
+
+\paragraph{Question 1} Assume given a set $X$ with two binary operations $\_\cdot\_$ and $\_\otimes\_$ with the same unit $e$, meaning that for all $x:X$ we have: 
+\[x\cdot e = e\cdot x = x\]
+\[x\cdot e = e\cdot x = x\]
+Moreover assume that:
+\[(a\otimes b)\cdot(c\otimes d) = (a\cdot c)\otimes(b\cdot d)\]
+Prove that $\_\cdot\_$ and $\_\otimes\_$ coincide and commute.
+
+%\paragrapf{Question 2 (optional)}
+
+\paragraph{Question 2} Assume given $A:\U$ with $p,q : x=_Ay$ and $p',q':y=_Az$. Moreover assume given $h:p=q$ and $h':p'=q'$. Define:
+\[h\otimes h': p\cdot q = p'\cdot q'\]
+
+\paragraph{Question 3} Assume given a type $X$ with $x:X$. Prove that $\_\cdot\_$ and $\_\otimes\_$ induces operations on $\refl_x=_{x=_Xx}\refl_x$ obeying the hypothesis from question 1.
+
+\paragraph{Question 4} Conclude that $|\Omega^2 X|_0$ has a structure of abelian group.
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Loop and suspension}]
+Recall that we defined $\Sigma : \U_* \r \U_*$ and $\Omega:\U_*\r\U_*$ by:
+\[\Sigma X \ :\equiv\ (\Sigma X,\N)\]
+\[\Omega X\ :\equiv\ (*=_X*,\refl_*)\]
+In this exercise we want to show that for any $X,Y:\U_*$ we have:
+\[(\Sigma X \r_* Y)\ \simeq\ (X\r_*\Omega Y)\]
+
+\paragraph{Question 1} Assume given $f:\Sigma X\r_* Y$ (recall this means we have $*_f:f(\N)=*$). We define $\psi(f) : X\r \Omega Y$ by:
+\[\psi(f,x) \ :\equiv\ *_f^{-1} \cdot \ap_f(\merid_x\cdot\merid_*^{-1})\cdot *_f\]
+Show this actually defines a map:
+\[\psi : (\Sigma X \r_* Y) \r (X\r_*\Omega Y)\]
+
+\paragraph{Question 2} Assume given $g:X\r_*\Omega Y$, we define $\phi(g) : \Sigma X \r Y$ by:
+\[\phi(g,\N) \ :\equiv\ *\]
+\[\phi(g,\S) \ :\equiv\ *\]
+\[\ap_{\phi(g)}\merid_x \ :\equiv\ f(x)\]
+Show this actually defines a map:
+\[\phi :  (X\r_*\Omega Y) \r (\Sigma X \r_* Y)\]
+
+\paragraph{Question 3} Show that given $f,g:\Sigma X \r Y$, in order to prove $f=g$ it is enough to give:
+\[p:f(\N)=g(\N)\]
+\[q:f(\S)=g(\S)\]
+\[h : (x:X) \r \ap_f(\merid_x) \cdot q = p\cdot \ap_g(\merid_x)\]
+Using this show that for all $f:\Sigma X \r_* Y$ we have: 
+\[\phi(\psi(f)) =_{\Sigma X \r Y} f\]
+
+\paragraph{Question 4 (Optional)} Can you prove that:
+\[\phi(\psi(f)) =_{\Sigma X \r_* Y} f\]
+(Can you understand what you need to prove? Hint: that paths between basepoints agree).
+
+\paragraph{Question 5} Show that: 
+\[\psi(\phi(g)) =_{X\r\Omega Y} g\] 
+for all $g:X\r_*\Omega Y$.
+
+\paragraph{Question 6 (Optional)} Try to prove:
+\[\psi(\phi(g)) =_{X\r_*\Omega Y} g\]
+(Can you understand what you need to prove? Hint: that paths between basepoints agree).
+
+\paragraph{Question 7} Conclude from the previous questions that:
+\[(\Sigma X \r_* Y)\ \simeq\ (X\r_*\Omega Y)\]
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={Canonical fiber sequence},difficulty=1]
+
+\paragraph{Question 1} Prove that any fiber sequence is equal to a canonical one.
+
+\paragraph{Question 2} Show that giving $Y:\U_*$ and a map in $Y\r_* Z$ is the same as giving $P:X\r \U$ and $*_P:P(*_Z)$.
+
+\paragraph{Question 3} Using previous questions, prove that any fiber sequence is of the form:
+ \[P(*_Z) \overset{\inc}\r_* (x:Z)\times P(x)\overset{p_Z}{\r_*} Z\]
+ where $P(_Z*$) is pointed by $*_P$ and $(z:Z)\times P(x)$ is pointed by $(*_Z,*_P)$, with $p_Z$ the projection and $\inc(q):\equiv (*_Z,q)$.
+\end{Exercise}
+
+
+
+\begin{Exercise}[title={Representable invariants}]
+A representable invariant (implicitly: on based types) is a map $F : \U_* \r \Set_*$ of the form:
+\[\Gl (X:\U_*).\, |A\r_* X|_0 \]
+for some fixed $A$, with $|A\r_*X|_0$ pointed by the constant map. 
+
+\paragraph{Question 1} Show that homotopy groups are representable invariants.
+\vspace{0.6cm}
+
+\noindent We define the product of two pointed types $X,Y:\U_*$ as $X\times Y$ pointed by $(*_X,*_Y)$.
+\paragraph{Question 2} Show that:
+\[F(X\times Y) = F(X)\times F(Y)\]
+for any representable invariant $F$.
+\vspace{0.6cm}
+
+\noindent A family of pointed types is a map $X:I\r \U_*$ for $I$ a set. We denote such a family by $(X_i)_{i:I}$, with $X_i$ denoting the element $X(i)$. 
+The product $\Pi_{i:I}X_i$ of a family of type is defined as the type $(i:I)\r X(i)$ pointed by $\Gl (i:I).*_{X(i)}$.
+
+\paragraph{Question 3}  Using an appropriate version of the axiom of choice, prove that: 
+\[F(\Pi_{i:I}X_i) \ = \ (i:I)\r F(X_i)\]  
+
+\paragraph{Question 4 (Optional)} Let $X\r_* Y\r_* Z$ be a fiber sequence, prove that we have an exact sequence of pointed set:
+\[F(X)\r_* F(Y)\r_* F(Z)\]
+for any representable invariant $F$. (Hint: use the "canonical fiber sequence" exercise)
+
+\end{Exercise}
+
+
+\comment{
+\begin{Exercise}[title={Corepresentable invariants},difficulty=1]
+This exercise is in some sense dual to the previous one. A corepresentable invariant (implicitly: on based types) is a map $G : \U_* \r \Set_*$ of the form:
+\[\Gl (X:\U_*).\, |X\r_* A|_0 \]
+for some fixed $A$, with $|X\r_*A|_0$ pointed by the constant map. 
+
+%\paragraph{Question 1} Show that homotopy groups are representable invariants.
+
+We define the wedge $X\wedge Y$ of two pointed types $X,Y:\U_*$ as a higher inductive type.
+
+\begin{ind_def}
+TODO
+\end{ind_def}
+
+\paragraph{Question 1} Show that: 
+\[G(X\wedge Y) = G(X)\times G(Y)\]
+for any corepresentable invariant $G$.
+\medbreak
+Now we define the wedge $\wedge_{i:I}X_i$ of a family of pointed type.
+
+\begin{ind_def}
+TODO
+\end{ind_def}
+
+%A family of pointed types is a map $X:I\r \U_*$ for $I$ a set. We denote such a family by $(X_i)_{i:I}$, with $X_i$ denoting the element $X(i)$. 
+%The product $\Pi_{i:I}X_i$ of a family of type is defined as the type $(i:I)\r X(i)$ pointed by $\Gl (i:I).*_{X(i)}$.
+
+\paragraph{Question 3}  Using an appropriate version of the axiom of choice, prove that: 
+\[G(\wedge_{i:I}X_i) \ = \ (i:I)\r G(X_i)\]  
+for any corepresentable invariant $G$.
+\vspace{0.6cm}
+
+\noindent TODO define cofiber sequence.
+
+\paragraph{Question 4} Let $X\r_* Y\r_* Z$ be a cofiber sequence, prove that we have an exact sequence of pointed set:
+\[G(Z)\r_* G(Y)\r_* G(X)\]
+for any corepresentable invariant $G$ (beware: the arrow are reversed).
+
+\end{Exercise}
+}
+
+
+\begin{Exercise}[title={The long fiber sequence of a map}]
+ We want to prove that given a fiber sequence:
+ \[X\overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
+ we have a long fiber sequence:
+ \[ \cdots \r_*\Omega X \r_* \Omega Y \r_* \Omega Z \r_* X\r_* Y\r_* Z\]
+ 
+ \paragraph{Question 1} Show that given a fiber sequence:
+  \[X\r_*Y\r_*Z\] 
+  we have a fiber sequence:
+   \[\Omega Z\r_*X\r_* Y\] 
+(Hint: use the "canonical fiber sequence" exercise. The necessary map from $\Omega Z$ to $P(*_Z)$ sends $r$ to $\tr_r^P(*_P)$).
+  
+ 
+% \paragraph{Question 2 (Optional)} Show that giving $Y:\U_*$ and a map in $Y\r_* Z$ is the same thing as giving $P:X\r \U$ and $*_P:P(*_Z)$. Using this equivalence and the fact that any fiber sequence is equal to a canonical one, prove that any fiber sequence is of the form:
+% \[P(*_Z) \overset{\inc}\r_* (x:Z)\times P(x)\]
+%  where $P(_Z*$) is pointed by $*_P$ and $(z:Z)\times P(x)$ is pointed by $(*_Z,*_P)$, with $p_Z$ the projection and $\inc(q):\equiv (*_Z,q)$.
+ 
+ \paragraph{Question 2} Conclude by iterating the previous question.
+ 
+% \paragraph{Question 4} Conclude
+ 
+ \paragraph{Question 3 (Optional)} Can you build a long fiber sequence:
+\[\cdots \r_* \Omega^2 X \overset{\Omega^2 f}{\r_*} \Omega^2 Y \overset{\Omega^2 g}{\r_*}\Omega^2 Z \overset{\Omega\delta}{\r_*} \Omega X \overset{\Omega f}{\r_*} \Omega Y \overset{\Omega g}{\r_*} \Omega Z \overset{\delta}{\r_*} X \overset{f}{\r_*} Y\overset{g}{\r_*} Z  \]
+ (you need to be careful about maps).
+ 
+\end{Exercise}
+
+
+
+\end{document}
+
+
