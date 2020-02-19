@@ -1,0 +1,283 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+
+ \usepackage[landscape,twocolumn]{geometry}
+\geometry{margin=0.4in}
+%\usepackage{tikz-cd}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+%\newtheorem{example}{Example}
+
+\newcommand{\lef}{\mathrm{\bf left}}
+\newcommand{\righ}{\mathrm{\bf right}}
+\newcommand{\quo}{\mathrm{\bf quo}}
+
+\usepackage{exercise}
+
+
+
+\title{Synthetic Homotopy Theory Homework: \\ The Hopf fibration}
+
+\begin{document}
+
+\maketitle
+
+
+%\begin{Exercise}[title={Yoneda Lemma}]
+%TODO
+%\end{Exercise}
+
+The goal of this homework is to construct the Hopf fibration. We use notations from the lecture notes freely. The exercises are {\bf not} independent. First we need an auxiliary definition.
+
+\begin{definition}
+A span consists $A,B,C:\U$ with $f:A\r B$ and $g:B\r C$.
+\end{definition}
+
+Usually we will denote a span by a diagram:
+\[A \overset{f}{\leftarrow} B \overset{g}{\r} C\]
+We give an analysis of equality between spans.
+
+\begin{proposition}
+Assume given two spans:
+\[A \overset{f}{\leftarrow} B \overset{g}{\r} C \hspace{1.5cm} A' \overset{f'}{\leftarrow} B' \overset{g'}{\r} C'\]
+then giving an equality between them is equivalent to giving three equivalences:
+\[\epsilon_A : A \simeq A'  \hspace{1cm} \epsilon_B : B \simeq B'  \hspace{1cm} \epsilon_C : C \simeq C'\]
+such that:
+\[\epsilon_A \circ f \sim f'\circ \epsilon_B \hspace{1.5cm} \epsilon_C \circ g \sim g'\circ \epsilon_B\]
+
+\end{proposition}
+
+Now we introduce a new higher inductive type.
+
+\begin{ind_def}
+Assume given a span: 
+\[A \overset{f}{\leftarrow} B \overset{g}{\r} C\]
+\begin{itemize}
+\item There is a type $A\coprod_B C$ called the pushout of the span.
+\item For all $x:A$ we have:
+\[\lef(x) : A\coprod_BC\] 
+For all $y:C$ we have: 
+\[\righ(y) : A\coprod_BC\] 
+Moreover for all $z:B$ we have:
+\[\quo(z) : \lef(f(z)) =_{A\coprod_BC} \righ(g(z))\]
+\item Assume given $P : A\coprod_BC \r \U$, in order to define:
+$f : (z:A\coprod_BC) \r P(z)$
+it is enough to define:
+\[f(\lef(x))\ :\equiv\ t_x\] 
+with $t_x:P(\lef(x))$ for $x:A$, 
+\[f(\righ(y))\ :\equiv\ s_y\] 
+with $s_y:P(\righ(y))$ for $y:B$, and:
+\[\apd_f(\quo(z)) \ :\equiv\  h_z\]
+with $h_z : \tr^P_{\quo(z)} (t_{f(z)}) = s_{g(z)} $ for $z:B$.
+\end{itemize}
+\end{ind_def}
+
+
+\begin{Exercise}[title={The join of two spaces}]
+
+First we define the join of two spaces.
+
+\begin{definition}
+Assume given two types $A$ and $B$, then we define their join $A\ast B$ as the pushout of the span:
+\[A\overset{p_1}{\leftarrow} A\times B \overset{p_2}{\r} B\]
+where $p_1$ and $p_2$ are projections.%is the projection to $A$, and $p_2$ the second.
+\end{definition}
+
+%\paragraph{Question 1} Show that for any $A,B,C:\U$, we have:
+%\[(A\ast B \r C)\ \simeq\ (f:A\r C)\times (g:B\r C)\times \big((x:A)\r (y:B) \r f(x)=_Cg(y)\big)\]
+
+\paragraph{Question 1} Let $A$ be a type, show that:
+\[\two\ast A \ \simeq \Sigma A\]
+
+\paragraph{Question 2} Show that the join operation is associative, meaning that for all $A,B,C:\U$ we have:
+\[(A\ast B)\ast C \ \simeq\ A\ast(B\ast C)\] 
+
+\paragraph{Question 3} Using the two previous questions and the fact that $\Sigma S^n = S^{n+1}$, prove that:
+\[S^1\ast S^1 \ \simeq \ S^3\]
+
+\end{Exercise} 
+
+
+\begin{Exercise}[title={Flattening Lemma for suspension},difficulty=1]
+Assume given $A:\U$ and $P:\Sigma A \r \U$.
+
+\paragraph{Question 1} Prove that $(x:\Sigma A)\times P(x)$ is equivalent to the pushout of the span:
+\[P(\N) \overset{p_1}{\leftarrow} P(\N)\times A \overset{\psi}{\r} P(\S) \]
+where $\psi$ is defined for $q:P(\N)$ and $a:A$ by:
+\[\psi(q,a) \ :\equiv\ \tr^P_{\merid_a}(q)\]
+\end{Exercise}
+
+
+
+\begin{Exercise}[title={The Hopf construction}]
+Assume given $A:\U$ with $\mu : A\times A \r A$ such that for all $a:A$ the maps
+\[\mu(a,\_) \ \equiv\ \Gl x.\mu(a,x) : A\r A\]
+\[\mu(\_,a) \ \equiv\ \Gl x.\mu(x,a):A\r A\] 
+are equivalences.
+
+We define $P:\Sigma A\r \U$ by:
+\[P(\N) \ :\equiv\ A\]
+\[P(\S) \ :\equiv\ A\]
+and for $x:A$ we have:
+\[\ap_P(\merid_x) \ :\equiv\ \ua^{-1}(\mu(\_,x))\]
+where $\ua^{-1} : A\simeq B \r A=_\U B$ is the map assumed by univalence.
+
+\paragraph{Question 1} Prove that for all $a,b:A$, we have $\tr^P_{\merid_b}(a) = \mu(a,b)$.
+
+\paragraph{Question 2} Using the previous exercise, show that $(x:\Sigma)\times P(x)$ is equivalent to the pushout of the span:
+\[ A \overset{p_1}{\leftarrow} A\times A \overset{\mu}{\r} A\]
+%higher inductive type generated by:
+
+\paragraph{Question 3} Using the fact that $\mu(a,\_)$ is an equivalence, show that the span:
+\[ A \overset{p_1}{\leftarrow} A\times A \overset{\mu}{\r} A\]
+is equal to the span:
+\[ A \overset{p_1}{\leftarrow} A\times A \overset{p_2}{\r} A\]
+where $p_1(x,y):\equiv x$ and $p_2(x,y):\equiv y$.
+
+\paragraph{Question 4} Conclude that we have:
+\[(x:\Sigma A) \times P(x) \ \simeq\ A\ast A\]
+
+%\paragraph{Question 5} Conclude that with the assumption of this exercise, we have a fiber sequence
+
+\end{Exercise}
+
+
+\begin{Exercise}[title={$H$-types}]
+
+In this exercise we define $H$-types and show that they satisfy the hypothesis from the previous exercise, and then build a fiber sequence for any connected $H$-type.
+
+\begin{definition}
+An $H$-type consists of a type $A$ with:
+\begin{itemize}
+\item An element $e:A$.
+\item A map: 
+\[\mu : A\times A \r A\] 
+such that for all $x:A$ we have:
+\[\mu(x,e) = \mu(e,x)= x\]
+\end{itemize} 
+\end{definition}
+
+As usual we identify an $H$-type and its underlying type. Let $A$ be a connected $H$-type.
+
+\paragraph{Question 1} Show that for all $x:A$, we have $|\mu(x,\_) = \id_A|$ and $|\mu(\_,x) = \id_A|$.
+
+\paragraph{Question 2} From the previous question, prove that for all $x:A$, the maps $\mu(x,\_)$ and $\mu(\_,x)$ are equivalences.
+
+\vspace{0.4cm}
+
+Recall that given $X$ a pointed type and $C:X\r \U$ with $*_C:C(*)$, we can build a fiber sequence:
+\[C(*) \r_* (x:X)\times C(x) \r_* X\]
+
+\paragraph{Question 3} Using the previous exercise, show that we have a fiber sequence:
+\[A\r_* A\ast A\r_*\Sigma A\] 
+
+\end{Exercise}
+
+
+\begin{Exercise}
+
+In this exercise we build the Hopf fibration using the fact that $S^1$ is a $H$-type.
+
+\paragraph{Question 1} Define: 
+\[\psi' : (x:S^1)\r x=_S^1x\]
+with $\psi'(\base) :\equiv \loop$.
+
+\vspace{0.4cm}
+
+We define $\mu : S^1\r  S^1\r S^1$ by:
+\[\mu(\base) \ :\equiv\ \id_{S^1} : S^1\r S^1\]
+\[\ap_\mu(\loop) \ :\equiv\ \psi\]
+
+where $\psi : \id_{S^1}=\id_{S^1}$ is the image of $\psi'$ by function extensionality.
+
+\paragraph{Question 2}
+Prove that for all $x:S^1$ we have:
+\[\mu(x,\base) = x\]
+\[\mu(\base,x) = x\]
+
+\paragraph{Question 3} Using the previous exercises, conclude that we have a fiber sequence:
+\[S^1\r_* S^3\r_* S^2\]
+
+\paragraph{Question 4} Prove that:
+\[\pi_n(S^3) = \pi_n(S^2)\]
+if $n>2$.
+
+\end{Exercise}
+
+
+\end{document}
+
+
