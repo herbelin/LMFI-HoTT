@@ -21,7 +21,28 @@ points particulièrement intéressants, etc.
 href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
 Liste des articles</a>
 
-<br>
+<h2>Notes de cours</h2>
+<ul>
+
+<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/ITT.pdf">
+Notes on Intensional Type Theory
+</a>
+
+<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
+Lecture Notes on Synthetic Homotopy Theory
+</a>
+
+Exercise sheets
+<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD1.pdf">
+TD1
+</a>
+<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD2.pdf">
+TD2
+</a>
+<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD3.pdf">
+TD3
+</a>
+
 <br>
 <h2>Bibliographie</h2>
 <ul>
