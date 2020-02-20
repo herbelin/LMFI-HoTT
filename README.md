@@ -22,7 +22,6 @@ href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/m
 Liste des articles</a>
 
 <h2>Notes de cours</h2>
-<ul>
 
 <a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/ITT.pdf">
 Notes on Intensional Type Theory
