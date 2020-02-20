@@ -18,29 +18,29 @@ l'article, fera éventuellement un focus technique sur un ou plusieurs
 points particulièrement intéressants, etc.
 
 <a charset="UTF-8"
-href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
+href="https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
 Liste des articles</a>
 
 <h2>Notes de cours</h2>
 
-<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/ITT.pdf">
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/ITT.pdf">
 Notes on Intensional Type Theory
 </a>
 
 <br>
-<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
 Lecture Notes on Synthetic Homotopy Theory
 </a>
 
 <br>
 Exercise sheets on Synthetic Homotopy Theory
-<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD1.pdf">
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD1.pdf">
 TD1
 </a>
-<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD2.pdf">
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD2.pdf">
 TD2
 </a>
-<a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD3.pdf">
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD3.pdf">
 TD3
 </a>
 
