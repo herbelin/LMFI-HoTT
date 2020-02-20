@@ -33,7 +33,7 @@ Lecture Notes on Synthetic Homotopy Theory
 </a>
 
 <br>
-Exercise sheets
+Exercise sheets on Synthetic Homotopy Theory
 <a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD1.pdf">
 TD1
 </a>
