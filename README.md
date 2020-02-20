@@ -27,10 +27,12 @@ Liste des articles</a>
 Notes on Intensional Type Theory
 </a>
 
+<br>
 <a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
 Lecture Notes on Synthetic Homotopy Theory
 </a>
 
+<br>
 Exercise sheets
 <a charset="UTF-8" href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/Exercise_Sheets/TD1.pdf">
 TD1
