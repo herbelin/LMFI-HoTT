@@ -18,7 +18,7 @@ l'article, fera éventuellement un focus technique sur un ou plusieurs
 points particulièrement intéressants, etc.
 
 <a charset="UTF-8"
-href="https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
+href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
 Liste des articles</a>
 
 <h2>Notes de cours</h2>
