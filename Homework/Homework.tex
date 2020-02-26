@@ -90,6 +90,7 @@
 
 
 \title{Synthetic Homotopy Theory Homework: \\ The Hopf fibration}
+\date{}
 
 \begin{document}
 
@@ -100,10 +101,12 @@
 %TODO
 %\end{Exercise}
 
-The goal of this homework is to construct the Hopf fibration. We use notations from the lecture notes freely. The exercises are {\bf not} independent. First we need an auxiliary definition.
+The goal of this homework is to construct the Hopf fibration. We use notations from the lecture notes freely. First we need an auxiliary definition.
+
+%There is a homework due on the 13th march, which will give bonus points for the exam. It is intended to be hard, so you should feel free to help each other and use the internet (e.g. section 8.5 in the HoTT book). The exercises are {\bf not} independent. Some questions are tagged as optional meaning they are a bit more tedious or technical than the others, but they are still needed to solve next questions.
 
 \begin{definition}
-A span consists $A,B,C:\U$ with $f:A\r B$ and $g:B\r C$.
+A span consists $A,B,C:\U$ with $f:B\r A$ and $g:B\r C$.
 \end{definition}
 
 Usually we will denote a span by a diagram:
@@ -162,7 +165,7 @@ where $p_1$ and $p_2$ are projections.%is the projection to $A$, and $p_2$ the s
 \paragraph{Question 1} Let $A$ be a type, show that:
 \[\two\ast A \ \simeq \Sigma A\]
 
-\paragraph{Question 2} Show that the join operation is associative, meaning that for all $A,B,C:\U$ we have:
+\paragraph{Question 2 (Optional)} Show that the join operation is associative, meaning that for all $A,B,C:\U$ we have:
 \[(A\ast B)\ast C \ \simeq\ A\ast(B\ast C)\] 
 
 \paragraph{Question 3} Using the two previous questions and the fact that $\Sigma S^n = S^{n+1}$, prove that:
@@ -171,10 +174,10 @@ where $p_1$ and $p_2$ are projections.%is the projection to $A$, and $p_2$ the s
 \end{Exercise} 
 
 
-\begin{Exercise}[title={Flattening Lemma for suspension},difficulty=1]
+\begin{Exercise}[title={Flattening Lemma for suspension}]
 Assume given $A:\U$ and $P:\Sigma A \r \U$.
 
-\paragraph{Question 1} Prove that $(x:\Sigma A)\times P(x)$ is equivalent to the pushout of the span:
+\paragraph{Question 1 (Optional)} Prove that $(x:\Sigma A)\times P(x)$ is equivalent to the pushout of the span:
 \[P(\N) \overset{p_1}{\leftarrow} P(\N)\times A \overset{\psi}{\r} P(\S) \]
 where $\psi$ is defined for $q:P(\N)$ and $a:A$ by:
 \[\psi(q,a) \ :\equiv\ \tr^P_{\merid_a}(q)\]
@@ -217,7 +220,7 @@ where $p_1(x,y):\equiv x$ and $p_2(x,y):\equiv y$.
 
 \begin{Exercise}[title={$H$-types}]
 
-In this exercise we define $H$-types and show that they satisfy the hypothesis from the previous exercise, and then build a fiber sequence for any connected $H$-type.
+In this exercise we define $H$-types and show that connected $H$-types satisfy the hypothesis from the previous exercise, and then build a fiber sequence.
 
 \begin{definition}
 An $H$-type consists of a type $A$ with:
@@ -247,11 +250,11 @@ Recall that given $X$ a pointed type and $C:X\r \U$ with $*_C:C(*)$, we can buil
 \end{Exercise}
 
 
-\begin{Exercise}
+\begin{Exercise}[title={$S^1$ is a $H$-type}]
 
 In this exercise we build the Hopf fibration using the fact that $S^1$ is a $H$-type.
 
-\paragraph{Question 1} Define: 
+\paragraph{Question 1 (Optional)} Define: 
 \[\psi' : (x:S^1)\r x=_S^1x\]
 with $\psi'(\base) :\equiv \loop$.
 
@@ -263,7 +266,7 @@ We define $\mu : S^1\r  S^1\r S^1$ by:
 
 where $\psi : \id_{S^1}=\id_{S^1}$ is the image of $\psi'$ by function extensionality.
 
-\paragraph{Question 2}
+\paragraph{Question 2 (Optional)}
 Prove that for all $x:S^1$ we have:
 \[\mu(x,\base) = x\]
 \[\mu(\base,x) = x\]
@@ -271,7 +274,7 @@ Prove that for all $x:S^1$ we have:
 \paragraph{Question 3} Using the previous exercises, conclude that we have a fiber sequence:
 \[S^1\r_* S^3\r_* S^2\]
 
-\paragraph{Question 4} Prove that:
+\paragraph{Question 4} Conclude that:
 \[\pi_n(S^3) = \pi_n(S^2)\]
 if $n>2$.
 

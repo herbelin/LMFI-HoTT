@@ -2375,7 +2375,7 @@ Both these facts come from the reluctance of teacher in algebraic topoplogy to u
 
 \se{Groups as pointed connected types and $\infty$-groups}
 
-In this section we come back to groups and show an alternative definition for them in homotopy type theory. We will generalize this definition to $\infty$-groups, i.e. groups whose carriers are arbitrary types rather than sets.
+In this section we come back to groups and give an alternative definition for them in homotopy type theory. We will generalize this definition to $\infty$-groups, i.e. groups whose carriers are arbitrary types rather than sets. Note that we do not give full proofs of some key results.
 
 
 \sse{The main equivalence}
@@ -2398,19 +2398,41 @@ For a pointed connected groupoid $X$, we define a group $\Omega X$ as:
 \[*=_X*\]
 \end{definition}
 
+We only give a sketch of proof for the next theorem
+
 \begin{theorem}
 The map $\Omega$ from pointed connected groupoids from groups is an equivalence. We denote its inverse by $\B$.
 \end{theorem}
 \begin{proof}
-See TD5.
+We want to define an inverse to $\Omega$. Assume given a group $G$, then we define $\B G$ as a higher inductive types with:
+\begin{itemize}
+\item A point $*:\B G$, which will be the basepoint of $\B G$.
+\item For any $g:G$, we add a path $p_g : *=_{\B G}*$.
+\item For any pair $g,g':G$, we add a path:
+\[h_{g,g'} : p_g \cdot p_{g'} = p_{g\cdot g'}\]
+\item We have $\refl_* = p_e$ with $e$ the unit of $G$.
+\item We assume that $\B G$ is a groupoid.
+\end{itemize}
+We do not state the elimination principle for $\B G$. Then we need to prove that: 
+\[(*=_{\B G}*)\ \simeq\ G \]
+which can be done using the encode decode method, indeed we define: 
+\[\Eq_{\B G} : \B G \r \Set\] 
+by:
+\[\Eq_{\B G}(*)\ :\equiv\ G\]
+\[\ap_{\Eq_{\B G}}(p_g)(g') \ = \ g'\cdot g\]
+with the action of $h_{g,g'}$ derived from associativity of multiplication in $G$. Then we can show for all $x:\B G$ that:
+\[(*=_{\B G}x)\ \simeq\ \Eq_{\B G}(x) \]
+The other way we need to prove for $X$ a connected pointed groupoid that:
+\[\B(*=_X*) \ \simeq\ X\]
+We omit the proof of this entirely.
 \end{proof}
 
-This theorem is very important, it means that we could be \emph{define} groups as pointed connected groupoids. As a space $\B G$ is a pointed connected space with one loop per element in $G$, such that composition of paths behave as the multiplication in $G$, and with a trivial higher-dimensional structure. Now we give some examples.
+This theorem is very important, it means that we could \emph{define} groups as pointed connected groupoids. As a space $\B G$ is a pointed connected space with one loop per element in $G$, such that composition of paths behave as the multiplication in $G$, and with a trivial higher-dimensional structure. Now we give some examples.
 
 \begin{proposition}
 We describe $\B G$ for some already defined groups.
 \begin{itemize}
-\item Assume given a groupoid $A$ (we think mainly of $\Set$ and $\Grp$) and $a:X$. Then we have:
+\item Assume given a groupoid $A$ (we think mainly of $\Set$ and $\Grp$) and $a:A$. Then we have:
 \[\B \Aut_A(a) \ = \ (x:A)\times |x=a|\]
 pointed by $(a,[\refl_a])$.
 \item Assume given a pointed type $X$. Then we have:
@@ -2422,21 +2444,21 @@ pointed by $([*],[\refl_{[*]}])$.
 \begin{itemize}
 \item For the first example, we need to prove that $(x:A)\times |x=a|$ is a connected groupoid and that: 
 \[(a,[\refl_a]) =_{(x:A)\times |x=a|}(a,[\refl_a])\ =_\Grp\ \Aut_A(a)\]
-Since being connected is a proposition, we have that:
+Since we have a propositional truncation on $x=a$, we have that:
 \[(a,p) =_{(x:A)\times |x=a|} (a',p') \ \simeq \ a=_Aa'\]
 So we see that:
 \[(a,[\refl_a]) =_{(x:A)\times |x=a|}(a,[\refl_a])\ \simeq\ a=_Aa\]
 and we can conclude because $\Aut_A(a)$ is defined as $a=_Aa$, and the group multiplication is induced by concatenation of paths in both cases, so it is preserved.
 
-All that is left to show is that $(x:A)\times |x=a|$ is connected. Assume given $z:(x:A)\times |x=a|$, we want to show that:
+All that is left to show is that $(x:A)\times |x=a|$ is connected. Assume given an inhabitant $z:(x:A)\times |x=a|$, we want to show that:
 \[|z = (a,[\refl_a])|\]
 Since we want to prove a proposition, we can assume $x:A$ and $q:x=a$ and try to prove:
 \[(x,[q]) = (a,[\refl_a])\]
 But this is equivalent to $x=a$, and we conclude using $q$.
 
-\item For the second case we just need to prove that 
-\[\pi_1(X) = \B\Aut_{|X|_1}([*])\]
-i.e. that:
+\item For the second case we just need to prove that: 
+\[\pi_1(X) = \Aut_{|X|_1}([*])\]
+meaning that:
 \[|*=_X*|_0 \ \simeq\ ([*] =_{|X|_1} [*])\] 
 But this is the characterization of identity types in $|X|_1$. 
 %, which is defined.
@@ -2446,14 +2468,14 @@ But this is the characterization of identity types in $|X|_1$.
 
 \sse{Reformulating morphisms}
 
-Now we have an alternate definition of groups, we want to reformulate some group theory in this point of view.
+Now we have an alternative definition of groups, so we want to reformulate some notions from group theory.
 
 \begin{proposition}
 For $G,G':\Grp$, we have:
 \[\Hom_\Grp(G,G') \ \simeq \ \B G\r_* \B G'\]
 \end{proposition}
 \begin{proof}
-See TD5.
+Omitted.
 \end{proof}
 
 Intuitively this is because maps preserving the basepoint need to acts on loops, and they preserve composition of loop (and the constant path) because any map does.
@@ -2468,11 +2490,13 @@ is the same thing as giving a fiber sequence:
 Assume given a fiber sequence:
 \[\B K \r_*\B H\r_*\B G\]
 Then by the long homotopy exact sequence we have an exact sequence:
-\[\pi_2(G)\r \pi_1(\B K) \r \pi_1(\B H) \r \pi_1(\B G) \r \pi_0(H)\]
-But we can conclude because $\pi_2(G) = 0$ as $G$ is a groupoid, $\pi_0(H) = 0$ as $H$ is connected, and $\pi_1(\B L)$ is equal to $L$ for any group $L$.
+\[\pi_2(\B G)\r \pi_1(\B K) \r \pi_1(\B H) \r \pi_1(\B G) \r \pi_0(\B H)\]
+But we can conclude because $\pi_2(\B G) = 0$ as $\B G$ is a groupoid, $\pi_0(\B H) = 0$ as $\B H$ is connected, and $\pi_1(\B L)$ is equal to $L$ for any group $L$.
  
 We omit the converse.
 \end{proof}
+
+Recall that our definition of fiber sequence was not so good, so that being a fiber sequence might not be a proposition, whereas being an exact sequence is a proposition. Therefore we do not hope for an equivalence between the two, but only for functions both way. This could be corrected by using another definition of fiber sequence.
 
 %This means that morphisms of groups are very easy to underste
 
@@ -2531,15 +2555,15 @@ But then $f(*) = X$ imply that $|f(x) = X|$ for all $x:\B G$ (because $\B G$ is 
 From now on we define new notions directly using $\B G$ rather than $G$.
 
 \begin{definition}
-Assume given an action $P:\B G\r \Set$ of $G$. Then we define the type of invariants of the action as:
-\[X^G \ :\equiv \ (x:\B G)\r P(x)\]
+Assume given an action $X:\B G\r \Set$. Then we define the type of invariants of this action as:
+\[X^G \ :\equiv \ (x:\B G)\r X(x)\]
 and we define the quotient of the action as:
-\[X//G \ :\equiv\ (x:\B G)\times P(x)\]
+\[X//G \ :\equiv\ (x:\B G)\times X(x)\]
 \end{definition}
 
 The type $X^G$ correspond to the set of points in $x:X(*)$ such that for all $g:G$ we have $g\cdot x = x$.%left invariant by the action of any element in $G$.
 
-The type $X//G$ is not a set but a groupoid. In fact it is the groupoid obtained from $X(*)$ by adding a path from $x$ to $x'$ for every $g:G$ such that $g\cdot x = x'$. It is usually not defined in introductory algebra class. 
+The type $X//G$ is not a set but a groupoid. In fact it is the groupoid obtained from $X(*)$ by adding a path from $x$ to $x'$ for every $g:G$ such that $g\cdot x = x'$. It is usually not defined in an introductory algebra class. 
 
 The usual set-quotient can be defined in HoTT as the set-truncation of $X//G$.% mathematics
 
@@ -2568,7 +2592,7 @@ for any $x,y,z:A$. But this is not enough: indeed from $\alpha$ we obtain for $a
 Is it possible to give a type in HoTT interpreted as operations associative up to coherent homotopy ?
 \end{open_problem}
 
-This problem is in my opinion the most important open problem about the applicability of HoTT. It has a lot of implications concerning synthetic homotopy theory. So it seems difficult to define $\infty$-groups in HoTT, because the naive approach requires an operation associative up to coherent homotopy. But we have an alternative definition of groups as pointed connected groupoids, and this one is very straightforward to generalize.
+In my opinion this is the most important problem about the applicability of HoTT. It has a lot of implications concerning synthetic homotopy theory. So it seems difficult to define $\infty$-groups in HoTT, because the naive approach requires an operation associative up to coherent homotopy. But we have an alternative definition of groups as pointed connected groupoids, and this one is very straightforward to generalize.
 %There exists a lot of variation on this problem of coherent homotopies.
 
 \begin{definition}
@@ -2578,7 +2602,7 @@ An $\infty$-group $G$ consists of a connected pointed type $\B G$.
 We use different notations for an $\infty$-group $G$ and its underlying type $\B G$ just to mirror the situation with groups. This definition is indeed interpreted as something equivalent to the traditional definition of $\infty$-groups, so that if we prove a result about pointed connected types in HoTT, we can deduce a result about $\infty$-groups in traditional homotopy theory. 
 
 \begin{remark}
-From a topological group one can get an $\infty$-group structure on its underlying homotopy type. This group is called strict because its homotopies witnessing coherent associativity are all constant. There are a lot of non-strict $\infty$-group not equivalent to a strict one.%$\infty$-groups not equivalent to a strict one.
+From a topological group one can get an $\infty$-group structure on its underlying homotopy type. This group is called strict because its homotopies witnessing coherent associativity are all constant. There are a lot of $\infty$-group not equivalent to a strict one.%$\infty$-groups not equivalent to a strict one.
 \end{remark}
 
 Now we give some definitions for $\infty$-groups.
@@ -2592,7 +2616,7 @@ pointed by $(a,[\refl_a])$.
 We are particularly interested in the $\infty$-group $\Aut_\U(A)$ for $A:\U$, which is called the $\infty$-group of automorphisms of $A$.
 
 \begin{definition}
-A morphism of $\infty$-group is a map map of pointed sets. 
+A morphism of $\infty$-group is a map of pointed sets. 
 \end{definition}
 
 Now we define exact sequence of $\infty$-groups.
@@ -2634,7 +2658,7 @@ Note that we just copied our definitions for groups.
 
 \se{Applications}
 
-Now that we have a alternative definition of ($\infty$-)groups, we will exploit it to prove important theorems from algebraic topology. The main goal is to illustrate how homotopy type theory allows direct and easy proofs of these theorems, once we have these definitions of groups and $\infty$-groups.
+Now that we have an alternative definition of ($\infty$-)groups, we will exploit it to prove important theorems from algebraic topology. The main goal is to illustrate how homotopy type theory allows direct and easy proofs of these theorems, once we have these definitions of groups and $\infty$-groups.
 
 
 
@@ -2643,7 +2667,7 @@ Now that we have a alternative definition of ($\infty$-)groups, we will exploit 
 We define coverings.
 
 \begin{definition}
-A covering of $X:\U$ is a map to $X$ whose fibres are sets. For $X:\U$ we denote by:
+A covering of $X:\U$ is a map to $X$ which fibers are sets. For $X:\U$ we denote by:
 \[\mathrm{Cover}(X)\]
 the type of coverings of $X$.
 \end{definition} 
@@ -2763,8 +2787,7 @@ As a last example we give an application to ($\infty$-)group theory.
 Assume given two $\infty$-groups $K$ and $G$, we define an extension of $G$ by $K$ as:
 \begin{itemize}
 \item An $\infty$-group $H$.
-\item An exact sequence of $\infty$-group:
-\[\B K \r_* \B H\r_* \B G\]
+\item A pointed map $f : \B H \r_* \B G$ such that $\fib_f(*) =_{\U_*} \B K$, with $\fib_f(*)$ pointed by $(*,*_f)$.
 \end{itemize}
 We denote by $\mathrm{Ext}(G,K)$ the type of extension of $G$ by $K$.
 \end{definition}
@@ -2774,23 +2797,23 @@ For any two $\infty$-groups $K$ and $G$ we have a trivial extension:
 The main intuition about group extensions is that they are "twisted" products of groups. %, i.e. variants of $p : \B K \times \B G \r \B G$ where the fiber of $\B K$ depends on $\B G$
 It should be noted that if $K$ and $G$ happens to be group, then $\mathrm{Ext}(K,G)$ is in fact equivalent to the type of exact sequence of groups:
 \[0\r K\r ?\r G\r 0\]
-Indeed in any fiber sequence of $\infty$-groups:
-\[\B K \r \B H\r \B G\]
-if $G$ and $K$ are groups, so is $H$.
+%Indeed in any fiber sequence of $\infty$-groups:
+%\[\B K \r \B H\r \B G\]
+%if $G$ and $K$ are groups, so is $H$.
 
 
 \begin{theorem}
 Assume given two $\infty$-groups $K$ and $G$. Then we have:
-\[\mathrm{Ext}(G,K)\ \simeq \ \B G\r_* \B\Aut_\U(\B K)\]
+\[\mathrm{Ext}(G,K)\ \simeq \ \Hom_{\infty\Grp}(G,\Aut_\U(\B K))\]
 \end{theorem}
 \begin{proof}
 We have:
-\[\mathrm{Ext}(G,K) \ \simeq\ (X:\U_*) \times (f:X\r_* \B G) \times (\fib_f=_{\U_*} \B K) \]
-The only non trivial point is that this implies $X$ connected, and it is left to the reader. Now we have:
+\[\mathrm{Ext}(G,K) \ \simeq\ (X:\U_*) \times (f:X\r_* \B G) \times (\fib_f(*)=_{\U_*} \B K) \]
+because we can check that this implies $X$ connected. Now we have:
 \[\mathrm{Ext}(G,K) \ \simeq \ (X:\U)\times (x:X)\times (f:X\r \B G)\times (f(x)=*) \times  (\fib_f=_{\U_*} \B K) \]
 But by the Grothendieck correspondance:
 \[\mathrm{Ext}(G,K) \ \simeq\ (P : \B G \r \U) \times (y:P(*))\times (P(*) =_{\U_*} \B K) \]
-\[\simeq \ (P : \B G \r \U)\times (\epsilon : P(*) =_\U \B K) \times (y:P(*)) \times (y= \ua(\epsilon)^{-1}(*))\]
+\[\simeq \ (P : \B G \r \U)\times (\epsilon : P(*) =_\U \B K) \times (y:P(*)) \times (y= \epsilon^{-1}(*))\]
 \[\simeq\ (P:\B G \r \U) \times (P(*) =_\U \B K)\]
 but since $\B G$ is connected, we know that for all $x:\B G$ we have $|P(x) = \B K|$, so:
 \[\mathrm{Ext}(G,K) \ \simeq\ (P:\B G \r \U)\times ((x:\B G)\r |P(x) =_\U \B K|) \times (P(*) =_\U \B K)\]

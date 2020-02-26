@@ -21,6 +21,10 @@ points particulièrement intéressants, etc.
 href="http://htmlpreview.github.io/?https://github.com/herbelin/LMFI-HoTT/blob/master/articles.html">
 Liste des articles</a>
 
+<h3> Homework </h3>
+There is a <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Homework/Homework.pdf"> homework </a> due on the 13th march, which will give bonus points for the exam. It is intended to be hard, so you should feel free to help each other and use the internet (e.g. section 8.5 in the HoTT book). Some questions are tagged as optional meaning they are a bit more tedious or technical than the others, but they are still needed to solve next questions.
+
+
 <h2>Notes de cours</h2>
 
 <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/ITT.pdf">
