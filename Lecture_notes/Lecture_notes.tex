@@ -2874,7 +2874,7 @@ Deloopable $\infty$-groups are called \emph{braided $\infty$-groups}.
  Next theorem is a special case of the stability theorem from \cite{buchholtz2018higher}.
 
 \begin{theorem}
-Let $A$ be an abelian group, there for any natural number $n>0$, there exists a connected type $X$ (denoted $\B^nX$) such that:
+Let $A$ be an abelian group, there for any natural number $n>0$, there exists a connected type $X$ (denoted $\B^nA$) such that:
 \[\Omega^n X \ = \ A\]
 \end{theorem}
 
@@ -2904,7 +2904,7 @@ In an introductory classes to algebraic topology, cohomology theories with coeff
 
 \begin{definition}
 A spectrum $A$ is a family of pointed types $A_n$ for $n:\mathbb{Z}$ such that for all $n$ we have:
-\[\Omega A_{n+1} \simeq A_n\]
+\[\Omega A_{n+1} = A_n\]
 \end{definition}
 
 Note that a spectrum is not necessarily an abelian $\infty$-groups because we do not ask for the pointed types to be connected. The fact that we use $\mathbb{Z}$ rather than $\mathbb{N}$ is unimportant, because for $n:\mathbb{N}$ we have: 
@@ -2914,7 +2914,7 @@ We use it because it leads to more convenient notations. We are now ready to def
 \begin{definition}
 Assume given a pointed type $X$ and a spectrum $A$, for $n:\mathbb{Z}$ we define the abelian group $H^n(X,A)$ by: 
 \[H^n(X,A)\ :\equiv\ |X\r_* A_n|_0\]
-with its group structure induced by the fact tat $A_n$ is a loop space.
+with its group structure induced by the fact that $A_n$ is a loop space.
 
 The abelian group $H^n(X,A)$ is called the $n$-th cohomology group of $X$ with coefficient in $A$.
 \end{definition}
@@ -2922,7 +2922,7 @@ The abelian group $H^n(X,A)$ is called the $n$-th cohomology group of $X$ with c
 For example if $A$ is an abelian group, then $H^n(X,A)$ is defined as
 \[|X\r_* \B^n A|_0\]
 
-Note that we see a duality between homotopy and cohomology groups: one are defined as maps \emph{from} some fixed types (more precisely from the spheres), the other are defined as maps \emph{to} some fixed types (more precisely to elements of a spectrum). We will see that cohomology groups have some dual properties to homotopy groups. 
+Note that we see a duality between homotopy and cohomology groups: the former are defined as maps \emph{from} some fixed types (more precisely from the spheres), the latter are defined as maps \emph{to} some fixed types (more precisely to elements of a spectrum). We will see that cohomology groups have some dual properties to homotopy groups, for example homotopy interact well with $\Omega$, whereas cohomology interact well with $\Sigma$. 
 
 \begin{remark}
 Perhaps you know about group cohomology. We define it in our context. If $G$ is an $\infty$-groups, then we define the cohomology of $G$ with coefficient in a spectrum $A$ by:
@@ -2932,7 +2932,7 @@ Perhaps you know about group cohomology. We define it in our context. If $G$ is 
 
 \sse{Eilenberg-Steenrod axioms for cohomology}
 
-Now we present the Eilenberg-Steenrod axioms for cohomology theories.
+Now we present some properties of cohomology theories, which allow efficient computations. Elilenberg and Steenrod \emph{defined} cohomology theories using these properties. % Eilenberg-Steenrod axioms for cohomology theories.
 
 \begin{proposition}
 Assume given a spectrum $A$, for any pointed type $X$ and $n:\mathbb{Z}$ we have:
@@ -2962,11 +2962,13 @@ Assume given a family of pointed type $X_i$ indexed by $I$ a set. Then:
 
 \begin{proposition}
 Assume the axiom of choice for set-truncation. Then for all family of pointed types $X_i$ indexed by a set $I$ we have:
-\[H^n(\bigvee_I X_i , A) \ \simeq\ (i:I) \r H^n(X_i,A)\]
+\[H^n\big(\bigvee_I X_i , A\big) \ \simeq\ (i:I) \r H^n(X_i,A)\]
 \end{proposition}
 \begin{proof}
 This is an easy consequence of the previous lemma.
 \end{proof}
+
+Cofiber sequence are dual to fiber sequence, so that they correspond to homotopy quotients. We omit the precise definition.
 
 \begin{proposition}
 Assume given a spectrum $A$ and a cofiber sequence: 
@@ -2983,7 +2985,7 @@ The previous remarks combined with knowledge about cofiber sequences combine to 
 Assume given a spectrum $A$ and a cofiber sequence: 
 \[X\r_* Y\r_* Z\]
 Then we have a long exact sequence:
-\[\cdots \r H^{n+1}(X,A) \r H^n(Z,A) \r H^n(Y,A) \r H^n(X,A) \r H^{n-1}(Z,A) \r \cdots \]
+\[\cdots \r H^{n-1}(X,A) \r H^n(Z,A) \r H^n(Y,A) \r H^n(X,A) \r H^{n+1}(Z,A) \r \cdots \]
 \end{proposition}
 
 
