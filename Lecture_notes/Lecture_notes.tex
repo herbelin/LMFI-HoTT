@@ -3003,25 +3003,25 @@ We conclude this introductory class by giving a summary and some perspectives.
 In this class:
 \begin{itemize}
 \item We used homotopical ideas to revisit some logic, mainly with propositional truncation. This allowed us to decompose disjunction and existential quantifier through proof-irrelevant but intuitionist constructors. This also allowed us to define an axiom of choice in type theory, intuitively related to the usual one.
-\item We presented HITs and illustrated how they allowed to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
-\item We gave an alternative definition of groups, which shed some new lights on some basic constructs, for example quotients.
-\item Using Grothendieck and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
+\item We introduced higher inductive types and illustrated how they allowed to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
+\item We gave an alternative definition of groups, which shed some new lights on some basic constructions, for example quotients.
+\item Using Grothendieck correspondance and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
 \item We presented cohomology and homotopy groups in a similar fashion, emphasizing the duality between the two.
 \end{itemize}
 
-\noindent The main insights we gain:
+\noindent The main insights we gained:
 \begin{itemize}
 \item For homotopy theorists: constructive methods and ideas can be useful for homotopy theory. This actually apply to mathematicians in general, although we did not demonstrate this.
 \item For type theorists: Homotopical ideas are useful to understand identity types even in "normal" type theory. For example higher inductive types are useful even without univalence. 
-\item For foundations: The idea of "isomorphic imply the same" can be taken seriously, and imply some homotopical structure on the universe !
+\item For foundations: The idea "being isomorphic means being the same" can be taken seriously, and imply some homotopical structure on the universe !
 \end{itemize}
 
 \noindent We list some limitations to HoTT. %For understandable reasons we did not emphasized them in the main body of the lecture notes.
 \begin{itemize}
-\item HoTT is not computational. This means that when we define say a natural number using univalence, it does not necessarily compute to an actual numeral. As an example if we show that $\pi_4(S^3) = \mathbb{Z}/n\mathbb{Z}$, there is no automated way in HoTT to compute the value of $n$ (see \cite{brunerie2016groupes} for more information on this). This problem can be solved using \emph{cubical type theory} \cite{cohen2016cubical}, which will be introduced latter in this class. Some workaround in non-cubical HoTT are being investigated under the name of \emph{homotopy canonicity} (see \cite{coquand2019homotopy} for homotopy canonicity in cubical type theory).
+\item HoTT is not computational. This means that when we define e.g. a natural number using univalence, it does not necessarily compute to a numeral (recall that numerals are $0$, and $\s(n)$ for $n$ a numeral). As an example if we show that $\pi_4(S^3) = \mathbb{Z}/n\mathbb{Z}$, there is no automated way in HoTT to compute the value of $n$ (see \cite{brunerie2016groupes} for more information on this). This problem can be solved using \emph{cubical type theory} \cite{cohen2016cubical}, which will be introduced latter in this class. Some workarounds in non-cubical HoTT are being investigated under the name of \emph{homotopy canonicity} (see \cite{coquand2019homotopy} for homotopy canonicity in cubical type theory).
 \item We mentioned the idea of infinite towers of coherences when we introduced $\infty$-groups. It is not known whether such infinite tower can be defined in HoTT. We were able to use a trick in order to define $\infty$-groups anyway, but no such trick is known for e.g. monoids. \emph{Two-Level type theories} (e.g. \cite{annenkov2017two}) are being investigated as a solution to this problem.
 \item HoTT is not directed, in the sense that we only say things about isomorphisms and not about morphisms. As an example we can extract the notion of isomorphisms of groups from the definition of groups in HoTT, but not the notion of morphisms of groups. Solutions to this are being investigated under the name of \emph{directed type theories} (e.g. \cite{licata2012} for a two-dimensional version).
-\item Currently no new theorem about homotopy types was proved in HoTT. It should be noted that some theorems were extended from homotopy types to any $\infty$-topoi using HoTT (Intuitively an $\infty$-topos is a mathematical universe similar to the universe of homotopy types, see below for more information).
+\item Currently no new theorem about homotopy types was proved in HoTT. It should be noted that some theorems were extended from homotopy types to any $\infty$-topos using HoTT (Intuitively an $\infty$-topos is a mathematical universe similar to the universe of homotopy types, see below for more information).
 \end{itemize}
 
 \noindent The main thing to remember about these limitations is that HoTT is not the definitive answer to any question, but rather a beautiful first step with many ramifications.
@@ -3038,7 +3038,7 @@ I give some perspectives from the point of view of someone interested in fundame
 %We have seen that groups are secretly $1$-dimensional objects in a rather natural way, whereas monoids are not. We know that groups are a lot more useful in mathematics than monoids, in fact groups are always introduced in a first algebra class, whereas monoids are not. I believe there is a correlation between these facts: knowing that groups are $1$-dimensional objects we could reasonably predict that they would be useful to mathematicians. Similarly it is shown in the HoTT book that categories are secretly $1$-dimensional objects, and they are used almost everywhere in fundamental mathematics.
 
 %This leads to the idea that $\infty$-dimensional objects should be very useful for mathematics. 
-Nowadays we see a tendency to replace mathematical objects by some $\infty$-dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they lead to the proof of Weibel's conjecture in algebraic geometry.
+Nowadays we see a tendency to replace mathematical objects by some infinite dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they were a key ingredient in the proof of Weibel's conjecture in algebraic geometry, by Kerz, Strunk and Tamme in 2018.
 
 \begin{remark}
 In fundamental physics one can study quantum fields, which describe matter and light in a space-time. Different fields on the same space-time can correspond to each other through what are called gauge equivalences, and gauge equivalent fields describe the same physical reality. But sometimes you have non-trivial gauge equivalences of a field with itself, and this fact can be observed through experiments. These are called ghost fields by physicians. Similarly you have gauge equivalences between gauge equivalences, and so on, leading to ghost-of-ghost fields, etc.
@@ -3050,24 +3050,24 @@ It turns out fields on a space-time form a genuinely $\infty$-dimensional object
 The situation is as follow:
 \begin{itemize}
 \item Objects in mathematics usually have an $\infty$-dimensional analogue.
-\item An $\infty$-dimensional theory should be somewhat similar to its $0$-dimensional counterpart, as it has been worked out in details for many examples.
+\item An $\infty$-dimensional theory should be somewhat similar to its $0$-dimensional counterpart, as was worked out in details for many examples.
 \item But $\infty$-dimensional objects tend to be very difficult to work with, they can get very technical (see e.g. the famous \cite{lurie2009higher}).
 \end{itemize}
 
-So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful $\infty$-dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondance: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
+So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful infinite dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondance: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
 
 %\begin{remark}
-HoTT is proof relevant and this can be used to derive some results about homotopy types. But HoTT is also intuitionist. Can we use this to amplify these results ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that it does not obey the law of excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional tools, this allows to amplify further the applicability of HoTT.
+Homotopy type theory is proof relevant and this can be used to derive some results about homotopy types. But Homotopy type theory is also intuitionist. Can we use this to amplify results proven in HoTT ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that it does not obey the law of the excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional objects, this allows to amplify further the applicability of HoTT.
 
 \begin{remark}
-This means that all the results we proved in this class are valid in any $\infty$-topos, as long as they did not use excluded-middle or choice. So for example we proved Schreier theory for $\infty$-groups in any $\infty$-topos, a result which would be so cumbersome to prove using classical methods that (to my knowledge) no such direct proof has ever been written.
+This means that all the results we proved in this class are valid in any $\infty$-topos, as long as they did not use the excluded middle or choice. So for example we proved Schreier theory for $\infty$-groups in any $\infty$-topos, a result which would be so cumbersome to prove using classical methods that (to my knowledge) no such direct proof has ever been written.
 \end{remark}
 
 \begin{remark}
 Favonia, Eric Finster, Dan Licata and Peter LeFanu Lumsdaine manage to prove the Blakers-Massey theorem in HoTT \cite{hou2016mechanization}, therefore reproving this result for homotopy types, but also generalizing it to any $\infty$-topos. Mathieu Anel, Georg Biedermann, Eric Finster and Andr{\'e} Joyal derived some generalization of this result in any $\infty$-topos in \cite{anel2017generalized}, inspired by this new proof. They derive some new results about Goodwillie calculus of functors from this \cite{anel2018goodwillie}. 
 \end{remark}
 
-The moral of this story is that homotopy type theory has proven itself a useful (albeit not definitive) tool in the development of these new higher mathematics. I hope that in the future more efficient tools using ideas from constructive mathematics will be developed, and that mathematicians will open themselves to constructivist and intuitionistic methods as a way to prove new classical theorem.
+The moral of this story is that homotopy type theory has proven itself a useful (albeit not definitive) tool in the development of these new higher mathematics. I hope that in the future more efficient tools using ideas from constructive mathematics will be developed, and that mathematicians will use constructivist and intuitionistic methods as a way to prove new classical theorem, whenever they are an appropriate tool.
 
 \bibliographystyle{plain}
 \bibliography{biblio}
