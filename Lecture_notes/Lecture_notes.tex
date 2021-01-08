@@ -89,7 +89,7 @@
 \maketitle
 
 \begin{abstract}
-These are lecture notes for an introductory class given at LMFI in 2019-2020.
+These are lecture notes for an introductory class given at LMFI in 2019-2020. They were given together with exercise sheets.
 \end{abstract}
 
 \tableofcontents
@@ -2138,8 +2138,12 @@ See TD3.
 \begin{definition}
 Assume given $X$ a pointed type and $n:\mathbb{N}$, we define the $n$-th \emph{homotopy groups} $\pi_n(X)$ of $X$ by:
 \[\pi_n(X) \ :\equiv\ |\Omega^n X|_0\]
-Note that $\pi_0(X)$ is actually a pointed set, and $\pi_n(X)$ is a group for $n>0$.
+%Note that $\pi_0(X)$ is actually a pointed set, and $\pi_n(X)$ is a group for $n>0$.
 \end{definition}
+
+\begin{remark}
+The set $\pi_0(X)$ is usually seen as pointed by $[*]$, and $\pi_n(X)$ is usually seen as a group with unit induced by reflexivity and multiplication induced by composition.
+\end{remark}
 
 We will see in TD3 that $\pi_n(X)$ is an abelian group for $n>1$. In traditional algebraic topology homotopy groups are defined as homotopy classes of pointed maps out of the spheres. We make this formal.
 
@@ -2160,6 +2164,8 @@ Let $X$ be a pointed type, then:
 \begin{proof}
 By the previous proposition we know that:
 \[\pi_n(X) \ \equiv\ |\Omega^nX|_0 \ \simeq \ |S^0\r_*\Omega^nX|_0\ \simeq\ |\Sigma^nS^0\r_*X|_0 \ \equiv\ |S^n\r_*X|_0\]
+The first equivalence comes from the fact that for $X$ any pointed type we have: 
+\[(S^0\r_*X)\, \simeq\, X\]
 \end{proof}
 
 
@@ -2197,15 +2203,16 @@ We need to give for $x:X$ a term:
 \[\epsilon_x : \fib_{p_g}(x)\ \simeq\ (g(x)=*)\]
 But this is part of the Grothendieck correspondence. Then we need: 
 \[\epsilon_*((*_X,*_g),\refl_{*}) = *_g\]
-but the equivalence from the Grothendieck correspondance is defined by transporting the second component $*_g$ along the third $\refl_{*}$. So we can conclude.
+but the equivalence from the Grothendieck correspondence is defined by transporting the second component $*_g$ along the third component  $\refl_{*}$. So we can conclude.
 \end{proof}
 
 In some sense any fiber sequence is equal to a canonical one, as proved by the next proposition.
 
 \begin{proposition}
-Assume given a fiber sequence:
+Assume given $X,Y,Z:\U_*$ in a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\]
-then we have that $f=p_g$ as pointed maps to $Y$. 
+then we have that $f=p_g$ as inhabitants of:
+\[(V : \U_*)\times (V\r_* Y)\]%$pointed maps to $Y$. 
 \end{proposition}
 \begin{proof}
 We have that: 
@@ -2264,7 +2271,7 @@ but this is the second component of $\epsilon^{-1}(q)$.
 Now we give a very important theorem of homotopy theory.
 
 \begin{theorem}
-Assume given a fiber sequence:
+Assume given $X,Y,Z:\U_*$ in a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
 Then we have $\delta : \Omega Z\r_* X$ and a long fiber sequence:
 \[\cdots \r_* \Omega^2 X \overset{\Omega^2 f}{\r_*} \Omega^2 Y \overset{\Omega^2 g}{\r_*}\Omega^2 Z \overset{\Omega\delta}{\r_*} \Omega X \overset{\Omega f}{\r_*} \Omega Y \overset{\Omega g}{\r_*} \Omega Z \overset{\delta}{\r_*} X \overset{f}{\r_*} Y\overset{g}{\r_*} Z  \]
@@ -2316,7 +2323,7 @@ so we can conclude.
 \end{itemize}
 \end{proof}
 
-This proof is a good example of working with truncations: we eliminate them as much as possible.
+Last proof is a good example of working with truncations: we eliminate them as much as possible.
 
 \begin{lemma}
 The set truncation of a fiber sequence is exact.
@@ -2343,7 +2350,7 @@ And we can conclude using the previous lemma.
 Then we can prove our first classical theorem from algebraic topology.
 
 \begin{theorem}
-Assume given a fiber sequence:
+Assume given $X,Y,Z:\U_*$ in a fiber sequence:
 \[X \overset{f}{\r_*} Y\overset{g}{\r_*} Z\] 
 Then we have a long exact sequence of pointed sets:
 %\[\cdots\r_*\pi_n(X)\r_* \pi_n(Y)\r_*\pi_n(Z) \r_* \cdots\]
@@ -2377,10 +2384,10 @@ for $n>2$.
 This presentation of the long homotopy exact sequence differs from the traditional one in algebraic topology.
 %Here we see some advantage to Homotopy Type Theory over traditional algebraic topology:
 \begin{itemize}
-\item In algebraic topology, one restrain to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
+\item In algebraic topology, one restricts attention to the case where $f:X\r Y$ is a fibration. Since every map is a fibration up to equivalence, we do not need this restriction.
 \item We see that the long exact sequence of homotopy groups is actually the shadow of a more powerful (and higher-dimensional) fiber sequence. This fact is usually not pointed out in algebraic topology, at least not in an introductory class.
 \end{itemize}
-Both these facts come from the reluctance of teacher in algebraic topoplogy to use homotopy fibers rather than usual fibers. %In HoTT we can only use homotopy fibers.
+Both these facts come from the reluctance from some teachers in algebraic topoplogy to use homotopy fibers rather than usual fibers. These notes\footnote{\url{https://www.math.univ-paris13.fr/~vallette/download/Homotopy\%20Theories.pdf}} by Johan Leray and Bruno Valette are a notable exception. % \url{https://www.math.univ-paris13.fr/~vallette/download/Homotopy\%20Theories.pdf}. %In HoTT we can only use homotopy fibers.
 \end{remark}
 
 
@@ -2400,7 +2407,7 @@ Both these facts come from the reluctance of teacher in algebraic topoplogy to u
 
 \se{Groups as pointed connected types and $\infty$-groups}
 
-In this section we come back to groups and give an alternative definition for them in homotopy type theory. We will generalize this definition to $\infty$-groups, i.e. groups whose carriers are arbitrary types rather than sets. Note that we do not give full proofs of some key results.
+In this section we come back to groups and give an alternative definition for them in homotopy type theory. We will generalize this definition to $\infty$-groups, i.e. groups whose carriers are arbitrary types rather than sets. Note that we do not give full proofs of some key results. A key reference are the participative ongoing book called the Symmetry Book\footnote{\url{https://github.com/UniMath/SymmetryBook}}. Also noteworthy is \cite{buchholtz2018higher}, focused on delooping of $\infty$-groups.
 
 
 \sse{The main equivalence}
@@ -2426,10 +2433,10 @@ For a pointed connected groupoid $X$, we define a group $\Omega X$ as:
 We only give a sketch of proof for the next theorem
 
 \begin{theorem}
-The map $\Omega$ from pointed connected groupoids from groups is an equivalence. We denote its inverse by $\B$.
+The map $\Omega$ from pointed connected groupoids to groups is an equivalence. We denote its inverse by $\B$.
 \end{theorem}
 \begin{proof}
-We want to define an inverse to $\Omega$. Assume given a group $G$, then we define $\B G$ as a higher inductive types with:
+We want to define an inverse to $\Omega$. Assume given a group $G$, then we define $\B G$ as a higher inductive type with:
 \begin{itemize}
 \item A point $*:\B G$, which will be the basepoint of $\B G$.
 \item For any $g:G$, we add a path $p_g : *=_{\B G}*$.
@@ -2452,7 +2459,7 @@ The other way we need to prove for $X$ a connected pointed groupoid that:
 We omit the proof of this entirely.
 \end{proof}
 
-This theorem is very important, it means that we could \emph{define} groups as pointed connected groupoids. As a space $\B G$ is a pointed connected space with one loop per element in $G$, such that composition of paths behave as the multiplication in $G$, and with a trivial higher-dimensional structure. Now we give some examples.
+This theorem is very important, it means that we could \emph{define} groups as pointed connected groupoids. As a space $\B G$ is a pointed connected space with one loop per element in $G$, such that composition of paths behaves as the multiplication in $G$, and with a trivial higher-dimensional structure. Now we give some examples.
 
 \begin{proposition}
 We describe $\B G$ for some already defined groups.
@@ -2503,7 +2510,7 @@ For $G,G':\Grp$, we have:
 Omitted.
 \end{proof}
 
-Intuitively this is because maps preserving the basepoint need to acts on loops, and they preserve composition of loop (and the constant path) because any map does.
+Intuitively this is because maps preserving the basepoint need to acts on loops, and they preserve composition of loops (and the constant path) because any map does.
 
 \begin{proposition}
 Giving an exact sequence of groups:
@@ -2536,10 +2543,10 @@ An action of a group $G$ is:
 \item A set $X$.
 \item A morphism of group from $G$ to $\Aut_\Set(X)$.
 \end{itemize}
-In this case we say that $G$ acts on $X$. We denote the type of action of $G$ by $\Set^G$.
+In this case we say that $G$ acts on $X$. We denote the type of actions of $G$ by $\Set^G$.
 \end{definition}
 
-We imagine that elements of $G$ acts on elements of $X$. This is made explicit in the following definition:
+We imagine that elements of $G$ act on elements of $X$. This is made explicit in the following definition:
 
 \begin{lemma}
 An action of $G$ on $X$ is equivalent to a map:
@@ -2599,9 +2606,9 @@ As an example when we have $G$ a finite group acting on $X$ finite there is in g
 \[\mathrm{card}(X) = \mathrm{card}(G) \times \mathrm{card}(X//G)\]
 where $X//G$ is the groupoid-quotient we have defined. (Puzzle unrelated to the class: Can you guess the notion of cardinal needed for finite groupoids ?)
 
-In traditional algebra classes, you see that this relation is true when the action is free (meaning that if $g\cdot x =x$ for some $x$ then $g=e$). In fact freeness of the action guarantee that $X//G$ is a set.
+In traditional algebra classes, you see that this relation is true when the action is free (meaning that if $g\cdot x =x$ for some $x$ then $g=e$). In fact freeness of the action guarantees that $X//G$ is a set.
 
-This is a somewhat general phenomena: if you see a theorem about set-quotients of free group actions, there is probably an analogue for the groupoid-quotient of any action. We will see a much deeper example of this when we discuss principal bundles. 
+This is a somewhat general phenomenon: if you see a theorem about set-quotients of free group actions, there is probably an analogue for the groupoid-quotient of any action. We will see a much deeper example of this when we discuss principal bundles. 
 \end{remark}
 
 
@@ -2611,7 +2618,7 @@ We have given two definitions of groups. Now we want to sketch the notion of $\i
 \[\alpha_{x,y,z} : (x\cdot y) \cdot z = x\cdot (y\cdot z)\] 
 for any $x,y,z:A$. But this is not enough: indeed from $\alpha$ we obtain for $a,b,c,d:A$ two ways to show:
 \[((a\cdot b)\cdot c )\cdot d = a\cdot(b\cdot (c\cdot d))\]
-(can you find them ?). In order to obtain a well-behaved theory of associative operations, we should ask for a homotopy $\beta$ between those two paths. But inductively for five elements we need to ask for a higher homotopy between two homotopies build from $\beta$, and so on. We know how to define this infinite tower in traditional homotopy theory, and the result is often called an operation \emph{associative up to coherent homotopy}.
+(can you find them ?). In order to obtain a well-behaved theory of associative operations, we should ask for a homotopy $\beta$ between those two paths. But inductively for five elements we need to ask for a higher homotopy between two homotopies build from $\beta$, and so on. We know how to define this infinite tower in traditional homotopy theory, and the result is often called an operation \emph{associative up to higher coherent homotopy}.
 
 \begin{open_problem}
 Is it possible to give a type in HoTT interpreted as operations associative up to coherent homotopy ?
@@ -2641,13 +2648,13 @@ pointed by $(a,[\refl_a])$.
 We are particularly interested in the $\infty$-group $\Aut_\U(A)$ for $A:\U$, which is called the $\infty$-group of automorphisms of $A$.
 
 \begin{definition}
-A morphism of $\infty$-group is a map of pointed sets. 
+A morphism of $\infty$-groups is a map of pointed sets. 
 \end{definition}
 
 Now we define exact sequence of $\infty$-groups.
 
 \begin{definition}
-An exact sequence of $\infty$-group is a a fiber sequence. More precisely an exact sequence:
+An exact sequence of $\infty$-groups is a fiber sequence. More precisely an exact sequence:
 \[0\r K\r H\r G\r 0\]
 is by definition a fiber sequence:
 \[\B K\r_*\B H\r_*\B G\]
@@ -2692,7 +2699,7 @@ Now that we have an alternative definition of ($\infty$-)groups, we will exploit
 We define coverings.
 
 \begin{definition}
-A covering of $X:\U$ is a map to $X$ which fibers are sets. For $X:\U$ we denote by:
+A covering of $X:\U$ is a map to $X$ whose fibers are sets. For $X:\U$ we denote by:
 \[\mathrm{Cover}(X)\]
 the type of coverings of $X$.
 \end{definition} 
@@ -2701,7 +2708,7 @@ the type of coverings of $X$.
 In traditional algebraic topology there is a definition of coverings of a space $X$ as well-behaved continuous maps to $X$ with discrete fibers. Our definition is interpreted as something equivalent to the traditional one, because any map with homotopy fibers equivalent to sets is actually equivalent to a traditional covering.
 \end{remark}
 
-You should see covering over $X$ as continuous family of sets indexed by $X$, as shown by next proposition. It is an easy variant of the Grothendieck correspondance.
+You should see covering over $X$ as continuous family of sets indexed by $X$, as shown by next proposition. It is an easy variant of the Grothendieck correspondence.
 
 \begin{proposition}
 Assume given a type $X:\U$. Then we have:
@@ -2735,7 +2742,7 @@ So we know a very explicit description of coverings of a type. The intuitive sum
 %The main trick which is hard to replicate in traditional homotopy theory is the use of grothendieck correpondance. %the fact that $\Set$ is a groupoid, i.e. a one-dimensional space.
 
 \begin{remark}
-Usually in an introductory class about algebraic topology one often see that subgroups of $\pi_1(X)$ corresponds to connected coverings of $X$. In fact connected coverings correspond to the so-called \emph{transitive} actions of $\pi_1(X)$, which in turn correspond to subgroups of $\pi_1(X)$
+Usually in an introductory class about algebraic topology one often sees that subgroups of $\pi_1(X)$ corresponds to connected coverings of $X$. In fact connected coverings correspond to the so-called \emph{transitive} actions of $\pi_1(X)$, which in turn correspond to subgroups of $\pi_1(X)$
 \end{remark}
 
 
@@ -2764,9 +2771,9 @@ By a variant of the Grothendieck correspondence, we have that:
 But $\B\Aut_\U(F)$ is defined as $(Y:\U)\times |Y=F|$.
 \end{proof}
 
-We say that $\B \Aut_\U(F)$ classify bundles with fiber $F$. This comes from a more general terminology: an object $A$ is said to classify some kind structure on types if giving such a structure on a type $X$ is the same thing as giving a map from $X$ to $A$. It is often useful to know that some kind structure is classified by a type.
+We say that $\B \Aut_\U(F)$ classifies bundles with fiber $F$. This comes from a more general terminology: an object $A$ is said to classify some kind of structure on types if giving such a structure on a type $X$ is the same thing as giving a map from $X$ to $A$. It is often useful to know that some kind of structure is classified by a type.
 
-Note that the proof is extremely simple, it is essentially Grothendieck correspondance.
+Note that the proof is extremely simple, it is essentially Grothendieck correspondence.
 
 
 \sse{Classifying principal bundles}
@@ -2780,7 +2787,7 @@ We denote by $\mathrm{Bund}_G(X)$ the type of $G$-principal bundles over $X$.
 \end{definition}
 
 \begin{remark}
-In traditional algebraic topology $G$-principal bundle over $X$ for $G$ a topological group are defined as a free and transitive continuous action with quotient $X$, obeying some additional topological hypothesis. In our definition, we can remove topological conditions. We can also remove the condition of freeness and transitiveness, which are here to guarantee that the strict quotient is the same as the homotopy quotient. Moreover our definition is more general as we can use non-strict $\infty$-groups.
+In traditional algebraic topology $G$-principal bundles over $X$ for $G$ a topological group are defined as a free and transitive continuous action with quotient $X$, obeying some additional topological hypothesis. In our definition, we can remove topological conditions. We can also remove the condition of freeness and transitiveness, which are here to guarantee that the strict quotient is the same as the homotopy quotient. Moreover our definition is more general as we can use non-strict $\infty$-groups.
 \end{remark}
 
 \begin{theorem}
@@ -2790,9 +2797,9 @@ Assume given a type $X:\U$ and an $\infty$-group $G$. Then we have:
 \begin{proof}
 By definition:
 \[\mathrm{Bund}_G(X)\ :\equiv\ (P : \B G \r \U)\times \big( \big((x:\B G)\times P(x)\big) \simeq X \big)\]
-But by the Grothendieck correspondance, we have:
+But by the Grothendieck correspondence, we have:
  \[(P : \B G \r \U)\times \big((x:\B G)\times P(x) \simeq X \big) \ \simeq\ (Y:\U)\times (f:Y\r \B G) \times \big(\big((x:\B G)\times \fib_f(x)\big) \simeq X\big)\]
- But we know (also by the Grothendieck correspondance) that:  
+ But we know (also by the Grothendieck correspondence) that:  
  \[(x:\B G)\times \fib_f(x)\ \simeq\ Y\]
  therefore we have:
  \[(Y:\U)\times (f:Y\r \B G) \times \big(\big((x:\B G)\times \fib_f(x)\big) \simeq X\big) \ \simeq \ (Y:\B G)\times  (Y\r \B G)\times (Y \simeq X)\]
@@ -2806,7 +2813,7 @@ Note that the principal bundle associated to $f:X\r \B G$ is just $\fib_f : \B G
 
 \sse{Schreier theory}
 
-As a last example we give an application to ($\infty$-)group theory.
+We give one last application of our alternative definition of groups. %our As a last f application of our alternative definition  we give an application to ($\infty$-)group theory.
 
 \begin{definition}
 Assume given two $\infty$-groups $K$ and $G$, we define an extension of $G$ by $K$ as:
@@ -2814,13 +2821,13 @@ Assume given two $\infty$-groups $K$ and $G$, we define an extension of $G$ by $
 \item An $\infty$-group $H$.
 \item A pointed map $f : \B H \r_* \B G$ such that $\fib_f(*) =_{\U_*} \B K$, with $\fib_f(*)$ pointed by $(*,*_f)$.
 \end{itemize}
-We denote by $\mathrm{Ext}(G,K)$ the type of extension of $G$ by $K$.
+We denote by $\mathrm{Ext}(G,K)$ the type of extensions of $G$ by $K$.
 \end{definition}
 
 For any two $\infty$-groups $K$ and $G$ we have a trivial extension:
 \[\B K\r_* \B K\times\B G\r_*\B G\]
 The main intuition about group extensions is that they are "twisted" products of groups. %, i.e. variants of $p : \B K \times \B G \r \B G$ where the fiber of $\B K$ depends on $\B G$
-It should be noted that if $K$ and $G$ happens to be group, then $\mathrm{Ext}(K,G)$ is in fact equivalent to the type of exact sequence of groups:
+It should be noted that if $K$ and $G$ happen to be groups, then $\mathrm{Ext}(K,G)$ is in fact equivalent to the type of exact sequence of groups:
 \[0\r K\r ?\r G\r 0\]
 %Indeed in any fiber sequence of $\infty$-groups:
 %\[\B K \r \B H\r \B G\]
@@ -2836,7 +2843,7 @@ We have:
 \[\mathrm{Ext}(G,K) \ \simeq\ (X:\U_*) \times (f:X\r_* \B G) \times (\fib_f(*)=_{\U_*} \B K) \]
 because we can check that this implies $X$ connected. Now we have:
 \[\mathrm{Ext}(G,K) \ \simeq \ (X:\U)\times (x:X)\times (f:X\r \B G)\times (f(x)=*) \times  (\fib_f=_{\U_*} \B K) \]
-But by the Grothendieck correspondance:
+But by the Grothendieck correspondence:
 \[\mathrm{Ext}(G,K) \ \simeq\ (P : \B G \r \U) \times (y:P(*))\times (P(*) =_{\U_*} \B K) \]
 \[\simeq \ (P : \B G \r \U)\times (\epsilon : P(*) =_\U \B K) \times (y:P(*)) \times (y= \epsilon^{-1}(*))\]
 \[\simeq\ (P:\B G \r \U) \times (P(*) =_\U \B K)\]
@@ -3030,7 +3037,7 @@ In this class:
 \item We used homotopical ideas to revisit some logic, mainly with propositional truncation. This allowed us to decompose disjunction and existential quantifier through proof-irrelevant but intuitionist constructors. This also allowed us to define an axiom of choice in type theory, intuitively related to the usual one.
 \item We introduced higher inductive types and illustrated how they allowed us to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
 \item We gave an alternative definition of groups, which shed some new lights on some basic constructions, for example quotients.
-\item Using Grothendieck correspondance and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
+\item Using Grothendieck correspondence and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
 \item We presented cohomology and homotopy groups in a similar fashion, emphasizing the duality between the two.
 \end{itemize}
 
@@ -3079,7 +3086,7 @@ The situation is as follow:
 \item But $\infty$-dimensional objects tend to be very difficult to work with, they can get very technical (see e.g. the famous \cite{lurie2009higher}).
 \end{itemize}
 
-So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful infinite dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondance: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
+So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful infinite dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondence: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
 
 %\begin{remark}
 Homotopy type theory is proof relevant and this can be used to derive some results about homotopy types. But Homotopy type theory is also intuitionist. Can we use this to amplify results proven in HoTT ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that it does not obey the law of the excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional objects, this allows us to amplify further the applicability of HoTT.
