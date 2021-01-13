@@ -2870,12 +2870,12 @@ Some extensions often encountered in group theory are called semi-direct product
 
 \se{Spectra and cohomology}
 
-It is a well-known fact that homotopy groups are exceedingly hard to compute (for example, not all homotopy groups of the sphere $S^2$ are known). In this section we describe another family of invariants called cohomology groups, which are easier to compute. Note that we will not present the methods to compute them, although they can be implemented in HoTT, at least for finite HITs \cite{buchholtz2018cellular}.
+It is a well-known fact that homotopy groups are exceedingly hard to compute. In this section we describe another family of invariants called cohomology groups, which are easier to compute. Note that we will not present the methods to compute them, although they can be implemented in HoTT. A basic reference is by Cavallo \cite{cavallo2015synthetic}. The main method of computation using cellular cohomology is presented by Bucholtz and Favonia \cite{buchholtz2018cellular}. A reference for homology is given by Graham \cite{graham2017synthetic}. Homology is variant of cohomology significantly harder to use in our context, so we will not introduce it here. %seen as the dual to cohomology, but this slightly incorrect from our point of view.
 
 
 \sse{Abelian groups and abelian $\infty$-groups}
 
-In this section we want to define abelian $\infty$-groups. We have seen that $\pi_1(\Omega^2 X)$ is abelian for any pointed type $X$. There is a kind of reciprocate to this property. We omit all proofs in this section, see \cite{buchholtz2018higher} for a thorough treatment of this (and much more).%, i.e. some class of pointed types equivalent to abelian groups through $\Omega^2$. 
+In this section we want to define abelian $\infty$-groups. We have seen that $\pi_1(\Omega^2 X)$ is abelian for any pointed type $X$. There is a kind of converse to this property. We omit all proofs in this section, see \cite{buchholtz2018higher} for a thorough treatment of this (and much more).%, i.e. some class of pointed types equivalent to abelian groups through $\Omega^2$. 
 
 %\begin{definition}
 %We say that a group $G$ has two deloopings if there exists a pointed connected type $X$ such that:
@@ -2883,7 +2883,7 @@ In this section we want to define abelian $\infty$-groups. We have seen that $\p
 %\end{definition}
 
 \begin{proposition}
-Let $A$ be an abelian group, then there exists a pointed connected type $X$ such that $\Omega X = \B A$.
+Let $A$ be an abelian group. There exists a pointed connected type $X$ such that $\Omega X = \B A$.
 \end{proposition}
 
 Such an $X$ is denoted $\B^2A$. The type of such $X$ is actually contractible.
@@ -2906,7 +2906,7 @@ Deloopable $\infty$-groups are called \emph{braided $\infty$-groups}.
  Next theorem is a special case of the stability theorem from \cite{buchholtz2018higher}.
 
 \begin{theorem}
-Let $A$ be an abelian group, there for any natural number $n>0$, there exists a connected type $X$ (denoted $\B^nA$) such that:
+Let $A$ be an abelian group. For any natural number $n>0$, there exists a connected type $X$ (denoted $\B^nA$) such that:
 \[\Omega^n X \ = \ A\]
 \end{theorem}
 
@@ -2922,7 +2922,7 @@ More precisely it a family of pointed connected types $X_n$ for $n:\mathbb{N}$ s
 This definition is satisfying, as we will illustrate in the next sections. We have mentioned that abelian groups can be seen as abelian $\infty$-groups.
 
 \begin{remark}
-The notion of $\infty$-groups deloopable $n$ times makes sense (e.g. it gives braided $\infty$-groups for $n=1$). This notion allows us to see "how much commutativity" an $\infty$-group has: the more it can be delooped, the more it commutes.
+The notion of $\infty$-groups deloopable $n$ times is also relevant (e.g. it gives braided $\infty$-groups for $n=1$). This notion allows us to see "how much commutativity" an $\infty$-group has: the more it can be delooped, the more it commutes.
 %It is intersting to see that while being associative has only one general 
 %These $\infty$-groups are more statisfying than braided ones.
 \end{remark}
@@ -2930,9 +2930,9 @@ The notion of $\infty$-groups deloopable $n$ times makes sense (e.g. it gives br
 
 
 
-\sse{Spectra and cohomolgy}
+\sse{Spectra and cohomology}
 
-In an introductory classes to algebraic topology, cohomology theories with coefficient in an abelian group are defined. We will define them with coefficient in a spectrum, a generalisation of abelian $\infty$-groups.% are usually defined 
+In an introductory class to algebraic topology, cohomology theories with coefficient in an abelian group are defined. We will define them with coefficient in a spectrum, a generalisation of abelian $\infty$-groups.% are usually defined 
 
 \begin{definition}
 A spectrum $A$ is a family of pointed types $A_n$ for $n:\mathbb{Z}$ such that for all $n$ we have:
@@ -2954,10 +2954,10 @@ The abelian group $H^n(X,A)$ is called the $n$-th cohomology group of $X$ with c
 For example if $A$ is an abelian group, then $H^n(X,A)$ is defined as
 \[|X\r_* \B^n A|_0\]
 
-Note that we see a duality between homotopy and cohomology groups: the former are defined as maps \emph{from} some fixed types (more precisely from the spheres), the latter are defined as maps \emph{to} some fixed types (more precisely to elements of a spectrum). We will see that cohomology groups have some dual properties to homotopy groups, for example homotopy interact well with $\Omega$, whereas cohomology interact well with $\Sigma$. 
+Note that we see a duality between homotopy and cohomology groups: the former are defined as maps \emph{from} some fixed types (more precisely from the spheres), the latter are defined as maps \emph{to} some fixed types (more precisely to elements of a spectrum). We will see that cohomology groups have some dual properties to homotopy groups, for example homotopy interacts well with $\Omega$, whereas cohomology interacts well with $\Sigma$. 
 
 \begin{remark}
-Perhaps you know about group cohomology. We define it in our context. If $G$ is an $\infty$-groups, then we define the cohomology of $G$ with coefficient in a spectrum $A$ by:
+Perhaps you know about group cohomology. We define it in our context. If $G$ is an $\infty$-group, then we define the cohomology of $G$ with coefficient in a spectrum $A$ by:
 \[H^n_\Grp(G,A) \ :\equiv\ |\B G \r_* A_n|_0\]
 \end{remark}
 
@@ -2973,7 +2973,7 @@ Assume given a spectrum $A$, for any pointed type $X$ and $n:\mathbb{Z}$ we have
 \begin{proof}
 We have:
 \[H^n(X,A) \ \equiv\ |X\r_* A_n|_0 \ \simeq \ |X\r_*\Omega A_{n+1}|_0 \ \simeq \ |\Sigma X \r_* A_{n+1}| \ \equiv\ H^{n+1}(\Sigma X , A)\]
-We do not check that this respect the group structure.
+We do not check that this respects the group structure.
 \end{proof}
 
 \begin{ind_def}
@@ -3034,24 +3034,24 @@ We conclude this introductory class by giving a summary and some perspectives.
 \sse{Summary}
 In this class:
 \begin{itemize}
-\item We used homotopical ideas to revisit some logic, mainly with propositional truncation. This allowed us to decompose disjunction and existential quantifier through proof-irrelevant but intuitionist constructors. This also allowed us to define an axiom of choice in type theory, intuitively related to the usual one.
-\item We introduced higher inductive types and illustrated how they allowed us to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
-\item We gave an alternative definition of groups, which shed some new lights on some basic constructions, for example quotients.
+\item We used homotopical ideas to revisit some logic, mainly with propositional truncation. This allowed us to decompose disjunction and existential quantifier through proof-irrelevant but intuitionist constructors. %This also allowed us to define an axiom of choice in type theory, intuitively related to the usual one.
+\item We introduced higher inductive types and illustrated how they allow one to model complicated objects easily. We proved that univalence determines the higher structure of the circle.
+\item We gave an alternative definition of groups, which sheds a new light on some basic constructions, for example quotients.
 \item Using Grothendieck correspondence and our alternative definition of groups, we were able to prove four important results from homotopy theory relatively easily. %Moreover we were able to emphasized how similar they are.
 \item We presented cohomology and homotopy groups in a similar fashion, emphasizing the duality between the two.
 \end{itemize}
 
 \noindent The main insights we gained:
 \begin{itemize}
-\item For homotopy theorists: constructive methods and ideas can be useful for homotopy theory. This actually apply to mathematicians in general, although we did not demonstrate this.
+\item For homotopy theorists: constructive methods and ideas can be useful for homotopy theory. This actually applies to mathematics in general, although we did not demonstrate this.
 \item For type theorists: Homotopical ideas are useful to understand identity types even in "normal" type theory. For example higher inductive types are useful even without univalence. 
 \item For foundations: The idea "being isomorphic means being the same" can be taken seriously, and imply some homotopical structure on the universe !
 \end{itemize}
 
 \noindent We list some limitations to HoTT. %For understandable reasons we did not emphasized them in the main body of the lecture notes.
 \begin{itemize}
-\item HoTT is not computational. This means that when we define e.g. a natural number using univalence, it does not necessarily compute to a numeral (recall that numerals are $0$, and $\s(n)$ for $n$ a numeral). As an example if we show that $\pi_4(S^3) = \mathbb{Z}/n\mathbb{Z}$, there is no automated way in HoTT to compute the value of $n$ (see \cite{brunerie2016groupes} for more information on this). This problem can be solved using \emph{cubical type theory} \cite{cohen2016cubical}, which will be introduced latter in this class. Some workarounds in non-cubical HoTT are being investigated under the name of \emph{homotopy canonicity} (see \cite{coquand2019homotopy} for homotopy canonicity in cubical type theory).
-\item We mentioned the idea of infinite towers of coherences when we introduced $\infty$-groups. It is not known whether such infinite tower can be defined in HoTT. We were able to use a trick in order to define $\infty$-groups anyway, but no such trick is known for e.g. monoids. \emph{Two-Level type theories} (e.g. \cite{annenkov2017two}) are being investigated as a solution to this problem.
+\item HoTT is not computational. This means that when we define e.g. a natural number using univalence, it does not necessarily compute to a numeral (recall that numerals are $0$, and $\s(n)$ for $n$ a numeral). As an example if we show that $\pi_4(S^3) = \mathbb{Z}/n\mathbb{Z}$, there is no automated way in HoTT to compute the value of $n$ (see \cite{brunerie2016groupes} for more information on this). This problem can be solved using \emph{cubical type theory} \cite{cohen2016cubical}, which will be introduced later in this class. Some workarounds in non-cubical HoTT are being investigated under the name of \emph{homotopy canonicity} (see \cite{coquand2019homotopy} for homotopy canonicity in cubical type theory).
+\item We mentioned the idea of infinite towers of coherences when we introduced $\infty$-groups. It is not known whether such an infinite tower can be defined in HoTT. We were able to use a trick in order to define $\infty$-groups anyway, but no such trick is known for e.g. monoids. \emph{Two-Level type theories} (e.g. \cite{annenkov2017two}) are being investigated as a solution to this problem.
 \item HoTT is not directed, in the sense that we only say things about isomorphisms and not about morphisms. As an example we can extract the notion of isomorphisms of groups from the definition of groups in HoTT, but not the notion of morphisms of groups. Solutions to this are being investigated under the name of \emph{directed type theories} (e.g. \cite{licata2012} for a two-dimensional version).
 \item Currently no new theorem about homotopy types was proved in HoTT. It should be noted that some theorems were extended from homotopy types to any $\infty$-topos using HoTT (Intuitively an $\infty$-topos is a mathematical universe similar to the universe of homotopy types, see below for more information).
 \end{itemize}
@@ -3070,12 +3070,12 @@ I give some perspectives from the point of view of someone interested in fundame
 %We have seen that groups are secretly $1$-dimensional objects in a rather natural way, whereas monoids are not. We know that groups are a lot more useful in mathematics than monoids, in fact groups are always introduced in a first algebra class, whereas monoids are not. I believe there is a correlation between these facts: knowing that groups are $1$-dimensional objects we could reasonably predict that they would be useful to mathematicians. Similarly it is shown in the HoTT book that categories are secretly $1$-dimensional objects, and they are used almost everywhere in fundamental mathematics.
 
 %This leads to the idea that $\infty$-dimensional objects should be very useful for mathematics. 
-Nowadays we see a tendency to replace mathematical objects by some infinite dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectrum). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they were a key ingredient in the proof of Weibel's conjecture in algebraic geometry, by Kerz, Strunk and Tamme in 2018.
+Nowadays we see a tendency to replace mathematical objects by some infinite dimensional versions, for example groups become $\infty$-groups, abelian groups become abelian $\infty$-groups (or perhaps spectra). This actually can be generalized to almost anything, so that we have for example $\infty$-categories. Such higher dimensional objects are getting used more and more, for example they were a key ingredient in the proof of Weibel's conjecture in algebraic geometry, by Kerz, Strunk and Tamme in 2018.
 
 \begin{remark}
 In fundamental physics one can study quantum fields, which describe matter and light in a space-time. Different fields on the same space-time can correspond to each other through what are called gauge equivalences, and gauge equivalent fields describe the same physical reality. But sometimes you have non-trivial gauge equivalences of a field with itself, and this fact can be observed through experiments. These are called ghost fields by physicians. Similarly you have gauge equivalences between gauge equivalences, and so on, leading to ghost-of-ghost fields, etc.
 
-It turns out fields on a space-time form a genuinely $\infty$-dimensional object, called a smooth $\infty$-groupoid. \emph{Higher gauge theory} is a useful keyword if you want to learn more about this, and Urs Schreiber wrote a lot of interesting things on this idea.
+It turns out that fields on a space-time form a genuinely $\infty$-dimensional object, called a smooth $\infty$-groupoid. \emph{Higher gauge theory} is a useful keyword if you want to learn more about this, and Urs Schreiber wrote a lot of interesting things on this idea.
 %, and more timidly in fundamental physics (higher gauge theory is a useful keyword if you want to know more about that).
 \end{remark}
 
@@ -3086,10 +3086,10 @@ The situation is as follow:
 \item But $\infty$-dimensional objects tend to be very difficult to work with, they can get very technical (see e.g. the famous \cite{lurie2009higher}).
 \end{itemize}
 
-So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful infinite dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondence: it required a only bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
+So we know that there is an upgraded version of basically any mathematical notion, which is quite similar to the basic version, but it requires a lot of technical work to use it. We want some techniques allowing us to manipulate the upgraded version almost as if it was the basic version, but nevertheless having these new and useful infinite dimensional features. Homotopy type theory provides that to a certain degree. A notable example in these notes is the Grothendieck correspondence: it required only a bit more work than for sets (still a bit more, but in mathematics nothing is free...), but has much more powerful consequences as illustrated by the four deep theorems from algebraic topology we deduced from it. 
 
 %\begin{remark}
-Homotopy type theory is proof relevant and this can be used to derive some results about homotopy types. But Homotopy type theory is also intuitionist. Can we use this to amplify results proven in HoTT ? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that it does not obey the law of the excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional objects, this allows us to amplify further the applicability of HoTT.
+Homotopy type theory is proof relevant and this can be used to derive some results about homotopy types. But Homotopy type theory is also intuitionist. Is this extra generality useful? The answer is yes. Recall that families over quotients are not so well-behaved in set theory. In category theory we have a notion of \emph{colimits} which generalize the notion of quotients. Intuitively an $\infty$-topos is defined as a mathematical universe where families over colimits are well-behaved (technically this is called the descent property). So sets do not form an $\infty$-topos, but homotopy types do. In fact any $\infty$-topos is quite similar to the one of homotopy types, with the notable exception that an arbitrary $\infty$-topos does not obey the law of the excluded middle or the axiom of choice. Mike Schulman showed that homotopy type theory can be interpreted in any $\infty$-topos \cite{shulman2019all}. As $\infty$-topoi are one of the most useful new higher dimensional objects, this allows us to amplify further the applicability of HoTT.
 
 \begin{remark}
 This means that all the results we proved in this class are valid in any $\infty$-topos, as long as they did not use the excluded middle or choice. So for example we proved Schreier theory for $\infty$-groups in any $\infty$-topos, a result which would be so cumbersome to prove using classical methods that (to my knowledge) no such direct proof has ever been written.
@@ -3099,7 +3099,7 @@ This means that all the results we proved in this class are valid in any $\infty
 Favonia, Eric Finster, Dan Licata and Peter LeFanu Lumsdaine manage to prove the Blakers-Massey theorem in HoTT \cite{hou2016mechanization}, therefore reproving this result for homotopy types, but also generalizing it to any $\infty$-topos. Mathieu Anel, Georg Biedermann, Eric Finster and Andr{\'e} Joyal derived some generalization of this result in any $\infty$-topos in \cite{anel2017generalized}, inspired by this new proof. They derive some new results about Goodwillie calculus of functors from this \cite{anel2018goodwillie}. 
 \end{remark}
 
-The moral of this story is that homotopy type theory has proven itself a useful (albeit not definitive) tool in the development of these new higher mathematics. I hope that in the future more efficient tools using ideas from constructive mathematics will be developed, and that mathematicians will use constructivist and intuitionistic methods as a way to prove new classical theorem, whenever they are an appropriate tool.
+The moral of this story is that homotopy type theory has proven itself a useful (albeit not definitive) tool in the development of these new higher mathematics. I hope that in the future more efficient tools using ideas from constructive mathematics will be developed, and that mathematicians will use constructivist and intuitionistic methods as a way to prove new theorems, whenever they are an appropriate tool.
 
 \bibliographystyle{plain}
 \bibliography{biblio}
