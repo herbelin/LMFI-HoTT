@@ -21,11 +21,11 @@ Lectures will be online
 
 <h2>Available lecture notes</h2>
 
-<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/ITT.pdf">
+- <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/ITT.pdf">
 Notes on Type Theory
 </a>
 
-<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
+- <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
 Lecture Notes on Synthetic Homotopy Theory
 </a>
 
