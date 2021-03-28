@@ -1,7 +1,5 @@
 # Introduction to Homotopy Type Theory (LMFI 2021)
 
-<h1>Homotopy type theory</h1>
-
 <h2>Lecturers</h2>
 
 - Type Theory: Hugo Herbelin
