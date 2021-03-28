@@ -2,7 +2,11 @@
 
 <h1>Homotopy type theory</h1>
 
-<h2>Lecturers : Hugo Herbelin, Paul-André Melliès, Hugo Moeneclaey</h2>
+<h2>Lecturers</h2>
+
+- Type Theory: Hugo Herbelin
+- Semantics of Homotopy Type Theory: Paul-André Melliès
+- Synthetic Homotopy Theory: Hugo Moeneclaey
 
 <h2>Schedule</h2>
 
@@ -15,7 +19,11 @@
 
 Lectures will be online
 
-<h2>Lecture notes</h2>
+<h2>Available lecture notes</h2>
+
+<a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/ITT.pdf">
+Notes on Type Theory
+</a>
 
 <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture notes/Lecture notes.pdf">
 Lecture Notes on Synthetic Homotopy Theory
