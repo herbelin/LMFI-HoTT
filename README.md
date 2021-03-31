@@ -33,6 +33,8 @@ Lecture Notes on Synthetic Homotopy Theory
 
 <li><a href="https://homotopytypetheory.org/book/">HoTT Book</a>, 2013</li>
 
+<li>Pierre-Louis Curien's LMFI lectures on the <a href="https://curien.galene.org/notes/CoursA.pdf">syntax of Martin-L\"of's type theory</a>, the <a href="https://curien.galene.org/notes/CoursB.pdf">categorical interpretation of extensional type theory</a> and <a href="https://curien.galene.org/notes/CoursC.pdf">homotopy type theory</a></li>
+
 <li><a href="https://github.com/HoTT/HoTT">A HoTT library in Coq</a></li>
 
 <li><a href="https://github.com/HoTT/HoTT-Agda">A HoTT library in Agda</a></li>
