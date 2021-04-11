@@ -11,8 +11,8 @@
   - Cubical type theory and parametricity
 - Synthetic Homotopy Theory: Hugo Moeneclaey
   - Type formers and their identity types
-  - Grothendieck correpsondance
-  - Proposition, sets and groupoids
+  - Grothendieck correspondence
+  - Propositions, sets and groupoids
   - Groups as groupoids
   - Classifying covers, bundle and principal bundles
 - Semantics of Homotopy Type Theory: Paul-André Melliès
