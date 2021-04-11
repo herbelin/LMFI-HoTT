@@ -3,17 +3,28 @@
 <h2>Lecturers</h2>
 
 - Type Theory: Hugo Herbelin
-- Semantics of Homotopy Type Theory: Paul-André Melliès
+  - History of realisability and the proofs-as-programs correspondence
+  - From predicate calculus, arithmetic and set theory to type theory
+  - Different forms of type theory for different purposes
+  - Duality between positive and negative types in type theory
+  - Side effects in type theory (optional)
+  - Cubical type theory and parametricity
 - Synthetic Homotopy Theory: Hugo Moeneclaey
+  - Type formers and their identity types
+  - Grothendieck correpsondance
+  - Proposition, sets and groupoids
+  - Groups as groupoids
+  - Classifying covers, bundle and principal bundles
+- Semantics of Homotopy Type Theory: Paul-André Melliès
 
 <h2>Schedule</h2>
 
-- Tuesday 13 April, 10-12
-- Tuesday 13 April, 14-16
-- Wednesday 14 April, 10-12
-- Thursday 15 April, 10-12
-- Thursday 15 April, 14-16 
-- Friday 16 April, 10-12
+- Tuesday 13 April, 10-12, Herbelin
+- Tuesday 13 April, 14-16, Moeneclaey
+- Wednesday 14 April, 10-12, Moeneclaey
+- Thursday 15 April, 10-12, Moeneclaey
+- Thursday 15 April, 14-16, Melliès (to be confirmed)
+- Friday 16 April, 10-12, Herbelin
 
 Lectures will be online
 
