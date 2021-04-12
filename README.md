@@ -26,7 +26,7 @@
 - Thursday 15 April, 14-16, Melliès (to be confirmed)
 - Friday 16 April, 10-12, Herbelin
 
-Lectures will be online
+Lectures will be on [BBB](bbb-front.math.univ-paris-diderot.fr/recherche/hug-tyg-cd9-zwi) (warning: incompatible with recent versions of Firefox).
 
 <h2>Available lecture notes</h2>
 
