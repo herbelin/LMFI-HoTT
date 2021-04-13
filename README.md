@@ -28,7 +28,7 @@
 
 Lectures will be on [BBB](https://bbb-front.math.univ-paris-diderot.fr/recherche/hug-tyg-cd9-zwi) (warning: incompatible with recent versions of Firefox).
 
-Lectures on synthetic homotopy theory (by Hugo Moeneclaey) will be on zoom (https://u-paris.zoom.us/j/82232208075?pwd=L1RXMEV3VytSemVxYi9KZk5aejBaQT09).
+Lectures on synthetic homotopy theory (by Hugo Moeneclaey) will be on [Zoom](https://u-paris.zoom.us/j/82232208075?pwd=L1RXMEV3VytSemVxYi9KZk5aejBaQT09).
 
 <h2>Available lecture notes</h2>
 
