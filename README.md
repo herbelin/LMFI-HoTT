@@ -19,7 +19,7 @@
 
 <h2>Schedule</h2>
 
-- Tuesday 13 April, 10-12, Herbelin ([slides](Lecture_notes/Cours1.pdf))
+- Tuesday 13 April, 10-12, Herbelin ([slides](Lecture_notes/Cours1.pdf)) ([video](https://www.dropbox.com/sh/ghmhktv1fmb2qrf/AAABEr3EOpKrtGJAc0cTf2_Aa?dl=0))
 - Tuesday 13 April, 14-16, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_1.pdf))
 - Wednesday 14 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_2.pdf))
 - Thursday 15 April, 10-12, Moeneclaey
