@@ -4,10 +4,10 @@
 
 - Type Theory: Hugo Herbelin
   - History of realisability and the proofs-as-programs correspondence
-  - From predicate calculus, arithmetic and set theory to type theory
+  - From predicate calculus, arithmetic and set theory (Aczel sets) to type theory
   - Different forms of type theory for different purposes
   - Duality between positive and negative types in type theory
-  - Side effects in type theory (optional)
+  - Models obtained by syntactic translations
   - Cubical type theory and parametricity
 - Synthetic Homotopy Theory: Hugo Moeneclaey
   - Type formers and their identity types
@@ -19,11 +19,11 @@
 
 <h2>Schedule</h2>
 
-- Tuesday 13 April, 10-12, Herbelin ([slides](Lecture_notes/Cours1.pdf)) ([video](https://www.dropbox.com/sh/ghmhktv1fmb2qrf/AAABEr3EOpKrtGJAc0cTf2_Aa?dl=0))
+- Tuesday 13 April, 10-12, Herbelin ([slides](Lecture_notes/Cours1.pdf)) ([video](https://www.dropbox.com/sh/ghmhktv1fmb2qrf/AAABEr3EOpKrtGJAc0cTf2_Aa?dl=0), courtesy of Tao Z.)
 - Tuesday 13 April, 14-16, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_1.pdf))
 - Wednesday 14 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_2.pdf))
 - Thursday 15 April, 10-12, Moeneclaey
-- Thursday 15 April, 14-16, Melliès (to be confirmed)
+- Thursday 15 April, 14-16, Herbelin
 - Friday 16 April, 10-12, Herbelin
 
 Lectures will be on [BBB](https://bbb-front.math.univ-paris-diderot.fr/recherche/hug-tyg-cd9-zwi) (warning: incompatible with recent versions of Firefox).
