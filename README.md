@@ -23,8 +23,8 @@
 - Tuesday 13 April, 14-16, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_1.pdf))
 - Wednesday 14 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_2.pdf))
 - Thursday 15 April, 10-12, Moeneclaey
-- Thursday 15 April, 14-16, Herbelin
-- Friday 16 April, 10-12, Herbelin
+- Thursday 15 April, 14-16, Herbelin (Aczel sets, then, syntactic models)
+- Friday 16 April, 10-12, Herbelin (cubical type theory)
 
 Lectures will be on [BBB](https://bbb-front.math.univ-paris-diderot.fr/recherche/hug-tyg-cd9-zwi) (warning: incompatible with recent versions of Firefox).
 
