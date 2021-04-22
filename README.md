@@ -24,11 +24,7 @@
 - Wednesday 14 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_2.pdf))
 - Thursday 15 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_3.pdf))
 - Thursday 15 April, 14-16, Herbelin (Aczel sets, then, syntactic models) ([video](https://www.dropbox.com/s/o63uruw2tx8z0uk/record%20course%201.wmv?dl=0))
-- Friday 16 April, 10-12, Herbelin (cubical type theory)
-
-Lectures will be on [BBB](https://bbb-front.math.univ-paris-diderot.fr/recherche/hug-tyg-cd9-zwi) (warning: incompatible with recent versions of Firefox).
-
-Lectures on synthetic homotopy theory (by Hugo Moeneclaey) will be on [Zoom](https://u-paris.zoom.us/j/81326863378?pwd=VkN1L09FenJsRlVBVjI1NEtyeDIzQT09).
+- Friday 16 April, 10-12, Herbelin (cubical type theory) ([video](https://www.dropbox.com/s/x6t8dqyw9yjlwvr/record%20course%202.wmv?dl=0))
 
 <h2>Available lecture notes</h2>
 
