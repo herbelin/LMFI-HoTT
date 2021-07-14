@@ -20,9 +20,9 @@
 <h2>Schedule</h2>
 
 - Tuesday 13 April, 10-12, Herbelin ([slides](Lecture_notes/Cours1.pdf)) ([video](https://www.dropbox.com/sh/ghmhktv1fmb2qrf/AAABEr3EOpKrtGJAc0cTf2_Aa?dl=0), courtesy of Tao Z.)
-- Tuesday 13 April, 14-16, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_1.pdf))
-- Wednesday 14 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_2.pdf))
-- Thursday 15 April, 10-12, Moeneclaey ([slides](Lecture_notes/Slide_Synthetic_3.pdf))
+- Tuesday 13 April, 14-16, Moeneclaey ([slides](Synthetic_Homotopy_Theory/Slides_2021/Slide_Synthetic_1.pdf))
+- Wednesday 14 April, 10-12, Moeneclaey ([slides](Synthetic_Homotopy_Theory/Slides_2021/Slide_Synthetic_2.pdf))
+- Thursday 15 April, 10-12, Moeneclaey ([slides](Synthetic_Homotopy_Theory/Slides_2021/Slide_Synthetic_3.pdf))
 - Thursday 15 April, 14-16, Herbelin (Aczel sets, then, syntactic models) ([video](https://www.dropbox.com/s/o63uruw2tx8z0uk/record%20course%201.wmv?dl=0))
 - Friday 16 April, 10-12, Herbelin (cubical type theory) ([video](https://www.dropbox.com/s/x6t8dqyw9yjlwvr/record%20course%202.wmv?dl=0))
 
@@ -32,10 +32,14 @@
 Notes on Type Theory
 </a></li>
 
-<li> <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Lecture_notes/Lecture_notes.pdf">
+<li> <a charset="UTF-8" href="https://github.com/herbelin/LMFI-HoTT/blob/master/Synthetic_Homotopy_Theory/Lecture_notes/Lecture_notes.pdf">
 Lecture Notes on Synthetic Homotopy Theory
 </a></li>
 </ul>
+
+<h2>Formalisation</h2>
+
+See [here](Synthetic_Homotopy_Theory/Formalisation). It was written by Louis Gervais during the first half of 2021.
 
 <h2>Bibliography</h2>
 <ul>
