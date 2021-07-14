@@ -1,0 +1,176 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{nccmath}
+\usepackage{bussproofs}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\selectlanguage{english} 
+\usepackage[all]{xy}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{tikz-cd}
+\usepackage{fourier}
+
+ \usepackage[landscape,twocolumn]{geometry}
+\geometry{margin=0.4in}
+%\usepackage{tikz-cd}
+
+\usepackage{forest}
+\usepackage{color}
+
+\newcommand{\se}[1]{\medbreak \medbreak \section{#1}}
+\newcommand{\sse}[1]{\medbreak \subsection{#1}}
+\newcommand{\ssse}[1]{\subsubsection*{#1}}
+
+
+\newcommand{\U}{{\mathcal U}}
+\renewcommand{\r}{\rightarrow}
+\newcommand{\Gl}{\lambda}
+
+\newcommand{\ap}{\mathrm{ap}}
+\newcommand{\apd}{\mathrm{apd}}
+\newcommand{\refl}{\mathrm{refl}}
+\newcommand{\id}{\mathrm{\bf id}}
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\fib}{\mathrm{\bf fib}}
+\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\base}{\mathrm{\bf base}}
+\renewcommand{\loop}{\mathrm{\bf loop}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\N}{\mathrm{\bf N}}
+\renewcommand{\S}{\mathrm{\bf S}}
+\newcommand{\merid}{\mathrm{\bf merid}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\B}{\mathrm{B}}
+\newcommand{\Aut}{\mathrm{Aut}}
+
+\newcommand{\List}{\mathrm{\bf List}}
+
+\newcommand{\s}{\mathrm{\bf s}}
+\newcommand{\inc}{\mathrm{\bf inc}}
+
+\newcommand{\one}{{\bf 1}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\two}{{\bf 2}}
+%\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Prop}{\mathrm{Prop}}
+\newcommand{\Gpd}{\mathrm{Gpd}}
+\newcommand{\Eq}{\mathrm{Eq}}
+
+\newcommand{\encode}{\mathrm{\bf encode}}
+\newcommand{\decode}{\mathrm{\bf decode}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{ind_def}{Inductive Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{exercise}{Exercise}
+\newtheorem{warning}{\danger Warning}
+\newtheorem{open_problem}{Open problem}
+\newtheorem{goal}{Goal}
+%\newtheorem{example}{Example}
+
+\newcommand{\lef}{\mathrm{\bf left}}
+\newcommand{\righ}{\mathrm{\bf right}}
+\newcommand{\quo}{\mathrm{\bf quo}}
+
+\usepackage{exercise}
+
+
+
+\title{Synthetic Homotopy Theory Homework: \\ The Impredicative Circle}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{definition} 
+A map $f : A\rightarrow B$ is called an immersion if for all $x,y:A$, the map:
+\[\mathrm{\bf ap}_f : x =_A y \rightarrow f(x) =_B f(y)\]
+is an equivalence.
+\end{definition}
+
+\begin{goal} 
+In this exercise we want to construct an immersion of $S^1$ into a type built without higher inductive type.
+\end{goal}
+
+\paragraph{Question 1} 
+Let $A$ be a pointed connected type, and let $B$ be any type. Assume given $f:A\rightarrow B$ such that: 
+\[\mathrm{\bf ap}_f : * = * \rightarrow f(*) = f(*)\]
+is an equivalence (here $*$ is the basepoint of $A$). Prove that $f$ is an immersion.
+
+\paragraph{Question 2} 
+Assume given $B$ a type with $b:B$ such that we have an isomorphism of group:
+\[\epsilon :  \mathbb{Z} \rightarrow (b=_Bb)\] 
+We define $f : S^1 \rightarrow B$ by: 
+\[f(\mathrm{\bf base})\ :\equiv\ b\]
+\[\mathrm{\bf ap}_f(\mathrm{\bf loop})\ :\equiv\ \epsilon(1)\]
+Using question 1 show that $f$ is an immersion.
+
+\begin{definition} 
+We denote by $\mathrm{Aut}$ the type $(X:{\mathcal U}) \times (X =_{\mathcal U} X)$.
+\end{definition}
+
+\paragraph{Question 3} 
+Assume given $(X,p)$ and $(Y,q)$ in $\mathrm{Aut}$. Prove that:
+\[(X,p) =_{\mathrm{Aut}} (Y,q) \ \simeq\ (\epsilon : X=_{\mathcal U}Y) \times (p\cdot\epsilon = \epsilon\cdot q)\]
+
+\begin{definition}
+We denote by $G$ the type of $\epsilon : \mathbb{Z}\simeq \mathbb{Z}$ such that we have the following property:
+\[(n:\mathbb{Z}) \rightarrow \epsilon(n+1) = \epsilon(n)+1\]
+\end{definition}
+
+\paragraph{Question 4} 
+We denote by $s$ the equivalence in $\mathbb{Z} \simeq \mathbb{Z}$ with underlying map $x\mapsto x+1$. Using question 3 prove that:
+\[\big((\mathbb{Z},s) =_{\mathrm{Aut}} (\mathbb{Z},s)\big) \ =_{\mathcal U}\ G\]
+
+\paragraph{Question 5} 
+Show that $G$ has a group structure where multiplication is the composition of equivalences. We admit that the equality from question 4 induces an isomorphism of group.
+
+\paragraph{Question 6} 
+Show that we have an isomorphism of group:
+\[\epsilon \mapsto \epsilon(0) : G \rightarrow \mathbb{Z}\]
+
+\paragraph{Question 7} 
+Conclude that we have an immersion of $S^1$ into $\mathrm{Aut}$.
+
+
+% \ \simeq\ (\epsilon : \mathbb{Z}\simeq\mathbb{Z})\times\big((n:\mathbb{Z}) \rightarrow \epsilon(n+1) = \epsilon(n)+1\big)\]
+
+\paragraph{Bonus Question} Show that if $A$ is a pointed-connected type and $B$ is any type, an immersion $f: A \rightarrow B$ induces an equivalence: 
+\[A\ \simeq\ (b:B)\times | f(*) = b |\]
+
+\begin{remark} 
+We define:
+\[T\ :\equiv\ (X:{\mathcal U})\times (p:X=_{\mathcal U} X) \times |(\mathbb{Z},s) = (X,p)|\]
+From question 7 and the bonus question, we can deduce that:
+\[S^1\ \simeq\ T\]
+In fact we can define the circle as $T$. This means that the circle can be defined from propositional truncation, without using higher inductive type.
+
+It should be noted that $T$ is one universe higher than the circle. % making it akin to an impredicative encoding of the circle. 
+\end{remark}
+
+\begin{remark}
+By our correspondance between groups and connected pointed groupoids, it is natural to see the type $T$ from the previous remark as the type of $\mathbb{Z}$-torsors (see \url{https://ncatlab.org/nlab/show/torsor} for a definition of torsors, and \url{http://math.ucr.edu/home/baez/torsors.html} for an entertaining introduction). %So we can see $\mathbb{Z}$-torsors as an impredicative encoding for $S^1$.
+%$\mathrm{B}\mathbb{Z}$ (recall that $S^1 = \mathrm{B}\mathbb{Z}$). 
+
+This can be generalized from $\mathbb{Z}$ to any group $G$, by giving a definition (without using higher inductive) of the type of $G$-torsors , and proving that it is equivalent to $\mathrm{B}G$ (recall that $S^1 = \mathrm{B}\mathbb{Z}$). This gives an insight into the classical definition of $G$-torsors: they form a large type equivalent to $\mathrm{B} G$.
+\end{remark}
+
+
+\end{document}
+
+

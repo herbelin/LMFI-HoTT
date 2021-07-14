@@ -1,0 +1,119 @@
+\documentclass{article}[6pt]%[landscape,twocolumn,letterpaper,8pt]
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\newtheorem*{definition}{Definition}
+\newtheorem*{goal}{Goal}
+\newtheorem*{remark}{Remark}
+
+\usepackage[all]{xy}
+
+\newcommand{\tr}{\mathrm{\bf tr}}
+\newcommand{\refl}{\mathrm{\bf refl}}
+\newcommand{\id}{\mathrm{id}}
+
+
+
+
+\begin{document}
+
+
+\paragraph{Question 1} 
+Assume given $x,y:A$, we want to prove that:
+\[\mathrm{\bf ap} : x=_Ay \rightarrow f(x)=_Bf(y)\]
+is an equivalence. Since $A$ is connected we know that $|x=*|$ and $|y=*|$, but as being an equivalence is a proposition, we can eliminate propositional truncation and assume $x=*$ and $y=*$. Then by path induction we need to prove that:
+\[\mathrm{\bf ap} : *=_A* \rightarrow f(*)=_Bf(*)\]
+is an equivalence, and this is the hypothesis.
+
+
+\paragraph{Question 2}
+ From question 1 we just need to prove that:
+\[\mathrm{\bf ap}_f : \mathrm{\bf base} =_{S^1}\mathrm{\bf base} \rightarrow  b=_Bb\]
+is an equivalence.
+
+We have the following diagram of morphisms of group:
+
+\begin{center}
+\xymatrix{
+\mathrm{\bf base} =_{S^1}\mathrm{\bf base}\ar[rr]^{\mathrm{\bf ap}_f} & & b=_Bb \\ 
+ \ar[u]^{n\mapsto \mathrm{\bf loop}^n }  \mathbb{Z} \ar[rr]_{\mathrm{id}}  & & \mathbb{Z} \ar[u]^{\epsilon}\\
+}
+\end{center}
+
+We want to show that it commutes. But morphisms of groups out of $\mathbb{Z}$ are equal if and only if they have the same value on $1$, so we just need to check that:
+\[\mathrm{\bf ap}_f(\mathrm{\bf loop}) = \epsilon(1)\]
+
+This is true by definition. Now we have a commuting square where three maps are equivalences, and therefore so is the fourth. 
+
+
+\paragraph{Question 3} 
+By our analysis of identity types in product types, we know that:
+\[(X,p) =_{\mathrm{Aut}}(Y,q) \ \simeq\ (\epsilon : X=_{\mathcal U} Y)\times \tr^{\lambda X.X=X}_\epsilon(p) = q \]
+So it is enough to show that for all $X,Y:{\mathcal U}$ with $\epsilon:X=Y$, $p:X=X$ and $q:Y=Y$ we have:
+\[ (\tr^{\lambda X.X=X}_\epsilon(p) = q)\ \simeq \ (p\cdot \epsilon = \epsilon\cdot q)\]
+By path induction we can assume that $\epsilon$ is $\refl$, and then we need to show that:
+\[(p=q)\ \simeq\ (p\cdot\refl = \refl\cdot q) \]
+but this is easy.
+
+\paragraph{Question 4} 
+By question 3 we know that:
+\[\big((\mathbb{Z},s)=_{\mathrm{Aut}} (\mathbb{Z},s)\big) \ =_{\mathcal U} \ (\epsilon : \mathbb{Z} = \mathbb{Z})\times (s\cdot \epsilon =_{\mathbb{Z} = \mathbb{Z}} \epsilon\cdot s)\] 
+By univalence this is equivalent to:
+\[(\epsilon : \mathbb{Z}\simeq\mathbb{Z})\times (s\circ \epsilon =_{\mathbb{Z}\simeq\mathbb{Z}} \epsilon\circ s) \]
+But by function extensionnality (and the analysis of equality between equivalences) this is equivalent to:
+\[(\epsilon : \mathbb{Z}\simeq\mathbb{Z})\times \big( (n:\mathbb{Z}) \rightarrow s(\epsilon(n)) =_{\mathbb{Z}}\epsilon(s(n)) \big)\]
+which is what we want.
+
+\paragraph{Question 5} 
+It is known that $\mathbb{Z}\simeq\mathbb{Z}$ has a group structure induced by composition. But $G$ is the type of elements of $\epsilon : \mathbb{Z}\simeq\mathbb{Z}$ verifying the proposition: 
+\[P(\epsilon) \ :\equiv\ (n:\mathbb{Z}) \rightarrow \epsilon(n)+1 = \epsilon(n+1)\]
+ So it is enough to check that $P$ is stable by composition and inverse in order to conclude.%of $\mathbb{Z}\simeq\mathbb{Z}$.
+
+For $f,g$ satisgying $P$, so does $g\circ f$. Indeed for all $n:\mathbb{Z}$ we have $f(n+1) = f(n)+1$ and $g(n+1) = g(n)+1$, we see that:
+\[g(f(n+1)) = g(f(n)+1) = g(f(n)) +1\]
+so that $g\circ f$ is in $G$.
+
+If $f$ satisfies $P$, so does $f^{-1}$, indeed: 
+\[f^{-1}(n)+1 = f^{-1}(n+1)\] 
+is equivalent to:
+\[f(f^{-1}(n)+1) = f(f^{-1}(n+1))\] 
+because $f$ is an equivalence, and then:
+\[ f(f^{-1}(n)+1) = f(f^{-1}(n)) +1 = n+1 = f(f^{-1}(n+1))\]
+
+
+
+\paragraph{Question 6}
+As a preliminary result, we omit the proof by a straightforward induction on $n:\mathbb{Z}$ that for $f:G$ we have:
+\[f(n) = f(0) + n\]
+
+We call $\psi$ the map $f\mapsto f(0) : G\rightarrow \mathbb{Z}$. 
+
+First we check that $\psi$ is a morphism of group, meaning that for $f,g:G$, we have:
+\[f(g(0)) = f(0) + g(0)\]
+But $f(n) = f(0)+n$ for all $n:\mathbb{Z}$, so we can conclude. (To be complete we need to check $\id(0) = 0$ which is obvious).
+
+Now we check that $\psi$ is an equivalence. We define $\phi : \mathbb{Z} \rightarrow G$ by:
+\[\psi(n) \ :\equiv\ (m\mapsto n+m)\]
+It is easy to check that $\psi(n)$ is in $G$. Then:
+
+\begin{itemize}
+\item For $f:G$ we have that $\phi(\psi(f)) \equiv \phi(f(0)) \equiv (m\mapsto f(0)+m)$, but we have seen that $f(m) = f(0) + m$ so we can conclude that:
+\[\phi(\psi(f)) = f\]
+by function extensionnality.
+\item For $m:\mathbb{Z}$ we see that $\psi(\phi(m)) = 0+m = m$ by definition.
+\end{itemize}
+
+So we indeed have an isomorphism of group $\psi : G \rightarrow \mathbb{Z}$.
+
+
+\paragraph{Question 7} By question 5 and 6 we know that: 
+\[(\mathbb{Z},s)=_{\mathrm{Aut}}(\mathbb{Z},s)\]
+is isomorphic as group to $\mathbb{Z}$. But from question 2 this gives an immersion for $S^1$ of $\mathrm{Aut}$, sending $\mathrm{\bf base}$ to $(\mathbb{Z},s)$
+
+%\paragraph{Bonus Question} 
+
+
+\end{document}
+
+
