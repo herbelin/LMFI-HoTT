@@ -1,10 +1,4 @@
-Require Import HoTT.
-Require Import Reals.
-Require Import Arith.
-Require Import Coq.Reals.Reals.
-Open Scope nat_scope.
-Require Import Bool.
-
+Require Import Beginning_until_Grothendieck.
 
 (* I couldn't do a makefile so i took previous definition, 
 i also add a few of them, which are pretty useful to prove things *)
@@ -23,13 +17,13 @@ Notation "f =~ g " := (homotopy f g)(at level 40).
 Definition compose_function {A B C} (g : B -> C) (f : A -> B) :=
   fun x : A => g (f x).
 
-Notation " g ¤ f ":= (compose_function g f)(at level 40).
+Notation " g \u00a4 f ":= (compose_function g f)(at level 40).
 
 Definition Id (A : Type) :=
 fun x: A => x.
 
 Record isequiv (A B : Type) (f : A-> B) : Type :=
-MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f¤g1)=~(Id B); inv_r : (g2¤f) =~(Id A)}.
+MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f\u00a4g1)=~(Id B); inv_r : (g2\u00a4f) =~(Id A)}.
 
 Lemma weak_functional_extensionality {A B} (f g : A -> B) : f=g -> forall x : A, f x = g x.
 Proof.
@@ -43,15 +37,15 @@ Proof.
 intros. apply extensionality . exact X.
 Defined.
 
-Lemma compose_asso {A B C D} (f : A -> B) ( g : B -> C) (h : C -> D) : h ¤ (g ¤ f ) = (h ¤ g) ¤ f.
+Lemma compose_asso {A B C D} (f : A -> B) ( g : B -> C) (h : C -> D) : h \u00a4 (g \u00a4 f ) = (h \u00a4 g) \u00a4 f.
 Proof.
-unfold "¤".
+unfold "\u00a4".
 apply refl.
 Defined.
 
-Lemma compose_asso_2 {A B C D} (f : A -> B) ( g : B -> C) (h : C -> D) :(h ¤ g) ¤ f = h ¤ (g ¤ f ).
+Lemma compose_asso_2 {A B C D} (f : A -> B) ( g : B -> C) (h : C -> D) :(h \u00a4 g) \u00a4 f = h \u00a4 (g \u00a4 f ).
 Proof.
-unfold "¤".
+unfold "\u00a4".
 apply refl.
 Defined.
 
@@ -67,29 +61,29 @@ exists (Id A). exists (Id A) (Id A).
 - intro ; apply refl.
 Defined.
 
-Lemma Id_and_hom {A B} (f : A -> B)(g : B -> A) :  (f ¤ g)  =~ Id B -> (f ¤ g) = Id B.
+Lemma Id_and_hom {A B} (f : A -> B)(g : B -> A) :  (f \u00a4 g)  =~ Id B -> (f \u00a4 g) = Id B.
 Proof.
 intros. apply functional_extensionality. unfold "=~" in X. exact X.
 Defined.
 
-Lemma compose_with_Id {A B C} (f : B -> A)(g : C -> B) : (f ¤ (Id B ¤ g)) = (f ¤ g).
+Lemma compose_with_Id {A B C} (f : B -> A)(g : C -> B) : (f \u00a4 (Id B \u00a4 g)) = (f \u00a4 g).
 Proof. 
-apply functional_extensionality. intro. unfold "¤". apply refl.
+apply functional_extensionality. intro. unfold "\u00a4". apply refl.
 Defined.
 
-Lemma compose_with_Id_2 {A B } (f : A -> B) : f¤Id A = f.
+Lemma compose_with_Id_2 {A B } (f : A -> B) : f\u00a4Id A = f.
 Proof. 
-unfold "¤". unfold Id. apply functional_extensionality. intro ; apply refl.
+unfold "\u00a4". unfold Id. apply functional_extensionality. intro ; apply refl.
 Defined.
 
 Lemma equiv_transitivity (A B C : Type) : A~=~B -> B~=~C -> A~=~C.
 Proof. 
 intros. destruct X. destruct X0. destruct second0. destruct second1. unfold "=~" in inv_l0. unfold "=~" in inv_r1. 
-exists (first1 ¤ first0). exists (g3 ¤ g5) (g4 ¤ g6).
-- unfold "=~". intro. rewrite (compose_asso g5 g3 (first1 ¤ first0)). 
+exists (first1 \u00a4 first0). exists (g3 \u00a4 g5) (g4 \u00a4 g6).
+- unfold "=~". intro. rewrite (compose_asso g5 g3 (first1 \u00a4 first0)). 
 rewrite (compose_asso_2  g3 first0 first1). apply weak_functional_extensionality. 
 apply Id_and_hom in inv_l0. rewrite inv_l0. rewrite compose_asso_2. rewrite compose_with_Id. apply functional_extensionality. exact inv_l1.
-- unfold "=~". intro. rewrite (compose_asso_2 (first1 ¤ first0) g6 g4). 
+- unfold "=~". intro. rewrite (compose_asso_2 (first1 \u00a4 first0) g6 g4). 
 rewrite (compose_asso first0 first1 g6). apply weak_functional_extensionality. 
 apply Id_and_hom in inv_r1. rewrite inv_r1. rewrite compose_with_Id. apply functional_extensionality.
 exact inv_r0.
@@ -157,12 +151,13 @@ Defined.
 
 (* End of definition *)
 
+
 (* We now defined new type to prove the lemma fifteen *)
 (* In order to prove it, we are going to 
 create new type to show that there are equivalent to each other *)
 
 Definition eq_with_equiv {A A' B} (f : A -> B) (g : A' -> B): Type :=
-prodpp (fun e : A~=~ A' => f=~ (g¤(first A A' e))).
+prodpp (fun e : A~=~ A' => f=~ (g\u00a4(first A A' e))).
 
 Definition eq_with_eq {A A' B} (f : A -> B) (g : A' -> B) :=
 prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f  = g).
@@ -231,25 +226,25 @@ unfold elmt_U_ov_set. apply (equiv_transitivity ({| fst_2 := A; snd_2 := f |} = 
 Defined. 
 
 Lemma for_fifteen_2 {A A' B} (f : A -> B)(g : A' -> B)(e : A = A') : 
-(Tr (fun C : Type => C -> B) A A' e f = g) ~=~ (f = (g ¤ (first A A' (ua e)))).
+(Tr (fun C : Type => C -> B) A A' e f = g) ~=~ (f = (g \u00a4 (first A A' (ua e)))).
 Proof.
 induction e. apply ua. apply refl.
 Defined.
 
 Definition eq_with_eg {A A' B} (f : A -> B)(g : A' -> B) :=
-prodpp (fun e : A=A' => f = g ¤ (first A A' (ua e))).
+prodpp (fun e : A=A' => f = g \u00a4 (first A A' (ua e))).
 
 Lemma encode_3 { A A' B} (f : A -> B) (g : A' -> B) :
 prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f = g) ->
-prodpp (fun e : A = A' => f = g ¤ first A A' (ua e)).
+prodpp (fun e : A = A' => f = g \u00a4 first A A' (ua e)).
 Proof.
-intro X. destruct X. destruct fst_4. destruct snd_4.  simpl. exact (prodpp_def _ (fun e : A = A => f = f ¤ first A A (ua e)) (refl A) (refl f)).
+intro X. destruct X. destruct fst_4. destruct snd_4.  simpl. exact (prodpp_def _ (fun e : A = A => f = f \u00a4 first A A (ua e)) (refl A) (refl f)).
 Defined.
 
 Lemma decode_3 { A A' B} (f : A -> B) (g : A' -> B) :
-prodpp (fun e : A=A' => f = g ¤ first A A' (ua e) ) -> prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f = g).
+prodpp (fun e : A=A' => f = g \u00a4 first A A' (ua e) ) -> prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f = g).
 Proof.
-intro X. destruct X. destruct fst_4. rewrite snd_4.  exact (prodpp_def _ (fun e : A = A => Tr (fun C : Type => C -> B) A A e (g ¤ first A A (ua 1)) = g) (refl A) (refl g)).
+intro X. destruct X. destruct fst_4. rewrite snd_4.  exact (prodpp_def _ (fun e : A = A => Tr (fun C : Type => C -> B) A A e (g \u00a4 first A A (ua 1)) = g) (refl A) (refl g)).
 Defined.
 
 Lemma inv_en_de { A B} (f : A -> B) (g : A -> B) (snd_4 : f = g ) :
@@ -261,10 +256,10 @@ Defined.
 
 Lemma for_for_fifteen_3 {A A' B} (f : A -> B) (g : A' -> B) :
 prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f = g) ~=~
-prodpp (fun e : A = A' => f = g ¤ first A A' (ua e)).
+prodpp (fun e : A = A' => f = g \u00a4 first A A' (ua e)).
 Proof.
 exists (encode_3 f g). exists (decode_3 f g) (decode_3 f g).
-- intro. destruct x. unfold "¤". unfold Id. destruct fst_4. simpl in snd_4. apply inv_en_de.
+- intro. destruct x. unfold "\u00a4". unfold Id. destruct fst_4. simpl in snd_4. apply inv_en_de.
 - intro. destruct x. destruct fst_4. destruct snd_4. apply refl.
 Defined.
 
@@ -279,12 +274,12 @@ apply (equiv_transitivity ((prodpp_def Type (fun X : Type => X -> B) A f )= (pro
 Defined.
 
 Definition eqi_with_eg {A A' B} (f : A -> B)(g : A' -> B) :=
-prodpp (fun e : A~=~A' => f = g ¤ (first A A' e)).
+prodpp (fun e : A~=~A' => f = g \u00a4 (first A A' e)).
 
 Lemma use (A B : Type) :
-ua ¤ uni  =~ Id (A~=~B).
+ua \u00a4 uni  =~ Id (A~=~B).
 Proof.
-unfold "¤". unfold Id. unfold uni. unfold ua. apply (inv_l (A=B) (A~=~B) ua (univalence A B)).
+unfold "\u00a4". unfold Id. unfold uni. unfold ua. apply (inv_l (A=B) (A~=~B) ua (univalence A B)).
 Defined.
 
 Lemma use_2 { A B} (e : A~=~ B) :
@@ -294,44 +289,44 @@ apply use .
 Defined.
 
 Lemma for_function { A A' B} (f : A -> B) (g : A' -> B)(e : A~=~A') :
-( f = g ¤ first A A' e) = (f = g ¤ first A A' (ua (uni e))).
+( f = g \u00a4 first A A' e) = (f = g \u00a4 first A A' (ua (uni e))).
 Proof.
 rewrite use_2. apply refl.
 Defined.
 
 Lemma function { A A' B} (f : A -> B) (g : A' -> B) :
-prodpp (fun e : A = A' => f = g ¤ first A A' (ua e)) ->
-prodpp (fun e : A ~=~ A' => f = g ¤ first A A' e).
+prodpp (fun e : A = A' => f = g \u00a4 first A A' (ua e)) ->
+prodpp (fun e : A ~=~ A' => f = g \u00a4 first A A' e).
 Proof.
-intro. destruct X. destruct fst_4. simpl in snd_4. exact (prodpp_def _ (fun e : A ~=~ A => f = g ¤ first A A e) (equiv_refle ) (snd_4)).
+intro. destruct X. destruct fst_4. simpl in snd_4. exact (prodpp_def _ (fun e : A ~=~ A => f = g \u00a4 first A A e) (equiv_refle ) (snd_4)).
 Defined.
 
 Lemma inv_function  { A A' B} (f : A -> B) (g : A' -> B) :
-prodpp (fun e : A ~=~ A' => f = g ¤ first A A' e) -> prodpp (fun e : A = A' => f = g ¤ first A A' (ua e)) .
+prodpp (fun e : A ~=~ A' => f = g \u00a4 first A A' e) -> prodpp (fun e : A = A' => f = g \u00a4 first A A' (ua e)) .
 Proof.
-intro. destruct X. rewrite for_function in snd_4. exact (prodpp_def  _ (fun e : A = A'  => f = g ¤ first A A' (ua e)) (uni fst_4) (snd_4)).
+intro. destruct X. rewrite for_function in snd_4. exact (prodpp_def  _ (fun e : A = A'  => f = g \u00a4 first A A' (ua e)) (uni fst_4) (snd_4)).
 Defined. 
 
 
-(* J'ai pas réussi ! *)
-Lemma goal_1 { A A' B} (f : A -> B) ( g : A' -> B) (fst_4 :A~=~ A') (snd_4 : f = g ¤ first A A' fst_4) :
- (function f g ¤ inv_function f g) {| fst_2 := fst_4; snd_2 := snd_4 |} =
-Id (prodpp (fun e : A ~=~ A' => f = g ¤ first A A' e))
+(* J'ai pas r\u00e9ussi ! *)
+Lemma goal_1 { A A' B} (f : A -> B) ( g : A' -> B) (fst_4 :A~=~ A') (snd_4 : f = g \u00a4 first A A' fst_4) :
+ (function f g \u00a4 inv_function f g) {| fst_2 := fst_4; snd_2 := snd_4 |} =
+Id (prodpp (fun e : A ~=~ A' => f = g \u00a4 first A A' e))
   {| fst_2 := fst_4; snd_2 := snd_4 |}.
 Proof.
 unfold Id.
 Admitted.
 
-Lemma goal_2 { A B} (f g : A -> B) (snd_4 : f = g ¤ Id A) :
-(inv_function f g ¤ function f g) {| fst_2 := 1%path; snd_2 := snd_4 |} =
+Lemma goal_2 { A B} (f g : A -> B) (snd_4 : f = g \u00a4 Id A) :
+(inv_function f g \u00a4 function f g) {| fst_2 := 1%path; snd_2 := snd_4 |} =
 {| fst_2 := 1%path; snd_2 := snd_4 |}.
 Proof.
 Admitted.
 
 
 Lemma for_for_fifteen_4 {A A' B} (f : A -> B) (g : A' -> B) :
-prodpp (fun e : A = A' => f = g ¤ first A A' (ua e)) ~=~
-prodpp (fun e : A ~=~ A' => f = g ¤ first A A' e).
+prodpp (fun e : A = A' => f = g \u00a4 first A A' (ua e)) ~=~
+prodpp (fun e : A ~=~ A' => f = g \u00a4 first A A' e).
 Proof.
 exists (function f g). exists (inv_function f g) (inv_function f g).
 - intro. destruct x. exact (goal_1 f g fst_4 snd_4).
@@ -355,18 +350,18 @@ Lemma encode_5 {A A' B} (f : A -> B) (g : A' -> B) :
 eqi_with_eg f g -> eq_with_equiv f g.
 Proof.
 intros X . unfold eqi_with_eg in X. unfold eq_with_equiv. destruct X.
-exact (prodpp_def _ (fun e : A~=~A' => f =~ (g¤first A A' e)) fst_4 (weak_functional_extensionality f (g¤first A A' fst_4) snd_4)).
+exact (prodpp_def _ (fun e : A~=~A' => f =~ (g\u00a4first A A' e)) fst_4 (weak_functional_extensionality f (g\u00a4first A A' fst_4) snd_4)).
 Defined.
 
 Lemma decode_5 {A A' B} (f : A -> B) (g : A' -> B) :
 eq_with_equiv f g -> eqi_with_eg f g.
 Proof.
 intros X . unfold eqi_with_eg . unfold eq_with_equiv in X. destruct X.
-exact (prodpp_def _ (fun e : A~=~A' => f = (g¤first A A' e)) fst_4 (functional_extensionality f (g¤first A A' fst_4) snd_4)).
+exact (prodpp_def _ (fun e : A~=~A' => f = (g\u00a4first A A' e)) fst_4 (functional_extensionality f (g\u00a4first A A' fst_4) snd_4)).
 Defined.
 
 Lemma weak_with_extensionality{ A B} (f g: A -> B) :
- weak_functional_extensionality f g ¤ functional_extensionality f g  =~ Id (forall x : A, f x = g x).
+ weak_functional_extensionality f g \u00a4 functional_extensionality f g  =~ Id (forall x : A, f x = g x).
 Proof.
 unfold weak_functional_extensionality.  unfold functional_extensionality. apply (inv_l (f=g) (forall x : A, f x= g x)(weak_functional_extensionality f g) (extensionality A B f g)).
 Defined.
@@ -378,12 +373,12 @@ apply weak_with_extensionality.
 Defined.
 
 
-(* Pas réussi nan plus ! *)
+(* Pas r\u00e9ussi nan plus ! *)
 Lemma extensionality_with_weak { A B} (f g: A -> B):
- functional_extensionality f g ¤
+ functional_extensionality f g \u00a4
       weak_functional_extensionality f g =~ Id (f = g).
 Proof.
-unfold "¤". intro. unfold functional_extensionality. 
+unfold "\u00a4". intro. unfold functional_extensionality. 
 Admitted.
 
 Lemma extensionality_with_weak_2 {A B} ( f g : A -> B) (e : f = g):
@@ -396,9 +391,9 @@ Lemma for_fifteen_5 {A A' B} (f : A -> B)(g : A' -> B) :
 eqi_with_eg f g ~=~ eq_with_equiv f g.
 Proof.
 unfold eqi_with_eg. unfold eq_with_equiv. exists (encode_5 f g). exists (decode_5 f g) (decode_5 f g).
-- intro. destruct x. unfold eq_with_equiv. unfold eqi_with_eg. unfold "¤". unfold Id. simpl. unfold decode_5. unfold encode_5. 
-rewrite (weak_with_extensionality_2 f (g¤ first A A' fst_4) snd_4). apply refl.
-- unfold "¤". intro. destruct x. unfold Id. unfold encode_5. unfold decode_5. rewrite extensionality_with_weak_2. apply refl.
+- intro. destruct x. unfold eq_with_equiv. unfold eqi_with_eg. unfold "\u00a4". unfold Id. simpl. unfold decode_5. unfold encode_5. 
+rewrite (weak_with_extensionality_2 f (g\u00a4 first A A' fst_4) snd_4). apply refl.
+- unfold "\u00a4". intro. destruct x. unfold Id. unfold encode_5. unfold decode_5. rewrite extensionality_with_weak_2. apply refl.
 Defined. 
 
 Lemma fifteen { A A' B} (f : A -> B) (g : A' -> B) :
@@ -413,7 +408,7 @@ Defined.
 (* What we did is that we said that 
 (elmt_U_ov_set B A f) = (elmt_U_ov_set B A' g) ~=~ eq_with_eq, (in for_fifteen_1)
 
-but (Tr (fun C : Type => C -> B) A A' e f = g) ~=~ (f = (g ¤ (first A A' (ua e)))) so :
+but (Tr (fun C : Type => C -> B) A A' e f = g) ~=~ (f = (g \u00a4 (first A A' (ua e)))) so :
  
 eq_with_eq ~=~ eq_with_eg, (in for_fifteen_2)
 
@@ -461,8 +456,8 @@ Lemma sixteen (Y : Type) ( P : Y -> Type) ( b : Y) :
 prodpp (fun z : prodpp P => p1_bis P z = b) ~=~ (P b).
 Proof.
 exists (psi Y P b ). exists (phi Y P b ) (phi Y P b ).
-- unfold "=~". intros. unfold phi. unfold "¤". unfold psi. unfold Id. apply refl.
-- unfold "=~". intros. destruct x. unfold "¤". unfold phi. unfold psi. unfold Id. unfold refl. destruct snd_4.
+- unfold "=~". intros. unfold phi. unfold "\u00a4". unfold psi. unfold Id. apply refl.
+- unfold "=~". intros. destruct x. unfold "\u00a4". unfold phi. unfold psi. unfold Id. unfold refl. destruct snd_4.
 destruct fst_4. apply refl.
 Defined.
 
@@ -500,14 +495,14 @@ Proof.
 intros. induction X0. unfold fib in snd_4. destruct snd_4. exact fst_5.
 Defined.
 
-Lemma epsi_and_a {X Y} (f : X -> Y) (z : prodpp (fib X Y f)) : ((epsilon_f_p f) ¤ (a_epsilon_f_p f)) z = z.
+Lemma epsi_and_a {X Y} (f : X -> Y) (z : prodpp (fib X Y f)) : ((epsilon_f_p f) \u00a4 (a_epsilon_f_p f)) z = z.
 Proof.
-unfold "¤". unfold epsilon_f_p. unfold a_epsilon_f_p. induction z. induction snd_4. destruct snd_4. apply refl.
+unfold "\u00a4". unfold epsilon_f_p. unfold a_epsilon_f_p. induction z. induction snd_4. destruct snd_4. apply refl.
 Defined.
 
-Lemma a_and_epsi {X Y} (f : X -> Y) (x : X) :(( a_epsilon_f_p f )¤ (epsilon_f_p f )) x = x.
+Lemma a_and_epsi {X Y} (f : X -> Y) (x : X) :(( a_epsilon_f_p f )\u00a4 (epsilon_f_p f )) x = x.
 Proof.
-unfold "¤". unfold epsilon_f_p. unfold a_epsilon_f_p. apply refl.
+unfold "\u00a4". unfold epsilon_f_p. unfold a_epsilon_f_p. apply refl.
 Defined.
 
 Lemma for_Grothendieck_2 (Y : Type) (X: Type) (f : X -> Y) :
@@ -539,9 +534,9 @@ Defined.
 
 Lemma for_Grothendieck_3 (Y : Type)(fst_4 : Type) (snd_4 : fst_4 -> Y)(e := for_Grothendieck_2_2 Y fst_4 snd_4):
 p1_bis (fib fst_4 Y snd_4) =~
-   (snd_4 ¤ first (prodpp (fib fst_4 Y snd_4)) fst_4 e). 
+   (snd_4 \u00a4 first (prodpp (fib fst_4 Y snd_4)) fst_4 e). 
 Proof.
-intro. destruct x. unfold "¤". unfold p1_bis. unfold fib. destruct snd_5. destruct snd_5. simpl.
+intro. destruct x. unfold "\u00a4". unfold p1_bis. unfold fib. destruct snd_5. destruct snd_5. simpl.
  apply refl. 
 Defined.
 
@@ -565,9 +560,9 @@ Defined.
 Theorem Grothendieck { Y}  : (Y -> Type) ~=~ U_over_set Y.
 Proof.
 exists (psii_bis Y). exists (phii_bis Y) (phii_bis Y).
-- intro. unfold "¤". destruct x. unfold phii_bis. unfold psii_bis. unfold Id. 
+- intro. unfold "\u00a4". destruct x. unfold phii_bis. unfold psii_bis. unfold Id. 
 apply fifteen. unfold eq_with_equiv. exact (prodpp_def _ _ (for_Grothendieck_2_2 Y fst_4 snd_4) (for_Grothendieck_3 Y fst_4 snd_4 )).
-- unfold "=~". intro. unfold "¤". unfold psii_bis. unfold phii_bis. unfold p1_bis. unfold fib. unfold Id.  apply for_Grothendieck_5.
+- unfold "=~". intro. unfold "\u00a4". unfold psii_bis. unfold phii_bis. unfold p1_bis. unfold fib. unfold Id.  apply for_Grothendieck_5.
 Defined.
 
 End  Grothendieck_correspondance_for_type.
