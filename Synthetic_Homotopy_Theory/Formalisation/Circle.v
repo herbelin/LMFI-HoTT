@@ -13,7 +13,7 @@ Defined.
 Definition compose_function {A B C} (g : B -> C) (f : A -> B) :=
   fun x : A => g (f x).
 
-Notation " g ¤ f ":= (compose_function g f)(at level 40).
+Notation " g \u00a4 f ":= (compose_function g f)(at level 40).
 
 Definition Id (A : Type) :=
 fun x: A => x.
@@ -23,7 +23,7 @@ forall x :A , f x = g x.
 
 Notation "f =~ g " := (homotopy f g)(at level 40).
 Record isequiv (A B : Type) (f : A-> B) : Type :=
-MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f¤g1)=~(Id B); inv_r : (g2¤f) =~(Id A)}.
+MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f\u00a4g1)=~(Id B); inv_r : (g2\u00a4f) =~(Id A)}.
 
 Record Type_equiv (A B : Type) :=
 Make_Type_equiv { first : A-> B ; second : isequiv A B first}.
@@ -64,6 +64,6 @@ Defined.
 
 Axiom S1_ind_beta_loop
   : forall (P : S1 -> Type) (b : P base) (l : Tr P base base loop b = b),
- forall x : S1, apd P loop (S1_ind P b l )  = l.
+ forall x : S1, apd P loop (S1_ind P b l ) = l.
 
 End Circle.

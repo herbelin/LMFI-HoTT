@@ -1,4 +1,4 @@
-(* In this file we give Section 3.1 to 3.6 *)
+(* Section 3 : Identity_Types_and_Grothendieck_Correspondance *)
 
 
 (*Section 3.1: Types_As_Infty_Groupoids*)
@@ -14,7 +14,7 @@ Proof.
 induction p. exact q.
 Defined.
 
-Notation "p \u00b0 q " := (compose_path p q)(at level 40).
+Notation "p  #  q " := (compose_path p q)(at level 40).
 (* Lemma 2 *)
 Lemma compose_path_with_refl {A : Type} {x y : A} (p : x=y) : compose_path (refl x) p = p.
 Proof.
@@ -22,7 +22,7 @@ apply refl.
 Defined.
 
 (* Lemma 3 *)
-Lemma asso_compose_path {A : Type} { a b c d : A} ( p : a=b)(q : b=c)(r : c=d) :(p\u00b0q)\u00b0r = p \u00b0(q\u00b0r).
+Lemma asso_compose_path {A : Type} { a b c d : A} ( p : a=b)(q : b=c)(r : c=d) :(p # q) # r = p  # (q # r).
 Proof.
 destruct p. apply refl.
 Defined.
@@ -36,7 +36,7 @@ Defined.
 Notation " p ^(-1) " := (inverse_path p)( at level 40).
 
 (* Lemma 5 *)
-Lemma compose_with_inverse (A : Type) ( x y : A) (p : x=y) :  p\u00b0(p^(-1)) =refl x.
+Lemma compose_with_inverse (A : Type) ( x y : A) (p : x=y) :  p # (p^(-1)) =refl x.
 Proof.
 destruct p. simpl. apply refl. 
 Defined.
@@ -58,7 +58,7 @@ Defined.
 
 (* Lemma 7 *)
 Lemma ap_distrib {A B : Type} {x y z: A} (f : A -> B)(p : x=y) (q : y=z) :
- ap f (p \u00b0 q) = (ap f p) \u00b0 (ap f q).
+ ap f (p  #  q) = (ap f p)  #  (ap f q).
 Proof.
 destruct p. apply refl.
 Defined. 
@@ -83,11 +83,11 @@ Defined.
 Definition compose_function {A B C} (g : B -> C) (f : A -> B) :=
   fun x : A => g (f x).
 
-Notation " g \u00a4 f ":= (compose_function g f)(at level 40).
+Notation " g $ f ":= (compose_function g f)(at level 40).
 
 (* Lemma 10 *)
 Lemma Tr_with_compose { A : Type} (B : A -> Type) {x y z :A }(p : x=y)(q : y=z) :
-forall b : B x, ((Tr B y z q)\u00a4(Tr B x y p)) b  = (Tr B x z (p\u00b0q)) b .
+forall b : B x, ((Tr B y z q) $ (Tr B x y p)) b  = (Tr B x z (p # q)) b .
 Proof.
 intro. destruct p. apply refl. 
 Defined.
@@ -122,7 +122,7 @@ fun x: A => x.
 
 (* Defintion 5 *)
 Record isequiv (A B : Type) (f : A-> B) : Type :=
-MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : f\u00a4g1 =~ Id B ; inv_r : g2\u00a4f =~ Id A }.
+MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : f $ g1 =~ Id B ; inv_r : g2 $ f =~ Id A }.
 
 (* Lemma 12 *)
 Lemma weak_functional_extensionality {A B} (f g : A -> B) : f=g -> forall x : A, f x = g x.
@@ -142,19 +142,19 @@ Defined.
 
 (* Lemma 13 , it is a litle bit tricky so we admit it *)
 Lemma proof_on_equiv {A B : Type} (f : A -> B) : forall e1 e2 : isequiv A B f, e1 = e2.
-Proof. 
+Proof.
 Admitted.
 
 (* Remark 11 *)
 
 (* We define isquasiequiv, two types which are "quasiequiv" have a bijection with the same inverse function *)
 Record isquasiequiv (A B : Type) (f : A-> B ):=
-MakeQuasiEquiv {iqe_l : B ->A ;iqe_mid : forall x : A,( iqe_l \u00a4 f ) (x) = x ; iqe_r : forall y : B, (f \u00a4 iqe_l) (y)=y}.
+MakeQuasiEquiv {iqe_l : B ->A ;iqe_mid : forall x : A,( iqe_l $ f ) (x) = x ; iqe_r : forall y : B, (f $ iqe_l) (y)=y}.
 
 (* When you see "for_X" as the name of a lemma, it is an auxilary lemma useful for "X" *)
 
 Lemma for_link (A B : Type) (f : A -> B) (g1 g2 : B -> A) :
-(f\u00a4g1 =~ Id B) -> (g2\u00a4f =~ Id A) -> g1 = g2.
+(f $ g1 =~ Id B) -> (g2 $ f =~ Id A) -> g1 = g2.
 Proof.
 intros H H'. apply functional_extensionality.
 intros. apply (@compose_path A (g1 x) (g2 (f (g1 x))) (g2 x)  ).
@@ -163,7 +163,7 @@ intros. apply (@compose_path A (g1 x) (g2 (f (g1 x))) (g2 x)  ).
 Defined.
 
 Lemma for_link_2 (A B : Type) (f : A -> B) ( g1 g2 : B -> A) :
-(g2\u00a4f) =~ Id A ->  g1 = g2 -> (g1\u00a4f) =~ Id A.
+(g2 $ f) =~ Id A ->  g1 = g2 -> (g1 $ f) =~ Id A.
 Proof.
 intros H p. destruct p. exact H.
 Defined.
@@ -280,9 +280,9 @@ Defined.
 (* We need many auxilary lemma about equivalences in this section *)
 
 Lemma equiv_compose {A B C : Type} (f : A -> B) (g : B -> C) :
-isequiv A B f -> isequiv B C g -> isequiv A C (g\u00a4f).
+isequiv A B f -> isequiv B C g -> isequiv A C (g $ f).
 Proof.
-intros e1 e2. destruct e1 as (f1,f2,i1,i2). destruct e2 as (g1,g2,j1,j2). exists (f1\u00a4g1) (f2\u00a4g2).
+intros e1 e2. destruct e1 as (f1,f2,i1,i2). destruct e2 as (g1,g2,j1,j2). exists (f1 $ g1) (f2 $ g2).
 - intro x. apply (fun p => compose_path p (j1 x)). apply (ap g). apply (i1 (g1 x)).
 - intro x. apply (fun p => compose_path p (i2 x)). apply (ap f2). apply (j2 (f x)).
 Defined.
@@ -290,19 +290,17 @@ Defined.
 Lemma equiv_transitivity {A B C : Type} : A~=~B -> B~=~C -> A~=~C.
 Proof.
 intros e1 e2. destruct e1 as (e1,eqe1). destruct e2 as (e2,eqe2).
-exists (e2\u00a4e1). apply equiv_compose.
+exists (e2 $ e1). apply equiv_compose.
 - apply eqe1.
 - apply eqe2.
 Defined.
 
-(*Lemma nat_prodpp_left {A A' : Type} (B : A' -> Type) (f : A -> A') :
-prodpp (B \u00a4 f) -> prodpp B.
+Lemma equiv_sym {A B : Type} : A ~=~ B -> B ~=~ A.
 Proof.
-intro x. destruct x as (a,b). exists (f a). apply b.
-Defined.*)
+Admitted.
 
 Lemma equiv_prodpp_left {A A' : Type} (B : A' -> Type) (f : A -> A') :
-isequiv A A' f -> prodpp (B \u00a4 f) ~=~ prodpp B.
+isequiv A A' f -> prodpp (B $ f) ~=~ prodpp B.
 Proof.
 Admitted.
 
@@ -311,7 +309,6 @@ Lemma equiv_prodpp_right {A : Type} (B B' : A -> Type) :
 Proof.
 intro H. apply ua. apply (ap prodpp). apply functional_extensionality. intro x. apply (weak_univalence (B x) (B' x)). apply (H x).
 Defined.
-
 
 (* Definition 7 *)
 Definition U_over (B : Type) :=
@@ -322,17 +319,17 @@ prodpp_def Type (fun A : Type  => (A -> B)) A f.
 
 (* In the end we want identity types in U_over equivalent to Eq_U_over*)
 Definition Eq_U_over {A A' B} (f : A -> B) (g : A' -> B): Type :=
-prodpp (fun e : A~=~ A' => f =~ (g\u00a4(first A A' e))).
+prodpp (fun e : A~=~ A' => f =~ (g $ (first A A' e))).
 
 (* We give some auxiliary types *)
 Definition Eq_U_over_1 {A A' B} (f : A -> B) (g : A' -> B) :=
 prodpp (fun e : A = A' => Tr (fun C : Type => C -> B) A A' e f  = g).
 
 Definition Eq_U_over_2 {A A' B} (f : A -> B) (g : A' -> B) :=
-prodpp (fun e : A = A' => f  = g \u00a4 (first A A' (ua e))).
+prodpp (fun e : A = A' => f  = g $ (first A A' (ua e))).
 
 Definition Eq_U_over_3 {A A' B} (f : A -> B) (g : A' -> B) :=
-prodpp (fun e : A ~=~ A' => f  = g \u00a4 (first A A' e)).
+prodpp (fun e : A ~=~ A' => f  = g  $  (first A A' e)).
 
 (* Now we prove a chain of equivalence *)
 Lemma for_fifteen_1  {A A' B} (f : A -> B) (g : A' -> B) :
@@ -350,14 +347,14 @@ Defined.
 Lemma for_fifteen_3 {A A' B} (f : A -> B) (g : A' -> B) :
 Eq_U_over_2 f g ~=~ Eq_U_over_3 f g.
 Proof.
-apply (equiv_prodpp_left (fun e:A ~=~ A' =>  f  = g \u00a4 (first A A' e)) ua). apply univalence.
+apply (equiv_prodpp_left (fun e:A ~=~ A' =>  f  = g  $  (first A A' e)) ua). apply univalence.
 Defined.
 
 Lemma for_fifteen_4 {A A' B} (f : A -> B) (g : A' -> B) :
 Eq_U_over_3 f g ~=~ Eq_U_over f g.
 Proof.
 apply equiv_prodpp_right. intro x. 
-exists (weak_functional_extensionality f (g \u00a4 first A A' x)). apply extensionality.
+exists (weak_functional_extensionality f (g  $  first A A' x)). apply extensionality.
 Defined.
 
 (* Lemma 15 *)
@@ -374,94 +371,91 @@ Defined.
 
 (* Section 3.8 : Grothendieck_correspondance_for_type.*)
 
-Definition p1 (X : Type) (B : X -> Type)  :=
-fun z :prodpp B => X.
-
-Definition p1_bis {Y}(P : Y -> Type) :=
+Definition p1 {Y}(P : Y -> Type) :=
 fun z : prodpp P => fst_2 P z.
 
-(* Function we define for lemma sixteen *)
+(* Function psi from Lemma 16 *)
 Definition psi (Y : Type) (P : Y -> Type) (b  : Y) : 
-prodpp (fun z : prodpp P => p1_bis P z = b) -> (P b).
+prodpp (fun z : prodpp P => p1 P z = b) -> (P b).
 Proof.
-intro X. destruct X as (fst_4,snd_4). destruct snd_4. destruct fst_4 as (fst_3,snd_3). unfold p1_bis. exact snd_3.
+intro X. destruct X as (fst_4,snd_4). destruct snd_4. destruct fst_4 as (fst_3,snd_3). unfold p1. exact snd_3.
 Defined.
 
+(* Function phi from Lemma 16 *)
 Definition phi (Y : Type) (P : Y -> Type) (b  : Y) :
-(P b) -> prodpp (fun z : prodpp P => p1_bis P z = b). 
+(P b) -> prodpp (fun z : prodpp P => p1 P z = b). 
 Proof.
-intros. apply (prodpp_def (prodpp P) (fun z : prodpp P => p1_bis P z = b) (prodpp_def Y P b X) (refl b)).
+intros. apply (prodpp_def (prodpp P) (fun z : prodpp P => p1 P z = b) (prodpp_def Y P b X) (refl b)).
 Defined.
 
-(* Will be useful for the Grothendieck's theorem *)
-(* Lemma sixteen *)
+(* Lemma 16, useful for the Grothendieck's theorem *)
 Lemma sixteen (Y : Type) ( P : Y -> Type) ( b : Y) :
-prodpp (fun z : prodpp P => p1_bis P z = b) ~=~ (P b).
+prodpp (fun z : prodpp P => p1 P z = b) ~=~ (P b).
 Proof.
 exists (psi Y P b ). exists (phi Y P b ) (phi Y P b ).
-- unfold "=~". intros. unfold phi. unfold "\u00a4". unfold psi. unfold Id. apply refl.
-- unfold "=~". intros. destruct x as (fst_4,snd_4). unfold "\u00a4". unfold phi. unfold psi. unfold Id. unfold refl. destruct snd_4.
-destruct fst_4. apply refl.
+- unfold "=~". intros. apply refl.
+- unfold "=~". intro X. destruct X as (fst_4,snd_4). destruct snd_4. destruct fst_4. apply refl.
 Defined.
 
-(* Will be useful *)
+(* We strenghten Lemma 16 using univalence *)
 Lemma sixteen_b (Y : Type) (P : Y -> Type) ( b y : Y) :
-prodpp (fun z : prodpp P => p1_bis P z = b) = (P b).
+prodpp (fun z : prodpp P => p1 P z = b) = (P b).
 Proof.
 apply univalence. apply (sixteen Y P b ).
 Defined.
 
-(* Definition eight *)
+(* Definition 8 *)
 Definition fib (X Y : Type) (f : X -> Y)(y : Y) :=
 prodpp (fun x: X => f x = y). 
 
-Definition p1_bbis (X Y : Type) ( f : X -> Y) (y : Y) :=
-fun (z : prodpp (fun x : X => f x = y) )=> X.
-
-Definition phii_bis (Y : Type) : U_over Y  -> (Y -> Type).
+(* Function psi from Theorem 1 *)
+Definition phi_bis (Y : Type) : U_over Y  -> (Y -> Type).
 Proof.
 intro. destruct X as (fst_4,snd_4). exact (fib fst_4 Y snd_4).
 Defined.
 
-Definition psii_bis (Y : Type) : (Y -> Type) -> U_over Y.
+(* Function phi from Theorem 1 *)
+Definition psi_bis (Y : Type) : (Y -> Type) -> U_over Y.
 Proof.
-intro. unfold U_over. exists (prodpp X). exact (p1_bis X).
+intro. unfold U_over. exists (prodpp X). exact (p1 X).
 Defined.
 
-Definition epsilon_f_p {X Y}(f : X -> Y) : X -> prodpp (fib X Y f).
+(* Function epsilon from Theorem 1 *)
+Definition epsilon {X Y}(f : X -> Y) : X -> prodpp (fib X Y f).
 Proof.
 intro x. unfold fib. exact ( prodpp_def  _ _ (f x) (prodpp_def X (fun x0 : X => f x0 = f x)  (x) (refl (f x)))).
 Defined.
 
-Definition a_epsilon_f_p {X Y} (f : X -> Y) : prodpp (fib X Y f) -> X.
+(* Inverse to epsilon *)
+Definition epsilon_inv {X Y} (f : X -> Y) : prodpp (fib X Y f) -> X.
 Proof.
 intro H. destruct H as (fst_4,snd_4). unfold fib in snd_4. destruct snd_4 as(fst_5,snd_5). exact fst_5.
 Defined.
 
-Lemma epsi_and_a {X Y} (f : X -> Y) (z : prodpp (fib X Y f)) : ((epsilon_f_p f) \u00a4 (a_epsilon_f_p f)) z = z.
+Lemma epsi_and_inv {X Y} (f : X -> Y) (z : prodpp (fib X Y f)) : ((epsilon f)  $  (epsilon_inv f)) z = z.
 Proof.
-unfold "\u00a4". unfold epsilon_f_p. unfold a_epsilon_f_p. destruct z as (fst_4,snd_4). destruct snd_4 as (fst_5,snd_5). destruct snd_5. apply refl.
+unfold " $ ". unfold epsilon. unfold epsilon_inv. destruct z as (fst_4,snd_4). destruct snd_4 as (fst_5,snd_5). destruct snd_5. apply refl.
 Defined.
 
-Lemma a_and_epsi {X Y} (f : X -> Y) (x : X) :(( a_epsilon_f_p f )\u00a4 (epsilon_f_p f )) x = x.
+Lemma inv_and_epsi {X Y} (f : X -> Y) (x : X) :(( epsilon_inv f ) $  (epsilon f )) x = x.
 Proof.
-unfold "\u00a4". unfold epsilon_f_p. unfold a_epsilon_f_p. apply refl.
+unfold " $ ". unfold epsilon. unfold epsilon_inv. apply refl.
 Defined.
 
 Lemma for_Grothendieck_2 (Y : Type) (X: Type) (f : X -> Y) :
 X~=~prodpp (fib X Y f).
 Proof.
-exists (epsilon_f_p f). exists (a_epsilon_f_p f) (a_epsilon_f_p f).
-- unfold "=~". intros. unfold Id. apply epsi_and_a.
-- unfold "=~". intros. unfold Id. apply a_and_epsi.
+exists (epsilon f). exists (epsilon_inv f) (epsilon_inv f).
+- unfold "=~". intros. unfold Id. apply epsi_and_inv.
+- unfold "=~". intros. unfold Id. apply inv_and_epsi.
 Defined.
 
 Lemma for_Grothendieck_2_2 (Y : Type) (X: Type) (f : X -> Y) :
 prodpp (fib X Y f) ~=~ X.
 Proof.
-exists (a_epsilon_f_p f). exists (epsilon_f_p f) (epsilon_f_p f).
-- unfold "=~". intros. unfold Id. apply a_and_epsi.
-- unfold "=~". intros. unfold Id. apply epsi_and_a.
+exists (epsilon_inv f). exists (epsilon f) (epsilon f).
+- unfold "=~". intros. unfold Id. apply inv_and_epsi.
+- unfold "=~". intros. unfold Id. apply epsi_and_inv.
 Defined.
 
 Lemma for_Grothendieck_1  (Y : Type) (X: Type) ( f : X -> Y) :
@@ -470,16 +464,11 @@ Proof.
 apply inverse_path. apply univalence. exact (for_Grothendieck_2 Y X f).
 Defined.
 
-Lemma tring {A B : Type} : A ~=~ B -> A = B.
-Proof.
-intro. apply univalence in X. exact X.
-Defined.
-
 Lemma for_Grothendieck_3 (Y : Type)(fst_4 : Type) (snd_4 : fst_4 -> Y)(e := for_Grothendieck_2_2 Y fst_4 snd_4):
-p1_bis (fib fst_4 Y snd_4) =~
-   (snd_4 \u00a4 first (prodpp (fib fst_4 Y snd_4)) fst_4 e). 
+p1 (fib fst_4 Y snd_4) =~
+   (snd_4  $  first (prodpp (fib fst_4 Y snd_4)) fst_4 e). 
 Proof.
-intro. destruct x as (fst_5,snd_5). unfold "\u00a4". unfold p1_bis. unfold fib. destruct snd_5 as (fst_6,snd_6). destruct snd_6. simpl.
+intro. destruct x as (fst_5,snd_5). unfold " $ ". unfold p1. unfold fib. destruct snd_5 as (fst_6,snd_6). destruct snd_6. simpl.
  apply refl. 
 Defined.
 
@@ -487,7 +476,7 @@ Lemma for_Grothendieck_4 (Y : Type) (P : Y -> Type) (x : Y) :
 (prodpp (fun x0 : prodpp P => fst_2 P x0 = x) )~=~ (P x).
 Proof.
 apply (fun z => equiv_transitivity z (sixteen Y P x)). 
-unfold p1_bis. exists (Id _). exists (Id _) (Id _).
+unfold p1. exists (Id _). exists (Id _) (Id _).
 + intro. apply refl.
 + intro. apply refl.
 Defined.
@@ -501,8 +490,8 @@ Defined.
 (* Grothendieck's Theorem, theorem 1 in courses *)
 Theorem Grothendieck { Y}  : (Y -> Type) ~=~ U_over Y.
 Proof.
-exists (psii_bis Y). exists (phii_bis Y) (phii_bis Y).
-- intro. unfold "\u00a4". destruct x as (fst_4,snd_4). unfold phii_bis. unfold psii_bis. unfold Id. 
+exists (psi_bis Y). exists (phi_bis Y) (phi_bis Y).
+- intro. unfold " $ ". destruct x as (fst_4,snd_4). unfold psi_bis. unfold phi_bis. unfold p1. unfold fib. unfold Id.
 apply fifteen. exact (prodpp_def _ _ (for_Grothendieck_2_2 Y fst_4 snd_4) (for_Grothendieck_3 Y fst_4 snd_4 )).
-- unfold "=~". intro. unfold "\u00a4". unfold psii_bis. unfold phii_bis. unfold p1_bis. unfold fib. unfold Id.  apply for_Grothendieck_5.
+- unfold "=~". intro. unfold " $ ". unfold psi_bis. unfold phi_bis. unfold p1. unfold fib. unfold Id.  apply for_Grothendieck_5.
 Defined.

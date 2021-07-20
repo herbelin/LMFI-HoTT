@@ -13,7 +13,7 @@ Defined.
 Definition compose_function {A B C} (g : B -> C) (f : A -> B) :=
   fun x : A => g (f x).
 
-Notation " g ¤ f ":= (compose_function g f)(at level 40).
+Notation " g \u00a4 f ":= (compose_function g f)(at level 40).
 
 Definition Id (A : Type) :=
 fun x: A => x.
@@ -23,7 +23,7 @@ forall x :A , f x = g x.
 
 Notation "f =~ g " := (homotopy f g)(at level 40).
 Record isequiv (A B : Type) (f : A-> B) : Type :=
-MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f¤g1)=~(Id B); inv_r : (g2¤f) =~(Id A)}.
+MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f\u00a4g1)=~(Id B); inv_r : (g2\u00a4f) =~(Id A)}.
 
 Record Type_equiv (A B : Type) :=
 Make_Type_equiv { first : A-> B ; second : isequiv A B first}.
@@ -64,9 +64,9 @@ Defined.
 Lemma twenty_one {A B} (a a': A) ( b b' : B) :( lft A B a = lft A B a' )~=~ (a=a').
 Proof.
 exists (e_f_t_o a a' b b'). exists (d_f_t_o a a' b b') (d_f_t_o a a' b b').
-- unfold "=~". intros. destruct x. unfold Id. unfold "¤". unfold d_f_t_o. unfold e_f_t_o. unfold paths_rect. unfold paths_ind. unfold refl. 
+- unfold "=~". intros. destruct x. unfold Id. unfold "\u00a4". unfold d_f_t_o. unfold e_f_t_o. unfold paths_rect. unfold paths_ind. unfold refl. 
 unfold lft_inj. unfold refl. apply refl.
-- unfold "=~". intros. unfold "¤". unfold e_f_t_o. unfold d_f_t_o. unfold Id. unfold paths_rect. unfold paths_ind. unfold refl. unfold lft_inj. unfold refl. 
+- unfold "=~". intros. unfold "\u00a4". unfold e_f_t_o. unfold d_f_t_o. unfold Id. unfold paths_rect. unfold paths_ind. unfold refl. unfold lft_inj. unfold refl. 
 Admitted.
 
 Lemma e_f_t_t {A B} (a a' : A) (b b' : B) : (lft A B a = rght A B b') -> Empty.
@@ -82,7 +82,7 @@ Defined.
 Lemma twenty_two {A B} (a a'  : A) (b b' :B) : (lft A B a = rght A B b' )~=~ Empty.
 Proof.
 exists (e_f_t_t a a' b b'). exists ( d_f_t_t a a' b b') (d_f_t_t a a' b b').
-- unfold "=~". unfold "¤". unfold d_f_t_t. unfold e_f_t_t. intros. destruct x.
+- unfold "=~". unfold "\u00a4". unfold d_f_t_t. unfold e_f_t_t. intros. destruct x.
 - intros. easy.
 Defined.
 
@@ -117,8 +117,8 @@ Defined.
 Lemma twenty_four {A B} (a a' : A) (b b' : B) : (rght A B b = rght A B b')~=~ (b = b').
 Proof.
 exists (e_f_t_f a a' b b'). exists (d_f_t_f a a' b b') (d_f_t_f a a' b b').
-- unfold "=~". unfold "¤". intros. induction x. apply refl.
-- unfold "=~". unfold "¤". intros. 
+- unfold "=~". unfold "\u00a4". intros. induction x. apply refl.
+- unfold "=~". unfold "\u00a4". intros. 
 Admitted.
 
 
