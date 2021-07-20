@@ -1,10 +1,3 @@
-Require Import HoTT.
-Require Import Reals.
-Require Import Arith.
-Require Import Coq.Reals.Reals.
-Open Scope nat_scope.
-Require Import Bool.
-
 Lemma refl {A} (x : A) : x=x.
 Proof.
 reflexivity.
@@ -13,7 +6,7 @@ Defined.
 Definition compose_function {A B C} (g : B -> C) (f : A -> B) :=
   fun x : A => g (f x).
 
-Notation " g ¤ f ":= (compose_function g f)(at level 40).
+Notation " g \u00a4 f ":= (compose_function g f)(at level 40).
 
 Definition Id (A : Type) :=
 fun x: A => x.
@@ -23,7 +16,7 @@ forall x :A , f x = g x.
 
 Notation "f =~ g " := (homotopy f g)(at level 40).
 Record isequiv (A B : Type) (f : A-> B) : Type :=
-MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f¤g1)=~(Id B); inv_r : (g2¤f) =~(Id A)}.
+MakeEquiv {g1 : B->A ; g2 : B-> A ; inv_l : ( f\u00a4g1)=~(Id B); inv_r : (g2\u00a4f) =~(Id A)}.
 
 Record Type_equiv (A B : Type) :=
 Make_Type_equiv { first : A-> B ; second : isequiv A B first}.
@@ -155,8 +148,8 @@ Defined.
 Proposition contractible_and_Unit ( X : Type )  :contractible X -> (X ~=~ Unit_Type) .
 Proof.
 intros. exists (encode_for_P_five X X0). exists (decode_for_P_five X X0) (decode_for_P_five X X0).
-- unfold "=~". unfold "¤". unfold decode_for_P_five. unfold encode_for_P_five. intros. unfold Id. destruct x. apply refl.
-- unfold "=~". unfold "¤". unfold decode_for_P_five. unfold encode_for_P_five. unfold contractible in X0.  unfold Id. intros. destruct X0. apply number_four. apply (snd_4 x). 
+- unfold "=~". unfold "\u00a4". unfold decode_for_P_five. unfold encode_for_P_five. intros. unfold Id. destruct x. apply refl.
+- unfold "=~". unfold "\u00a4". unfold decode_for_P_five. unfold encode_for_P_five. unfold contractible in X0.  unfold Id. intros. destruct X0. apply number_four. apply (snd_4 x). 
 Defined.
 
 Proposition Unit_and_contractible (X : Type) : (X ~=~ Unit_Type) -> contractible X.
@@ -264,8 +257,8 @@ Defined.
 Lemma Unit_to_Unit : forall x y : Unit_Type, (x=y) ~=~ Unit_Type.
 Proof.
 intros. exists (encode_2 x y). exists (decode_2 x y) (decode_2 x y).
-- unfold "=~". intros. destruct x0. unfold "¤". unfold decode_2. unfold encode_2. destruct x. destruct y. unfold Id. apply refl.
-- unfold "=~". intros. destruct x0. destruct x. unfold encode_2. unfold decode_2. unfold "¤". unfold Id. apply refl.
+- unfold "=~". intros. destruct x0. unfold "\u00a4". unfold decode_2. unfold encode_2. destruct x. destruct y. unfold Id. apply refl.
+- unfold "=~". intros. destruct x0. destruct x. unfold encode_2. unfold decode_2. unfold "\u00a4". unfold Id. apply refl.
 Defined. 
 Proposition contractible_eg : forall x y : Unit_Type, contractible (x = y).
 Proof.
@@ -309,7 +302,7 @@ Proposition contractible_with_prodpp (A : Type) (P :A -> Type) (a a' : A)(p : P 
 (forall x : A, proposition (P x))-> (prodpp_def A P a p = prodpp_def A P a' p' )~=~ (a=a').
 Proof.
 intros. exists (encode_b A P a a' p p' X). exists (decode_b A P a a' p p' X) (decode_b A P a a' p p' X).
-- intro. destruct x. unfold proposition in X. unfold decode_b. unfold encode_b. unfold "¤". unfold Id. simpl. (* utiliser Eq_bis que P est contractible, prodpp a=a' et Unit ~=~ a=a' *)
+- intro. destruct x. unfold proposition in X. unfold decode_b. unfold encode_b. unfold "\u00a4". unfold Id. simpl. (* utiliser Eq_bis que P est contractible, prodpp a=a' et Unit ~=~ a=a' *)
 Admitted. 
 
 (* End Propositions *)
@@ -344,7 +337,7 @@ intros.  unfold set.  intros. apply contractible_prop. apply (proposition_contra
 Defined. 
 
 Proposition set_Nat : set Nat.
-Proof. (*on a montré 0 =0 ~=~Unit_Type *)
+Proof. (*on a montr\u00e9 0 =0 ~=~Unit_Type *)
 unfold set. intros. unfold proposition. intros. destruct x. 
 - destruct y. 
 + Admitted.
@@ -390,7 +383,7 @@ unfold groupoids. intros. unfold set. intros. unfold proposition. intros. destru
 
 (* Section The_Types_Prop_Set_And_GPD *)
 
-(* A vérifier définition et proposition : *)
+(* A v\u00e9rifier d\u00e9finition et proposition : *)
 
 Definition Prop_Type :=
 prodpp (fun X : Type => proposition X).
@@ -417,7 +410,7 @@ Proof.
 unfold groupoids in p.
 Admitted.
 
-(* problème au niveau de l'égalité 
+(* probl\u00e8me au niveau de l'\u00e9galit\u00e9 
 Proposition twenty_one_for_prop (X Y : Prop_Type) : X=Y ~=~  *)
 
 
@@ -438,7 +431,7 @@ Admitted.
 
 (* End The_Types_Prop_Set_And_GPD *)
 
-(* Section Propositionnal_Truncations *) (* Passé *)
+(* Section Propositionnal_Truncations *) (* Pass\u00e9 *)
 
 (* Inductive Propositionnal_Truncation (A : Type) : Type := *)
 
@@ -446,7 +439,7 @@ Admitted.
 
 (* Section Set_Truncations_And_Beyond *)
 
-(* Passé *)
+(* Pass\u00e9 *)
 
 (* End Set_Truncations_And_Beyond *)
 
