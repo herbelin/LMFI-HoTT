@@ -250,7 +250,6 @@ prodpp_def {fst_2 : A ; snd_2 : B fst_2 }.
 (* We define Eq_bis ( x ; y ) ( x' ; y' ) as the type of proofs that x = x' and y = y', which require a transport to be well-typed *)
 Definition Eq_bis {A : Type} ( B : A -> Type) (z z' :  prodpp B) :=
 prodpp (fun p : fst_2 B z = fst_2 B z' => Tr B _ _ p (snd_2 B z) = snd_2 B z').
-(*Eq_bis_def { fst_3 : fst_2 B z=fst_2 B z' ; snd_3 : Tr B (fst_2 B z) (fst_2 B z') fst_3 (snd_2 B z) =snd_2 B z' }.*)
 
 (* We define encode and decode, as for prod *)
 Lemma encode_bis {A} (B : A -> Type) : forall z z' : prodpp B, z=z' -> Eq_bis B z z'.
