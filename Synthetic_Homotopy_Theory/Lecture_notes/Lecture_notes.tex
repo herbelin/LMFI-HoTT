@@ -38,7 +38,7 @@
 \newcommand{\id}{\mathrm{\bf id}}
 \newcommand{\tr}{\mathrm{\bf tr}}
 \newcommand{\fib}{\mathrm{\bf fib}}
-\newcommand{\ua}{\mathrm{\bf ua}}
+\newcommand{\ua}{\mathrm{\bf ideq}}
 \newcommand{\base}{\mathrm{\bf base}}
 \renewcommand{\loop}{\mathrm{\bf loop}}
 \newcommand{\Map}{\mathrm{Map}}
@@ -630,8 +630,7 @@ This long string of results shows path induction in action. From now on we will 
 
 %\sse{Based path induction}
 
-
-\sse{Identities in (dependent) function types}
+\sse{Homotopies between functions}
 
 \begin{definition}
 Assume given $A,B:\U$ and $f,g:A\r B$. Then we define:
@@ -651,25 +650,11 @@ Assume given $A:\U$ with $B:A\r \U$ and $f,g:(x:A)\r B(x)$. Then we define:
 \[f\sim g \, :\equiv\, (x:A)\r f(x) =_{B(x)} g(x)\]
 \end{definition}
 
-We see that the non-dependent case is a special case of the dependent one.
-
-\begin{lemma}
-Assume given $A:\U$ with $B:A\r \U$ and $f,g:(x:A)\r B(x)$. Then the canonical function in:
-\[f= g \r f\sim g\]
-is an equivalence.
-\end{lemma}
-
-%\begin{proof}
-%The proof
-%\end{proof}
-
-The proof of this lemma uses the soon to be introduced \emph{univalence axiom} (together with the notion of equivalence). It is a bit tricky, so we admit it. It can be found in section 4.9 of \cite{hottbook}.
-
-%\begin{lemma}
-%\end{lemma}
+We see that the non-dependent case is a special case of the dependent one. We will see soon that an homotopy between two functions is the same thing as an equality between these functions.
 
 
-\sse{The univalence axiom: identity types in the universe}
+
+\sse{Identity types in the universe: the univalence axiom}
 
 Now we define equivalences between types, which are interpreted as homotopy equivalences (or equivalences of $\infty$-groupoids).
 
@@ -755,6 +740,18 @@ For a homotopy theorist the univalence axiom is both a blessing and a curse:
 \end{remark}
 
 
+\sse{Identities in (dependent) function types}
+
+\begin{lemma}
+Assume given $A:\U$ with $B:A\r \U$ and $f,g:(x:A)\r B(x)$. Then the canonical function in:
+\[f= g \r f\sim g\]
+is an equivalence.
+\end{lemma}
+
+The proof of this lemma uses the soon to be introduced \emph{univalence axiom} (together with the notion of equivalence). It is a bit tricky, so we admit it. It can be found in section 4.9 of \cite{hottbook}.
+
+
+
 \sse{Identities in (dependent) product types}
 
 The product of types is an example of inductive type. We want to perform an analysis of its identity types, i.e. find a type equivalent to $(x,y)=_{A\times B} (x',y')$ for $x,x':A$ and $y,y':B$. In order to do that we introduce the \emph{encode-decode method}, an essential tool of homotopy type theory. %Note that a similar analysis
@@ -770,20 +767,25 @@ If we try to build directly a map out of $(x,y)=_{A\times B}(x',y')$, we cannot 
 We define $\mathrm{Eq}_{A\times B} : A\times B \r A\times B \r \U$ inductively by:
 \[\mathrm{Eq}_{A\times B}((x,y),(x',y')) \, :\equiv \, (x=_Ax')\times (y=_By')\]
 It is clear that proving:
-\[(z,z':A\times B) \r z=_{A\times B} z' \simeq \mathrm{Eq}_{A\times B}(z,z')\]
+\[(z,z':A\times B)\ \r\ \big(z=_{A\times B} z' \simeq \mathrm{Eq}_{A\times B}(z,z')\big)\]
 will imply the desired property.
 
 %$H:$
 
 First we define $\encode : z=_{A\times B} z' \r \mathrm{Eq}_{A\times B}(z,z')$. By path induction it is enough to define $\encode(\refl_z) :\mathrm{Eq}_{A\times B}(z,z)$ for all $z:A\times B$, but assuming by induction that $z$ is $(x,y)$, it is enough to define: %we can give $(\refl_x,\refl_y)$.
 
-\[\encode(\refl_{(x,y)})\,  :\equiv\, (\refl_x,\refl_y)\] 
+\begin{eqnarray}
+\encode(\refl_{(x,y)})\,  &:\equiv& \, (\refl_x,\refl_y) \label{encodeprod}
+\end{eqnarray}
 %by definition.
 
 Now we define $\decode : \mathrm{Eq}_{A\times B}(z,z') \r z=_{A\times B} z'$. By induction we assume $z$ is $(x,y)$ and $z'$ is $(x',y')$. Then we need to give:
-\[\decode : (x=_Ax')\times (y=_By') \r (x,y)=_{A\times B}(x',y')\]
+\[\decode : (x=_Ax')\times (y=_By') \r (x,y)=_{A\times B}(x',y') \label{decodeprod}\]
 By induction on the product and two path inductions, it is enough to define:
-\[\decode(\refl_x,\refl_y) \, :\equiv \, \refl_{(x,y)}\]
+
+\begin{eqnarray}
+\decode(\refl_x,\refl_y) \, &:\equiv& \, \refl_{(x,y)} \label{decodeprod}
+\end{eqnarray}
 
 We can prove that for all $z,z':A\times B$ we have:
 \begin{itemize}
@@ -791,12 +793,12 @@ We can prove that for all $z,z':A\times B$ we have:
 \[\encode (\decode(q)) = q\] 
 indeed by induction on $z,z'$ followed by induction on $q$, it is enough to prove:
 \[\encode(\decode(\refl_x,\refl_y)) = (\refl_x,\refl_y)\]
-but this is true by reflexivity.
+but this is true by \ref{encodeprod} and \ref{decodeprod}.
 \item For all $p:z=_{A\times B} z'$ we have:
 \[\decode(\encode(p))=p\]
 indeed by induction on $p$ followed by induction on $z$, it is enough to prove:
 \[\decode(\encode(\refl_{(x,y)})) = \refl_{(x,y)}\]
-but the constant path solves this as well.
+but this is true by \ref{encodeprod} and \ref{decodeprod}.
 \end{itemize}
 Now we can conclude.
 \end{proof}
@@ -854,7 +856,7 @@ But by the characterization of identity types in a dependent product, it is equi
 
 \item Now we prove that for any $\epsilon:A=_\U A'$ and $f:A\r B$, $g:A'\r B$ we have:
 \[\big(\tr^{\Gl Z.Z\r B}_\epsilon(f) =_{A'\r B} g\big) \ \simeq\ \big(f =_{A\r B}g\circ \ua(\epsilon) \big)\]
-Where $\ua$ is the map from $A=_\U B$ to $A\simeq B$ is assumed to be an equivalence by the univalence axiom.
+Where $\ua$ is the map from $A=_\U B$ to $A\simeq B$. It is assumed to be an equivalence by the univalence axiom.
 By path induction on $\epsilon$ one just needs to show that:
 \[\big(\tr^{\Gl Z.Z\r B}_{\refl_A}(f) =_{A\r B} g\big) \ \simeq\ \big(f =_{A\r B}g\circ \ua(\refl_A)\big) \]
 but by definition this just means:
@@ -866,7 +868,7 @@ which is obvious.
 From that we know that $f=_{\U_{/B}} g$ is equivalent to:
 \[(\epsilon : A=_\U A')\times (f=_{A\r B} g\circ \ua(\epsilon))\]
 But using univalence (i.e. the fact that $\ua$ is an equivalence) we can show (omitted) that this is equivalent to:
-\[(\epsilon:A\simeq A')\times (f=_{A\r B} g \circ \epsilon)\]
+\[(e:A\simeq A')\times (f=_{A\r B} g \circ e)\]
 which is equivalent to what we want by function extensionality.
 
 %\[\[\tr^{\Gl Z.Z\r B}_\epsilon(f) =_{A'\r B} g \ \simeq\ g\circ \ua(\epsilon)=_{A\r B}f \]\]
@@ -891,8 +893,9 @@ This illustrates a general situation: assume we define a notion of "types with e
 We give a very important auxiliary definition.
 
 \begin{definition}
+\label{defFibre}
 Assume given a map $f:X\r Y$. We define $\fib_f : Y\r \U$ by:
-\[\fib_f(y) \, :\equiv \, (x:X)\times f(x) =_X y\]
+\[\fib_f(y) \, :\equiv \, (x:X)\times f(x) =_Y y\]
 \end{definition}
 
 Note that there is a canonical map $p_1:\fib_f(y) \r X$.
@@ -905,16 +908,19 @@ Here the set-theoretic perspective is that $\fib_f(y)$ is what is usually denote
 We need an auxiliary lemma.
 
 \begin{lemma}
-Assume given $Y:\U$ with $P:Y\r \U$ and $b:Y$. Then we have
-\[(z:(y:Y)\times P(y))\times (p_1(z) =_Y b) \ \simeq \ P(b)\]
+\label{auxiliaryGrothendieckCorrespondance}
+Assume given $Y:\U$ with $P:Y\r \U$ and $b:Y$. Then we have:
+\[\fib_{p_1}(b) \ \simeq\ P(b)\]
 \end{lemma}
 \begin{proof}
-We just construct the equivalence:
+We just construct an equivalence between $\fib_{p_1}(b)$ which is defined as:
+\[\big(z:(y:Y)\times P(y)\big) \times \big(p_1(z) =_Y b\big)\]
+and $P(b)$.
 \begin{itemize}
-\item We define $\phi : P(b) \r (z:(y:Y)\times P(y))\times (p_1(z) =_Y b)$ by:
+\item We define $\phi : P(b) \r \big(z:(y:Y)\times P(y)\big)\times \big(p_1(z) =_Y b\big)$ by:
 \[\phi(r) \, :\equiv\, ((b,r),\refl_b)\]
 \item We need to define: 
-\[\psi : (z:(y:Y)\times P(y))\times (p_1(z) =_Y b) \r P(b)\] 
+\[\psi : \big(z:(y:Y)\times P(y)\big)\times \big(p_1(z) =_Y b\big) \r P(b)\] 
 Inductively on $z$ it is enough to define for $y:Y$ and $r:P(y)$ with $q:y=_Y b$ a term:
 \[\psi((y,r),q) : P(b)\]
 But by based path induction on $q$ (this is possible because $y$ is a variable), it is enough to define:
@@ -940,7 +946,7 @@ For $Y:\U$, we have:
 We define $\psi : (Y\r \U)\r \U_{/Y}$ by:
 \[\psi(P) \, :\equiv \, ((y:Y)\times P(y) , p_1)\]
 for $P:Y\r \U$. The other way we define $\phi : \U_{/Y}\r (Y\r \U)$ by induction as:
-\[\psi((Y,f)) \, :\equiv \, \fib_f\]
+\[\phi((X,f)) \, :\equiv \, \fib_f\]
 Now we need to check that both constructions are inverse to each other.
 \begin{itemize}
 \item  For $P:Y\r \U$ we need to prove $\phi(\psi(P)) =_{Y\r \U} P$, i.e. with: 
@@ -974,9 +980,7 @@ Then $\alpha(\epsilon(x))$ is by definition equal to $x$. We want to prove $\eps
 \[\epsilon(\alpha(y,x,r)) = (y,x,r)\]
 i.e. 
 \[(f(x),x,\refl_{f(x)}) = (y,x,r)\]
-But we can assume that $r$ is $\refl_{f(x)}$ (so that $y$ is $f(x)$) by based path induction (since $r$ has one variable $y$ as its endpoint). Then it is easy to conclude.%the property is obvious.
-
-%\subitem First we construct $\epsilon$
+But we can assume that $r$ is $\refl_{f(x)}$ (so that $y$ is $f(x)$) by based path induction (since $r$ has one variable $y$ as its endpoint). Then it is easy to conclude.
 \end{itemize}
 \end{proof}
 
@@ -985,8 +989,8 @@ A similar result is true in set theory. Roughly it says that for $Y$ a set, givi
 
 We see that type theory has two advantages over set theory in this case:
 \begin{itemize}
-\item Knowing in which sense families of sets are "equivalent" to functions require to know a bit of category theory (technically we use equivalences of category). In homotopy type theory families correspond to maps in a very canonical way: by univalence we have $(Y\r \U) = \U_{/Y}$. This means that (at least in this case) homotopy type theory has some foundational value: it gives a more natural meaning to this "families equivalent to maps" idea. %This advantage is a bit subtle, and I do not expect you to understand it at this point. Just know that it gives homotopy type theory some value as a foundation of mathematics.
-\item On the other hand, using the homotopical interpretation of type theory we deduce from our theorem that for $Y$ an $\infty$-groupoid, the $\infty$-groupoid of morphisms (of $\infty$-groupoid) to $Y$ is equivalent to the $\infty$-groupoid of morphisms (of $\infty$-groupoid) from $Y$ to the $\infty$-groupoid of all $\infty$-groupoids. Proving (and even stating...) this theorem in traditional mathematics requires a lot of serious work. But our proof does not require a lot more work than for sets.
+\item Knowing in which sense families of sets are "equivalent" to functions require to know a bit of category theory (technically we use equivalences of categories). In homotopy type theory families correspond to maps in a very canonical way: by univalence we have $(Y\r \U) = \U_{/Y}$. This means that (at least in this case) homotopy type theory has some foundational value: it gives a more natural meaning to this "families equivalent to maps" idea. %This advantage is a bit subtle, and I do not expect you to understand it at this point. Just know that it gives homotopy type theory some value as a foundation of mathematics.
+\item On the other hand, using the homotopical interpretation of type theory we deduce from our theorem that for $Y$ an $\infty$-groupoid, the $\infty$-groupoid of morphisms (of $\infty$-groupoids) to $Y$ is equivalent to the $\infty$-groupoid of morphisms (of $\infty$-groupoids) from $Y$ to the $\infty$-groupoid of all $\infty$-groupoids. Proving (and even stating...) this theorem in traditional mathematics requires a lot of serious work. But our proof does not require a lot more work than for sets.
 \end{itemize}
 \end{remark}
 
@@ -999,7 +1003,7 @@ We see that type theory has two advantages over set theory in this case:
 
 
 
-\se{Inductive types and the encode-decode method}
+\se{Inductive types and their identity types}
 
 In this section we give examples of inductive types. These types are defined by a list of constructors allowing us to build inhabitants of them, and an elimination stating that they are the simplest types with these constructors. We do not attempt to give a general definition of inductive types. One can be found in \cite{dybjer1994inductive}. %We treat $\bot$, $\top$, $\mathrm{Bool}$, $\mathbb{N}$, $A+B$, maybe $W(x:A).\, B(x)$.
 
@@ -1191,8 +1195,8 @@ For any $m:\mathbb{N}^*$, we have two inhabitants:
 \[f:(x:\mathbb{Z})\r P(x)\]
 then it is enough to define:
 \[f(0) \ :\equiv\ s_0\]
-\[f(+m) \ :\equiv\ s_+\]
-\[f(-m) \ :\equiv\ s_-\]
+\[f(+m) \ :\equiv\ s_+(m)\]
+\[f(-m) \ :\equiv\ s_-(m)\]
 For $s_0$, $s_+$ and $s_-$ of the appropriate type.
 \end{itemize}
 \end{ind_def}
@@ -1203,6 +1207,10 @@ Note that integers behave as the usual set-theoretic integers, so that we will u
 Analyse identity types in $\mathbb{Z}$ using the encode-decode method. 
 \end{exercise}
 
+\begin{exercise}
+Define the successor function $\lambda(x:\mathbb{Z}).\, x+1$ from $\mathbb{Z}$ to $\mathbb{Z}$. Prove it is an equivalence the predecessor function $\lambda(x:\mathbb{Z}).\, x-1$ as inverse.
+\end{exercise}
+
 %There exists many more example of inductive types, for example lists, finitely branching trees, $\cdots$
 
 
@@ -1210,53 +1218,6 @@ Analyse identity types in $\mathbb{Z}$ using the encode-decode method.
 \se{Higher inductive types}
 
 In this section we give an introduction to higher inductive types. They are inductive types with constructors in their iterated identity types.
-
-%A higher inductive type is an inductive type with identity constructors. So intuitively it is a type inductively generated by  
-
-
-%\sse{Identity types in the circle}
-
-
-
-\comment{
-%\sse{Reformulating encode-decode}
-
-%We give a useful lemma to study identity types. From now on when we say "by the reformulation of the encode-decode method" we mean "using this lemma". 
-
-%Next lemma is useful reformulation of the encode-decode method. From now on when we say "by the reformulation of the encode-decode method" we mean "using this lemma". %This is not standard by any mean. 
-
-\begin{lemma}
-Assume given $A:\U$ with $a:A$. Assume given $\Eq_A : A\r \U$ with $q : \Eq_A(a)$. Then if:
-\[(x:A)\times \Eq_A(x)\]
-is contractible, we have for all $x:A$:
-\[\Eq_A(x) \simeq a=_A x\]
-%Moreover for $p:a=_Ax$ and 
-\end{lemma}
-\begin{proof}
-We consider the map: 
-\[p_1:(x:A)\times \Eq_A(x)\r A\]
-We denote by $*_a : \one \r A$ the map defined by $*_A(x) :\equiv a$. We want to show that:
-$*_a=_{\U_{/A}} p_1$
-\begin{itemize}
-\item By the characterization of identity types in it is enough to find an equivalence:
-\[\phi : \one \r (x:A)\times \Eq_A(x)\] 
-such that $p_1\circ \phi \sim *_a$.
-\item We define $\phi$ by induction:
-\[\phi(*) \, :\equiv \, (a,q)\]
-\item It is immediate to check by induction that $p_1\circ \phi \sim *_a$.
-\item The map $\phi$ is an equivalence because any map between contractible type is an equivalence.
-\end{itemize}
-So we know that for all $b:A$ we have
-\[\fib_{*_a}(b)\, \simeq\, \fib_{p_1}(b)\]
-From the Grothendieck we know that:
-\[\fib_{p_1}(b) \, \simeq \, \Eq_A(b)\]
-Now we see:
-\[\fib_{*_a}(b) \ \equiv\  (x:\one)\times (*_a(x)=_Ab) \]
-\[\ \equiv\  \one\times (a=_Ab) \]
-\[\ \simeq\ a=_Ab\]
-So we can conclude.
-\end{proof}
-}
 
 
 \sse{The circle}
@@ -1271,15 +1232,27 @@ We have:
 Moreover there is a path: \[\loop : \base=_{S^1}\base\]
 \item (Elimination) In order to define $f:(x:S^1) \r P(x)$ it is enough to define:
 \[f(\base) \, :\equiv\, t \]
-\[\apd_f(\loop) \, :\equiv\, \epsilon\]
+\[\apd_f(\loop) \, :\equiv\, e\]
 For $t:P(\base)$ and 
 %\[\apd\]
-\[\epsilon : \tr^P_\loop(t) =_{P(\base)} t\]% In this case:
+\[e : \tr^P_\loop(t) =_{P(\base)} t\]% In this case:
 %\[\apd_f(\loop) = \epsilon\] 
 \end{itemize}
 \end{definition}
 
-This is a type freely generated by a point $\base$ and an identity proof $\loop$. As a space this correspond to a point $b$ with a path from this point to itself added, i.e. a circle. So we call $S^1$ the circle. 
+This is a type freely generated by a point $\base$ and an identity proof $\loop$. As a space this correspond to a point $b$ with a path from this point to itself added, i.e. a circle. So we call $S^1$ the circle. Now we spell out the non-dependent elimination principle for the circle.
+
+\begin{lemma}
+\label{nondepinductioncircle}
+Assume given $A:\U$ with $t:A$ and $e:t=_At$. Then we have a map $f : S^1\r A$ such that:
+\[f(\base)\, :\equiv\, t\]
+\[\ap_f(\loop) \, =\, e\]
+\end{lemma}
+\begin{proof}
+We use the dependent elimination principle on the constant family:
+\[P : (x:S^1)\mapsto A\]
+See Lemma 6.2.5 in the HoTT book for the details.
+\end{proof}
 
 \sse{Identity types in the circle}
 
@@ -1288,9 +1261,9 @@ As usual we want to characterize the identity types in $S^1$. One can guess that
 From these hints we guess that $\base=_{S^1}\base$ is equivalent to $\mathbb{Z}$, via the map sending $n:\mathbb{Z}$ to $\loop^n$. When proving this we need to generalize this to $\base=_{S^1}x$, so that we can use path induction.
 
 \begin{definition}
-We define $\Eq_{S^1} : S^1 \r \U$ inductively by:
+Using Lemma \ref{nondepinductioncircle} we define $\Eq_{S^1} : S^1 \r \U$ such that:
 \[\Eq_{S^1}(\base) \, :\equiv\, \mathbb{Z}\]
-\[\ap_{\Eq_{S^1}}(\loop) \, :\equiv\, \ua(\Gl(x:\mathbb{Z}).\, x+1)\] %: \mathbb{Z}=_\U\mathbb{Z}\] 
+\[\ap_{\Eq_{S^1}}(\loop) \, =\, \ua^{-1}(\Gl(x:\mathbb{Z}).\, x+1)\] %: \mathbb{Z}=_\U\mathbb{Z}\] 
 %corresponding to the equivalence $\Gl(x:\mathbb{Z}).\, x+1$ via univalence.
 %\[\ap_{\Eq_{S^1}}(\loop) \, :\equiv\, \]
 \end{definition} 
@@ -1305,7 +1278,11 @@ Now we want to show that $\Eq_{S^1}(x)$ is equivalent to $\base=_{S^1}x$. We use
 For all $m:\mathbb{Z}$, we have that $\tr_\loop^{\Eq_{S^1}}(m) = m+1$.
 \end{lemma}
 \begin{proof}
-We prove that for any $B:A\r \U$ and $p:x=_Ay$ we have $\tr^B_p = \ua(\ap_B(p))$ by path induction. But then we know that by definition $\ap_{\Eq^{S^1}}(\loop) = \ua^{-1}(\Gl m.m+1)$, so we can conclude.
+We prove that for any $B:A\r \U$ and $p:x=_Ay$ we have:
+\[\tr^B_p = \ua(\ap_B(p))\] 
+by path induction. But then we know that: 
+\[\ap_{\Eq^{S^1}}(\loop) = \ua^{-1}(\Gl m.m+1)\] 
+so we can conclude.
 \end{proof}
 
 \begin{lemma}
@@ -1335,9 +1312,7 @@ because $\tr^{\Gl x.P(x)\r Q(x)}_p(f) = \tr^Q_p\circ f\circ \tr^P_{p^{-1}}$. The
 \[\tr^{\Gl x.\base=x}_\loop(\loop^{n-1}) = \loop^n\]
 which is in turn equivalent to:
 \[\loop^{n-1}\cdot\loop = \loop^n\]
-using the fact that $\tr_q^{\Gl x.a=_Ax}(p) = p\cdot q$ for any type $A$.
-
-But this last statement is more or less the definition of $\loop^{\_}$.
+using the fact that $\tr_q^{\Gl x.a=_Ax}(p) = p\cdot q$ for any type $A$. This last statement is can be deduced from the definition of $\loop^n$.
 \end{itemize}
 \end{proof}
 
@@ -1353,12 +1328,8 @@ But we know that:%By the definition of $\Eq_{S^1}$, we know that:
 %(prove this! hint: prove for all $B:A\r \U$, $p:x=_Ay$ we have $\ua(\ap_B(p))(b) = \tr^B_p(b)$)
 %because $\ap_{\Eq_{S^1}}(\loop)$ is defined as $\Gl (m:\mathbb{Z}).\, m+1$.
 
-Using induction on $n:\mathbb{Z}$ we can conclude. %it is a simple induction on $n$ to conclude.
+Using induction on $n:\mathbb{Z}$ we can conclude. The details are left as an exercise.
 \end{proof}
-
-\begin{exercise}
-Do the induction on $n:\mathbb{Z}$.
-\end{exercise}
 
 \begin{proposition}
 For all $x:S^1$ we have:
@@ -1385,9 +1356,9 @@ We proceed by induction on $x$.
 \[\encode(\loop^n) =_{\mathbb{Z}} n \]
 but this is the previous lemma.
 \subitem If $x$ is $\loop$ then we need to show that:
-\[\tr_\loop(H) =_{(n:\mathbb{Z}) \r \psi(\loop^n) =_{\mathbb{Z}} n} H\]
+\[\tr_\loop(H) =_{(n:\mathbb{Z}) \r \encode(\loop^n) =_{\mathbb{Z}} n} H\]
 where $H$ is the previous proof of $(n:\mathbb{Z})\r \encode(\loop^n) = n$. By function extensionality it is enough to show that for all $n:\mathbb{Z}$ we have:
-\[\tr_\loop(H)(n) =_{\psi(\loop^n) =_{\mathbb{Z}} n} H(n)\]
+\[\tr_\loop(H)(n) =_{\encode(\loop^n) =_{\mathbb{Z}} n} H(n)\]
 But using an analysis of identity types in $\mathbb{Z}$ by the encode-decode method, we can prove that for any $p,q:m=_{\mathbb{Z}} n$ we have $p=q$.
 \end{itemize}
 \end{proof}
@@ -2198,16 +2169,14 @@ Assume given $X,Y:\U_*$ with a map $g:X\r_* Y$. The canonical fiber sequence ass
 \[\fib_g(*) \overset{p_g}{\r_*} X \overset{g}{\r_*} Y\]
 where:
 \begin{itemize}
-\item The type $\fib_g(*)$ is defined as:
-\[(x:X)\times (g(x)=_Y*)\] 
-pointed by $(*_X,*_g)$.
+\item The type $\fib_g(*)$ is given in Definition \ref{defFibre}. It is pointed by $(*_X,*_g)$.
 \item The map $p_g$ is the projection to $X$ (which obviously preserves the basepoints).
 \end{itemize}
 \end{proposition}
 \begin{proof}
 We need to give for $x:X$ a term: 
 \[\epsilon_x : \fib_{p_g}(x)\ \simeq\ (g(x)=*)\]
-But this is part of the Grothendieck correspondence. Then we need: 
+But this is Lemma \ref{auxiliaryGrothendieckCorrespondance}. Then we need: 
 \[\epsilon_*((*_X,*_g),\refl_{*}) = *_g\]
 but the equivalence from the Grothendieck correspondence is defined by transporting the second component $*_g$ along the third component  $\refl_{*}$. So we can conclude.
 \end{proof}
@@ -2320,7 +2289,7 @@ Since both sides are propositions, it is enough to build maps both way:
 \[|(x:X)\times f(x)=y|\] 
 Since we want to prove a proposition, we can assume given $x:|X|_0$ such that $|f|_0(x) = [y]$, but using induction on the truncation again we can assume given $x:X$ such that $[f(x)]=[y]$. 
 
-By our analysis of identity types in set-truncation in TD2, we this is equivalent to $x:X$ such that $|f(x)=y|$. Using induction on the truncation again, we can assume given $x:X$ such that $f(x)=y$, and we can conclude.
+By our analysis of identity types in set-truncation in TD2, this is equivalent to $x:X$ such that $|f(x)=y|$. Using induction on the truncation again, we can assume given $x:X$ such that $f(x)=y$, and we can conclude.
 \item Assume given an inhabitant of $|(x:X)\times f(x)=y|$, we want to prove:
 \[\exists(x:|X|_0).\,(|f|_0(x) = [y])\]
 By induction on the truncation we can assume given $x:X$ with $q:f(x)=y$, and then we have:
