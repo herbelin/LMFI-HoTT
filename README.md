@@ -10,7 +10,7 @@
 
 - Homotopy type theory: a common language for logic, programming, algebra and geometry
   - Category with families from a syntactic point of view
-  - When syntax meet semantics: intrinsic vs extrinsic syntax, inductive-inductive syntax vs mutual inductive syntax
+  - When syntax meets semantics: intrinsic vs extrinsic syntax, inductive-inductive syntax vs mutual inductive syntax
   - Basic Cubical type theory
   - From parametricity to simplicical and cubical sets: towards a parametric model of cubical type theory
 
