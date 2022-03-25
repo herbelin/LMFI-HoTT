@@ -2,29 +2,31 @@
 
 <h2>Lecturers</h2>
 
-- Type Theory: Hugo Herbelin
-  - History of realisability and the proofs-as-programs correspondence
-  - From predicate calculus, arithmetic and set theory (Aczel sets) to type theory
-  - Different forms of type theory for different purposes
-  - Duality between positive and negative types in type theory
-  - Models obtained by syntactic translations
-  - Cubical type theory and parametricity
+- Type theory and its standard categorical models: Paul-André Melliès
+  - Syntax of type theory
+  - Comprehension category
+  - Categories with families
+  - A model of homotopy type theory: tribes
+
+- Homotopy type theory: a common language for logic, programming, algebra and geometry
+  - Category with families from a syntactic point of view
+  - When syntax meet semantics: intrinsic vs extrinsic syntax, inductive-inductive syntax vs mutual inductive syntax
+  - Basic Cubical type theory
+  - From parametricity to simplicical and cubical sets: towards a parametric model of cubical type theory
+
 - Synthetic Homotopy Theory: Hugo Moeneclaey
-  - Type formers and their identity types
-  - Grothendieck correspondence
   - Propositions, sets and groupoids
   - Groups as groupoids
   - Classifying covers, bundle and principal bundles
-- Semantics of Homotopy Type Theory: Paul-André Melliès
 
 <h2>Schedule</h2>
 
-- Monday 11 April, 10-12
-- Monday 11 April, 14-16
-- Tuesday 12 April, 10-12
-- Wednesday 13 April, 10-12
-- Thursday 14 April, 10-12
-- Friday 15 April, 10-12
+- Monday 11 April, 10-12 Paul-André Melliès (introduction to type theory and its models)
+- Monday 11 April, 14-16 Hugo Moeneclaey
+- Tuesday 12 April, 10-12 Hugo Moeneclaey
+- Wednesday 13 April, 10-12 Paul-André Melliès (a model of homotopy type theory)
+- Thursday 14 April, 10-12 Hugo Herbelin (the syntax of models of type theory)
+- Friday 15 April, 10-12 Hugo Herbelin (cubical type theory and parametricity)
 
 <h2>Lecture notes</h2>
 
@@ -53,5 +55,8 @@ Lecture Notes on Synthetic Homotopy Theory
 
 <li><a href="http://www.cse.chalmers.se/~bengt/papers/hlcs.pdf">Martin-Löf’s Type Theory</a>,
 B. Nordström, K. Petersson and J. M. Smith, 2000</li>
+
+<li><a href="https://akaposi.github.io/finitaryqiit.pdf">Constructing Quotient Inductive-Inductive Types</a>,
+Ambrus Kaposi, András Kovács, Thorsten Altenkirch</li>
 
 </ul>
