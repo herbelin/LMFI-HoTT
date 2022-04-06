@@ -26,9 +26,9 @@
 - Monday 11 April, 10-12 (room 0013) Paul-André Melliès (introduction to type theory and its models)
 - Monday 11 April, 14-16 (room 0013) Hugo Moeneclaey
 - Tuesday 12 April, 10-12 (room 2015) Hugo Moeneclaey
-- Wednesday 13 April, 10-12 (room 1008) Paul-André Melliès (a model of homotopy type theory)
-- Thursday 14 April, 10-12 (room 2017) Hugo Herbelin (the syntax of models of type theory)
-- Friday 15 April, 10-12 (room 2014) Hugo Herbelin (cubical type theory and parametricity)
+- Wednesday 13 April, 10-12 (room 1008) Hugo Herbelin (the syntax of models of type theory)
+- Thursday 14 April, 10-12 (room 2017) Hugo Herbelin (cubical type theory and parametricity)
+- Friday 15 April, 10-12 (room 2014) Paul-André Melliès (a model of homotopy type theory)
 
 Room numbers refer to the Sophie Germain building.
 
