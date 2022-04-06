@@ -48,9 +48,9 @@ Lecture Notes on Synthetic Homotopy Theory
 
 <li><a href="https://homotopytypetheory.org/book/">HoTT Book</a>, 2013</li>
 
-<li><a href="https://arxiv.org/pdf/1703.03007.pdf">Homotopy type theory: the logic of space</a>, 2017</li>
+<li><a href="https://arxiv.org/pdf/1703.03007.pdf">Homotopy type theory: the logic of space</a>, Michael Shulman, 2017</li>
 
-<li><a href="https://www.andrew.cmu.edu/user/erijke/hott/hott_intro.pdf">Introduction to homotopy type theory</a>, 2018</li>
+<li><a href="https://www.andrew.cmu.edu/user/erijke/hott/hott_intro.pdf">Introduction to homotopy type theory</a>, Egbert Rijke, 2018</li>
 
 <li>Pierre-Louis Curien's LMFI lectures on the <a href="https://curien.galene.org/notes/CoursA.pdf">syntax of Martin-Löf's type theory</a>, the <a href="https://curien.galene.org/notes/CoursB.pdf">categorical interpretation of extensional type theory</a> and <a href="https://curien.galene.org/notes/CoursC.pdf">homotopy type theory</a></li>
 <li><a href="https://github.com/HoTT/HoTT">A HoTT library in Coq</a></li>
