@@ -15,9 +15,11 @@
   - From parametricity to simplicical and cubical sets: towards a parametric model of cubical type theory
 
 - Synthetic Homotopy Theory: Hugo Moeneclaey
-  - Propositions, sets and groupoids
-  - Groups as groupoids
-  - Classifying covers, bundle and principal bundles
+  - Motivation: toward well-behaved quotients by group action.
+  - Constuctors and their identity types, univalence axiom.
+  - Propositions, sets and groupoids.
+  - Groups as groupoids. Actions of groups and their quotients.
+  - Classifying covers, torsors, extensions.
 
 <h2>Schedule</h2>
 
@@ -45,6 +47,10 @@ Lecture Notes on Synthetic Homotopy Theory
 <ul>
 
 <li><a href="https://homotopytypetheory.org/book/">HoTT Book</a>, 2013</li>
+
+<li><a href="https://arxiv.org/pdf/1703.03007.pdf">Homotopy type theory: the logic of space</a>, 2017</li>
+
+<li><a href="https://www.andrew.cmu.edu/user/erijke/hott/hott_intro.pdf">Introduction to homotopy type theory</a>, 2018</li>
 
 <li>Pierre-Louis Curien's LMFI lectures on the <a href="https://curien.galene.org/notes/CoursA.pdf">syntax of Martin-Löf's type theory</a>, the <a href="https://curien.galene.org/notes/CoursB.pdf">categorical interpretation of extensional type theory</a> and <a href="https://curien.galene.org/notes/CoursC.pdf">homotopy type theory</a></li>
 <li><a href="https://github.com/HoTT/HoTT">A HoTT library in Coq</a></li>
