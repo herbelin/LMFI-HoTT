@@ -3,10 +3,10 @@
 <h2>Topics</h2>
 
 As of today, six 2-hour lectures are planned, liable to cover:
-- basic notions of homotopy type theory: h-levels, univalence, higher inductive types (HITs), fibered-indexed correspondence, unique choice, classical logic, full choice
+- basic notions of homotopy type theory: h-levels, univalence, higher inductive types (HITs), fibered-indexed correspondence, unique choice, classical logic, full choice, basic synthetic homotopy
 - standard presentations of type theory: judgemental equality vs untyped conversion, fibered vs indexed presentations, intrinsic vs extrinsic presentations
-- a types-as-propositions-as-categories-as-spaces dictionary connecting in particular the categorical approach (categories with families, comprehension categories) to the proof-theoretic approach of homotopy type theory
-- cubical type theory and parametricity models
+- a types-as-propositions-as-categories-as-spaces dictionary connecting in particular the categorical approach (categories with families, comprehension categories) to the proof-theoretic approach of type theory
+- computing with homotopy type theory: cubical type theory and parametricity models
 
 <h2>Schedule</h2>
 
