@@ -1,36 +1,16 @@
-# Introduction to Homotopy Type Theory (LMFI 2022)
+# Introduction to Homotopy Type Theory (LMFI 2023)
 
-<h2>Lecturers</h2>
+<h2>Topics</h2>
 
-- Type theory and its standard categorical models: Paul-André Melliès
-  - Syntax of type theory
-  - Comprehension category
-  - Categories with families
-  - A model of homotopy type theory: tribes
-
-- Homotopy type theory: a common language for logic, programming, algebra and geometry
-  - Category with families from a syntactic point of view
-  - When syntax meets semantics: intrinsic vs extrinsic syntax, inductive-inductive syntax vs mutual inductive syntax
-  - Basic Cubical type theory
-  - From parametricity to simplicical and cubical sets: towards a parametric model of cubical type theory
-
-- Synthetic Homotopy Theory: Hugo Moeneclaey
-  - Motivation: toward well-behaved quotients by group action.
-  - Constuctors and their identity types, univalence axiom.
-  - Propositions, sets and groupoids.
-  - Groups as groupoids. Actions of groups and their quotients.
-  - Classifying covers, torsors, extensions.
+As of today, six 2-hour lectures are planned, liable to cover:
+- basic notions of homotopy type theory: h-levels, univalence, higher inductive types (HITs), fibered-indexed correspondence, classical logic, unique choice, full choice
+- standard presentations of type theory: judgemental equality vs untyped conversion, fibered vs indexed presentations, intrinsic vs extrinsic presentations
+- a types-as-propositions-as-categories-as-spaces dictionary connecting in particular the categorical approach (categories with families, comprehension categories) to the proof-theoretic approach of homotopy type theory
+- cubical type theory and parametricity models
 
 <h2>Schedule</h2>
 
-- Monday 11 April, 10-12 (room 0013) Paul-André Melliès (introduction to type theory and its models)
-- Monday 11 April, 14-16 (room 0013) Hugo Moeneclaey
-- Tuesday 12 April, 10-12 (room 2015) Hugo Moeneclaey
-- Wednesday 13 April, 10-12 (room 1008) Hugo Herbelin (the syntax of models of type theory)
-- Thursday 14 April, 10-12 (room 2017) Hugo Herbelin (cubical type theory and parametricity)
-- Friday 15 April, 10-12 (room 2014) Paul-André Melliès (a model of homotopy type theory)
-
-Room numbers refer to the Sophie Germain building.
+To be announced.
 
 <h2>Lecture notes</h2>
 
