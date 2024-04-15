@@ -1,12 +1,85 @@
-# Introduction to Homotopy Type Theory (LMFI 2023)
+# Introduction to Homotopy Type Theory (LMFI 2023-2024)
 
-<h2>Topics</h2>
+<h2>Schedule</h2>
 
-As of today, six 2-hour lectures are planned, liable to cover:
-- basic notions of homotopy type theory: h-levels, univalence, higher inductive types (HITs), fibered-indexed correspondence, unique choice, classical logic, full choice, basic synthetic homotopy
-- standard presentations of type theory: judgemental equality vs untyped conversion, fibered vs indexed presentations, intrinsic vs extrinsic presentations
-- a types-as-propositions-as-categories-as-spaces dictionary connecting in particular the categorical approach (categories with families, comprehension categories) to the proof-theoretic approach of type theory
-- computing with homotopy type theory: cubical type theory and parametricity models
+- Tuesday April 16, 14h00-17h00, room 1020 Sophie Germain
+- Thursday April 18, 9h00-12h00, room 1020 Sophie Germain
+- Tuesday April 23, 9h00-12h00, room 266 Olympe de Gouges
+- Thursday April 25, 9h00-12h00, salle 2012 Sophie Germain
+
+<h2>Plan</h2>
+
+<h4>Cours 1 : Généralités sur la théorie des types</h4>
+
+- La correspondance de Curry-Howard
+  - une correspondance entre syntaxe intrinsèque et extrinsèque
+  - propositions vues comme types « proof-irrelevant »
+- Comparaison entre types simples et types dépendants
+  - la correspondance fibrée/indexée
+- Comparaison avec la théorie des ensembles
+  - intrication calcul/logique (à la Church, à la ML, à la théorie des types) vs
+    séparation totale calcul/logique (à la Curry, à la Lisp, à la ZF)
+  - les ensembles vus comme arbres inductifs ou coinductifs (les ensemble de Aczel)
+- La théorie des types comme jeu de légo
+  - les différents types : ∑, Π, =, inductifs, coinductifs, troncation, univers
+  - les règles de construction : formation, introduction, élimination, β-réduction, η-conversion
+- Les différentes formes d'égalité
+  - intensionnelle/extensionnelle
+  - définitionnelle/propositionnelle
+- Implémentations de la théorie des types
+  - comparaison entre les logiques d'Agda, Coq, Isabelle, Lean, Mizar, ...
+  - décidabilité de l'égalité définitionnelle
+- Exercices
+
+<h4>Cours 2 : Généralités sur la théorie des types homotopiques</h4>
+
+- Type = espace à homotopie près, égalité = chemin
+- h-niveaux de Voevodsky
+  - une reconstruction des propositions, ensembles, groupoïdes comme types
+- Les types inductifs supérieurs
+  - exemples du cercle et de la sphère (homotopie synthétique)
+  - exemple des types quotients
+- Le principe d'univalence
+  - les différentes définitions d'équivalence
+  - l'univalence comme principe d'extensionnalité généralisation l'extensionnalité des propositions
+- Axiome du choix
+  - l'axiome du choix de Martin-Löf
+  - prouvabilité du choix unique
+  - l'axiome du choix général comme distribution du produit dépendant sur la troncation
+  - l'axiome du choix implique la logique classique (théorème de Diaconescu)
+- Exercices
+
+<h4>Cours 3 : Modèles géométriques et catégoriques de la théorie des types</h4>
+
+- La correspondance Curry-Howard-Lambek et son extension à la géométrie
+- Un modèle « syntaxique » : les catégories avec familles
+- L'interprétation des types dépendants comme « fibrations »
+- Catégories cartésiennes localement fermées
+- Les correspondances intrinsèque/extrinsèque et fibrée/indexée en action
+- Univers vus comme classificateur d'objets
+- ∞-catégories et ∞-groupoïdes
+- Les différentes formes géométriques
+  - globes (= itération de l'égalité homogène)
+  - triangles/simplexes
+  - cubes (= itération de l'égalité hétérogène)
+  - opétopes
+- Les différents équipements de structures
+  - l'infrastructure pure de dépendances (structure « semi- »)
+  - dégénérescences = réfléxivités = identités
+  - complétion des cornets internes = transitivité = composition (structure de Kan faible)
+  - complétion de tous les cornets = ajout de symétries = ajout d'inverses (structure de Kan forte)
+- Exercices
+
+<h4>Cours 4 : Théorie des types cubiques</h4>
+
+- La théorie des types cubiques ou comment calculer avec la théorie des types homotopiques
+  - l'univalence comme algorithme de réécriture de preuves sur une structure en preuves sur structures équivalentes
+  - fonctions sur types inductifs supérieurs comme fonctions réécrivant des preuves d'égalités
+- Paramétricité et réalisabilité au cœur de la correspondance intrinsèque/extrinsèque
+- La paramétricité itérée comme génératrice des ensembles simpliciaux et cubiques
+- Exemples de raisonnement égalitaire en théorie des types cubiques
+- Comparaison avec la théorie des types observationnelle supérieure
+- Exercices
 
 <h2>Schedule</h2>
 
