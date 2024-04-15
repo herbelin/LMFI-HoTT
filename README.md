@@ -7,7 +7,7 @@
 - Tuesday April 23, 9h00-12h00, room 266 Olympe de Gouges
 - Thursday April 25, 9h00-12h00, salle 2012 Sophie Germain
 
-<h2>Plan</h2>
+<h2>Plan prospectif</h2>
 
 <h4>Cours 1 : Généralités sur la théorie des types</h4>
 
@@ -81,9 +81,8 @@
 - Comparaison avec la théorie des types observationnelle supérieure
 - Exercices
 
-<h2>Schedule</h2>
-
-To be announced.
+Le cours, fait au tableau, laissera cependant la place à
+l'improvisation en fonction des demandes de l'auditoire.
 
 <h2>Lecture notes</h2>
 
