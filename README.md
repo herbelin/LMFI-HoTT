@@ -43,10 +43,10 @@
   - les différentes définitions d'équivalence
   - l'univalence comme principe d'extensionnalité généralisation l'extensionnalité des propositions
 - Axiome du choix
-  - l'axiome du choix de Martin-Löf
+  - l'axiome du choix « intensionnel » de Martin-Löf
   - prouvabilité du choix unique
   - l'axiome du choix général comme distribution du produit dépendant sur la troncation
-  - l'axiome du choix implique la logique classique (théorème de Diaconescu)
+  - l'axiome du choix général implique la logique classique (théorème de Diaconescu)
 - Exercices
 
 <h4>Cours 3 : Modèles géométriques et catégoriques de la théorie des types</h4>
@@ -65,7 +65,7 @@
   - opétopes
 - Les différents équipements de structures
   - l'infrastructure pure de dépendances (structure « semi- »)
-  - dégénérescences = réfléxivités = identités
+  - dégénérescences = réflexivités = identités
   - complétion des cornets internes = transitivité = composition (structure de Kan faible)
   - complétion de tous les cornets = ajout de symétries = ajout d'inverses (structure de Kan forte)
 - Exercices
