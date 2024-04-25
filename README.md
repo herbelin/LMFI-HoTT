@@ -40,12 +40,12 @@
   - exemples du cercle et de la sphère (homotopie synthétique)
   - exemple des types quotients
 - Le principe d'univalence
-  - les différentes définitions d'équivalence
+  - différentes définitions d'équivalence
   - l'univalence comme principe d'extensionnalité généralisation l'extensionnalité des propositions
 - Axiome du choix
   - l'axiome du choix « intensionnel » de Martin-Löf
-  - prouvabilité du choix unique
   - l'axiome du choix général comme distribution du produit dépendant sur la troncation
+  - prouvabilité du choix unique
   - l'axiome du choix général implique la logique classique (théorème de Diaconescu)
 - Exercices
 
@@ -55,7 +55,7 @@
 - Un modèle « syntaxique » : les catégories avec familles
 - L'interprétation des types dépendants comme « fibrations »
 - Catégories cartésiennes localement fermées
-- Les correspondances intrinsèque/extrinsèque et fibrée/indexée en action
+- Les correspondances intrinsèque/extrinsèque, fibrée/indexée, classe de structures/structure initiale en action
 - Univers vus comme classificateur d'objets
 - ∞-catégories et ∞-groupoïdes
 - Les différentes formes géométriques
@@ -72,12 +72,14 @@
 
 <h4>Cours 4 : Théorie des types cubiques</h4>
 
-- La théorie des types cubiques ou comment calculer avec la théorie des types homotopiques
-  - l'univalence comme algorithme de réécriture de preuves sur une structure en preuves sur structures équivalentes
-  - fonctions sur types inductifs supérieurs comme fonctions réécrivant des preuves d'égalités
+- Les preuves d'égalité sur un type vues comme chemins formels, fonctions d'un intervalle formel vers le type
+- Diverses propriétés possibles pour l'intervalle formel
+- Les fonctions sur types inductifs supérieurs comme fonctions réécrivant des preuves d'égalités
+- Exemples de raisonnement égalitaire en théorie des types cubiques
+- Substitutivité de l'égalité par complétion de cubes ouvert (composition de Kan)
+- L'univalence comme algorithme de réécriture de preuves sur une structure en preuves sur structures équivalentes
 - Paramétricité et réalisabilité au cœur de la correspondance intrinsèque/extrinsèque
 - La paramétricité itérée comme génératrice des ensembles simpliciaux et cubiques
-- Exemples de raisonnement égalitaire en théorie des types cubiques
 - Comparaison avec la théorie des types observationnelle supérieure
 - Exercices
 
